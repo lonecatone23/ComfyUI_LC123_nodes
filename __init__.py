@@ -1,0 +1,24 @@
+"""
+ComfyUI_LC123_nodes — custom nodes by lonecatone23
+
+https://github.com/lonecatone23
+https://ko-fi.com/lonecatone
+"""
+
+from .aspect_ratio import NODE_CLASS_MAPPINGS as _AR_MAP, NODE_DISPLAY_NAME_MAPPINGS as _AR_DISP
+from .regional_canvas import NODE_CLASS_MAPPINGS as _RC_MAP, NODE_DISPLAY_NAME_MAPPINGS as _RC_DISP
+from .slider import NODE_CLASS_MAPPINGS as _SL_MAP, NODE_DISPLAY_NAME_MAPPINGS as _SL_DISP
+
+NODE_CLASS_MAPPINGS = {}
+NODE_CLASS_MAPPINGS.update(_AR_MAP)
+NODE_CLASS_MAPPINGS.update(_RC_MAP)
+NODE_CLASS_MAPPINGS.update(_SL_MAP)
+
+NODE_DISPLAY_NAME_MAPPINGS = {}
+NODE_DISPLAY_NAME_MAPPINGS.update(_AR_DISP)
+NODE_DISPLAY_NAME_MAPPINGS.update(_RC_DISP)
+NODE_DISPLAY_NAME_MAPPINGS.update(_SL_DISP)
+
+WEB_DIRECTORY = "./web"
+
+__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

@@ -1,0 +1,19 @@
+[project]
+name = "ComfyUI_LC123_nodes"
+version = "1.0.0"
+description = "Aspect ratio tools, regional prompt canvases (Anima / Krea2), and a Nodes 2.0–friendly slider for ComfyUI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "lonecatone23" }]
+keywords = ["comfyui", "custom-nodes", "slider", "regional", "aspect-ratio"]
+
+[project.urls]
+Repository = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"
+Homepage = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"
+"Buy me a coffee" = "https://ko-fi.com/lonecatone"
+
+[tool.comfy]
+PublisherId = "lonecatone23"
+DisplayName = "ComfyUI LC123 Nodes"
+Icon = ""

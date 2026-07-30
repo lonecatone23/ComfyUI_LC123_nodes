@@ -1,5 +1,7 @@
 # ComfyUI LC123 Nodes
 
+> **BETA** — These nodes are under active development. Expect breaking changes, rough edges, and incomplete multi-region behavior. Not recommended for production workflows yet. Feedback welcome.
+
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by **lonecatone23**.
 
 - **GitHub:** [https://github.com/lonecatone23](https://github.com/lonecatone23)

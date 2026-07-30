@@ -1,10 +1,11 @@
 # ComfyUI LC123 Nodes
 
-> **BETA** — These nodes are under active development. Expect breaking changes, rough edges, and incomplete multi-region behavior. Not recommended for production workflows yet. Feedback welcome.
+> **BETA** — Active development. Expect breaking changes (especially Regional Canvas I/O). Feedback welcome.
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by **lonecatone23**.
 
-- **GitHub:** [https://github.com/lonecatone23](https://github.com/lonecatone23)
+- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
+- **Author:** [https://github.com/lonecatone23](https://github.com/lonecatone23)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
 
 Compatible with **ComfyUI Nodes 1.0** (LiteGraph) and **Nodes 2.0** (Vue).
@@ -13,9 +14,9 @@ Compatible with **ComfyUI Nodes 1.0** (LiteGraph) and **Nodes 2.0** (Vue).
 
 ## Install
 
-### ComfyUI Manager
+### ComfyUI Manager / Registry
 
-Search for `ComfyUI_LC123_nodes` (once published), or install via git URL:
+Search for `ComfyUI_LC123_nodes`, or install via git URL:
 
 ```text
 https://github.com/lonecatone23/ComfyUI_LC123_nodes
@@ -30,7 +31,14 @@ git clone https://github.com/lonecatone23/ComfyUI_LC123_nodes.git
 
 Restart ComfyUI, then hard-refresh the browser (`Ctrl+F5` / `Cmd+Shift+R`).
 
-**No extra Python dependencies.**
+**No extra Python dependencies** for this pack.
+
+For **Anima** regional attention (recommended path), also install:
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning.git
+```
 
 ---
 
@@ -73,88 +81,110 @@ Mask is resized with the same crop/pad/resize geometry (nearest-exact edges).
 
 ---
 
-## Regional Inline Canvas
+## Anima Regional Inline Canvas
 
-Interactive paint canvas for regional prompts. Two variants share the same UI:
-
-| Variant | CLIP | MODEL / LATENT |
-|---------|------|----------------|
-| **Anima** | Standard CLIP | Pass-through MODEL + empty LATENT |
-| **Krea2** | `CLIPLoader` type **krea2** | No MODEL or LATENT — wire those to the sampler yourself |
+Interactive RGB paint canvas. Emits **separate** global / per-color conditionings and masks so you can plug into [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning) or any other regional system.
 
 ### Widgets
 
-| Widget | Description |
-|--------|-------------|
-| **brush_size** | Paint brush diameter |
-| **region_strength** | Strength of each painted region’s prompt |
-| **quality_prompt** | Global quality / style text |
-| **scene_prompt** | Global scene / setting text |
-| **red / blue / yellow / green / magenta_prompt** | Per-color region prompts |
-| **negative_prompt** | Negative conditioning |
-| **regional_enabled** | On = use regions · Off = global prompts only |
-| **keep_mask** | Keep painted regions across runs |
-| **stop_on_empty_mask** | Pause if nothing is painted (no hard error) |
-| **pause_until_apply** | Hold the graph until **Apply** is clicked |
+| Widget | What it does |
+|--------|----------------|
+| **brush_size** | Paint brush diameter on the canvas. |
+| **region_strength** | Stored in metadata; region **weight** is set on each `AnimaConditioningRegion`. |
+| **quality_prompt** | Style / quality tags (folded into **GLOBAL** and each color conditioning). |
+| **scene_prompt** | Shared environment text → **GLOBAL** only. |
+| **red / green / blue_prompt** | Subject prompt for that paint color only. |
+| **negative_prompt** | Negative conditioning → **NEGATIVE**. |
+| **canvas_data** | Hidden/serialized paint data (managed by the UI). |
+| **regional_enabled** | On = emit per-color cond + masks · Off = empty region slots. |
+| **keep_mask** | Keep painted regions across runs. |
+| **stop_on_empty_mask** | Pause if nothing is painted (no hard error). |
+| **pause_until_apply** | Stop the graph until you click **Apply**. |
 
-**Optional inputs:** `image` (background), `quality_prompt_in` / `scene_prompt_in` / `negative_prompt_in`.
+**Optional inputs:** `image` (canvas background), `quality_prompt_in` / `scene_prompt_in` / `negative_prompt_in`.
 
-**Required (Anima):** `model`, `clip`, `width`, `height`  
-**Required (Krea2):** `clip`, `width`, `height`
+**Required inputs:** `model`, `clip`, `width`, `height`.
 
-**Anima outputs:** `IMAGE`, `MODEL`, `POSITIVE`, `NEGATIVE`, `LATENT`, `JSON`, `MASK_PREVIEW`  
-**Krea2 outputs:** `IMAGE`, `POSITIVE`, `NEGATIVE`, `JSON`, `MASK_PREVIEW`
+### Outputs
 
-### How to use
+| Socket | Type | Typical use |
+|--------|------|-------------|
+| **IMAGE** | IMAGE | Paint canvas / preview |
+| **MODEL** | MODEL | Pass-through (or wire UNET/LoRA straight to the patch) |
+| **GLOBAL** | CONDITIONING | quality + scene → `background_conditioning` / KSampler positive |
+| **RED** | CONDITIONING | quality + red prompt → `AnimaConditioningRegion` |
+| **RED_MASK** | MASK | Red paint only |
+| **GREEN** | CONDITIONING | quality + green prompt |
+| **GREEN_MASK** | MASK | Green paint only |
+| **BLUE** | CONDITIONING | quality + blue prompt |
+| **BLUE_MASK** | MASK | Blue paint only |
+| **NEGATIVE** | CONDITIONING | KSampler negative |
+| **JSON** | STRING | Debug metadata |
+| **MASK** | MASK | Union of painted regions |
 
-1. Wire **clip**, **width**, **height** (Anima: also **model**). Optional **image** for a background.
-2. Queue Prompt — the node **pauses**.
-3. Paint color regions; edit prompts.
-4. Click the green **Apply** button — the workflow continues.
-5. Toolbar: **Undo**, **Clear Canvas**, **Reset 🖌️**, **Apply**.
+Conditionings are **plain** (no embedded mask/area metadata).
+
+### How to use (Sen-sou)
+
+1. Wire **model**, **clip**, **width**, **height** (optional **image**).
+2. Queue Prompt — node **pauses**; paint **R / G / B**; edit prompts.
+3. Click green **Apply**.
+4. Chain: **RED**+**RED_MASK** → Region → **GREEN**+**GREEN_MASK** → Region → **BLUE**+**BLUE_MASK** → Region → Apply **`regions`**.
+5. **GLOBAL** → Apply **`background_conditioning`** and (usually) KSampler **positive**.
+6. **NEGATIVE** → KSampler negative; Apply **`patched_model`** → KSampler model.
+
+Toolbar: **Undo**, **Clear Canvas**, **Reset 🖌️**, **Apply**.
+
+### Working Apply patch settings (tested)
+
+Credit: [Sen-sou/Comfyui-Anima-Regional-Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning)
+
+| Parameter | Value |
+|-----------|------:|
+| **base_mode** | `disabled` |
+| **base_strength** | `0.20` |
+| **start_percent** | `0.00` |
+| **end_percent** | `0.35` |
+| **cross_mask_strength** | `1.00` |
+| **self_mask_strength** | `0.10` |
+| **base_ratio** | `0.30` |
+| **cross_inject_every_n_blocks** | `1` |
+| **self_inject_every_n_blocks** | `1` |
+| Region **weight** | `1.0` |
 
 ### Tips
 
-- Canvas size comes only from **width** / **height** connections.
-- Muted or disconnected image → white background.
-- Linked prompt inputs lock the matching text fields.
-- Empty mask with **stop_on_empty_mask** pauses without throwing.
+- Size comes only from **width** / **height** connections.
+- Region prompts = **subject only**; room/lighting only in **scene** → **GLOBAL**.
+- Muted/disconnected image → white canvas.
+- Background coherence is tuned mainly on the **Apply** patch, not this node.
+- After this I/O change, **delete and re-add** the Anima node on old workflows.
 
-### Region colors
+---
 
-| Color | Widget |
-|-------|--------|
-| Red | `red_prompt` |
-| Blue | `blue_prompt` |
-| Yellow | `yellow_prompt` |
-| Green | `green_prompt` |
-| Magenta | `magenta_prompt` |
+## Krea2 Regional Inline Canvas
+
+Same paint UI; CLIP type **krea2**. Still uses Comfy mask/area conditioning (combined positive).
+
+**Required:** `clip`, `width`, `height` — **no** MODEL or LATENT pass-through.
+
+**Outputs:** `IMAGE`, `POSITIVE`, `NEGATIVE`, `JSON`, `MASK`
+
+Wire UNET and empty latent around the node to the sampler.
 
 ---
 
 ## 🎚️ LC123 Slider
 
-mxToolkit-style slider rebuilt for **Nodes 2.0** (DOM UI, not canvas paint).
-
-Works in Nodes 1.0 and 2.0. Output type is `*` (any) so it connects to INT or FLOAT inputs.
-
-### Face
-
-- Drag the track to change the value  
-- Click the number to type a value  
-- **⚙ Settings** → min, max, step, decimals  
-
-### Settings
+mxToolkit-style slider for **Nodes 2.0** (DOM UI). Works in 1.0 and 2.0.
 
 | Setting | Description |
 |---------|-------------|
-| **min / max** | Slider range |
-| **step** | Snap increment (always snaps) |
-| **decimals** | `0` → integer value · `1–4` → float precision |
+| **min / max** | Range |
+| **step** | Snap increment |
+| **decimals** | `0` = int · `1–4` = float precision |
 
-### Output
-
-`*` — integer when decimals = 0, float otherwise.
+Output type `*` (INT or FLOAT depending on decimals).
 
 ---
 
@@ -163,19 +193,21 @@ Works in Nodes 1.0 and 2.0. Output type is `*` (any) so it connects to INT or FL
 ```text
 ComfyUI_LC123_nodes/
 ├── __init__.py
-├── aspect_ratio.py          # 📐 Aspect Ratio Simplifier
-├── regional_canvas.py       # Anima + Krea2 Regional Inline Canvas
-├── slider.py                # 🎚️ LC123 Slider
+├── aspect_ratio.py
+├── anima_regional_canvas.py      # Anima Regional Inline Canvas
+├── krea2_regional_canvas.py      # Krea2 Regional Inline Canvas
+├── regional_canvas_common.py     # Shared paint / mask helpers
+├── regional_canvas.py            # Compatibility shim
+├── slider.py
 ├── web/
 │   ├── inline_regional_canvas.js
 │   └── lc123_slider.js
 ├── README.md
 ├── LICENSE
+├── pyproject.toml
 ├── .gitignore
 └── .comfyignore
 ```
-
----
 
 ---
 
@@ -183,62 +215,53 @@ ComfyUI_LC123_nodes/
 
 ### Nodes do not appear after install
 
-1. Confirm the folder name is exactly `ComfyUI_LC123_nodes` under `ComfyUI/custom_nodes/`.
-2. Restart **ComfyUI fully** (close the terminal / stop the service, start again). A browser refresh alone is not enough for new Python nodes.
-3. Hard-refresh the UI: `Ctrl+F5` (Windows/Linux) or `Cmd+Shift+R` (macOS).
-4. Open the ComfyUI terminal log and look for:
-   - `ImportError` / `ModuleNotFoundError` under `ComfyUI_LC123_nodes`
-   - `Traceback` while loading custom nodes  
-   Fix any reported error, then restart again.
-5. In the node search box, try the class IDs: `AspectRatioSimplifier`, `AnimaRegionalCanvasInline`, `Krea2RegionalCanvasInline`, `LC123Slider`.
+1. Folder name must be `ComfyUI_LC123_nodes` under `ComfyUI/custom_nodes/`.
+2. Restart ComfyUI fully (not only browser refresh).
+3. Hard-refresh UI: `Ctrl+F5` / `Cmd+Shift+R`.
+4. Check the terminal for `ImportError` under this pack.
+5. Search class IDs: `AspectRatioSimplifier`, `AnimaRegionalCanvasInline`, `Krea2RegionalCanvasInline`, `LC123Slider`.
 
-### Slider looks blank or settings do nothing (Nodes 2.0)
+### Anima outputs changed / graph broken after update
 
-- Hard-refresh after updating `web/lc123_slider.js`.
-- **Delete** the old slider node and **add a new** 🎚️ LC123 Slider (widget layout changed between versions).
-- Confirm `ComfyUI_LC123_nodes/web/lc123_slider.js` exists (not only `slider.py`).
-- Disable conflicting old mxToolkit slider experiments if they override the same extension name.
+- **Re-add** the Anima Regional Inline Canvas node (RETURN_TYPES changed to split GLOBAL / RGB / masks).
+- Re-wire to Sen-sou `AnimaConditioningRegion` + `ApplyAnimaRegionalConditioningPatch`.
 
 ### Regional canvas does not show / Apply does not resume
 
 - Hard-refresh so `web/inline_regional_canvas.js` loads.
-- Ensure **width** and **height** are connected (force-input).
-- With **pause_until_apply** on, the graph **stops** until you click the green **Apply** button on the node.
-- Empty paint + **stop_on_empty_mask** also pauses by design; paint a region or turn that toggle off.
-- Krea2: load CLIP with type **krea2**. This variant has **no MODEL or LATENT** outputs — wire those around the node.
+- **width** and **height** must be connected.
+- With **pause_until_apply**, click the green **Apply** button after painting.
+- Empty paint + **stop_on_empty_mask** pauses by design.
+
+### Background unstable with Sen-sou patch
+
+Expected with regional DiT attention. Raise **base_ratio**, lower **self_mask_strength**, keep **base_mode = disabled**. See table above.
+
+### Slider blank (Nodes 2.0)
+
+Hard-refresh; delete and re-add the slider node; confirm `web/lc123_slider.js` exists.
 
 ### Aspect Ratio Simplifier errors
 
-- Connect at least an **image** or a **mask** (or both).
-- If a workflow was saved with an older widget order, **re-add** the node so widgets realign (especially after `max_resolution` / `resolution_source` changes).
-- `"aspect_ratio is not available"` usually means stale `widgets_values` — replace the node on the canvas.
+Connect at least **image** or **mask**. Stale widgets → re-add the node.
 
-### General update checklist
-
-After pulling a new version:
+### Update checklist
 
 ```bash
 cd ComfyUI/custom_nodes/ComfyUI_LC123_nodes
 git pull
 ```
 
-Then:
-
 1. Restart ComfyUI  
-2. Hard-refresh the browser  
-3. Re-add nodes that changed inputs/outputs (slider, Krea2 canvas, aspect ratio)  
+2. Hard-refresh browser  
+3. Re-add nodes whose inputs/outputs changed  
 
-Old graphs may keep outdated widget lists until the node instance is replaced.
-
-### Still stuck?
-
-- Note ComfyUI version, Nodes 1.0 vs 2.0, and the exact log traceback.
-- Open an issue on [GitHub](https://github.com/lonecatone23/ComfyUI_LC123_nodes) with that info (no API keys or private workflows).
+---
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
 
-Use and modify freely with your ComfyUI setup.
+Anima attention routing depends on [Sen-sou/Comfyui-Anima-Regional-Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning) (install separately; follow that project’s license).
 
-If this pack helps your workflows: [Buy me a ☕](https://ko-fi.com/lonecatone)
+If this pack helps: [Buy me a ☕](https://ko-fi.com/lonecatone)

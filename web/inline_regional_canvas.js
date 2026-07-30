@@ -3,10 +3,8 @@ const { app } = window.comfyAPI.app;
 const NODE_NAMES = new Set(["AnimaRegionalCanvasInline", "Krea2RegionalCanvasInline", "AnimaRegionalCanvas", "AnimaRegionalInpaintCanvas"]);
 const COLORS = [
   ["RED", "#ff0000", "red_prompt"],
-  ["BLUE", "#0000ff", "blue_prompt"],
-  ["YELLOW", "#ffff00", "yellow_prompt"],
   ["GREEN", "#00ff00", "green_prompt"],
-  ["MAGENTA", "#ff00ff", "magenta_prompt"],
+  ["BLUE", "#0000ff", "blue_prompt"],
 ];
 const HISTORY_LIMIT = 8;
 const MAX_STROKE_POINTS = 96;

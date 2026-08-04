@@ -1,57 +1,9 @@
 {
   "id": "ec4dcc91-597d-49e3-bf40-f4a06e3433ed",
   "revision": 0,
-  "last_node_id": 60,
-  "last_link_id": 122,
+  "last_node_id": 61,
+  "last_link_id": 123,
   "nodes": [
-    {
-      "id": 49,
-      "type": "LoadImage",
-      "pos": [
-        -8140,
-        -1880
-      ],
-      "size": [
-        270,
-        430
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            94
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            93
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.28.0",
-        "Node name for S&R": "LoadImage",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "Krea2_inline_00002_.png",
-        "image"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
     {
       "id": 54,
       "type": "AnimaConditioningRegion",
@@ -90,63 +42,6 @@
           "type": "ANIMA_CONDITIONING_REGIONS",
           "links": [
             107
-          ]
-        }
-      ],
-      "properties": {
-        "aux_id": "Sen-sou/Comfyui-Anima-Regional-Conditioning",
-        "ver": "099cf1fa052721394963418455d49f7087efaf6c",
-        "Node name for S&R": "AnimaConditioningRegion",
-        "ue_properties": {
-          "widget_ue_connectable": {
-            "weight": true
-          },
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        1
-      ]
-    },
-    {
-      "id": 25,
-      "type": "AnimaConditioningRegion",
-      "pos": [
-        -5880,
-        -2150
-      ],
-      "size": [
-        280,
-        100
-      ],
-      "flags": {},
-      "order": 15,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mask",
-          "type": "MASK",
-          "link": 111
-        },
-        {
-          "name": "conditioning",
-          "type": "CONDITIONING",
-          "link": 110
-        },
-        {
-          "name": "regions",
-          "shape": 7,
-          "type": "ANIMA_CONDITIONING_REGIONS",
-          "link": 107
-        }
-      ],
-      "outputs": [
-        {
-          "name": "regions",
-          "type": "ANIMA_CONDITIONING_REGIONS",
-          "links": [
-            44
           ]
         }
       ],
@@ -235,7 +130,7 @@
         120
       ],
       "flags": {},
-      "order": 1,
+      "order": 0,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -276,7 +171,7 @@
         150
       ],
       "flags": {},
-      "order": 2,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -317,7 +212,7 @@
         90
       ],
       "flags": {},
-      "order": 11,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -366,7 +261,7 @@
         110
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -412,7 +307,7 @@
         90
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -456,7 +351,7 @@
         60
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -645,7 +540,7 @@
         120
       ],
       "flags": {},
-      "order": 6,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -685,7 +580,7 @@
         430
       ],
       "flags": {},
-      "order": 9,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
@@ -765,55 +660,6 @@
         8,
         1
       ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 48,
-      "type": "Fast Muter (rgthree)",
-      "pos": [
-        -8140,
-        -2040
-      ],
-      "size": [
-        270,
-        80
-      ],
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [
-        {
-          "dir": 3,
-          "name": "Load Image",
-          "type": "*",
-          "link": 93
-        },
-        {
-          "dir": 3,
-          "name": "",
-          "type": "*",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "dir": 4,
-          "label": " ",
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "Fast Muter",
-      "properties": {
-        "toggleRestriction": "default",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
       "color": "#432",
       "bgcolor": "#653"
     },
@@ -1148,7 +994,7 @@
         550
       ],
       "flags": {},
-      "order": 7,
+      "order": 6,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -1177,7 +1023,7 @@
         620
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -1193,6 +1039,162 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 25,
+      "type": "AnimaConditioningRegion",
+      "pos": [
+        -5890,
+        -2160
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 111
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 110
+        },
+        {
+          "name": "regions",
+          "shape": 7,
+          "type": "ANIMA_CONDITIONING_REGIONS",
+          "link": 107
+        }
+      ],
+      "outputs": [
+        {
+          "name": "regions",
+          "type": "ANIMA_CONDITIONING_REGIONS",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "Sen-sou/Comfyui-Anima-Regional-Conditioning",
+        "ver": "099cf1fa052721394963418455d49f7087efaf6c",
+        "Node name for S&R": "AnimaConditioningRegion",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "weight": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 49,
+      "type": "LoadImage",
+      "pos": [
+        -8140,
+        -1880
+      ],
+      "size": [
+        270,
+        430
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            94,
+            123
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.28.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Krea2_inline_00002_.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 61,
+      "type": "LC Bypasser",
+      "pos": [
+        -8140,
+        -2080
+      ],
+      "size": [
+        270,
+        120
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Load Image",
+          "type": "*",
+          "link": 123
+        },
+        {
+          "name": "enable",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "",
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "enable",
+          "type": "BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "toggleRestriction": "default"
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#c3782d",
+      "bgcolor": "#af6419"
     }
   ],
   "links": [
@@ -1267,14 +1269,6 @@
       47,
       0,
       "MODEL"
-    ],
-    [
-      93,
-      49,
-      1,
-      48,
-      0,
-      "MASK"
     ],
     [
       94,
@@ -1435,22 +1429,30 @@
       56,
       0,
       "IMAGE"
+    ],
+    [
+      123,
+      49,
+      0,
+      61,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8954302432552402,
+      "scale": 0.28531167061100143,
       "offset": [
-        9017.228598169773,
-        1833.0768752226531
+        9871.29717104724,
+        3286.797719608755
       ]
     },
     "ue_links": [],
     "k2cf_state_id": "k2cf_1785440796193_kshiymzpu2",
     "links_added_by_ue": [],
-    "frontendVersion": "1.45.21",
+    "frontendVersion": "1.47.12",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,

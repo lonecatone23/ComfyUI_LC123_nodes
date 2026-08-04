@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes
 
-> **BETA** — Active development. Expect breaking changes (especially Regional Canvas I/O). Feedback welcome.
+> **v1.2.0 (BETA)** — Active development. Expect breaking changes (especially Regional Canvas I/O). Feedback welcome.
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by **lonecatone23**.
 
@@ -46,10 +46,17 @@ git clone https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning.git
 
 | Node | Category | ID |
 |------|----------|-----|
-| **📐 Aspect Ratio Simplifier** | `image/resize` | `AspectRatioSimplifier` |
+| **📐 Aspect Ratio Simplifier** | `LC123` | `AspectRatioSimplifier` |
 | **Anima Regional Inline Canvas** | `Anima/Regional` | `AnimaRegionalCanvasInline` |
 | **Krea2 Regional Inline Canvas** | `Krea2/Regional` | `Krea2RegionalCanvasInline` |
-| **🎚️ LC123 Slider** | `LC123/utils` | `LC123Slider` |
+| **LC Slider** | `LC123/utils` | `LCSlider` |
+| **LC Dynamic Overlay** | `LC123/image` | `LCDynamicOverlay` |
+| **LC Combo Selector** | `LC123/utils` | `LCComboSelector` |
+| **LC AnySwitch** | `LC123/utils` | `LCAnySwitch` |
+| **LC Bypasser** | `LC123/utils` | `LC Bypasser` |
+| **LC Groups Bypasser** | `LC123/utils` | `LC Groups Bypasser` |
+
+`LC Bypasser` and `LC Groups Bypasser` are **frontend virtual nodes** (JavaScript only). Mute/bypass is applied in the UI before the graph is queued.
 
 ---
 
@@ -174,9 +181,11 @@ Wire UNET and empty latent around the node to the sampler.
 
 ---
 
-## 🎚️ LC123 Slider
+## LC Slider
 
-mxToolkit-style slider for **Nodes 2.0** (DOM UI). Works in 1.0 and 2.0.
+Value slider with on-node face UI (DOM). Works in Nodes 1.0 and 2.0.
+
+**Display name:** LC Slider · **ID:** `LCSlider`.
 
 | Setting | Description |
 |---------|-------------|
@@ -185,6 +194,170 @@ mxToolkit-style slider for **Nodes 2.0** (DOM UI). Works in 1.0 and 2.0.
 | **decimals** | `0` = int · `1–4` = float precision |
 
 Output type `*` (INT or FLOAT depending on decimals).
+
+---
+
+## LC Dynamic Overlay
+
+Compare / composite two images with a **live circular opacity knob** on the node.
+
+| Input | Role |
+|-------|------|
+| **image_a** | Base image — sets output resolution |
+| **image_b** | Overlay — fit-scaled to A (uniform scale, centered, no stretch/crop) |
+| **opacity** | 0–1 (driven by the on-node knob; widget is hidden in the UI) |
+
+**Output:** composited `IMAGE` at the current opacity (for the rest of the graph).
+
+### Live preview
+
+1. Queue once with both images connected.
+2. Drag the **circular knob** above the preview — overlay updates **immediately** (no re-queue).
+3. Opacity sticks when released until you move it again.
+4. Center of the knob shows the percentage; blue arc tracks the value.
+
+Graph output still reflects the opacity from the last queue (standard Comfy behaviour). The on-node view is what updates live.
+
+---
+
+## LC Combo Selector
+
+Remote dropdown for another node’s **combo** setting (scheduler, sampler name, upscale method, etc.).
+
+**Reads** the option list from the target — it does not define its own list.
+
+### Setup
+
+1. On the target node, right-click the combo widget → **Convert to input**.
+2. Add **LC Combo Selector** and wire its output into that input.
+3. The LC Combo Selector dropdown fills with the target’s real options (status shows e.g. `12 options`).
+4. Choose a value — it is sent into the target on queue.
+
+### Notes
+
+- Output type is `*` so it can connect to combo inputs (plain `STRING` often cannot).
+- Options are taken from the target’s live widget and/or node definition (`INPUT_TYPES`).
+- Disconnect → dropdown clears until you connect again.
+- After updating the JS, hard-refresh and reconnect (or re-add) the node.
+
+**Class ID:** `LCComboSelector` · **Category:** `LC123/utils`
+
+---
+
+## LC AnySwitch
+
+Top-down priority switch (first connected input wins), similar to rgthree **Any Switch**, with two important differences:
+
+1. **Use Everywhere blocked** — `cg-use-everywhere` will not auto-wire into the switch inputs (avoids circular links and surprise defaults).
+2. **Type lock** — the first connection sets the type for every socket and the output. Mismatched types cannot be wired. When **all** inputs are disconnected, the node resets to `*` and accepts a new type.
+
+### Widgets
+
+| Widget | Description |
+|--------|-------------|
+| **inputcount** | Number of input slots (2–20), same idea as JoinStringMulti |
+
+### Behaviour
+
+| State | Effect |
+|-------|--------|
+| Blank (no links) | All sockets accept `*` |
+| First connection | That type locks **all** inputs + output |
+| Further connections | Only the locked type is accepted |
+| Fully disconnected | Resets to `*` |
+
+Priority is top-down: `any_01` → `any_02` → … first connected value is passed through.
+
+---
+
+## LC Bypasser
+
+Frontend virtual node (no Python execution). Per-node bypass control with optional remote BOOLEAN sockets.
+
+Replaces the common **Node Collector + Fast Bypasser** pattern without depending on rgthree.
+
+### Layout
+
+Each connection is a pair:
+
+```text
+*        → connect any node output (Load Image, etc.)
+enable   → optional BOOLEAN (true = active, false = bypass)
+*        → next connection…
+enable
+*        → empty slot ready for another
+```
+
+### Behaviour
+
+| Control | Effect |
+|---------|--------|
+| **Toggle widget** | Click to enable / bypass the linked node |
+| **BOOLEAN → enable** | Drives that pair; toggle locks (🔒) and is not clickable |
+| Disconnect BOOLEAN | Toggle unlocks again |
+
+- `true` / yes → node mode **ALWAYS** (active)
+- `false` / no → node mode **BYPASS** (4)
+
+### Right-click menu
+
+- **Enable all** / **Bypass all** / **Toggle all** (skips locked rows)
+- **Restriction:** `default` · `max one` · `always one`
+
+### Notes
+
+- Bypass is client-side only (applied before queue). It cannot change mid-execution.
+- `OPT_CONNECTION` output is optional passthrough for chaining.
+- After updating the JS file, hard-refresh and re-add the node if behaviour looks stale.
+
+---
+
+## LC Groups Bypasser
+
+Frontend virtual node (no Python execution, **no rgthree dependency**).
+
+Discovers groups in the current workflow and exposes one control row per group.
+
+### Layout
+
+For each group (e.g. `Group 1`, `Group 2`):
+
+```text
+Toggle:  Enable Group 1
+Socket:  Group 1   (BOOLEAN, optional)
+Toggle:  Enable Group 2
+Socket:  Group 2   (BOOLEAN, optional)
+```
+
+### Behaviour
+
+| Control | Effect |
+|---------|--------|
+| **Toggle** | Enable / bypass **all nodes inside that group** |
+| **BOOLEAN → group socket** | Drives that group only; toggle locks (🔒) |
+| Other groups | Remain independently controllable |
+
+### Properties
+
+| Property | Description |
+|----------|-------------|
+| **matchTitle** | Substring or regex filter on group titles |
+| **matchColors** | Comma-separated colour names or hex codes |
+| **sort** | `position` (default) or `alphanumeric` |
+| **toggleRestriction** | `default` · `max one` · `always one` |
+
+### Right-click menu
+
+- **Refresh groups**
+- **Enable all** / **Bypass all** / **Toggle all** (manual rows only)
+- **Restriction** / **Sort** cycle
+
+### Notes
+
+- Group membership uses LiteGraph’s group node list when available, otherwise bounding-box overlap.
+- New or renamed groups are picked up automatically (periodic scan).
+- Same client-side bypass limitation as **LC Bypasser**.
+- Hard-refresh after install; delete and re-add the node once if toggles misbehave after an upgrade.
 
 ---
 
@@ -199,15 +372,25 @@ ComfyUI_LC123_nodes/
 ├── regional_canvas_common.py     # Shared paint / mask helpers
 ├── regional_canvas.py            # Compatibility shim
 ├── slider.py
+├── dynamic_overlay.py            # LC Dynamic Overlay
+├── lc_any_switch.py              # LC AnySwitch
+├── lc_combo.py                   # LC Combo Selector
 ├── web/
 │   ├── inline_regional_canvas.js
-│   └── lc123_slider.js
+│   ├── lc123_slider.js
+│   ├── lc_dynamic_overlay.js     # LC Dynamic Overlay UI
+│   ├── lc_any_switch.js          # LC AnySwitch UI (type-lock + UE block)
+│   ├── lc_combo.js               # LC Combo Selector UI (option discovery + dropdown)
+│   ├── lc_bypasser.js            # LC Bypasser
+│   └── lc_groups_bypasser.js     # LC Groups Bypasser
 ├── README.md
 ├── LICENSE
 ├── pyproject.toml
 ├── .gitignore
 └── .comfyignore
 ```
+
+`WEB_DIRECTORY = "./web"` loads every `.js` file in `web/` automatically.
 
 ---
 
@@ -219,7 +402,38 @@ ComfyUI_LC123_nodes/
 2. Restart ComfyUI fully (not only browser refresh).
 3. Hard-refresh UI: `Ctrl+F5` / `Cmd+Shift+R`.
 4. Check the terminal for `ImportError` under this pack.
-5. Search class IDs: `AspectRatioSimplifier`, `AnimaRegionalCanvasInline`, `Krea2RegionalCanvasInline`, `LC123Slider`.
+5. Search class IDs: `AspectRatioSimplifier`, `AnimaRegionalCanvasInline`, `Krea2RegionalCanvasInline`, `LCSlider`, `LCDynamicOverlay`, `LCComboSelector`, `LCAnySwitch`, `LC Bypasser`, `LC Groups Bypasser`.
+
+### LC Combo Selector — no dropdown / “N options” but empty field
+
+1. Confirm `web/lc_combo.js` is loaded (console: `[LC123.Combo]`).
+2. Target combo must be **Convert to input**, then wire LC Combo Selector into it.
+3. Hard-refresh; disconnect and reconnect, or delete and re-add LC Combo Selector.
+4. Status under the node: `12 options` = discovery OK · `not connected` · `no options found`.
+
+### LC Dynamic Overlay — no live preview
+
+1. Confirm `web/lc_dynamic_overlay.js` exists and hard-refresh.
+2. Queue the node **once** so A and B are cached.
+3. Browser console should log the extension on load.
+4. Delete and re-add the node after upgrades.
+
+### LC AnySwitch — Use Everywhere still connecting
+
+1. Confirm `web/lc_any_switch.js` is loaded (console: `[LC123.AnySwitch]`).
+2. Hard-refresh; delete and re-add the switch node.
+3. UE block is re-asserted periodically; if a specific UE version still links, report the version.
+
+### LC Bypasser / LC Groups Bypasser missing
+
+1. Confirm `web/lc_bypasser.js` and `web/lc_groups_bypasser.js` exist.
+2. Hard-refresh (`Ctrl+F5`).
+3. Open the browser console — look for `[LC123.Bypasser]` / `[LC123.GroupsBypasser] registered`.
+4. Virtual nodes only appear in the **Add node** menu after the frontend extension loads.
+
+### LC Groups Bypasser toggles wrong after update
+
+Delete the node and add a fresh **LC Groups Bypasser**. Saved widget state from older JS revisions can be inconsistent.
 
 ### Anima outputs changed / graph broken after update
 
@@ -239,7 +453,7 @@ Expected with regional DiT attention. Raise **base_ratio**, lower **self_mask_st
 
 ### Slider blank (Nodes 2.0)
 
-Hard-refresh; delete and re-add the slider node; confirm `web/lc123_slider.js` exists.
+Hard-refresh; delete and re-add the slider node; confirm `web/lc123_slider.js` exists. Search **LC Slider**.
 
 ### Aspect Ratio Simplifier errors
 

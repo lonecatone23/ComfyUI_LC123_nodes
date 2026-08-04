@@ -1,5 +1,5 @@
 """
-LC123 Slider — value on face; min/max/step/decimals via Settings.
+LC Slider — value on face; min/max/step/decimals via Settings.
 Always snaps to step. decimals=0 → INT, else FLOAT.
 """
 
@@ -25,7 +25,7 @@ def _snap(value: float, lo: float, hi: float, step: float) -> float:
     return v
 
 
-class LC123Slider:
+class LCSlider:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -64,12 +64,11 @@ class LC123Slider:
     FUNCTION = "main"
     CATEGORY = "LC123/utils"
     DESCRIPTION = (
-        "Slider: value on the face. min / max / step / decimals via ⚙ Settings. "
+        "Slider: value on the face. min / max / step / decimals via Settings. "
         "Always snaps to step. decimals=0 → INT output; 1–4 → FLOAT."
     )
 
     def main(self, value, min, max, step, decimals):
-        # NOTE: params named min/max shadow builtins — never call min()/max() here
         lo = float(min)
         hi = float(max)
         if lo > hi:
@@ -88,9 +87,9 @@ class LC123Slider:
 
 
 NODE_CLASS_MAPPINGS = {
-    "LC123Slider": LC123Slider,
+    "LCSlider": LCSlider,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LC123Slider": "🎚️ LC123 Slider",
+    "LCSlider": "LC Slider",
 }

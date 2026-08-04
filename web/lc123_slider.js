@@ -1,7 +1,7 @@
-// LC123 Slider — full DOM face (decimals + INT/FLOAT label work under Nodes 2.0)
+// LC Slider — full DOM face (decimals + INT/FLOAT label work under Nodes 2.0)
 import { app } from "../../scripts/app.js";
 
-const NODE_NAME = "LC123Slider";
+const NODE_NAMES = new Set(["LCSlider"]);
 const HIDE = new Set(["value", "min", "max", "step", "decimals", "snap"]);
 const DEFAULTS = { min: 0, max: 100, step: 1, decimals: 0 };
 
@@ -154,7 +154,7 @@ function openSettingsModal(node) {
     "background:#1e1e1e;color:#eee;border:1px solid #444;border-radius:10px;padding:16px 18px;min-width:280px;max-width:90vw;box-shadow:0 12px 40px rgba(0,0,0,0.5);";
 
   const title = document.createElement("div");
-  title.textContent = "🎚️ Slider settings";
+  title.textContent = "Slider settings";
   title.style.cssText = "font-size:15px;font-weight:600;margin-bottom:12px;";
   panel.appendChild(title);
 
@@ -326,7 +326,7 @@ function attachFace(node) {
     });
     node._lc123DomWidget = domWidget;
   } catch (e) {
-    console.warn("LC123 Slider face widget failed", e);
+    console.warn("LC Slider face widget failed", e);
   }
 
   // Chain onResize for Nodes 1.0
@@ -369,7 +369,7 @@ function boot(node) {
 app.registerExtension({
   name: "LC123.Slider",
   async beforeRegisterNodeDef(nodeType, nodeData) {
-    if (nodeData.name !== NODE_NAME) return;
+    if (!NODE_NAMES.has(nodeData.name)) return;
 
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
@@ -416,7 +416,7 @@ app.registerExtension({
   },
 
   async nodeCreated(node) {
-    if (node.comfyClass !== NODE_NAME && node.type !== NODE_NAME) return;
+    if (!NODE_NAMES.has(node.comfyClass) && !NODE_NAMES.has(node.type)) return;
     requestAnimationFrame(() => boot(node));
   },
 });

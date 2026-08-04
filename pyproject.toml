@@ -1,12 +1,21 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.1.0"
-description = "Aspect ratio tools, RGB regional paint canvases (Anima split cond/mask outputs for Sen-sou; Krea2), and a Nodes 2.0–friendly slider."
+version = "1.2.0"
+description = "LC123 ComfyUI nodes: aspect ratio tools, regional paint canvases (Anima/Krea2), slider, dynamic overlay, AnySwitch, combo selector, and frontend bypass helpers."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "lonecatone23" }]
-keywords = ["comfyui", "custom-nodes", "slider", "regional", "aspect-ratio"]
+keywords = [
+  "comfyui",
+  "custom-nodes",
+  "slider",
+  "regional",
+  "aspect-ratio",
+  "bypass",
+  "overlay",
+  "switch",
+]
 
 [project.urls]
 Repository = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"

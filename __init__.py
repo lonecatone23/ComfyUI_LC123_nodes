@@ -5,23 +5,37 @@ https://github.com/lonecatone23
 https://ko-fi.com/lonecatone
 """
 
-from .aspect_ratio import NODE_CLASS_MAPPINGS as _AR_MAP, NODE_DISPLAY_NAME_MAPPINGS as _AR_DISP
-from .anima_regional_canvas import NODE_CLASS_MAPPINGS as _ANIMA_MAP, NODE_DISPLAY_NAME_MAPPINGS as _ANIMA_DISP
-from .krea2_regional_canvas import NODE_CLASS_MAPPINGS as _KREA_MAP, NODE_DISPLAY_NAME_MAPPINGS as _KREA_DISP
-from .slider import NODE_CLASS_MAPPINGS as _SL_MAP, NODE_DISPLAY_NAME_MAPPINGS as _SL_DISP
-
 NODE_CLASS_MAPPINGS = {}
-NODE_CLASS_MAPPINGS.update(_AR_MAP)
-NODE_CLASS_MAPPINGS.update(_ANIMA_MAP)
-NODE_CLASS_MAPPINGS.update(_KREA_MAP)
-NODE_CLASS_MAPPINGS.update(_SL_MAP)
-
 NODE_DISPLAY_NAME_MAPPINGS = {}
-NODE_DISPLAY_NAME_MAPPINGS.update(_AR_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_ANIMA_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_KREA_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_SL_DISP)
+
+
+def _load(module_name: str) -> None:
+    """Import a submodule and merge its mappings. Log and skip on failure."""
+    import importlib
+    import traceback
+
+    try:
+        mod = importlib.import_module(f".{module_name}", __name__)
+        maps = getattr(mod, "NODE_CLASS_MAPPINGS", None) or {}
+        disp = getattr(mod, "NODE_DISPLAY_NAME_MAPPINGS", None) or {}
+        NODE_CLASS_MAPPINGS.update(maps)
+        NODE_DISPLAY_NAME_MAPPINGS.update(disp)
+        print(f"[LC123] + {module_name}: {list(maps.keys())}")
+    except Exception as e:
+        print(f"[LC123] ! failed to load {module_name}: {e}")
+        traceback.print_exc()
+
+
+_load("aspect_ratio")
+_load("slider")
+_load("anima_regional_canvas")
+_load("krea2_regional_canvas")
+_load("dynamic_overlay")
+_load("lc_any_switch")
+_load("lc_combo")
 
 WEB_DIRECTORY = "./web"
+
+print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

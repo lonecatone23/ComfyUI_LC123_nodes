@@ -365,7 +365,7 @@ class AspectRatioSimplifier:
     RETURN_TYPES = ("IMAGE", "MASK", "INT", "INT", "LATENT", "INT")
     RETURN_NAMES = ("image", "mask", "width", "height", "latent", "batch")
     FUNCTION = "run"
-    CATEGORY = "LC123"
+    CATEGORY = "LC123/image"
     DESCRIPTION = (
         "Resolve target size from the input image (preferred) or mask, or a CR-style "
         "aspect preset. Resize image and/or mask with the same geometry. "

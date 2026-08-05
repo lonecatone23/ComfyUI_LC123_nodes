@@ -92,6 +92,19 @@ def _region_pack(clip, prompts, masks, regional_enabled):
     return outs
 
 
+def _interrupt(reason: str) -> None:
+    """Stop the graph so downstream nodes do not run on empty / unconfirmed canvas."""
+    try:
+        from comfy.model_management import InterruptProcessingException
+
+        raise InterruptProcessingException()
+    except ImportError:
+        raise RuntimeError(
+            f"Anima Regional Canvas stopped: {reason}. "
+            "Paint regions if needed, click Apply, then queue again."
+        ) from None
+
+
 class AnimaRegionalCanvasInline:
     """Paint RGB regions → separate GLOBAL / per-color CONDITIONING + MASK.
 
@@ -221,25 +234,31 @@ class AnimaRegionalCanvasInline:
         except Exception:
             pass
 
+        # Hard stop: do not let the rest of the graph run on empty / unconfirmed paint
+        if should_pause:
+            if empty_mask_hold and not waiting_for_apply:
+                reason = "empty mask"
+            elif empty_mask_hold and waiting_for_apply:
+                reason = "empty mask — paint a region, then click Apply"
+            else:
+                reason = "waiting for Apply"
+            _interrupt(reason)
+
         prompts = _prompts(kwargs)
         regional_enabled = kwargs.get("regional_enabled", True)
         masks = _extract_masks(image)
         pack = _region_pack(clip, prompts, masks, regional_enabled)
         union = _mask_output(masks)
 
-        mode = "paused" if should_pause else "inline"
-        extra = None
-        if should_pause:
-            extra = {"reason": "empty_mask" if empty_mask_hold else "waiting_for_apply"}
         metadata = _build_metadata(
             "Anima Regional Inline Canvas",
-            mode,
+            "inline",
             prompts,
             width,
             height,
             regional_enabled,
             region_strength,
-            extra=extra,
+            extra=None,
         )
 
         result = (

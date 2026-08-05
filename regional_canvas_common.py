@@ -543,22 +543,16 @@ def _run_inline_canvas(
     regional_enabled = kwargs.get("regional_enabled", True)
 
     if should_pause:
-        masks = _extract_masks(image)
-        mask_out = _mask_output(masks)
+        # Hard stop so downstream nodes do not run on empty / unconfirmed canvas
         try:
-            positive, negative = _conditioning(clip, prompts, masks, region_strength, regional_enabled)
-        except Exception:
-            positive = negative = None
-        metadata = _build_metadata(
-            node_name, "paused", prompts, width, height, regional_enabled, region_strength,
-            extra={"reason": "empty_mask" if empty_mask_hold else "waiting_for_apply"},
-        )
-        latent = _latent(width, height, batch_size) if pass_latent else None
-        result = _pack_inline_result(
-            image, positive, negative, metadata, mask_out,
-            model=model, latent=latent, pass_model=pass_model, pass_latent=pass_latent,
-        )
-        return {"ui": ui, "result": result}
+            from comfy.model_management import InterruptProcessingException
+            raise InterruptProcessingException()
+        except ImportError:
+            reason = "empty mask" if empty_mask_hold else "waiting for Apply"
+            raise RuntimeError(
+                f"{node_name} stopped: {reason}. "
+                "Paint if needed, click Apply, then queue again."
+            ) from None
 
     masks = _extract_masks(image)
     positive, negative = _conditioning(clip, prompts, masks, region_strength, regional_enabled)

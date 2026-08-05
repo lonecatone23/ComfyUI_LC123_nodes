@@ -33,6 +33,7 @@ _load("krea2_regional_canvas")
 _load("dynamic_overlay")
 _load("lc_any_switch")
 _load("lc_combo")
+_load("lc_invert_boolean")
 
 WEB_DIRECTORY = "./web"
 

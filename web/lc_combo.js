@@ -1,13 +1,15 @@
 /**
  * LC Combo Selector — remote dropdown for a target node’s combo
  * -------------------------------------------------------------
- * Reads options from the connected target (scheduler, etc.).
- * Rebuilds a real combo widget so the dropdown is actually usable.
+ * Reads options from the connected target. Rebuilds a real combo widget.
+ * Node size is retained across reload, scroll, and option refresh.
  */
 
 import { app } from "../../scripts/app.js";
 
 const CLASSES = new Set(["LCComboSelector"]);
+const MIN_W = 200;
+const MIN_H = 60;
 
 function normalizeValues(values) {
   if (!Array.isArray(values) || !values.length) return null;
@@ -153,9 +155,28 @@ function matchOutputType(node, targetInput) {
   }
 }
 
+function rememberSize(node) {
+  if (!node.properties) node.properties = {};
+  if (node.size?.[0]) node.properties.lc_combo_w = node.size[0];
+  if (node.size?.[1]) node.properties.lc_combo_h = node.size[1];
+}
+
+function restoreSize(node) {
+  if (!node.properties) node.properties = {};
+  const w = Number(node.properties.lc_combo_w) || node.size?.[0] || MIN_W;
+  const h = Number(node.properties.lc_combo_h) || node.size?.[1] || MIN_H;
+  const nw = Math.max(MIN_W, w);
+  const nh = Math.max(MIN_H, h);
+  if (typeof node.setSize === "function") {
+    node.setSize([nw, nh]);
+  } else if (node.size) {
+    node.size[0] = nw;
+    node.size[1] = nh;
+  }
+}
+
 /**
- * Replace the `value` widget with a real combo (or text if no options).
- * Mutating type in-place often does not refresh the UI in modern Comfy.
+ * Replace the value widget. Does NOT reset node size (preserves user resize).
  */
 function setValueWidget(node, options) {
   if (!node.widgets) node.widgets = [];
@@ -166,7 +187,6 @@ function setValueWidget(node, options) {
       ? String(node.widgets[idx].value)
       : "";
 
-  // Remove existing value widget(s)
   for (let i = node.widgets.length - 1; i >= 0; i--) {
     if (node.widgets[i]?.name === "value") {
       node.widgets.splice(i, 1);
@@ -185,7 +205,6 @@ function setValueWidget(node, options) {
       },
       { values: options.slice() }
     );
-    // Ensure graph serialization picks it up
     w.serialize = true;
     node._lcOptions = options.slice();
     node._lcStatus = `${options.length} options`;
@@ -206,11 +225,9 @@ function setValueWidget(node, options) {
       : "not connected";
   }
 
-  // Resize for widget list
-  try {
-    const size = node.computeSize?.();
-    if (size) node.setSize(size);
-  } catch (_) {}
+  // Keep existing size — only grow if the node is still at default tiny height
+  restoreSize(node);
+  if (node.size && node.size[1] < MIN_H) node.size[1] = MIN_H;
   node.setDirtyCanvas?.(true, true);
 }
 
@@ -233,15 +250,16 @@ function refresh(node) {
         node._lcStatus = "not connected";
         node.setDirtyCanvas?.(true, true);
       }
+      restoreSize(node);
       return;
     }
     matchOutputType(node, target.input);
-    // Only rebuild widget when the list actually changes
     if (!sameOptions(node._lcOptions, target.options)) {
       setValueWidget(node, target.options || null);
     } else if (target.options?.length) {
       node._lcStatus = `${target.options.length} options`;
     }
+    restoreSize(node);
   } catch (e) {
     console.warn("[LC Combo Selector] refresh", e);
   }
@@ -254,7 +272,6 @@ app.registerExtension({
     const name = nodeData?.name || "";
     if (!CLASSES.has(name)) return;
 
-    // Allow connect to any input type
     nodeType.prototype.onConnectOutput = function () {
       return true;
     };
@@ -264,26 +281,45 @@ app.registerExtension({
       const r = onCreated?.apply(this, arguments);
       this._lcOptions = null;
       this._lcStatus = "not connected";
+      if (!this.properties) this.properties = {};
       if (this.outputs?.[0]) {
         this.outputs[0].type = "*";
         this.outputs[0].name = "value";
       }
+      restoreSize(this);
       setTimeout(() => refresh(this), 40);
       return r;
     };
 
     const onConfigure = nodeType.prototype.onConfigure;
-    nodeType.prototype.onConfigure = function () {
+    nodeType.prototype.onConfigure = function (data) {
       const r = onConfigure?.apply(this, arguments);
+      if (!this.properties) this.properties = {};
+      if (data?.size?.[0]) this.properties.lc_combo_w = data.size[0];
+      if (data?.size?.[1]) this.properties.lc_combo_h = data.size[1];
       if (this.outputs?.[0]) this.outputs[0].type = "*";
-      setTimeout(() => refresh(this), 60);
-      setTimeout(() => refresh(this), 300);
+      setTimeout(() => {
+        restoreSize(this);
+        refresh(this);
+      }, 60);
+      setTimeout(() => {
+        restoreSize(this);
+        refresh(this);
+      }, 300);
+      return r;
+    };
+
+    const onResize = nodeType.prototype.onResize;
+    nodeType.prototype.onResize = function (size) {
+      const r = onResize?.apply(this, arguments);
+      rememberSize(this);
       return r;
     };
 
     const onConnectionsChange = nodeType.prototype.onConnectionsChange;
     nodeType.prototype.onConnectionsChange = function () {
       const r = onConnectionsChange?.apply(this, arguments);
+      rememberSize(this);
       setTimeout(() => refresh(this), 15);
       setTimeout(() => refresh(this), 120);
       return r;
@@ -291,6 +327,22 @@ app.registerExtension({
 
     const onDrawFG = nodeType.prototype.onDrawForeground;
     nodeType.prototype.onDrawForeground = function (ctx) {
+      // Re-assert size if something collapsed it (scroll / layout pass)
+      if (
+        this.properties?.lc_combo_w &&
+        this.size &&
+        (Math.abs(this.size[0] - this.properties.lc_combo_w) > 2 ||
+          Math.abs(this.size[1] - this.properties.lc_combo_h) > 2)
+      ) {
+        // Only restore if we shrank — allow intentional growth
+        if (
+          this.size[0] < this.properties.lc_combo_w - 2 ||
+          this.size[1] < this.properties.lc_combo_h - 2
+        ) {
+          restoreSize(this);
+        }
+      }
+
       const r = onDrawFG?.apply(this, arguments);
       if (this._lcStatus) {
         ctx.save();
@@ -313,7 +365,6 @@ app.registerExtension({
   },
 });
 
-// * connects to anything
 (function () {
   try {
     const orig = LiteGraph.isValidConnection;
@@ -327,4 +378,4 @@ app.registerExtension({
   } catch (_) {}
 })();
 
-console.log("[LC123.Combo] combo widget rebuild enabled");
+console.log("[LC123.Combo] size retention enabled");

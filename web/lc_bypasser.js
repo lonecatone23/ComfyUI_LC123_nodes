@@ -41,16 +41,83 @@ function getLinkedOrigin(graph, input) {
   return graph.getNodeById?.(link.origin_id) || null;
 }
 
-function readBooleanFromOrigin(origin) {
-  if (!origin?.widgets) return null;
+function coerceBool(v) {
+  if (v === true || v === false) return v;
+  if (v === 1 || v === "1" || v === "true" || v === "yes" || v === "on") return true;
+  if (v === 0 || v === "0" || v === "false" || v === "no" || v === "off") return false;
+  return null;
+}
+
+function isInvertNode(node) {
+  if (!node) return false;
+  const s = `${node.type || ""} ${node.comfyClass || ""} ${node.title || ""}`.toLowerCase();
+  return /invert|flip|negate|boolean.?not|not.?boolean|lcinvert/.test(s);
+}
+
+function readBooleanFromWidgets(origin) {
+  if (!origin?.widgets?.length) return null;
+  // Prefer obvious names first
+  const preferred = ["value", "boolean", "boolean_value", "toggle", "enabled", "enable"];
+  for (const name of preferred) {
+    const w = origin.widgets.find((x) => x && x.name === name);
+    if (!w) continue;
+    const c = coerceBool(w.value);
+    if (c !== null) return c;
+    if (w.type === "toggle") return !!w.value;
+  }
   for (const w of origin.widgets) {
     if (!w) continue;
-    if (typeof w.value === "boolean") return !!w.value;
+    const c = coerceBool(w.value);
+    if (c !== null) return c;
     if (w.type === "toggle") return !!w.value;
-    if (w.value === "yes" || w.value === "true" || w.value === 1) return true;
-    if (w.value === "no" || w.value === "false" || w.value === 0) return false;
   }
   return null;
+}
+
+/**
+ * Resolve a BOOLEAN input live for the UI, following intermediate nodes
+ * (Primitive → Invert/Flip → Bypasser). Invert-style nodes flip the upstream value.
+ */
+function resolveBoolean(graph, input, depth = 0) {
+  if (!input || input.link == null || !graph || depth > 24) return null;
+  const link = graph.links?.[input.link];
+  if (!link) return null;
+  const origin = graph.getNodeById?.(link.origin_id);
+  if (!origin) return null;
+
+  const invert = isInvertNode(origin);
+
+  // Follow upstream BOOLEAN inputs first (covers invert/passthrough nodes)
+  const boolIns = (origin.inputs || []).filter(
+    (i) =>
+      i &&
+      (i.type === "BOOLEAN" ||
+        i.type === "boolean" ||
+        String(i.name || "").toLowerCase().includes("bool") ||
+        String(i.name || "").toLowerCase() === "value")
+  );
+  for (const bi of boolIns) {
+    if (bi.link == null) continue;
+    const up = resolveBoolean(graph, bi, depth + 1);
+    if (up !== null) return invert ? !up : up;
+  }
+
+  // Also try any connected input if none typed BOOLEAN matched
+  if (!boolIns.some((i) => i.link != null)) {
+    for (const bi of origin.inputs || []) {
+      if (!bi || bi.link == null) continue;
+      const up = resolveBoolean(graph, bi, depth + 1);
+      if (up !== null) return invert ? !up : up;
+    }
+  }
+
+  const local = readBooleanFromWidgets(origin);
+  if (local !== null) return invert ? !local : local;
+  return null;
+}
+
+function readBooleanFromOrigin(origin) {
+  return readBooleanFromWidgets(origin);
 }
 
 function setWidgetLocked(widget, locked) {
@@ -204,7 +271,7 @@ app.registerExtension({
 
           let enabled = true;
           if (driven) {
-            const bv = readBooleanFromOrigin(getLinkedOrigin(graph, e));
+            const bv = resolveBoolean(graph, e);
             if (bv !== null) enabled = bv;
           } else if (origin) {
             enabled = origin.mode === MODE_ALWAYS;
@@ -281,7 +348,7 @@ app.registerExtension({
           const driven = e?.link != null;
           let enabled = true;
           if (driven) {
-            const bv = readBooleanFromOrigin(getLinkedOrigin(graph, e));
+            const bv = resolveBoolean(graph, e);
             if (bv !== null) enabled = bv;
           } else if (this.widgets?.[p] != null) {
             enabled = !!this.widgets[p].value;

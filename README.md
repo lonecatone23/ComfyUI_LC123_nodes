@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes
 
-**Version 1.2.3**
+**Version 1.2.4**
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).
 
@@ -20,7 +20,8 @@ For Anima regional attention, also install [Sen-sou Anima Regional Conditioning]
 | **LC Dynamic Overlay** | Overlay B on A; A sets resolution; B fit-scaled; live circular opacity knob after one queue | Adjust the blend and save the final image without regenerating. |
 | **LC Combo Selector** | Wire into a converted combo input; dropdown mirrors that node’s options (scheduler, etc.) | Lets you collapse nodes while still keeping selections available. |
 | **LC AnySwitch** | Top-down any-type switch; type-locks from first connection; blocks Use Everywhere auto-wire; 2–20 inputs | Avoids the circular-reference issues common with rgthree Any Switch. |
-| **LC Bypasser** | Frontend per-node bypass; optional BOOLEAN enable sockets; 🔒 when driven remotely | Turn multiple nodes on or off with a single boolean. |
+| **LC Invert Boolean** | Socket-only boolean NOT; small true/false readout on the node | Use in enable / bypass chains (e.g. before LC Bypasser). |
+| **LC Bypasser** | Frontend per-node bypass; optional BOOLEAN enable sockets; 🔒 when driven remotely | Turn multiple nodes on or off with a single boolean (works through invert/flip). |
 | **LC Groups Bypasser** | Frontend per-group bypass; discovers graph groups; optional BOOLEAN per group | Turn multiple groups on or off with a single boolean. |
 
 ## License

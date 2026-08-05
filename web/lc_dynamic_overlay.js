@@ -1,8 +1,8 @@
 /**
  * LC Dynamic Overlay — live opacity preview
  * ------------------------------------------------
- * Circular knob (not a flat bar) above the image.
- * Python opacity widget is hidden; value still drives the graph.
+ * Circular knob above the image. Python opacity widget is hidden.
+ * Node size is retained across refresh and re-queue.
  *
  * ui.images: [0]=A  [1]=B(fit)  [2]=composite
  */
@@ -11,6 +11,12 @@ import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
 
 const NODE_CLASS = "LCDynamicOverlay";
+const MIN_W = 220;
+const MIN_H = 160;
+const MARGIN = 8;
+const KNOB_R = 22;
+const GAP = 8;
+const TOP = 34;
 
 function viewUrl(meta) {
   if (!meta) return null;
@@ -43,7 +49,6 @@ async function metaToCanvas(meta) {
   return c;
 }
 
-/** Hide widget, keep value for the graph. */
 function hideWidget(widget) {
   if (!widget || widget._lcHidden) return;
   widget._lcHidden = true;
@@ -57,36 +62,77 @@ function hideWidget(widget) {
   widget.type = "hidden";
 }
 
-/**
- * Map opacity 0..1 ↔ angle on a 270° arc.
- * Bottom-left (−135°) = 0%, bottom-right (+135°) = 100%.
- * Angle is in radians, 0 = east, CCW positive (canvas).
- */
-function opacityToAngle(t) {
-  // start at 135° (SW) going clockwise to 45° (SE) → use canvas arcs carefully
-  // We draw from startAng to endAng clockwise for fill.
-  const start = Math.PI * 0.75; // 135°
-  const span = Math.PI * 1.5; // 270°
-  return start + span * Math.max(0, Math.min(1, t));
-}
-
 function angleToOpacity(dx, dy) {
-  // atan2 from knob center; convert to 0..1 along the 270° arc
-  let a = Math.atan2(dy, dx); // -PI..PI, 0 = east
-  // Normalize to [0, 2PI)
+  let a = Math.atan2(dy, dx);
   if (a < 0) a += Math.PI * 2;
-  const start = Math.PI * 0.75; // 135°
-  const span = Math.PI * 1.5; // 270°
-  // Offset so start → 0
+  const start = Math.PI * 0.75;
+  const span = Math.PI * 1.5;
   let rel = a - start;
   if (rel < 0) rel += Math.PI * 2;
-  // Clamp to arc; values past the dead zone snap to ends
   if (rel > span) {
-    // In the 90° gap at the bottom — pick nearer end
     const midGap = span + (Math.PI * 2 - span) / 2;
     return rel < midGap ? 1 : 0;
   }
   return Math.max(0, Math.min(1, rel / span));
+}
+
+/** Height needed for current node width + image A aspect. */
+function neededSize(node) {
+  const a = node._lc?.a;
+  const w = Math.max(MIN_W, node.size?.[0] || MIN_W);
+  if (!a) {
+    return [w, Math.max(MIN_H, node.size?.[1] || MIN_H)];
+  }
+  const availW = Math.max(48, w - MARGIN * 2);
+  const scale = availW / Math.max(a.width, 1);
+  const drawH = Math.round(a.height * scale);
+  const imgY = TOP + KNOB_R * 2 + GAP;
+  const h = imgY + drawH + MARGIN + 4;
+  return [w, Math.max(MIN_H, h)];
+}
+
+/**
+ * Apply size without fighting user resize:
+ * - Never shrink below the last good stored size unless force.
+ * - Update properties so refresh keeps it.
+ */
+function applySize(node, force) {
+  const [nw, nh] = neededSize(node);
+  if (!node.size) node.size = [nw, nh];
+
+  const curW = node.size[0] || MIN_W;
+  const curH = node.size[1] || MIN_H;
+
+  // Keep user width if they resized wider; only grow height to fit image
+  const w = force ? nw : Math.max(curW, nw);
+  const h = force ? nh : Math.max(curH, nh);
+
+  if (typeof node.setSize === "function") {
+    node.setSize([w, h]);
+  } else {
+    node.size[0] = w;
+    node.size[1] = h;
+  }
+
+  // Persist for configure / refresh
+  if (!node.properties) node.properties = {};
+  node.properties.lc_overlay_w = w;
+  node.properties.lc_overlay_h = h;
+  node._lc.lastW = w;
+  node._lc.lastH = h;
+}
+
+function restoreSavedSize(node) {
+  const pw = node.properties?.lc_overlay_w;
+  const ph = node.properties?.lc_overlay_h;
+  const w = Number(pw) || node._lc?.lastW || node.size?.[0] || MIN_W;
+  const h = Number(ph) || node._lc?.lastH || node.size?.[1] || MIN_H;
+  if (typeof node.setSize === "function") {
+    node.setSize([Math.max(MIN_W, w), Math.max(MIN_H, h)]);
+  } else if (node.size) {
+    node.size[0] = Math.max(MIN_W, w);
+    node.size[1] = Math.max(MIN_H, h);
+  }
 }
 
 app.registerExtension({
@@ -94,6 +140,30 @@ app.registerExtension({
 
   async beforeRegisterNodeDef(nodeType, nodeData) {
     if ((nodeData?.name || "") !== NODE_CLASS) return;
+
+    // Size from image when available
+    const origCompute = nodeType.prototype.computeSize;
+    nodeType.prototype.computeSize = function (out) {
+      if (this._lc?.a) {
+        const [w, h] = neededSize(this);
+        const size = [w, h];
+        if (out) {
+          out[0] = size[0];
+          out[1] = size[1];
+          return out;
+        }
+        return size;
+      }
+      const size = origCompute?.apply(this, arguments) || [MIN_W, MIN_H];
+      size[0] = Math.max(MIN_W, size[0] || MIN_W);
+      size[1] = Math.max(MIN_H, size[1] || MIN_H);
+      if (out) {
+        out[0] = size[0];
+        out[1] = size[1];
+        return out;
+      }
+      return size;
+    };
 
     const origCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
@@ -104,8 +174,12 @@ app.registerExtension({
         b: null,
         opacity: 0.5,
         dragging: false,
-        draw: null, // { cx, cy, r }
+        draw: null,
+        lastW: null,
+        lastH: null,
       };
+
+      if (!this.properties) this.properties = {};
 
       const setupOpacity = () => {
         const ow = (this.widgets || []).find((w) => w.name === "opacity");
@@ -121,12 +195,34 @@ app.registerExtension({
             return prev?.apply(ow, [v, ...args]);
           };
         }
-        this.setSize?.(this.computeSize?.() || this.size);
       };
       setupOpacity();
       setTimeout(setupOpacity, 30);
       setTimeout(setupOpacity, 120);
 
+      // Initial compact size; grow after first preview
+      restoreSavedSize(this);
+      if (!this.properties.lc_overlay_w) {
+        applySize(this, true);
+      }
+
+      return r;
+    };
+
+    const origConfigure = nodeType.prototype.onConfigure;
+    nodeType.prototype.onConfigure = function (data) {
+      const r = origConfigure?.apply(this, arguments);
+      // Prefer size from graph JSON, then properties
+      if (data?.size && Array.isArray(data.size) && data.size.length >= 2) {
+        if (!this.properties) this.properties = {};
+        this.properties.lc_overlay_w = data.size[0];
+        this.properties.lc_overlay_h = data.size[1];
+      }
+      setTimeout(() => {
+        restoreSavedSize(this);
+        this.setDirtyCanvas?.(true, true);
+      }, 0);
+      setTimeout(() => restoreSavedSize(this), 50);
       return r;
     };
 
@@ -146,12 +242,28 @@ app.registerExtension({
             self._lc.opacity = Math.max(0, Math.min(1, Number(ow.value) || 0));
             hideWidget(ow);
           }
+          // Fit height to image; keep user width if larger
+          applySize(self, false);
         } catch (e) {
           console.warn("[LC Overlay] preview load error", e);
         }
         self.setDirtyCanvas?.(true, true);
       })();
 
+      return r;
+    };
+
+    // After user resizes, remember
+    const origResize = nodeType.prototype.onResize;
+    nodeType.prototype.onResize = function (size) {
+      const r = origResize?.apply(this, arguments);
+      if (size && this._lc) {
+        if (!this.properties) this.properties = {};
+        this.properties.lc_overlay_w = size[0];
+        this.properties.lc_overlay_h = size[1];
+        this._lc.lastW = size[0];
+        this._lc.lastH = size[1];
+      }
       return r;
     };
 
@@ -173,49 +285,45 @@ app.registerExtension({
       const s = this._lc;
       if (!s?.a) return;
 
-      const margin = 8;
-      const knobR = 22; // outer radius of the circle control
-      const gap = 8;
-      const top = 34;
-
-      const availW = Math.max(48, this.size[0] - margin * 2);
+      const availW = Math.max(48, this.size[0] - MARGIN * 2);
       const srcW = s.a.width;
       const srcH = s.a.height;
       const scale = availW / Math.max(srcW, 1);
       const drawW = Math.round(srcW * scale);
       const drawH = Math.round(srcH * scale);
 
-      const sx = margin;
-      // Knob centered above the image
+      const sx = MARGIN;
       const cx = sx + drawW / 2;
-      const cy = top + knobR;
-      const imgY = top + knobR * 2 + gap;
+      const cy = TOP + KNOB_R;
+      const imgY = TOP + KNOB_R * 2 + GAP;
 
-      const needH = imgY + drawH + margin + 4;
-      if (this.size[1] < needH) this.size[1] = needH;
+      // Grow only if too short — never collapse on redraw
+      const needH = imgY + drawH + MARGIN + 4;
+      if (this.size[1] < needH) {
+        this.size[1] = needH;
+        if (!this.properties) this.properties = {};
+        this.properties.lc_overlay_h = needH;
+        s.lastH = needH;
+      }
 
-      s.draw = { cx, cy, r: knobR + 6 }; // hit radius slightly larger
+      s.draw = { cx, cy, r: KNOB_R + 6 };
 
       const t = Math.max(0, Math.min(1, s.opacity));
-      const startAng = Math.PI * 0.75; // 135°
-      const span = Math.PI * 1.5; // 270°
+      const startAng = Math.PI * 0.75;
+      const span = Math.PI * 1.5;
       const endAng = startAng + span * t;
-      const trackR = knobR - 3;
+      const trackR = KNOB_R - 3;
       const thumbR = 6;
 
-      // ---- circular knob ----
       ctx.save();
-
-      // Outer disc
       ctx.beginPath();
-      ctx.arc(cx, cy, knobR, 0, Math.PI * 2);
+      ctx.arc(cx, cy, KNOB_R, 0, Math.PI * 2);
       ctx.fillStyle = "#1a1a1a";
       ctx.fill();
       ctx.strokeStyle = "#555";
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Track (full 270° arc, muted)
       ctx.beginPath();
       ctx.arc(cx, cy, trackR, startAng, startAng + span, false);
       ctx.strokeStyle = "#333";
@@ -223,7 +331,6 @@ app.registerExtension({
       ctx.lineCap = "round";
       ctx.stroke();
 
-      // Value arc
       if (t > 0.001) {
         ctx.beginPath();
         ctx.arc(cx, cy, trackR, startAng, endAng, false);
@@ -233,7 +340,6 @@ app.registerExtension({
         ctx.stroke();
       }
 
-      // Thumb on the arc
       const thumbAng = endAng;
       const tx = cx + Math.cos(thumbAng) * trackR;
       const ty = cy + Math.sin(thumbAng) * trackR;
@@ -245,24 +351,19 @@ app.registerExtension({
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Center label
       ctx.fillStyle = "#eee";
       ctx.font = "bold 11px sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(`${Math.round(t * 100)}%`, cx, cy);
-
       ctx.restore();
 
-      // ---- image composite ----
       ctx.save();
       ctx.beginPath();
       ctx.rect(sx, imgY, drawW, drawH);
       ctx.clip();
-
       ctx.globalAlpha = 1;
       ctx.drawImage(s.a, 0, 0, srcW, srcH, sx, imgY, drawW, drawH);
-
       if (s.b) {
         ctx.globalAlpha = t;
         ctx.drawImage(s.b, 0, 0, s.b.width, s.b.height, sx, imgY, drawW, drawH);
@@ -326,4 +427,4 @@ app.registerExtension({
   },
 });
 
-console.log("[LC123.DynamicOverlay] circular opacity knob");
+console.log("[LC123.DynamicOverlay] size retention + circular knob");

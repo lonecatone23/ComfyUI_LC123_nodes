@@ -389,28 +389,25 @@ class AspectRatioSimplifier:
         image=None,
         mask=None,
     ):
-        if image is None and mask is None:
-            raise RuntimeError(
-                "Aspect Ratio Simplifier: connect an image and/or a mask."
-            )
+        has_image = image is not None
+        has_mask = mask is not None
+        has_source = has_image or has_mask
 
-        # Source size: image preferred, else mask
-        if image is not None:
+        # Source size from image (preferred) or mask when present
+        if has_image:
             src_w, src_h = _image_size(image)
             src_batch = int(image.shape[0])
             src_ref = image
-        else:
+        elif has_mask:
             src_w, src_h = _mask_size(mask)
-            if mask.dim() == 2:
-                src_batch = 1
-            else:
-                src_batch = int(mask.shape[0])
+            src_batch = 1 if mask.dim() == 2 else int(mask.shape[0])
             src_ref = mask
-
-        if not resolution_source:
-            # image/mask native resolution (+ max_resolution clamp)
-            tw, th = src_w, src_h
         else:
+            src_w = src_h = 0
+            src_batch = max(1, int(batch_size))
+            src_ref = None
+
+        def _preset_size():
             preset = ASPECT_PRESETS.get(aspect_ratio)
             if preset is None:
                 tw, th = int(custom_width), int(custom_height)
@@ -418,11 +415,24 @@ class AspectRatioSimplifier:
                 tw, th = preset
             if swap_dimensions == "On":
                 tw, th = th, tw
+            return tw, th
+
+        # resolution_source False = image/mask, True = custom/preset
+        # No image/mask (disconnected or upstream bypassed) → always custom/preset
+        if has_source and not resolution_source:
+            tw, th = src_w, src_h
+        else:
+            tw, th = _preset_size()
 
         tw, th = _clamp_to_max(tw, th, int(max_resolution))
+        if divisible_by and int(divisible_by) > 1:
+            tw = _make_divisible(tw, int(divisible_by))
+            th = _make_divisible(th, int(divisible_by))
+        tw = max(1, tw)
+        th = max(1, th)
 
         # --- image ---
-        if image is not None:
+        if has_image:
             out_image, out_w, out_h = _resize_image(
                 image,
                 tw,
@@ -433,12 +443,9 @@ class AspectRatioSimplifier:
                 pad_color=pad_color,
                 divisible_by=int(divisible_by),
             )
-        else:
-            # Mask-only: still apply aspect/proportion math to get final size,
-            # then emit a blank image at that size.
-            # Run geometry via a 1-channel proxy so crop/pad/resize match.
+        elif has_mask:
+            # Mask-only: geometry via proxy, then blank RGB image
             proxy = mask.unsqueeze(-1) if mask.dim() == 3 else mask.unsqueeze(0).unsqueeze(-1)
-            # expand to 3ch for resize helper
             proxy = proxy.repeat(1, 1, 1, 3)
             _, out_w, out_h = _resize_image(
                 proxy,
@@ -451,9 +458,13 @@ class AspectRatioSimplifier:
                 divisible_by=int(divisible_by),
             )
             out_image = _blank_image(src_batch, out_h, out_w, ref=src_ref)
+        else:
+            # Nothing connected — blank image at custom/preset size
+            out_w, out_h = tw, th
+            out_image = _blank_image(src_batch, out_h, out_w, ref=None)
 
         # --- mask ---
-        if mask is not None:
+        if has_mask:
             out_mask = _resize_mask(
                 mask,
                 src_w=src_w,

@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes
 
-**Version 1.2.4**
+**Version 1.2.5**
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).
 
@@ -13,7 +13,7 @@ For Anima regional attention, also install [Sen-sou Anima Regional Conditioning]
 
 | Node | Features | Notes |
 |------|----------|-------|
-| **📐 Aspect Ratio Simplifier** | Size from image/mask or CR-style presets; resize image and mask together; crop / stretch / pad / total_pixels; empty latent out | A single node for every resize need. |
+| **📐 Aspect Ratio Simplifier** | Size from image/mask or CR-style presets; resize image and mask together; crop / stretch / pad / total_pixels; empty latent out | A single node for every resize need. Falls back to custom/preset when image/mask is missing or bypassed. |
 | **Anima Regional Inline Canvas** | RGB paint canvas; separate GLOBAL / RED / GREEN / BLUE conditioning and masks for Sen-sou; pause until Apply | Simple and easy to use without a separate mask editor. |
 | **Krea2 Regional Inline Canvas** | Same paint UI for Krea2 CLIP; combined positive via Comfy mask/area. **BETA — still a work in progress** | Simple and easy to use without a separate mask editor. |
 | **LC Slider** | On-node slider face; min / max / step / decimals in Settings; INT or FLOAT output | Makes it easy to change values. Works in Nodes 2.0. |

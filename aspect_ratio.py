@@ -424,12 +424,21 @@ class AspectRatioSimplifier:
         else:
             tw, th = _preset_size()
 
-        tw, th = _clamp_to_max(tw, th, int(max_resolution))
-        if divisible_by and int(divisible_by) > 1:
-            tw = _make_divisible(tw, int(divisible_by))
-            th = _make_divisible(th, int(divisible_by))
-        tw = max(1, tw)
-        th = max(1, th)
+        max_res = int(max_resolution)
+        tw, th = _clamp_to_max(tw, th, max_res)
+        div = int(divisible_by) if divisible_by else 1
+        if div > 1:
+            # Round down so we never exceed max_resolution after alignment
+            tw = max(div, (tw // div) * div)
+            th = max(div, (th // div) * div)
+            # If still over max (e.g. div > max), clamp to max then down-align
+            if tw > max_res:
+                tw = max(div, (max_res // div) * div) if max_res >= div else max_res
+            if th > max_res:
+                th = max(div, (max_res // div) * div) if max_res >= div else max_res
+        tw = max(1, int(tw))
+        th = max(1, int(th))
+        pad_rgb = _parse_pad_color(pad_color)
 
         # --- image ---
         if has_image:
@@ -440,7 +449,7 @@ class AspectRatioSimplifier:
                 upscale_method,
                 proportion,
                 crop_location,
-                pad_color=pad_color,
+                pad_color=pad_rgb,
                 divisible_by=int(divisible_by),
             )
         elif has_mask:
@@ -454,7 +463,7 @@ class AspectRatioSimplifier:
                 "nearest-exact",
                 proportion,
                 crop_location,
-                pad_color=pad_color,
+                pad_color=pad_rgb,
                 divisible_by=int(divisible_by),
             )
             out_image = _blank_image(src_batch, out_h, out_w, ref=src_ref)

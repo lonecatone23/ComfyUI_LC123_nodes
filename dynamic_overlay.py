@@ -120,7 +120,22 @@ class LCDynamicOverlay:
         _, _, ah, aw = a.shape
         b_fit = _fit_resize(b, ah, aw)
 
-        out = (a * (1.0 - opacity) + b_fit * opacity).clamp(0.0, 1.0)
+        # Coverage: 1 where fitted B was drawn, 0 on letterbox pad.
+        # Prevents black pad pixels from darkening image A.
+        b_sum = b_fit.abs().sum(dim=1, keepdim=True)
+        # Rebuild coverage from fit geometry (zeros outside placed B)
+        _, _, bh0, bw0 = b.shape
+        scale = min(aw / max(bw0, 1), ah / max(bh0, 1))
+        new_w = max(1, int(round(bw0 * scale)))
+        new_h = max(1, int(round(bh0 * scale)))
+        y0 = (ah - new_h) // 2
+        x0 = (aw - new_w) // 2
+        cover = torch.zeros(
+            a.shape[0], 1, ah, aw, device=a.device, dtype=a.dtype
+        )
+        cover[:, :, y0 : y0 + new_h, x0 : x0 + new_w] = 1.0
+        alpha = opacity * cover
+        out = (a * (1.0 - alpha) + b_fit * alpha).clamp(0.0, 1.0)
         out_bhwc = _to_bhwc(out)
         a_bhwc = _to_bhwc(a)
         b_bhwc = _to_bhwc(b_fit)

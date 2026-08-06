@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes
 
-**Version 1.2.5**
+**Version 1.2.6**
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).
 
@@ -27,3 +27,12 @@ For Anima regional attention, also install [Sen-sou Anima Regional Conditioning]
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+
+## Changelog (1.2.6)
+
+- Dynamic Overlay: fit mode no longer darkens letterboxed areas of image A
+- Regional Canvas: brush opacity is global mask strength; Step removed; Apply handles queue errors
+- LC Bypasser: disconnecting an earlier target no longer steals later controls
+- LC Groups Bypasser: bindings follow stable group ids across reorder
+- Aspect Ratio Simplifier: max resolution honored with divisible_by; safer pad_color parsing

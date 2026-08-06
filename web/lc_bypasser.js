@@ -203,29 +203,24 @@ app.registerExtension({
           enables.push({ name: "enable", type: "BOOLEAN", link: null });
         }
 
+        // Keep only connected targets (+ their enable). Drops holes so later
+        // slots are not left without a widget after an earlier disconnect.
         const next = [];
         for (let i = 0; i < targets.length; i++) {
           const t = targets[i];
+          if (t.link == null) continue;
           const origin = getLinkedOrigin(graph, t);
-          if (origin) {
-            t.name = origin.title || "";
-          } else if (t.link == null) {
-            t.name = "";
-          }
+          t.name = origin ? origin.title || "" : t.name || "";
           t.type = "*";
           next.push(t);
-
-          const e = enables[i];
+          const e = enables[i] || { name: "enable", type: "BOOLEAN", link: null };
           e.name = "enable";
           e.type = "BOOLEAN";
           next.push(e);
         }
 
-        const lastT = next.length >= 2 ? next[next.length - 2] : null;
-        if (!lastT || lastT.link != null) {
-          next.push({ name: "", type: "*", link: null });
-          next.push({ name: "enable", type: "BOOLEAN", link: null });
-        }
+        next.push({ name: "", type: "*", link: null });
+        next.push({ name: "enable", type: "BOOLEAN", link: null });
 
         this.inputs = next;
         this.syncWidgets();
@@ -269,10 +264,12 @@ app.registerExtension({
           w._lcNameClean = null;
           w.name = `Enable ${title}`;
 
-          let enabled = true;
+          let enabled = w.value !== false;
           if (driven) {
             const bv = resolveBoolean(graph, e);
             if (bv !== null) enabled = bv;
+            // unresolved remote boolean: keep prior widget / mode
+            else if (origin) enabled = origin.mode === MODE_ALWAYS;
           } else if (origin) {
             enabled = origin.mode === MODE_ALWAYS;
           }
@@ -346,12 +343,13 @@ app.registerExtension({
           if (!origin) continue;
 
           const driven = e?.link != null;
-          let enabled = true;
+          let enabled =
+            this.widgets?.[p] != null
+              ? !!this.widgets[p].value
+              : origin.mode === MODE_ALWAYS;
           if (driven) {
             const bv = resolveBoolean(graph, e);
             if (bv !== null) enabled = bv;
-          } else if (this.widgets?.[p] != null) {
-            enabled = !!this.widgets[p].value;
           }
 
           changeMode(origin, enabled ? MODE_ALWAYS : MODE_BYPASS);

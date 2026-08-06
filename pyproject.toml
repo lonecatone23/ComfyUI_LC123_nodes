@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.2.5"
+version = "1.2.6"
 description = "LC123 ComfyUI nodes: aspect ratio tools, regional paint canvases (Anima/Krea2), slider, dynamic overlay, AnySwitch, combo selector, invert boolean, and frontend bypass helpers."
 readme = "README.md"
 requires-python = ">=3.10"

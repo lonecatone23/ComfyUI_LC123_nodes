@@ -129,6 +129,19 @@ function setWidgetLocked(widget, locked) {
   }
 }
 
+function groupStableId(group) {
+  if (!group) return "unknown";
+  if (group.id != null && group.id !== "") return "id:" + String(group.id);
+  if (!group._lcStableId) {
+    group._lcStableId =
+      "lcg_" +
+      Math.random().toString(36).slice(2, 9) +
+      "_" +
+      String(group.title || "").slice(0, 24);
+  }
+  return group._lcStableId;
+}
+
 function collectGroups(graph) {
   if (!graph) return [];
   const out = [];
@@ -306,9 +319,25 @@ app.registerExtension({
         const graph = app.graph;
         const groups = this.listGroups();
         this._lcGroups = groups;
+        if (!this.properties) this.properties = {};
+        if (!this.properties.lcBindings) this.properties.lcBindings = {};
+        const bindings = this.properties.lcBindings;
 
         if (!this.inputs) this.inputs = [];
         if (!this.widgets) this.widgets = [];
+
+        // Snapshot current slot → stable group id before rebuild
+        const prevIds = (this._lcSlotIds || []).slice();
+        for (let i = 0; i < prevIds.length; i++) {
+          const id = prevIds[i];
+          if (!id) continue;
+          const origin = getLinkedOrigin(graph, this.inputs[i]);
+          bindings[id] = {
+            value:
+              this.widgets[i] != null ? !!this.widgets[i].value : true,
+            originId: origin?.id ?? null,
+          };
+        }
 
         // ---- BOOLEAN inputs (one per group), in-place ----
         while (this.inputs.length > groups.length) {
@@ -329,15 +358,19 @@ app.registerExtension({
           const title = groups[i].title || `Group ${i + 1}`;
           this.addInput(title, "BOOLEAN");
         }
+
+        this._lcSlotIds = [];
         for (let i = 0; i < groups.length; i++) {
-          const title = groups[i].title || `Group ${i + 1}`;
+          const g = groups[i];
+          const id = groupStableId(g);
+          this._lcSlotIds[i] = id;
+          const title = g.title || `Group ${i + 1}`;
           this.inputs[i].name = title;
           this.inputs[i].type = "BOOLEAN";
         }
 
-        // ---- Widgets: create with fixed-index callback (like LC Bypasser) ----
+        // ---- Widgets ----
         while (this.widgets.length < groups.length) {
-          // Capture index at creation — critical, same as LC Bypasser
           const pair = this.widgets.length;
           this.addWidget(
             "toggle",
@@ -351,14 +384,14 @@ app.registerExtension({
           this.widgets.pop();
         }
 
-        // Update labels / lock / values — do NOT replace callbacks
+        // Restore values / try to reattach boolean by origin node id
         for (let i = 0; i < groups.length; i++) {
           const w = this.widgets[i];
           const inp = this.inputs[i];
+          const id = this._lcSlotIds[i];
           const title = groups[i].title || `Group ${i + 1}`;
-          const driven = inp?.link != null;
+          const saved = bindings[id] || {};
 
-          // Update name carefully around lock prefix
           const base = `Enable ${title}`;
           if (w._lcLocked && w._lcNameClean) {
             w._lcNameClean = base;
@@ -368,13 +401,40 @@ app.registerExtension({
             w._lcNameClean = null;
           }
 
+          // Reconnect boolean from saved origin if slot empty
+          if (inp.link == null && saved.originId != null && graph) {
+            const origin = graph.getNodeById?.(saved.originId);
+            const outSlot = origin?.outputs?.findIndex(
+              (o) =>
+                o &&
+                (o.type === "BOOLEAN" ||
+                  o.type === "*" ||
+                  o.type === "boolean")
+            );
+            if (origin && outSlot >= 0) {
+              try {
+                origin.connect(outSlot, this, i);
+              } catch (_) {}
+            }
+          }
+
+          const driven = inp?.link != null;
           if (driven) {
             const bv = resolveBoolean(graph, inp);
             if (bv !== null) w.value = bv;
+            else if (saved.value != null) w.value = !!saved.value;
             setWidgetLocked(w, true);
           } else {
+            if (saved.value != null) w.value = !!saved.value;
             setWidgetLocked(w, false);
           }
+
+          // persist
+          const origin = getLinkedOrigin(graph, inp);
+          bindings[id] = {
+            value: !!w.value,
+            originId: origin?.id ?? null,
+          };
         }
 
         const minH = 60 + Math.max(groups.length, 1) * 30;

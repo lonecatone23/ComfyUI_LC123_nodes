@@ -6,7 +6,7 @@ const COLORS = [
   ["GREEN", "#00ff00", "green_prompt"],
   ["BLUE", "#0000ff", "blue_prompt"],
 ];
-const HISTORY_LIMIT = 8;
+const HISTORY_LIMIT = 5;
 const MAX_STROKE_POINTS = 96;
 const STANDARD_NODE_SIZE = [1430, 1270];
 const ARC_BACKUP_PREFIX = "anima_regional_canvas:";
@@ -282,7 +282,7 @@ app.registerExtension({
       opacity.max = "1";
       opacity.step = "0.01";
       opacity.value = node.properties.brushOpacity ?? "1";
-      opacity.title = "Brush opacity";
+      opacity.title = "Global mask strength — applies to all painted regions; updates on change";
       opacity.className = "arc-range";
       const opacityNum = document.createElement("input");
       opacityNum.type = "number";
@@ -294,47 +294,24 @@ app.registerExtension({
       const opacityLabel = document.createElement("span");
       opacityLabel.className = "arc-small";
       opacityLabel.textContent = "Opacity";
-      const syncOpacity = (v) => {
+      opacityLabel.title = "Global mask strength. Changing this rescales the entire painted mask.";
+      const syncOpacity = (v, rescaleMask = true) => {
         const val = Math.max(0.1, Math.min(1, Number(v) || 1));
         opacity.value = String(val);
         opacityNum.value = String(val);
         node.properties.brushOpacity = val;
+        if (rescaleMask) {
+          applyGlobalOpacityToMask(val);
+          redrawDisplay();
+          scheduleSaveData();
+        }
       };
-      opacity.addEventListener("input", () => syncOpacity(opacity.value));
-      opacityNum.addEventListener("input", () => syncOpacity(opacityNum.value));
+      opacity.addEventListener("input", () => syncOpacity(opacity.value, true));
+      opacityNum.addEventListener("input", () => syncOpacity(opacityNum.value, true));
       opacity.addEventListener("pointerdown", stop);
       opacityNum.addEventListener("pointerdown", stop);
       toolbar.append(opacityLabel, opacity, opacityNum);
 
-      const stepSize = document.createElement("input");
-      stepSize.type = "range";
-      stepSize.min = "5";
-      stepSize.max = "50";
-      stepSize.step = "1";
-      stepSize.value = node.properties.stepSize ?? "18";
-      stepSize.title = "Stroke step size. Smaller is smoother.";
-      stepSize.className = "arc-range";
-      const stepNum = document.createElement("input");
-      stepNum.type = "number";
-      stepNum.min = "5";
-      stepNum.max = "50";
-      stepNum.step = "1";
-      stepNum.value = stepSize.value;
-      stepNum.className = "arc-num";
-      const stepLabel = document.createElement("span");
-      stepLabel.className = "arc-small";
-      stepLabel.textContent = "Step";
-      const syncStep = (v) => {
-        const val = Math.max(5, Math.min(50, Number(v) || 18));
-        stepSize.value = String(val);
-        stepNum.value = String(val);
-        node.properties.stepSize = val;
-      };
-      stepSize.addEventListener("input", () => syncStep(stepSize.value));
-      stepNum.addEventListener("input", () => syncStep(stepNum.value));
-      stepSize.addEventListener("pointerdown", stop);
-      stepNum.addEventListener("pointerdown", stop);
-      toolbar.append(stepLabel, stepSize, stepNum);
 
       const undo = makeButton("Undo", "Undo");
       const clear = makeButton("Clear Canvas", "Clear painted regions on the canvas");
@@ -356,7 +333,6 @@ app.registerExtension({
         brush.value = "92";
         syncBrush();
         syncOpacity(1);
-        syncStep(18);
       });
       toolbar.appendChild(undo);
       toolbar.appendChild(clear);
@@ -528,13 +504,13 @@ app.registerExtension({
         saveTimer = setTimeout(saveData, 250);
       }
       function pushHistory() {
+        // Mask-only history (display is reconstructed) to limit RAM at high res
         try {
           history.push({
-            display: ctx.getImageData(0, 0, canvas.width, canvas.height),
             mask: maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height),
           });
         } catch (_) {}
-        if (history.length > HISTORY_LIMIT) history.shift();
+        while (history.length > HISTORY_LIMIT) history.shift();
       }
       function cloneCanvas(src) {
         if (!src?.width || !src?.height) return null;
@@ -870,21 +846,33 @@ app.registerExtension({
         if (statusLabel) statusLabel.textContent = "Applying — continuing workflow…";
         const canvasVal = findWidget(node, "canvas_data")?.value ?? "";
         try {
-          await fetch("/anima/canvas/apply", {
+          const res = await fetch("/anima/canvas/apply", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ node_id: String(node.id), canvas_data: canvasVal, ts: Date.now() }),
           });
+          if (!res.ok) {
+            const body = await res.text().catch(() => "");
+            throw new Error(body || `Apply endpoint HTTP ${res.status}`);
+          }
+          let queueResult;
+          if (typeof app.queuePrompt === "function") {
+            queueResult = app.queuePrompt(0);
+          } else if (app.ui?.queuePrompt) {
+            queueResult = app.ui.queuePrompt(0);
+          } else {
+            document.getElementById("queue-button")?.click();
+          }
+          if (queueResult != null && typeof queueResult.then === "function") {
+            await queueResult;
+          }
+          if (statusLabel) statusLabel.textContent = "Applied — queued";
         } catch (err) {
-          console.warn("IRC apply endpoint failed", err);
-        }
-        try {
-          if (typeof app.queuePrompt === "function") app.queuePrompt(0);
-          else if (app.ui?.queuePrompt) app.ui.queuePrompt(0);
-          else document.getElementById("queue-button")?.click();
-        } catch (err) {
-          console.error("IRC Apply queue failed", err);
-          if (statusLabel) statusLabel.textContent = "Apply failed — try Queue Prompt manually";
+          console.error("IRC Apply failed", err);
+          if (statusLabel) {
+            statusLabel.textContent =
+              "Apply failed: " + (err?.message || String(err) || "queue/validation error");
+          }
         }
       }
       applyBtn.addEventListener("click", (e) => {
@@ -915,15 +903,85 @@ app.registerExtension({
         brushPreview.style.left = `${x}px`;
         brushPreview.style.top = `${y}px`;
       }
-      function strokePath(targetCtx, points, alpha = 1) {
+      /**
+       * Mask model:
+       * - maskCanvas stores PURE region colors (full R/G/B or white eraser).
+       * - Opacity is a global strength applied on export + display.
+       * - Painting never stacks: pure color replaces pure color (source-over).
+       * - Changing Opacity rescales every painted pixel for Apply/conditioning.
+       */
+      function currentStrength() {
+        return Math.max(0.1, Math.min(1, Number(opacity.value) || 1));
+      }
+      function strengthColor(hex, strength) {
+        const s = Math.max(0, Math.min(1, Number(strength) || 1));
+        if (String(hex).toLowerCase() === "#ffffff") return "#ffffff";
+        const h = String(hex).replace("#", "");
+        if (h.length !== 6) return hex;
+        const r = Math.round(parseInt(h.slice(0, 2), 16) * s);
+        const g = Math.round(parseInt(h.slice(2, 4), 16) * s);
+        const b = Math.round(parseInt(h.slice(4, 6), 16) * s);
+        return `rgb(${r},${g},${b})`;
+      }
+      const PURE = {
+        red: [255, 0, 0],
+        green: [0, 255, 0],
+        blue: [0, 0, 255],
+      };
+      function nearestPure(r, g, b) {
+        if (r >= 250 && g >= 250 && b >= 250) return null; // white
+        const candidates = [
+          ["red", PURE.red],
+          ["green", PURE.green],
+          ["blue", PURE.blue],
+        ];
+        let best = null;
+        let bestD = Infinity;
+        for (const [name, rgb] of candidates) {
+          const d =
+            (r - rgb[0]) ** 2 + (g - rgb[1]) ** 2 + (b - rgb[2]) ** 2;
+          if (d < bestD) {
+            bestD = d;
+            best = rgb;
+          }
+        }
+        return best;
+      }
+      /** Rewrite mask pixels to pureColor * strength (global opacity). */
+      function applyGlobalOpacityToMask(strength) {
+        const s = Math.max(0.1, Math.min(1, Number(strength) || 1));
+        try {
+          const w = maskCanvas.width;
+          const h = maskCanvas.height;
+          if (!w || !h) return;
+          const img = maskCtx.getImageData(0, 0, w, h);
+          const d = img.data;
+          for (let i = 0; i < d.length; i += 4) {
+            const pure = nearestPure(d[i], d[i + 1], d[i + 2]);
+            if (!pure) {
+              d[i] = d[i + 1] = d[i + 2] = 255;
+              d[i + 3] = 255;
+              continue;
+            }
+            d[i] = Math.round(pure[0] * s);
+            d[i + 1] = Math.round(pure[1] * s);
+            d[i + 2] = Math.round(pure[2] * s);
+            d[i + 3] = 255;
+          }
+          maskCtx.putImageData(img, 0, 0);
+        } catch (_) {}
+      }
+      function strokePath(targetCtx, points, color, alpha = 1) {
         if (!points.length) return;
         targetCtx.save();
-        targetCtx.strokeStyle = activeColor;
-        targetCtx.fillStyle = activeColor;
+        targetCtx.strokeStyle = color;
+        targetCtx.fillStyle = color;
         targetCtx.globalAlpha = alpha;
         targetCtx.lineWidth = Number(brush.value);
         targetCtx.lineCap = "round";
         targetCtx.lineJoin = "round";
+        // Replace pixels — no additive stacking of the same stroke
+        targetCtx.globalCompositeOperation = "source-over";
         targetCtx.beginPath();
         targetCtx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) {
@@ -940,15 +998,19 @@ app.registerExtension({
         const dx = to.x - from.x;
         const dy = to.y - from.y;
         const dist = Math.hypot(dx, dy);
-        const step = Math.max(1, Number(brush.value) * (Number(stepSize.value) / 100));
+        // Fixed smooth step (~18% of brush) — Step control removed
+        const step = Math.max(1, Number(brush.value) * 0.18);
         const count = Math.max(1, Math.min(MAX_STROKE_POINTS, Math.ceil(dist / step)));
         const points = [from];
         for (let i = 1; i <= count; i++) {
           const t = i / count;
           points.push({ x: from.x + dx * t, y: from.y + dy * t });
         }
-        strokePath(ctx, points, Number(opacity.value));
-        strokePath(maskCtx, points, 1);
+        const s = currentStrength();
+        // Visible preview
+        strokePath(ctx, points, activeColor, s);
+        // Authoritative mask: pure region * global strength (no stacking above pure)
+        strokePath(maskCtx, points, strengthColor(activeColor, s), 1);
       }
 
       let drawing = false;

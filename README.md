@@ -221,7 +221,7 @@ ComfyUI_LC123_nodes/
 ├── regional_canvas_common.py
 ├── regional_canvas.py            # compatibility shim
 ├── slider.py
-├── save_text.py                  # 📝 LC Save Text
+├── LC_save_text.py                  # 📝 LC Save Text
 ├── web/
 │   ├── inline_regional_canvas.js
 │   └── lc123_slider.js

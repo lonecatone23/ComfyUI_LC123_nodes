@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.2.4"
-description = "Aspect ratio tools, RGB regional paint canvases (Anima / Krea2), Nodes 2.0 slider, and Save Text with bare-then-_01 numbering."
+version = "1.2.7"
+description = "Aspect ratio, regional canvases (Anima/Krea2), slider, AnySwitch, Combo Selector, Dynamic Overlay, Save Text."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

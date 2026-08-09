@@ -7,89 +7,47 @@ https://ko-fi.com/lonecatone
 
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
-_FAILED = []
 
 
-def _load(label, import_fn):
-    global NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+def _load(module_name: str) -> None:
+    """Import a submodule and merge its mappings. Log and skip on failure."""
+    import importlib
+    import traceback
+
     try:
-        cmap, dmap = import_fn()
-        NODE_CLASS_MAPPINGS.update(cmap or {})
-        NODE_DISPLAY_NAME_MAPPINGS.update(dmap or {})
+        mod = importlib.import_module(f".{module_name}", __name__)
+        maps = getattr(mod, "NODE_CLASS_MAPPINGS", None) or {}
+        disp = getattr(mod, "NODE_DISPLAY_NAME_MAPPINGS", None) or {}
+        NODE_CLASS_MAPPINGS.update(maps)
+        NODE_DISPLAY_NAME_MAPPINGS.update(disp)
+        print(f"[LC123] + {module_name}: {list(maps.keys())}")
     except Exception as e:
-        _FAILED.append(f"{label}: {e}")
-        print(f"[ComfyUI_LC123_nodes] FAILED to load {label}: {e}")
+        print(f"[LC123] ! failed to load {module_name}: {e}")
+        traceback.print_exc()
 
 
-def _aspect():
-    from .aspect_ratio import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
+# Core
+_load("aspect_ratio")
+_load("slider")
+_load("anima_regional_canvas")
+_load("krea2_regional_canvas")
+_load("dynamic_overlay")
 
+# Utils
+_load("lc_any_switch")
+_load("lc_combo")
+_load("lc_invert_boolean")
 
-def _anima():
-    from .anima_regional_canvas import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _krea():
-    from .krea2_regional_canvas import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _slider():
-    from .slider import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _save_text():
-    try:
-        from .lc_save_text import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-        return c, d
-    except ImportError:
-        from .LC_save_text import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-        return c, d
-
-
-def _any_switch():
-    from .lc_any_switch import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _combo():
-    from .lc_combo import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _invert_bool():
-    from .lc_invert_boolean import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-def _dynamic_overlay():
-    from .dynamic_overlay import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
-    return c, d
-
-
-_load("aspect_ratio", _aspect)
-_load("anima_regional_canvas", _anima)
-_load("krea2_regional_canvas", _krea)
-_load("slider", _slider)
-_load("lc_save_text", _save_text)
-_load("lc_any_switch", _any_switch)
-_load("lc_combo", _combo)
-_load("lc_invert_boolean", _invert_bool)
-_load("dynamic_overlay", _dynamic_overlay)
-
-if _FAILED:
-    print(
-        f"[ComfyUI_LC123_nodes] {len(_FAILED)} module(s) failed; "
-        f"still registered: {list(NODE_CLASS_MAPPINGS)}"
-    )
-    for msg in _FAILED:
-        print(f"[ComfyUI_LC123_nodes]   - {msg}")
-else:
-    print(f"[ComfyUI_LC123_nodes] loaded: {list(NODE_CLASS_MAPPINGS)}")
+# Save text (prefer lowercase module name; fall back to LC_*)
+try:
+    _load("lc_save_text")
+except Exception:
+    pass
+if "LC123SaveText" not in NODE_CLASS_MAPPINGS:
+    _load("LC_save_text")
 
 WEB_DIRECTORY = "./web"
+
+print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

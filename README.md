@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes
 
-**Version 1.2.7**
+**Version 1.2.9**
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).
 
@@ -24,6 +24,7 @@ For Anima regional attention, also install [Sen-sou Anima Regional Conditioning]
 | **LC Bypasser** | Frontend per-node bypass; optional BOOLEAN enable sockets; 🔒 when driven remotely | Turn multiple nodes on or off with a single boolean (works through invert/flip). |
 | **LC Groups Bypasser** | Frontend per-group bypass; discovers graph groups; optional BOOLEAN per group | Turn multiple groups on or off with a single boolean. |
 | **📝 LC Save Text** | First file is bare `prefix.ext`; then `prefix_01`, `prefix_02`, … | Alternative to core SaveText numbering. |
+| **LC Batch Image Comparer** | Stable image comparer for large batches; single synchronized index (Aₙ vs Bₙ); compact `◀ Pair N / Total ▶` control; socket names shown on the bar; image area never jumps | Drop-in replacement for rgthree Image Comparer when you run 10–20+ image batches. |
 
 ## Install
 
@@ -38,8 +39,17 @@ Restart ComfyUI and hard-refresh the browser. No extra Python dependencies for t
 
 MIT — see [LICENSE](LICENSE).
 
-## Changelog (1.2.7)
+## Changelog
 
+### 1.2.9
+- **New node: LC Batch Image Comparer**
+  - Compact selector (`◀ Pair N / Total ▶`) instead of an overflowing number list
+  - Single synchronized index so A and B advance together
+  - Socket display names appear on either side of the control
+  - Fixed layout: image area never moves when batch size changes
+  - Freely movable; drawing stays below the socket row
+
+### 1.2.7
 - `__init__.py`: register **all** modules including Save Text (was missing from loader)
 - Align `pyproject.toml` version with README (was stuck at 1.2.4 while README said 1.2.6)
 - Clean registry publish version: **1.2.7**

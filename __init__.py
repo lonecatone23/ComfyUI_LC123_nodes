@@ -46,6 +46,9 @@ except Exception:
 if "LC123SaveText" not in NODE_CLASS_MAPPINGS:
     _load("LC_save_text")
 
+# Image tools
+_load("lc_batch_image_comparer")
+
 WEB_DIRECTORY = "./web"
 
 print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")

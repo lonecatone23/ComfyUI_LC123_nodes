@@ -1,12 +1,12 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.2.7"
-description = "Aspect ratio, regional canvases (Anima/Krea2), slider, AnySwitch, Combo Selector, Dynamic Overlay, Save Text."
+version = "1.2.9"
+description = "Aspect ratio, regional canvases (Anima/Krea2), slider, AnySwitch, Combo Selector, Dynamic Overlay, Save Text, Batch Image Comparer."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "lonecatone23" }]
-keywords = ["comfyui", "custom-nodes", "slider", "regional", "aspect-ratio", "save-text"]
+keywords = ["comfyui", "custom-nodes", "slider", "regional", "aspect-ratio", "save-text", "image-comparer"]
 
 [project.urls]
 Repository = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"

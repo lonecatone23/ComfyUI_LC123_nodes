@@ -5,25 +5,90 @@ https://github.com/lonecatone23
 https://ko-fi.com/lonecatone
 """
 
-from .aspect_ratio import NODE_CLASS_MAPPINGS as _AR_MAP, NODE_DISPLAY_NAME_MAPPINGS as _AR_DISP
-from .anima_regional_canvas import NODE_CLASS_MAPPINGS as _ANIMA_MAP, NODE_DISPLAY_NAME_MAPPINGS as _ANIMA_DISP
-from .krea2_regional_canvas import NODE_CLASS_MAPPINGS as _KREA_MAP, NODE_DISPLAY_NAME_MAPPINGS as _KREA_DISP
-from .slider import NODE_CLASS_MAPPINGS as _SL_MAP, NODE_DISPLAY_NAME_MAPPINGS as _SL_DISP
-from .LC_save_text import NODE_CLASS_MAPPINGS as _ST_MAP, NODE_DISPLAY_NAME_MAPPINGS as _ST_DISP
-
 NODE_CLASS_MAPPINGS = {}
-NODE_CLASS_MAPPINGS.update(_AR_MAP)
-NODE_CLASS_MAPPINGS.update(_ANIMA_MAP)
-NODE_CLASS_MAPPINGS.update(_KREA_MAP)
-NODE_CLASS_MAPPINGS.update(_SL_MAP)
-NODE_CLASS_MAPPINGS.update(_ST_MAP)
-
 NODE_DISPLAY_NAME_MAPPINGS = {}
-NODE_DISPLAY_NAME_MAPPINGS.update(_AR_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_ANIMA_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_KREA_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_SL_DISP)
-NODE_DISPLAY_NAME_MAPPINGS.update(_ST_DISP)
+_FAILED = []
+
+
+def _load(label, import_fn):
+    global NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+    try:
+        cmap, dmap = import_fn()
+        NODE_CLASS_MAPPINGS.update(cmap or {})
+        NODE_DISPLAY_NAME_MAPPINGS.update(dmap or {})
+    except Exception as e:
+        _FAILED.append(f"{label}: {e}")
+        print(f"[ComfyUI_LC123_nodes] FAILED to load {label}: {e}")
+
+
+def _aspect():
+    from .aspect_ratio import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _anima():
+    from .anima_regional_canvas import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _krea():
+    from .krea2_regional_canvas import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _slider():
+    from .slider import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _save_text():
+    try:
+        from .lc_save_text import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+        return c, d
+    except ImportError:
+        from .LC_save_text import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+        return c, d
+
+
+def _any_switch():
+    from .lc_any_switch import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _combo():
+    from .lc_combo import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _invert_bool():
+    from .lc_invert_boolean import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+def _dynamic_overlay():
+    from .dynamic_overlay import NODE_CLASS_MAPPINGS as c, NODE_DISPLAY_NAME_MAPPINGS as d
+    return c, d
+
+
+_load("aspect_ratio", _aspect)
+_load("anima_regional_canvas", _anima)
+_load("krea2_regional_canvas", _krea)
+_load("slider", _slider)
+_load("lc_save_text", _save_text)
+_load("lc_any_switch", _any_switch)
+_load("lc_combo", _combo)
+_load("lc_invert_boolean", _invert_bool)
+_load("dynamic_overlay", _dynamic_overlay)
+
+if _FAILED:
+    print(
+        f"[ComfyUI_LC123_nodes] {len(_FAILED)} module(s) failed; "
+        f"still registered: {list(NODE_CLASS_MAPPINGS)}"
+    )
+    for msg in _FAILED:
+        print(f"[ComfyUI_LC123_nodes]   - {msg}")
+else:
+    print(f"[ComfyUI_LC123_nodes] loaded: {list(NODE_CLASS_MAPPINGS)}")
 
 WEB_DIRECTORY = "./web"
 

@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.4.0"
+version = "1.4.1"
 description = "ComfyUI helpers by lonecatone23: aspect ratio, regional canvases, sampling/pipes, folders, prompts, post-processing image tools, switches, bypassers, slider, overlay, stop, VRAM clear."
 readme = "README.md"
 requires-python = ">=3.10"

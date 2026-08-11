@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Virtual envs
+.venv/
+venv/
+ENV/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local / secrets
+.env
+.env.*
+*.local
+
+# Runtime / caches
+.cache/
+*.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Comfy / workflow scratch (keep examples if you add them under examples/)
+*.png
+*.jpg
+*.jpeg
+*.webp
+!docs/**/*.png
+!examples/**/*.png

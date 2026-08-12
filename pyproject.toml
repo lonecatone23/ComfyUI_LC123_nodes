@@ -1,0 +1,23 @@
+[project]
+name = "ComfyUI_LC123_nodes"
+version = "1.5.0"
+description = "ComfyUI helpers by lonecatone23: aspect ratio, regional canvases, sampling/pipes, folders, prompts, image FX (watermark, sharpen, film, LUT…), switches, bypassers + panel, join/show text, slider, stop, VRAM clear."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "lonecatone23" }]
+keywords = [
+  "comfyui", "custom-nodes", "slider", "regional", "aspect-ratio",
+  "image-processing", "post-processing", "film-grain", "lut", "pipes",
+  "watermark", "bypasser",
+]
+
+[project.urls]
+Repository = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"
+Homepage = "https://github.com/lonecatone23/ComfyUI_LC123_nodes"
+"Buy me a coffee" = "https://ko-fi.com/lonecatone"
+
+[tool.comfy]
+PublisherId = "lonecatone23"
+DisplayName = "ComfyUI LC123 Nodes"
+Icon = ""

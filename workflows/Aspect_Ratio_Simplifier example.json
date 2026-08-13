@@ -1,0 +1,40 @@
+{
+  "id": "Aspect_Ratio_Simplifier example",
+  "revision": 0,
+  "last_node_id": 1,
+  "last_link_id": 0,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Note",
+      "pos": [
+        100,
+        100
+      ],
+      "size": [
+        400,
+        120
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {},
+      "widgets_values": [
+        "Example: Aspect Ratio Simplifier \u2014 set custom/preset size; image/mask optional (falls back to preset when disconnected)."
+      ]
+    }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "info": {
+      "name": "Aspect_Ratio_Simplifier example",
+      "author": "lonecatone23",
+      "description": "Example: Aspect Ratio Simplifier \u2014 set custom/preset size; image/mask optional (falls back to preset when disconnected).",
+      "version": "1.2.6"
+    }
+  },
+  "version": 0.4
+}

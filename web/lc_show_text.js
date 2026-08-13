@@ -1,0 +1,128 @@
+/**
+ * LC Show Text — multiline text below widgets (preserve newlines).
+ * Default size matches LC Join Strings (~270×118).
+ */
+
+import { app } from "../../scripts/app.js";
+
+const NODE_CLASS = "LCShowText";
+const DEFAULT_W = 270;
+const DEFAULT_H = 118;
+const PAD = 8;
+
+function contentTop(node) {
+  const titleH =
+    (typeof LiteGraph !== "undefined" && LiteGraph.NODE_TITLE_HEIGHT) || 30;
+  let y = titleH + 2;
+  if (node.widgets && node.widgets.length) {
+    for (const w of node.widgets) {
+      if (typeof w.last_y === "number") {
+        const wh = typeof w.computeSize === "function" ? w.computeSize(node.size[0])[1] : 20;
+        y = Math.max(y, w.last_y + wh + 4);
+      }
+    }
+    // Fallback if last_y not set yet: room for one widget row under title
+    if (y <= titleH + 2) {
+      y = titleH + 24 * node.widgets.length + 6;
+    }
+  }
+  // Socket-only nodes (forceInput, no widgets): still clear title
+  return y + PAD;
+}
+
+app.registerExtension({
+  name: "LC123.ShowText",
+
+  async beforeRegisterNodeDef(nodeType, nodeData) {
+    if ((nodeData?.name || "") !== NODE_CLASS) return;
+
+    const onCreated = nodeType.prototype.onNodeCreated;
+    nodeType.prototype.onNodeCreated = function () {
+      const r = onCreated?.apply(this, arguments);
+      this.color = "#28281E";
+      this.bgcolor = "#28281E";
+      this._lcShowText =
+        this.properties?.lc_show_text != null
+          ? String(this.properties.lc_show_text)
+          : "";
+      if (typeof this.setSize === "function") {
+        this.setSize([DEFAULT_W, DEFAULT_H]);
+      } else {
+        this.size = [DEFAULT_W, DEFAULT_H];
+      }
+      return r;
+    };
+
+    const onExecuted = nodeType.prototype.onExecuted;
+    nodeType.prototype.onExecuted = function (message) {
+      const r = onExecuted?.apply(this, arguments);
+      let t = null;
+      if (message?.text != null) {
+        t = Array.isArray(message.text) ? message.text[0] : message.text;
+      }
+      if (t != null) {
+        this._lcShowText = String(t);
+        if (!this.properties) this.properties = {};
+        this.properties.lc_show_text = this._lcShowText;
+        this.setDirtyCanvas?.(true, true);
+      }
+      return r;
+    };
+
+    const onConfigure = nodeType.prototype.onConfigure;
+    nodeType.prototype.onConfigure = function (data) {
+      const r = onConfigure?.apply(this, arguments);
+      if (this.properties?.lc_show_text != null) {
+        this._lcShowText = String(this.properties.lc_show_text);
+      }
+      return r;
+    };
+
+    const onDrawFG = nodeType.prototype.onDrawForeground;
+    nodeType.prototype.onDrawForeground = function (ctx) {
+      if (onDrawFG) onDrawFG.apply(this, arguments);
+      const raw = this._lcShowText;
+      if (raw == null || raw === "") return;
+
+      const x = PAD;
+      const top = contentTop(this);
+      const w = Math.max(1, (this.size?.[0] || DEFAULT_W) - PAD * 2);
+      const h = Math.max(1, (this.size?.[1] || DEFAULT_H) - top - PAD);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, top, w, h);
+      ctx.clip();
+
+      ctx.fillStyle = "#e8e8e8";
+      ctx.font = "12px monospace";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+
+      const lineHeight = 14;
+      const lines = String(raw).split("\n");
+      let yy = top;
+      for (const line of lines) {
+        if (yy > top + h) break;
+        if (ctx.measureText(line).width <= w) {
+          ctx.fillText(line, x, yy);
+          yy += lineHeight;
+        } else {
+          let rest = line;
+          while (rest.length && yy <= top + h) {
+            let cut = rest.length;
+            while (cut > 1 && ctx.measureText(rest.slice(0, cut)).width > w) {
+              cut--;
+            }
+            const space = rest.lastIndexOf(" ", cut);
+            if (space > 8 && space < cut) cut = space + 1;
+            ctx.fillText(rest.slice(0, cut), x, yy);
+            rest = rest.slice(cut);
+            yy += lineHeight;
+          }
+        }
+      }
+      ctx.restore();
+    };
+  },
+});

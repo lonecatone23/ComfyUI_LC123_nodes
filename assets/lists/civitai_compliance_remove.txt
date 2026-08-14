@@ -1,0 +1,73 @@
+# Civitai-oriented prompt strip list (one term per line)
+# Lines starting with # are ignored. Case-insensitive substring removal.
+# Edit this file to match your needs. Restart ComfyUI after big edits if the node caches paths only.
+#
+# See assets/lists/README_civitai_compliance.txt for disclaimer.
+
+# --- Minors / age-play (policy-sensitive) ---
+child
+lolicon
+loli-con
+loli
+lolita
+shotacon
+shota
+jailbait
+jail bait
+underage
+under-age
+preteen
+pre-teen
+pedophile
+paedophile
+tiny
+little
+child porn
+
+# --- Non-consent / sexual violence ---
+rape
+raped
+raping
+rapist
+noncon
+non-con
+forced sex
+
+# --- Incest ---
+incest
+incestuous
+
+# --- Bestiality ---
+bestiality
+beastiality
+zoophilia
+
+# --- Bodily excretions / related (ToS) ---
+scat
+coprophagia
+watersports
+golden shower
+smegma
+diaper
+diapers
+
+# --- Self-harm ---
+self-harm
+self harm
+anorexia
+bulimia
+
+# --- Mind-altered sexual context (ToS themes) ---
+chloroform
+chloroformed
+hypnosis sex
+mind control sex
+
+# --- Extreme / death-adjacent (common moderation flags) ---
+necrophilia
+snuff
+
+# --- Hate / extremist markers (minimal set; extend as needed) ---
+neonazi
+nazi
+kkk

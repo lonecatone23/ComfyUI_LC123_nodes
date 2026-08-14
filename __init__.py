@@ -44,6 +44,8 @@ _load("lc_text_replace")
 _load("lc_text_remove")
 _load("lc_compare")
 _load("lc_seed_jump")
+_load("lc_notify")
+_load("lc_civitai_strip")
 
 # Save text (prefer lowercase module name; fall back to LC_*)
 try:

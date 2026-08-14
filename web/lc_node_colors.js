@@ -47,6 +47,8 @@ const COLORS = {
     LCBoolean: { color: "#28281E", bgcolor: "#28281E" },
     LCIntCompare: { color: "#28281E", bgcolor: "#28281E" },
     LCSeedJump: { color: "#28281E", bgcolor: "#28281E" },
+    LCNotify: { color: "#649632", bgcolor: "#649632" },
+    LCCivitaiStrip: { color: "#643232", bgcolor: "#643232" },
     LCFloatCompare: { color: "#28281E", bgcolor: "#28281E" },
     LC123SaveText: { color: "#28281E", bgcolor: "#28281E" },
     LCTextReplace: { color: "#28281E", bgcolor: "#28281E" },

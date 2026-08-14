@@ -2,14 +2,14 @@
 
 Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).
 
-- **Repo:** https://github.com/lonecatone23/ComfyUI_LC123_nodes
+- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
-For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
+**Version 1.7.0**
 
-**Version 1.6.0**
+For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
 
 ---
 
@@ -30,81 +30,137 @@ git clone https://github.com/lonecatone23/ComfyUI_LC123_nodes.git
 
 | Node | What it does |
 |------|----------------|
-| **📐 Aspect Ratio Simplifier** | Size from image/mask/preset. Crop/stretch/pad/total pixels. Empty latent. Default upscale: **lanczos**. **resolution** = longer side. |
-| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same + pipe out. |
-| **LC Aspect Ratio Pipe Out** | Unpack aspect pipe. |
-| **LC Get Image 📐** | Megapixels, width, height, batch, aspect, resolution. |
-| **LC Image Crop 🖼️🔪** | Interactive crop + aspect lock. |
-| **LC Image Compare 🔎** | Batch A/B compare, one slider. |
-| **LC Last Image Holder** | Hold last image for before/after. |
-| **LC Dynamic Overlay** | Overlay B on A; live opacity knob; fixed node size, letterboxed preview. |
-| **LC Watermark 💧** | Image watermark: size, opacity, drag place. |
+| **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. **resolution** = longer side. |
+| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |
+| **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |
+| **LC Get Image 📐** | Megapixels, width, height, batch, aspect ratio, and **resolution** (longer side). |
+| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |
+| **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |
+| **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. |
+| **LC Dynamic Overlay** | Overlay B on A. After one queue, drag the opacity knob — no re-gen to preview. |
+| **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |
 
-## 🎨 Image FX / post
+---
 
-| Node | What it does |
-|------|----------------|
-| Adjust, RGB, desaturate, vibrance, vignette, bloom, denoise, color match, LUT, film grain/stock, lens FX/profile, chromatic aberration, sharpen/clarity, lift-gamma-gain, auto white balance, text overlay | On-node preview (and wipe where applicable). |
-
-## 🧪 Sampling & sigmas
+## 🎨 Image FX (on-node preview + before/after wipe)
 
 | Node | What it does |
 |------|----------------|
-| **LC Sampler Configure** / **(pipe)** | total_steps, step_swap, detailer_steps, denoise (0.01 step), CFG1/2, sampler, scheduler. |
-| **LC Sampler Configure Pipe Out** | Unpack sampler pipe. |
-| **LC Split Sigma Scheduler** | Dual-model sigma split at step_swap. |
-| **LC Basic Scheduler** | model + scheduler + steps → SIGMAS (no denoise). |
-| **LC Split Sigmas (Advanced)** | Two curves + models; split at step_swap; denoise; sigmas_2/model_2 optional → fall back to first. |
+| **LC Image Adjust** | Brightness, contrast, saturation, hue (−1…1 style). |
+| **LC Auto White Balance** | Auto white-balance correction. |
+| **LC Sharpen Pro** | Adaptive mid-tone / micro-contrast. |
+| **LC Lens Effects** | Lens-style FX suite. |
+| **LC Lift Gamma Gain** | Lift / gamma / gain adjust. |
+| **LC Image RGB** | Per-channel RGB adjust. |
+| **LC Film Grain** | Film grain overlay. |
+| **LC Vibrance** | Vibrance (smart saturation). |
+| **LC Vignette** | Vignette darkening. |
+| **LC Bloom** | Bloom / glow. |
+| **LC Image Denoise** | Smart denoise. |
+| **LC Color Match 🎨** | Match colors to a reference. No reference → bypass. |
+| **LC Film Stock (B&W / Color)** | Film stock looks. |
+| **LC Lens Profile** | Lens profile character. |
+| **LC Chromatic Aberration** | RGB channel split CA. |
+| **LC Image Desaturate** | Desaturate. |
+| **LC Apply LUT** | Apply a LUT file. |
+| **LC Text Overlay** | Place text on the image (drag, font, color, size). |
 
-## 📦 Pipes
+---
+
+## 🎨 Regional canvas
 
 | Node | What it does |
 |------|----------------|
-| **LC Pipe (in/edit)** | Pack or merge LC_PIPE (KJ Get/Set friendly). |
+| **Anima Regional Inline Canvas** | Paint R/G/B regions for Sen-sou Anima. |
+| **Krea2 Regional Inline Canvas** | Same paint UI for Krea2. **Beta.** |
+
+---
+
+## 🔧 Sampling helpers
+
+| Node | What it does |
+|------|----------------|
+| **LC Sampler Configure** | total steps, step swap, detailer steps, denoise (0.01 step), CFG 1/2, sampler, scheduler. |
+| **LC Sampler Configure (pipe)** | Same + pipe on top. |
+| **LC Sampler Configure Pipe Out** | Unpacks a sampler pipe. |
+| **LC Split Sigma Scheduler** | High/low sigma schedules; optional 2nd model. |
+| **LC Basic Scheduler** | Model + scheduler + steps → SIGMAS (no denoise). |
+| **LC Split Sigmas (Advanced)** | Two curves + models; split at step_swap; optional sigma_2/model_2 fallback. |
+| **LC VRAM Cache Clear** | Pass-through cache clear. |
+| **LC Stop 🛑** | Breakpoint with enable switch. |
+
+---
+
+## 🧵 Pipes
+
+| Node | What it does |
+|------|----------------|
+| **LC Pipe (in/edit)** | Pack or merge into **LC_PIPE**. |
 | **LC Pipe Out** | Unpack full pipe. |
 | **LC Detail Pipe Out** | Detailer-oriented unpack. |
 
-## 📝 Text & prompts
+Works with **KJ Set/Get**. STRING prompts are not CONDITIONING — encode before packing or after unpack.
+
+---
+
+## ✍️ Prompts, text & conditioning
 
 | Node | What it does |
 |------|----------------|
+| **Positive / Negative** | Green / red prompt boxes → string. |
+| **Prompt to Conditioning** | CLIP-encode a string. |
+| **LC Prompt to Conditioning + Zero** | Encode + zero-out socket. |
+| **LC Join Strings 🔗** | Join N strings; skip null/empty. |
 | **LC Text Replace ✂️** | Up to 20 find/replace pairs. |
 | **LC Text Remove 🔪** | Up to 20 finds to delete. |
-| **LC Join Strings** / **LC Show Text 🔤** | Join / display (auto pretty JSON). |
-| **LC Save Text** | Write text (sanitized paths). |
-| **Prompt boxes / Prompt→Conditioning (+ zero)** | Prompt helpers. |
+| **Civitai 🚩🔪** | Strip terms from `assets/lists/` (default civitai list). |
+| **LC Show Text 🔤** | Show text; auto pretty-JSON. |
+| **📝 LC Save Text** | Write text; Windows path sanitize. |
 
-## 🔀 Logic & control
+**Civitai disclaimer:** For compliance assistance only! It is **YOUR** responsibility to abide by CivitAi TOS. Review `assets/lists/civitai_compliance_remove.txt`. No guarantee it is complete, current, or enough for approval. Policies change; metadata and moderation still apply.
 
-| Node | What it does |
-|------|----------------|
-| **LC AnySwitch**, **Combo Selector**, **Boolean / Invert Boolean** | Switching & coercion. |
-| **LC Bypasser**, **Groups Bypasser**, **Bypasser Panel** | Bypass hubs; restriction on hub only. |
-| **LC Slider**, **LC Stop 🛑**, **VRAM cache clear** | UI helpers. |
-| **LC Int Compare** / **LC Float Compare** | largest / smallest of two values. |
-| **LC Seed Jump 🌱** | seed + jump → six stepped seeds. |
+---
 
-## 📁 Folders
+## 📁 Save paths
 
 | Node | What it does |
 |------|----------------|
-| **LC Easy Folder 📂** / **LC Advanced Folder 📂** | Path builders for savers. |
+| **LC Easy Folder 📂** | `filename_prefix` for native Save Image. |
+| **LC Advanced Folder 📂** | Split filename + path for Image Saver Simple. |
 
-## 🎛️ Other
+---
+
+## 🔀 Switches, logic & control
 
 | Node | What it does |
 |------|----------------|
-| **Anima / Krea2 Regional Inline Canvas** | Paint regional conditioning (Anima needs Sen-sou pack). |
+| **LC AnySwitch** | First connected input; type-lock; 2–20 inputs. |
+| **LC Combo Selector** | Mirrors another node’s combo options. |
+| **LC Boolean / Invert Boolean** | Coerce to true/false; show on face. |
+| **LC Int Compare / LC Float Compare** | Largest or smallest of two values. |
+| **LC Seed Jump 🌱** | Seed + jump → six stepped seeds. |
 | **LC Slider** | On-node slider. |
+| **LC Notify 🔊** | Play sound from `assets/sounds/` (always / on empty queue). ▶ preview on node. |
+| **LC Bypasser / Groups Bypasser / Panel** | Bypass hubs + remote panel. |
 
 ---
 
-## Workflows
+## 📦 Assets
 
-See `workflows/` for examples (dual sigma, aspect ratio, post FX, regional canvas, etc.).
+| Path | Use |
+|------|-----|
+| `assets/sounds/` | Notification sounds for **LC Notify 🔊** |
+| `assets/lists/` | Text lists (Civitai compliance strip) |
 
 ---
 
-## License
+## 💡 Quick tips
 
-MIT — see `LICENSE`.
+- **Image FX:** fix seed, tune low-res, then full run.
+- **Pipes:** if the graph always regenerates, try a direct pipe link (no Get/Set) to test caching.
+- **Dual sigma:** encode prompts to CONDITIONING — CFGGuider will not accept empty conds.
+- **Notify:** drop `.mp3` / `.wav` into `assets/sounds/`, restart once for dropdown refresh.
+
+---
+
+*Lonecat’s LC123 — less friction, more making.*

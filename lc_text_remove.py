@@ -13,10 +13,21 @@ def _as_str(v):
     return str(v)
 
 
+def _tidy_spaces(s: str) -> str:
+    """Collapse runs of spaces/tabs; keep newlines; strip edges of each line-ish."""
+    if not s:
+        return s
+    # Protect newlines: collapse horizontal whitespace only
+    s = re.sub(r"[ \t]+", " ", s)
+    s = re.sub(r" *\n *", "\n", s)
+    return s.strip()
+
+
 class LCTextRemove:
     """
     Remove up to 20 find strings in order (replaced with empty).
-    Empty find slots are skipped.
+    Empty find slots are skipped. Whitespace-only finds are skipped
+    (they would glue the whole prompt into one word).
     """
 
     @classmethod
@@ -28,7 +39,7 @@ class LCTextRemove:
                 {
                     "default": "",
                     "multiline": False,
-                    "tooltip": f"Text #{i} to remove (skipped if empty).",
+                    "tooltip": f"Text #{i} to remove (skipped if empty or only spaces).",
                 },
             )
         return {
@@ -77,8 +88,8 @@ class LCTextRemove:
     CATEGORY = "LC123/utils"
     DESCRIPTION = (
         "Remove substrings with 1–20 sequential finds (no replacement value). "
-        "Raise entrycount to add rows; lower it to remove them. "
-        "Empty finds are skipped. Optional regex."
+        "Whitespace-only finds are ignored so spaces are not stripped from the whole prompt. "
+        "Leftover double spaces are collapsed after removals."
     )
 
     def remove(
@@ -95,7 +106,8 @@ class LCTextRemove:
 
         for i in range(1, n + 1):
             find = _as_str(kwargs.get(f"find_{i}"))
-            if find == "":
+            # Skip empty OR whitespace-only (prevents gluing words together)
+            if find == "" or find.strip() == "":
                 continue
             if use_regex:
                 try:
@@ -108,6 +120,8 @@ class LCTextRemove:
                     out = out.replace(find, "")
                 else:
                     out = out.replace(find, "", max_n)
+
+        out = _tidy_spaces(out)
         return (out,)
 
 

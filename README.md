@@ -7,7 +7,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
-**Version 1.7.1**
+**Version 1.7.2**
 
 For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
 
@@ -113,7 +113,7 @@ Works with **KJ Set/Get**. STRING prompts are not CONDITIONING — encode before
 | **LC Prompt to Conditioning + Zero** | Encode + zero-out socket. |
 | **LC Join Strings 🔗** | Join N strings; skip null/empty. |
 | **LC Text Replace ✂️** | Up to 20 find/replace pairs. |
-| **LC Text Remove 🔪** | Up to 20 finds to delete. |
+| **LC Text Remove 🔪** | Up to 20 finds to delete. Whitespace-only finds skipped; leftover spaces collapsed. |
 | **Civitai 🚩🔪** | Strip terms from `assets/lists/` (default civitai list). |
 | **LC Show Text 🔤** | Show text; auto pretty-JSON. |
 | **📝 LC Save Text** | Write text; Windows path sanitize. |

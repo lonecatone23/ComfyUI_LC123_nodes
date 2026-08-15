@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.7.1"
+version = "1.7.2"
 description = "ComfyUI helpers by lonecatone23: aspect ratio, pipes, dual sigma/schedulers, folders, prompts, image FX, notify sounds, Civitai strip, switches, bypassers, text tools, seed jump, dimension resize, compare, slider, stop, VRAM clear."
 readme = "README.md"
 requires-python = ">=3.10"

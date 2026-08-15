@@ -1,9 +1,9 @@
 # ComfyUI LC123 Nodes — quick note
 
-**Version 1.7.0** · [Repo](https://github.com/lonecatone23/ComfyUI_LC123_nodes) · [Ko-fi](https://ko-fi.com/lonecatone)
+**Version 1.7.1** · [Repo](https://github.com/lonecatone23/ComfyUI_LC123_nodes) · [Ko-fi](https://ko-fi.com/lonecatone)
 
 ### Image & size
-Aspect Ratio Simplifier (+ Pipe / Pipe Out), Get Image, Image Crop, Image Compare, Last Image Holder, Dynamic Overlay, Watermark
+Aspect Ratio Simplifier (+ Pipe / Pipe Out), Get Image, Dimension Resize, Image Crop, Image Compare, Last Image Holder, Dynamic Overlay, Watermark
 
 ### Image FX
 Adjust, RGB, Desaturate, Vibrance, Vignette, Bloom, Denoise, Color Match, LUT, Film Grain/Stock, Lens FX/Profile, Chromatic Aberration, Sharpen Pro, Lift-Gamma-Gain, Auto WB, Text Overlay

@@ -7,7 +7,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
-**Version 1.7.0**
+**Version 1.7.1**
 
 For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
 
@@ -33,11 +33,12 @@ git clone https://github.com/lonecatone23/ComfyUI_LC123_nodes.git
 | **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. **resolution** = longer side. |
 | **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |
 | **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |
+| **LC Dimension Resize 📐** | Apply add/subtract/multiply/divide to width and height with one value; rounded INT outs. |
 | **LC Get Image 📐** | Megapixels, width, height, batch, aspect ratio, and **resolution** (longer side). |
 | **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |
 | **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |
 | **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. |
-| **LC Dynamic Overlay** | Overlay B on A. After one queue, drag the opacity knob — no re-gen to preview. |
+| **LC Dynamic Overlay** | Overlay B on A; **blended Image** out. After one queue, drag the opacity knob — no re-gen to preview. |
 | **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |
 
 ---

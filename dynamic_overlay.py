@@ -101,7 +101,7 @@ class LCDynamicOverlay:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    RETURN_NAMES = ("image",)
+    RETURN_NAMES = ("blended Image",)
     FUNCTION = "overlay"
     CATEGORY = "LC123/image"
     OUTPUT_NODE = True

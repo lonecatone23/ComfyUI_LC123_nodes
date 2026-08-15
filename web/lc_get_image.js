@@ -49,6 +49,9 @@ app.registerExtension({
     nodeType.prototype.onDrawForeground = function (ctx) {
       if (onDrawFG) onDrawFG.apply(this, arguments);
 
+      // Collapsed title-only — do not paint expanded readout
+      if (this.flags?.collapsed) return;
+
       let display = this._lcDisplay;
       if (!display || !display.length) {
         if (this._lcText) {

@@ -20,6 +20,7 @@ const COLORS = {
     LCDetailPipeOut: { color: "#324b4b", bgcolor: "#324b4b" },
     LCDynamicOverlay: { color: "#324b4b", bgcolor: "#324b4b" },
     LCGetImage: { color: "#324b4b", bgcolor: "#324b4b" },
+    LCImageSplit: { color: "#324B4B", bgcolor: "#324B4B" },
     LCSkinBeauty: { color: "#324B4B", bgcolor: "#324B4B" },
     LCDimensionResize: { color: "#324B4B", bgcolor: "#324B4B", size: [270, 110] },
     LCLastImageHolder: { color: "#324B4B", bgcolor: "#324B4B" },

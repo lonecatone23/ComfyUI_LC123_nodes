@@ -57,6 +57,7 @@ if "LC123SaveText" not in NODE_CLASS_MAPPINGS:
 
 # Image tools
 _load("lc_batch_image_comparer")
+_load("lc_image_split")
 _load("lc_last_image_holder")
 
 # Sampling helpers
@@ -66,6 +67,7 @@ _load("lc_get_image")
 _load("lc_dimension_resize")
 _load("lc_image_crop")
 _load("lc_image_tools")
+_load("lc_skin_beauty")
 _load("lc_apply_lut")
 _load("lc_text_overlay")
 _load("lc_watermark")

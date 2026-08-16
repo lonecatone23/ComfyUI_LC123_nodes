@@ -26,6 +26,7 @@ const NODE_CLASSES = new Set([
   "LCImageDesaturate",
   "LCLensProfile",
   "LCChromaticAberration",
+  "LCSkinBeauty",
 ]);
 
 // Text overlay handled separately (live overlay, no wipe)

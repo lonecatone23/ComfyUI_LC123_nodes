@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.7.3"
-description = "ComfyUI LC123 Nodes by lonecatone23 — 63+ helpers: aspect ratio, pipes, dual sigma/schedulers, folders, prompts, image FX & post, notify sounds, Civitai strip, switches, bypassers, text tools, dimension resize, compare, slider, stop, VRAM clear. Collapsed nodes hide previews."
+version = "1.8.0"
+description = "ComfyUI LC123 Nodes by lonecatone23 — aspect ratio, pipes, dual sigma, folders, image FX, LC Skin Beauty, Image Split, notify, Civitai strip, bypassers, text tools, and more."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -9,7 +9,7 @@ authors = [{ name = "lonecatone23" }]
 keywords = [
   "comfyui", "custom-nodes", "slider", "regional", "aspect-ratio",
   "image-processing", "post-processing", "film-grain", "lut", "pipes",
-  "watermark", "bypasser", "sigma", "scheduler", "notify", "lonecat",
+  "watermark", "bypasser", "sigma", "scheduler", "notify", "lonecat", "skin-beauty", "image-split",
 ]
 
 [project.urls]

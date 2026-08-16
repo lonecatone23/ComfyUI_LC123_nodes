@@ -1,8 +1,8 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 267,
-  "last_link_id": 367,
+  "last_node_id": 279,
+  "last_link_id": 382,
   "nodes": [
     {
       "id": 21,
@@ -258,7 +258,7 @@
         130
       ],
       "flags": {},
-      "order": 65,
+      "order": 67,
       "mode": 0,
       "inputs": [
         {
@@ -301,7 +301,7 @@
         250
       ],
       "flags": {},
-      "order": 64,
+      "order": 66,
       "mode": 0,
       "inputs": [
         {
@@ -380,7 +380,7 @@
         50
       ],
       "flags": {},
-      "order": 87,
+      "order": 90,
       "mode": 0,
       "inputs": [
         {
@@ -502,7 +502,7 @@
         280
       ],
       "flags": {},
-      "order": 102,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -556,7 +556,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 74,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -647,7 +647,7 @@
         30
       ],
       "flags": {},
-      "order": 66,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -690,7 +690,7 @@
         50
       ],
       "flags": {},
-      "order": 67,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -854,7 +854,7 @@
         90
       ],
       "flags": {},
-      "order": 68,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -941,7 +941,7 @@
         60
       ],
       "flags": {},
-      "order": 70,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -994,7 +994,7 @@
         50
       ],
       "flags": {},
-      "order": 69,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -1202,7 +1202,7 @@
         130
       ],
       "flags": {},
-      "order": 71,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -1354,7 +1354,7 @@
         340
       ],
       "flags": {},
-      "order": 72,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -1401,7 +1401,7 @@
         520
       ],
       "flags": {},
-      "order": 73,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -1455,7 +1455,7 @@
         450
       ],
       "flags": {},
-      "order": 88,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -1492,14 +1492,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_gimhh_00001_.png",
+            "filename": "lc_after_temp_opuud_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_gimhh_00001_.png",
+            "filename": "lc_before_temp_opuud_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1609,7 +1609,7 @@
         490
       ],
       "flags": {},
-      "order": 75,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -1640,14 +1640,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ltvle_00001_.png",
+            "filename": "lc_after_temp_jdkgp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ltvle_00001_.png",
+            "filename": "lc_before_temp_jdkgp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1800,7 +1800,7 @@
         120
       ],
       "flags": {},
-      "order": 91,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -1975,7 +1975,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 81,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -2096,7 +2096,7 @@
         540
       ],
       "flags": {},
-      "order": 103,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -2127,14 +2127,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_xryti_00001_.png",
+            "filename": "lc_after_temp_xjfpf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_xryti_00001_.png",
+            "filename": "lc_before_temp_xjfpf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2163,7 +2163,7 @@
         580
       ],
       "flags": {},
-      "order": 106,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -2194,14 +2194,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ueofr_00001_.png",
+            "filename": "lc_after_temp_bpbhl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ueofr_00001_.png",
+            "filename": "lc_before_temp_bpbhl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2232,7 +2232,7 @@
         490
       ],
       "flags": {},
-      "order": 107,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -2263,14 +2263,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ckzqb_00001_.png",
+            "filename": "lc_after_temp_unfgd_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ckzqb_00001_.png",
+            "filename": "lc_before_temp_unfgd_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2297,7 +2297,7 @@
         520
       ],
       "flags": {},
-      "order": 108,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -2328,14 +2328,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_axhgt_00001_.png",
+            "filename": "lc_after_temp_jukcq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_axhgt_00001_.png",
+            "filename": "lc_before_temp_jukcq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2363,7 +2363,7 @@
         470
       ],
       "flags": {},
-      "order": 109,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -2394,14 +2394,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_rpzmf_00001_.png",
+            "filename": "lc_after_temp_tkzaq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_rpzmf_00001_.png",
+            "filename": "lc_before_temp_tkzaq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2427,7 +2427,7 @@
         540
       ],
       "flags": {},
-      "order": 111,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -2458,14 +2458,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_klvhz_00001_.png",
+            "filename": "lc_after_temp_tbdhv_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_klvhz_00001_.png",
+            "filename": "lc_before_temp_tbdhv_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2494,7 +2494,7 @@
         580
       ],
       "flags": {},
-      "order": 112,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -2525,14 +2525,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_sjqcl_00001_.png",
+            "filename": "lc_after_temp_lrxku_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_sjqcl_00001_.png",
+            "filename": "lc_before_temp_lrxku_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2563,7 +2563,7 @@
         520
       ],
       "flags": {},
-      "order": 113,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -2594,14 +2594,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_pakxo_00001_.png",
+            "filename": "lc_after_temp_dhjfh_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_pakxo_00001_.png",
+            "filename": "lc_before_temp_dhjfh_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2629,7 +2629,7 @@
         540
       ],
       "flags": {},
-      "order": 114,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -2660,14 +2660,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ycddg_00001_.png",
+            "filename": "lc_after_temp_uxqgm_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ycddg_00001_.png",
+            "filename": "lc_before_temp_uxqgm_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2696,7 +2696,7 @@
         470
       ],
       "flags": {},
-      "order": 115,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -2727,14 +2727,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_lqmqd_00001_.png",
+            "filename": "lc_after_temp_nfkty_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_lqmqd_00001_.png",
+            "filename": "lc_before_temp_nfkty_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2760,7 +2760,7 @@
         520
       ],
       "flags": {},
-      "order": 116,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -2791,14 +2791,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ncrdb_00001_.png",
+            "filename": "lc_after_temp_dpxpe_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ncrdb_00001_.png",
+            "filename": "lc_before_temp_dpxpe_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2826,7 +2826,7 @@
         520
       ],
       "flags": {},
-      "order": 117,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -2857,14 +2857,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_rygjc_00001_.png",
+            "filename": "lc_after_temp_ztsky_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_rygjc_00001_.png",
+            "filename": "lc_before_temp_ztsky_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2892,7 +2892,7 @@
         560
       ],
       "flags": {},
-      "order": 118,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -2923,14 +2923,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_fsjhg_00001_.png",
+            "filename": "lc_after_temp_izdli_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_fsjhg_00001_.png",
+            "filename": "lc_before_temp_izdli_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2960,7 +2960,7 @@
         450
       ],
       "flags": {},
-      "order": 119,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -2991,14 +2991,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_vvoic_00001_.png",
+            "filename": "lc_after_temp_zseet_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_vvoic_00001_.png",
+            "filename": "lc_before_temp_zseet_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3023,7 +3023,7 @@
         470
       ],
       "flags": {},
-      "order": 120,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -3054,14 +3054,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_hazls_00001_.png",
+            "filename": "lc_after_temp_iipku_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_hazls_00001_.png",
+            "filename": "lc_before_temp_iipku_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3087,7 +3087,7 @@
         430
       ],
       "flags": {},
-      "order": 121,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -3141,7 +3141,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 124,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -3219,7 +3219,7 @@
         640
       ],
       "flags": {},
-      "order": 122,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -3250,7 +3250,7 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_before_temp_rurip_00001_.png",
+            "filename": "lc_before_temp_bfome_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3282,7 +3282,7 @@
         130
       ],
       "flags": {},
-      "order": 126,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -3401,7 +3401,7 @@
         490
       ],
       "flags": {},
-      "order": 110,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -3432,14 +3432,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_qbzzo_00001_.png",
+            "filename": "lc_after_temp_vqymk_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_qbzzo_00001_.png",
+            "filename": "lc_before_temp_vqymk_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3466,7 +3466,7 @@
         580
       ],
       "flags": {},
-      "order": 130,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -3531,7 +3531,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 125,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -3582,7 +3582,7 @@
         520
       ],
       "flags": {},
-      "order": 123,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -3629,14 +3629,14 @@
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_buphg_00001_.png",
+            "filename": "lc_before_temp_aobbi_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_wm_meta": [
           {
-            "filename": "lc_wm_temp_buphg_00001_.png",
+            "filename": "lc_wm_temp_aobbi_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3664,7 +3664,7 @@
         640
       ],
       "flags": {},
-      "order": 127,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -3708,7 +3708,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 76,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -3755,7 +3755,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 84,
+      "order": 86,
       "mode": 0,
       "inputs": [
         {
@@ -3800,7 +3800,7 @@
         120
       ],
       "flags": {},
-      "order": 77,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -3956,7 +3956,7 @@
         450
       ],
       "flags": {},
-      "order": 78,
+      "order": 80,
       "mode": 4,
       "inputs": [
         {
@@ -4059,7 +4059,7 @@
         400
       ],
       "flags": {},
-      "order": 89,
+      "order": 92,
       "mode": 4,
       "inputs": [
         {
@@ -4145,7 +4145,7 @@
         120
       ],
       "flags": {},
-      "order": 93,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -4189,7 +4189,7 @@
         236
       ],
       "flags": {},
-      "order": 82,
+      "order": 84,
       "mode": 0,
       "inputs": [
         {
@@ -5095,7 +5095,7 @@
         460
       ],
       "flags": {},
-      "order": 90,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -5140,6 +5140,11 @@
         },
         {
           "name": "🎨 Post Processing Suite 260811",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "Skin Beauty ✨",
           "type": "BOOLEAN",
           "link": null
         }
@@ -5213,6 +5218,7 @@
         true,
         true,
         true,
+        true,
         true
       ],
       "color": "#28281E",
@@ -5230,7 +5236,7 @@
         40
       ],
       "flags": {},
-      "order": 79,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -5403,7 +5409,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 80,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
@@ -5470,7 +5476,7 @@
         150
       ],
       "flags": {},
-      "order": 92,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -5515,7 +5521,7 @@
         90
       ],
       "flags": {},
-      "order": 94,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -5544,7 +5550,7 @@
         }
       },
       "widgets_values": [
-        "934367315160348"
+        "1039456565751769"
       ]
     },
     {
@@ -5559,7 +5565,7 @@
         100
       ],
       "flags": {},
-      "order": 95,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -5588,7 +5594,7 @@
         }
       },
       "widgets_values": [
-        "934367315160358"
+        "1039456565751779"
       ]
     },
     {
@@ -5603,7 +5609,7 @@
         90
       ],
       "flags": {},
-      "order": 96,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -5632,7 +5638,7 @@
         }
       },
       "widgets_values": [
-        "934367315160368"
+        "1039456565751789"
       ]
     },
     {
@@ -5647,7 +5653,7 @@
         90
       ],
       "flags": {},
-      "order": 99,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -5675,7 +5681,7 @@
         }
       },
       "widgets_values": [
-        "934367315160398"
+        "1039456565751819"
       ]
     },
     {
@@ -5690,7 +5696,7 @@
         90
       ],
       "flags": {},
-      "order": 98,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -5718,7 +5724,7 @@
         }
       },
       "widgets_values": [
-        "934367315160388"
+        "1039456565751809"
       ]
     },
     {
@@ -5756,7 +5762,7 @@
         }
       },
       "widgets_values": [
-        102448686386360,
+        859546828892203,
         "randomize"
       ]
     },
@@ -5772,7 +5778,7 @@
         160
       ],
       "flags": {},
-      "order": 83,
+      "order": 85,
       "mode": 0,
       "inputs": [
         {
@@ -6200,7 +6206,7 @@
         60
       ],
       "flags": {},
-      "order": 85,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -6246,7 +6252,7 @@
         120
       ],
       "flags": {},
-      "order": 100,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -6271,7 +6277,7 @@
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "lc_show_text": "woman,  old, young,  adult, cat,  ,  and a bunch of other words I'm not even comfortable typing."
+        "lc_show_text": "woman,  old,  , adult, cat,  ,  , and a bunch of other words I'm not even comfortable typing."
       },
       "widgets_values": [],
       "color": "#28281E",
@@ -6361,7 +6367,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 129,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -6749,7 +6755,7 @@
         90
       ],
       "flags": {},
-      "order": 97,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -6778,7 +6784,7 @@
         }
       },
       "widgets_values": [
-        "934367315160378"
+        "1039456565751799"
       ]
     },
     {
@@ -6954,36 +6960,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 31,
-      "type": "MarkdownNote",
-      "pos": [
-        -12260,
-        -4520
-      ],
-      "size": [
-        270,
-        440
-      ],
-      "flags": {},
-      "order": 60,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "Nodes:",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "**LC Prompt to Conditioning**\n- compact version of a clip text encode node\n\n**LC Prompt to Conditioning + Zero**\n- same as above, but with built in zero out\n\n\n**LC Save Text**\n- text file save node that aligns its numbering system with the native **Save Image** node\n\n**LC AnySwitch**\n\n- Similar operation to a normal Anyswitch, but witout the added nodes, it does not create a dependency issue\n- Great for multi- group workflows where you modify the model conditioning numerous times.\n\n**LC Boolean/ Invert Boolean**\n- takes a number, int, float, or boolean and converts them accordingly\n\n\n**LC Int Compare/ Float Compare** \n- Compares two numbers, choose teh lerger or smaller. Returns said value**\n\n**LC VRAM Cache Clear**\n- clears VRAM and Cache all in one\n- hook it up inline or seperate"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 265,
       "type": "easy showAnything",
       "pos": [
@@ -6995,7 +6971,7 @@
         90
       ],
       "flags": {},
-      "order": 105,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -7023,7 +6999,7 @@
         }
       },
       "widgets_values": [
-        "2016"
+        "3024"
       ]
     },
     {
@@ -7038,7 +7014,7 @@
         140
       ],
       "flags": {},
-      "order": 86,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
@@ -7109,7 +7085,7 @@
         60
       ],
       "flags": {},
-      "order": 61,
+      "order": 60,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7149,7 +7125,7 @@
         100
       ],
       "flags": {},
-      "order": 62,
+      "order": 61,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7199,7 +7175,7 @@
         90
       ],
       "flags": {},
-      "order": 104,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -7242,7 +7218,7 @@
         130
       ],
       "flags": {},
-      "order": 101,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -7315,7 +7291,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 63,
+      "order": 62,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7334,6 +7310,36 @@
       "bgcolor": "#000"
     },
     {
+      "id": 31,
+      "type": "MarkdownNote",
+      "pos": [
+        -12270,
+        -4520
+      ],
+      "size": [
+        280,
+        440
+      ],
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Nodes:",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "**LC Prompt to Conditioning**\n- compact version of a clip text encode node\n\n**LC Prompt to Conditioning + Zero**\n- same as above, but with built in zero out\n\n\n**LC Save Text**\n- text file save node that aligns its numbering system with the native **Save Image** node\n\n**LC AnySwitch**\n\n- Similar operation to a normal Anyswitch, but witout the added nodes, it does not create a dependency issue\n- Great for multi- group workflows where you modify the model conditioning numerous times.\n\n**LC Boolean/ Invert Boolean**\n- takes a number, int, float, or boolean and converts them accordingly\n\n\n**LC Int Compare/ Float Compare** \n- Compares two numbers, choose the lerger or smaller. Returns said value**\n- designed to be used for resize\n\n**LC VRAM Cache Clear**\n- clears VRAM and Cache all in one\n- hook it up inline or seperate"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
       "id": 219,
       "type": "LCNotify",
       "pos": [
@@ -7345,7 +7351,7 @@
         130
       ],
       "flags": {},
-      "order": 128,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -7378,11 +7384,383 @@
       "widgets_values": [
         "always",
         1,
-        "burp-1.mp3",
+        "oh-yeah.mp3",
         null
       ],
       "color": "#649632",
       "bgcolor": "#649632"
+    },
+    {
+      "id": 269,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -9150,
+        -2230
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 105,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Before",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 370
+        },
+        {
+          "label": "After",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 375
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 273,
+      "type": "LCSkinBeauty",
+      "pos": [
+        -9470,
+        -2230
+      ],
+      "size": [
+        300,
+        690
+      ],
+      "flags": {},
+      "order": 89,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 378
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            375,
+            382
+          ]
+        },
+        {
+          "name": "skin_mask",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCSkinBeauty",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_otrid_00007_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_otrid_00007_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Natural",
+        1,
+        0.22,
+        0.12,
+        0.08,
+        0.18,
+        0.15,
+        0.06,
+        0.88,
+        -0.08,
+        0.75,
+        0.55,
+        0.45
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 270,
+      "type": "LoadImage",
+      "pos": [
+        -9780,
+        -2230
+      ],
+      "size": [
+        290,
+        320
+      ],
+      "flags": {},
+      "order": 64,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            370,
+            378,
+            381
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Hasukui Pro Post_00007_.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 276,
+      "type": "LCImageSplit",
+      "pos": [
+        -8830,
+        -2230
+      ],
+      "size": [
+        300,
+        420
+      ],
+      "flags": {},
+      "order": 106,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Before",
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 381
+        },
+        {
+          "label": "After",
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 382
+        }
+      ],
+      "outputs": [
+        {
+          "name": "split 🖼️",
+          "type": "IMAGE",
+          "links": [
+            379
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCImageSplit",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        true
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 277,
+      "type": "LCTextOverlay",
+      "pos": [
+        -8510,
+        -2230
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {},
+      "order": 111,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 379
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            380
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCTextOverlay",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_grunq_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Before        After",
+        "Arial",
+        100,
+        255,
+        255,
+        255,
+        50,
+        90,
+        "center-top"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 278,
+      "type": "PreviewImage",
+      "pos": [
+        -8190,
+        -2230
+      ],
+      "size": [
+        350,
+        390
+      ],
+      "flags": {},
+      "order": 113,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 380
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PreviewImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 279,
+      "type": "MarkdownNote",
+      "pos": [
+        -9150,
+        -1770
+      ],
+      "size": [
+        620,
+        700
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -8273,6 +8651,62 @@
       265,
       0,
       "INT"
+    ],
+    [
+      370,
+      270,
+      0,
+      269,
+      0,
+      "IMAGE"
+    ],
+    [
+      375,
+      273,
+      0,
+      269,
+      1,
+      "IMAGE"
+    ],
+    [
+      378,
+      270,
+      0,
+      273,
+      0,
+      "IMAGE"
+    ],
+    [
+      379,
+      276,
+      0,
+      277,
+      0,
+      "IMAGE"
+    ],
+    [
+      380,
+      277,
+      0,
+      278,
+      0,
+      "IMAGE"
+    ],
+    [
+      381,
+      270,
+      0,
+      276,
+      0,
+      "IMAGE"
+    ],
+    [
+      382,
+      273,
+      0,
+      276,
+      1,
+      "IMAGE"
     ]
   ],
   "groups": [
@@ -8354,8 +8788,8 @@
       "bounding": [
         -12280,
         -5590,
-        310,
-        1660
+        300,
+        1520
       ],
       "color": "#3f789e",
       "flags": {}
@@ -8383,16 +8817,28 @@
       ],
       "color": "#b58b2a",
       "flags": {}
+    },
+    {
+      "id": 11,
+      "title": "Skin Beauty ✨",
+      "bounding": [
+        -9790,
+        -2300,
+        1980,
+        1250
+      ],
+      "color": "#3f789e",
+      "flags": {}
     }
   ],
   "config": {},
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.16105100000000103,
+      "scale": 0.1,
       "offset": [
-        14051.156940755165,
-        5645.695412325615
+        15763.851583005064,
+        7499.003393484776
       ]
     },
     "links_added_by_ue": [],

@@ -1,7 +1,7 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 279,
+  "last_node_id": 280,
   "last_link_id": 382,
   "nodes": [
     {
@@ -258,7 +258,7 @@
         130
       ],
       "flags": {},
-      "order": 67,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -301,7 +301,7 @@
         250
       ],
       "flags": {},
-      "order": 66,
+      "order": 67,
       "mode": 0,
       "inputs": [
         {
@@ -380,7 +380,7 @@
         50
       ],
       "flags": {},
-      "order": 90,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -502,7 +502,7 @@
         280
       ],
       "flags": {},
-      "order": 107,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -556,7 +556,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 76,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -647,7 +647,7 @@
         30
       ],
       "flags": {},
-      "order": 68,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -690,7 +690,7 @@
         50
       ],
       "flags": {},
-      "order": 69,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -854,7 +854,7 @@
         90
       ],
       "flags": {},
-      "order": 70,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -941,7 +941,7 @@
         60
       ],
       "flags": {},
-      "order": 72,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -994,7 +994,7 @@
         50
       ],
       "flags": {},
-      "order": 71,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -1202,7 +1202,7 @@
         130
       ],
       "flags": {},
-      "order": 73,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -1354,7 +1354,7 @@
         340
       ],
       "flags": {},
-      "order": 74,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -1401,7 +1401,7 @@
         520
       ],
       "flags": {},
-      "order": 75,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -1455,7 +1455,7 @@
         450
       ],
       "flags": {},
-      "order": 91,
+      "order": 92,
       "mode": 0,
       "inputs": [
         {
@@ -1492,14 +1492,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_opuud_00001_.png",
+            "filename": "lc_after_temp_qeops_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_opuud_00001_.png",
+            "filename": "lc_before_temp_qeops_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1609,7 +1609,7 @@
         490
       ],
       "flags": {},
-      "order": 77,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -1640,14 +1640,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_jdkgp_00001_.png",
+            "filename": "lc_after_temp_syisf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_jdkgp_00001_.png",
+            "filename": "lc_before_temp_syisf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1800,7 +1800,7 @@
         120
       ],
       "flags": {},
-      "order": 94,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -1975,7 +1975,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 83,
+      "order": 84,
       "mode": 0,
       "inputs": [
         {
@@ -2096,7 +2096,7 @@
         540
       ],
       "flags": {},
-      "order": 108,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -2127,14 +2127,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_xjfpf_00001_.png",
+            "filename": "lc_after_temp_palxl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_xjfpf_00001_.png",
+            "filename": "lc_before_temp_palxl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2163,7 +2163,7 @@
         580
       ],
       "flags": {},
-      "order": 112,
+      "order": 113,
       "mode": 0,
       "inputs": [
         {
@@ -2194,14 +2194,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_bpbhl_00001_.png",
+            "filename": "lc_after_temp_qbaop_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_bpbhl_00001_.png",
+            "filename": "lc_before_temp_qbaop_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2232,7 +2232,7 @@
         490
       ],
       "flags": {},
-      "order": 114,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -2263,14 +2263,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_unfgd_00001_.png",
+            "filename": "lc_after_temp_fvpia_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_unfgd_00001_.png",
+            "filename": "lc_before_temp_fvpia_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2297,7 +2297,7 @@
         520
       ],
       "flags": {},
-      "order": 115,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -2328,14 +2328,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_jukcq_00001_.png",
+            "filename": "lc_after_temp_sungp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_jukcq_00001_.png",
+            "filename": "lc_before_temp_sungp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2363,7 +2363,7 @@
         470
       ],
       "flags": {},
-      "order": 116,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -2394,14 +2394,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_tkzaq_00001_.png",
+            "filename": "lc_after_temp_zcnlh_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_tkzaq_00001_.png",
+            "filename": "lc_before_temp_zcnlh_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2427,7 +2427,7 @@
         540
       ],
       "flags": {},
-      "order": 118,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -2458,14 +2458,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_tbdhv_00001_.png",
+            "filename": "lc_after_temp_zndxs_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_tbdhv_00001_.png",
+            "filename": "lc_before_temp_zndxs_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2494,7 +2494,7 @@
         580
       ],
       "flags": {},
-      "order": 119,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -2525,14 +2525,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_lrxku_00001_.png",
+            "filename": "lc_after_temp_vumxu_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_lrxku_00001_.png",
+            "filename": "lc_before_temp_vumxu_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2563,7 +2563,7 @@
         520
       ],
       "flags": {},
-      "order": 120,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -2594,14 +2594,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_dhjfh_00001_.png",
+            "filename": "lc_after_temp_dxlrt_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_dhjfh_00001_.png",
+            "filename": "lc_before_temp_dxlrt_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2629,7 +2629,7 @@
         540
       ],
       "flags": {},
-      "order": 121,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -2660,14 +2660,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_uxqgm_00001_.png",
+            "filename": "lc_after_temp_xexbc_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_uxqgm_00001_.png",
+            "filename": "lc_before_temp_xexbc_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2696,7 +2696,7 @@
         470
       ],
       "flags": {},
-      "order": 122,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -2727,14 +2727,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_nfkty_00001_.png",
+            "filename": "lc_after_temp_xpxcp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_nfkty_00001_.png",
+            "filename": "lc_before_temp_xpxcp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2760,7 +2760,7 @@
         520
       ],
       "flags": {},
-      "order": 123,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -2791,14 +2791,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_dpxpe_00001_.png",
+            "filename": "lc_after_temp_cjipq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_dpxpe_00001_.png",
+            "filename": "lc_before_temp_cjipq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2826,7 +2826,7 @@
         520
       ],
       "flags": {},
-      "order": 124,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -2857,14 +2857,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ztsky_00001_.png",
+            "filename": "lc_after_temp_cbxxt_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ztsky_00001_.png",
+            "filename": "lc_before_temp_cbxxt_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2892,7 +2892,7 @@
         560
       ],
       "flags": {},
-      "order": 125,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -2923,14 +2923,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_izdli_00001_.png",
+            "filename": "lc_after_temp_mpixd_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_izdli_00001_.png",
+            "filename": "lc_before_temp_mpixd_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2960,7 +2960,7 @@
         450
       ],
       "flags": {},
-      "order": 126,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -2991,14 +2991,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_zseet_00001_.png",
+            "filename": "lc_after_temp_dztaa_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_zseet_00001_.png",
+            "filename": "lc_before_temp_dztaa_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3023,7 +3023,7 @@
         470
       ],
       "flags": {},
-      "order": 127,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -3054,14 +3054,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_iipku_00001_.png",
+            "filename": "lc_after_temp_kpecf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_iipku_00001_.png",
+            "filename": "lc_before_temp_kpecf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3087,7 +3087,7 @@
         430
       ],
       "flags": {},
-      "order": 128,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -3141,7 +3141,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 131,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -3219,7 +3219,7 @@
         640
       ],
       "flags": {},
-      "order": 129,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -3250,7 +3250,7 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_before_temp_bfome_00001_.png",
+            "filename": "lc_before_temp_ypdux_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3282,7 +3282,7 @@
         130
       ],
       "flags": {},
-      "order": 133,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -3401,7 +3401,7 @@
         490
       ],
       "flags": {},
-      "order": 117,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -3432,14 +3432,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_vqymk_00001_.png",
+            "filename": "lc_after_temp_rljdf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_vqymk_00001_.png",
+            "filename": "lc_before_temp_rljdf_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3466,7 +3466,7 @@
         580
       ],
       "flags": {},
-      "order": 137,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -3531,7 +3531,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 132,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -3582,7 +3582,7 @@
         520
       ],
       "flags": {},
-      "order": 130,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -3629,14 +3629,14 @@
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_aobbi_00001_.png",
+            "filename": "lc_before_temp_mkvfc_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_wm_meta": [
           {
-            "filename": "lc_wm_temp_aobbi_00001_.png",
+            "filename": "lc_wm_temp_mkvfc_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3664,7 +3664,7 @@
         640
       ],
       "flags": {},
-      "order": 134,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -3708,7 +3708,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 78,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -3755,7 +3755,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 86,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -3800,7 +3800,7 @@
         120
       ],
       "flags": {},
-      "order": 79,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -3956,7 +3956,7 @@
         450
       ],
       "flags": {},
-      "order": 80,
+      "order": 81,
       "mode": 4,
       "inputs": [
         {
@@ -4059,7 +4059,7 @@
         400
       ],
       "flags": {},
-      "order": 92,
+      "order": 93,
       "mode": 4,
       "inputs": [
         {
@@ -4145,7 +4145,7 @@
         120
       ],
       "flags": {},
-      "order": 96,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -4189,7 +4189,7 @@
         236
       ],
       "flags": {},
-      "order": 84,
+      "order": 85,
       "mode": 0,
       "inputs": [
         {
@@ -5054,8 +5054,8 @@
         -4450
       ],
       "size": [
-        733.70361328125,
-        75
+        740,
+        80
       ],
       "flags": {
         "allow_interaction": true
@@ -5095,7 +5095,7 @@
         460
       ],
       "flags": {},
-      "order": 93,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -5236,7 +5236,7 @@
         40
       ],
       "flags": {},
-      "order": 81,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
@@ -5321,7 +5321,7 @@
         -5880
       ],
       "size": [
-        1542.5537109375,
+        1550,
         150
       ],
       "flags": {
@@ -5409,7 +5409,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 82,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -5476,7 +5476,7 @@
         150
       ],
       "flags": {},
-      "order": 95,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -5521,7 +5521,7 @@
         90
       ],
       "flags": {},
-      "order": 97,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -5550,7 +5550,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751769"
+        "799912819352288"
       ]
     },
     {
@@ -5565,7 +5565,7 @@
         100
       ],
       "flags": {},
-      "order": 98,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -5594,7 +5594,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751779"
+        "799912819352298"
       ]
     },
     {
@@ -5609,7 +5609,7 @@
         90
       ],
       "flags": {},
-      "order": 99,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -5638,7 +5638,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751789"
+        "799912819352308"
       ]
     },
     {
@@ -5653,7 +5653,7 @@
         90
       ],
       "flags": {},
-      "order": 102,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -5681,7 +5681,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751819"
+        "799912819352338"
       ]
     },
     {
@@ -5696,7 +5696,7 @@
         90
       ],
       "flags": {},
-      "order": 101,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -5724,7 +5724,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751809"
+        "799912819352328"
       ]
     },
     {
@@ -5762,7 +5762,7 @@
         }
       },
       "widgets_values": [
-        859546828892203,
+        491572216654624,
         "randomize"
       ]
     },
@@ -5778,7 +5778,7 @@
         160
       ],
       "flags": {},
-      "order": 85,
+      "order": 86,
       "mode": 0,
       "inputs": [
         {
@@ -6206,7 +6206,7 @@
         60
       ],
       "flags": {},
-      "order": 87,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
@@ -6252,7 +6252,7 @@
         120
       ],
       "flags": {},
-      "order": 103,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -6367,7 +6367,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 136,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -6755,7 +6755,7 @@
         90
       ],
       "flags": {},
-      "order": 100,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -6784,7 +6784,7 @@
         }
       },
       "widgets_values": [
-        "1039456565751799"
+        "799912819352318"
       ]
     },
     {
@@ -6971,7 +6971,7 @@
         90
       ],
       "flags": {},
-      "order": 110,
+      "order": 111,
       "mode": 0,
       "inputs": [
         {
@@ -7014,7 +7014,7 @@
         140
       ],
       "flags": {},
-      "order": 88,
+      "order": 89,
       "mode": 0,
       "inputs": [
         {
@@ -7175,7 +7175,7 @@
         90
       ],
       "flags": {},
-      "order": 109,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -7218,7 +7218,7 @@
         130
       ],
       "flags": {},
-      "order": 104,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -7351,7 +7351,7 @@
         130
       ],
       "flags": {},
-      "order": 135,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -7404,7 +7404,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 105,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -7456,7 +7456,7 @@
         690
       ],
       "flags": {},
-      "order": 89,
+      "order": 90,
       "mode": 0,
       "inputs": [
         {
@@ -7497,14 +7497,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_otrid_00007_.png",
+            "filename": "lc_after_temp_kving_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_otrid_00007_.png",
+            "filename": "lc_before_temp_kving_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -7529,54 +7529,6 @@
       "bgcolor": "#324B4B"
     },
     {
-      "id": 270,
-      "type": "LoadImage",
-      "pos": [
-        -9780,
-        -2230
-      ],
-      "size": [
-        290,
-        320
-      ],
-      "flags": {},
-      "order": 64,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            370,
-            378,
-            381
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "LoadImage",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "Hasukui Pro Post_00007_.png",
-        "image"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 276,
       "type": "LCImageSplit",
       "pos": [
@@ -7588,7 +7540,7 @@
         420
       ],
       "flags": {},
-      "order": 106,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -7642,7 +7594,7 @@
         640
       ],
       "flags": {},
-      "order": 111,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -7671,7 +7623,7 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_before_temp_grunq_00002_.png",
+            "filename": "lc_before_temp_oeepo_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -7703,7 +7655,7 @@
         390
       ],
       "flags": {},
-      "order": 113,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -7745,7 +7697,7 @@
         700
       ],
       "flags": {},
-      "order": 65,
+      "order": 64,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7761,6 +7713,84 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 270,
+      "type": "LoadImage",
+      "pos": [
+        -9780,
+        -2230
+      ],
+      "size": [
+        290,
+        320
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            370,
+            378,
+            381
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Anika face no easrrings.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 280,
+      "type": "MarkdownNote",
+      "pos": [
+        -10710,
+        -3120
+      ],
+      "size": [
+        670,
+        960
+      ],
+      "flags": {},
+      "order": 66,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "# LC123 Performance Settings ⚙️",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# LC123 Performance Settings ⚙️\n\n> **UI only** — smoother scrolling and lighter on-node previews.  \n> These settings do **not** change generation VRAM, model load, or output image quality on the sockets.\n\n---\n\n## Where to find them\n\n1. Open **ComfyUI Settings** (gear).\n2. In the sidebar, open **LC123**.\n3. Open **Performance**.\n\nIf you don’t see the full list: restart ComfyUI, then **Ctrl+F5** (hard refresh) so the updated `web/lc_performance_settings.js` loads.\n\n---\n\n## What each option does\n\n| Setting | Default | What it does |\n|--------|---------|----------------|\n| **Remove wipe** | Off | Turns off hover A/B wipe on **image FX** nodes. Last result still shows. |\n| **Half-resolution previews** | Off | Draws FX previews at **half** the node’s image area (less GPU/CPU work while panning). |\n| **Clamp longest side** | Off | Downscales the **on-node** preview bitmap so the longest side ≤ **Max edge**. |\n| **Max edge (px)** | 768 | Used only when **Clamp longest side** is on. Try 512–1024 on heavy graphs. |\n| **No preview when collapsed** | On | Collapsed FX nodes skip drawing previews (less work while scrolling). |\n| **Hide FX on-node previews** | Off | Hides all LC **image FX** on-node previews. Socket outputs are unchanged. |\n| **Skin Beauty full preview override** | On | **LC Skin Beauty** keeps a **full-quality** on-node preview even if half-res / clamp are on (for zooming skin detail). Wipe still follows **Remove wipe**. |\n\n---\n\n## What is *not* affected\n\nThese stay fully interactive and are **not** driven by the Performance toggles:\n\n- **LC Image Compare 🔎**\n- **LC Dynamic Overlay**\n- **LC Image Split 🖼️**\n\nGeneration, Save Image, and every **IMAGE** output socket still use full resolution.\n\n---\n\n## Suggested setups\n\n### Default (shipped)\nLeave everything at default: full FX previews, wipe on, Skin Beauty override on.\n\n### Heavy graph / laggy scroll\n1. Turn **Half-resolution previews** **On**  \n2. Turn **Clamp longest side** **On** (Max edge **512** or **768**)  \n3. Keep **No preview when collapsed** **On**  \n4. Leave **Skin Beauty full preview override** **On** if you still inspect skin on the node  \n\n### Maximum UI lightness\n1. **Hide FX on-node previews** **On**  \n2. Or use **Remove wipe** + half-res + clamp  \n3. Use **Image Compare** / **Image Split** when you need a wipe  \n\n---\n\n## Notes\n\n- Changes apply on the next canvas redraw (panning or queue is enough; no reinstall needed).\n- Optional SAM / LayerStyle / big models are separate from these settings; they still use their own VRAM.\n- Pack files: `web/lc_performance_settings.js`, `web/lc_image_preview.js`\n\n"
+      ],
+      "color": "#dc6947",
+      "bgcolor": "#c85533"
     }
   ],
   "links": [
@@ -8835,10 +8865,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.1,
+      "scale": 0.6727499949325617,
       "offset": [
-        15763.851583005064,
-        7499.003393484776
+        11288.997980688098,
+        2764.055140766935
       ]
     },
     "links_added_by_ue": [],

@@ -1,0 +1,549 @@
+{
+  "id": "553c675c-7c6c-477b-b697-c48e6b214f9a",
+  "revision": 0,
+  "last_node_id": 119,
+  "last_link_id": 171,
+  "nodes": [
+    {
+      "id": 100,
+      "type": "Label (rgthree)",
+      "pos": [
+        -660,
+        2170
+      ],
+      "size": [
+        679.1015625,
+        150
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": " Lonecat's",
+      "properties": {
+        "fontSize": 150,
+        "fontFamily": "Arial",
+        "fontColor": "#ffdd77",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 99,
+      "type": "Label (rgthree)",
+      "pos": [
+        60,
+        2180
+      ],
+      "size": [
+        1048.095703125,
+        150
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Skin Beauty ✨",
+      "properties": {
+        "fontSize": 150,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 116,
+      "type": "PreviewImage",
+      "pos": [
+        750,
+        2480
+      ],
+      "size": [
+        350,
+        440
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 164
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PreviewImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        -750,
+        2430
+      ],
+      "size": [
+        500,
+        730
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            131,
+            161
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Starting Image",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Anika face no easrrings.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 92,
+      "type": "LCSkinBeauty",
+      "pos": [
+        -210,
+        2480
+      ],
+      "size": [
+        300,
+        690
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 131
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            165
+          ]
+        },
+        {
+          "name": "skin_mask",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCSkinBeauty",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_blvhc_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_blvhc_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Warm keep",
+        1,
+        0.08,
+        0.1,
+        0.18,
+        0.25,
+        0.16,
+        0.08,
+        0.9,
+        -0.04,
+        0.8,
+        0.55,
+        0.45
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 94,
+      "type": "MarkdownNote",
+      "pos": [
+        -1710,
+        2450
+      ],
+      "size": [
+        920,
+        1170
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 114,
+      "type": "LCImageSplit",
+      "pos": [
+        110,
+        2480
+      ],
+      "size": [
+        300,
+        420
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Before",
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 161
+        },
+        {
+          "label": "After",
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 165
+        }
+      ],
+      "outputs": [
+        {
+          "name": "split 🖼️",
+          "type": "IMAGE",
+          "links": [
+            163
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCImageSplit",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0.5,
+        true
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 119,
+      "type": "LCNotify",
+      "pos": [
+        760,
+        2980
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": 171
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "614316bab898ba6520b0573b35c57bf8d62144e7",
+        "Node name for S&R": "LCNotify",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "always",
+        0.5,
+        "vuvuzela.mp3",
+        null
+      ],
+      "color": "#649632",
+      "bgcolor": "#649632"
+    },
+    {
+      "id": 115,
+      "type": "LCTextOverlay",
+      "pos": [
+        430,
+        2480
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 163
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            164,
+            171
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCTextOverlay",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_lbtvf_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Before        After",
+        "Arial",
+        100,
+        255,
+        255,
+        255,
+        50,
+        90,
+        "center-top"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    }
+  ],
+  "links": [
+    [
+      131,
+      1,
+      0,
+      92,
+      0,
+      "IMAGE"
+    ],
+    [
+      161,
+      1,
+      0,
+      114,
+      0,
+      "IMAGE"
+    ],
+    [
+      163,
+      114,
+      0,
+      115,
+      0,
+      "IMAGE"
+    ],
+    [
+      164,
+      115,
+      0,
+      116,
+      0,
+      "IMAGE"
+    ],
+    [
+      165,
+      92,
+      0,
+      114,
+      1,
+      "IMAGE"
+    ],
+    [
+      171,
+      115,
+      0,
+      119,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "Simple (works for most applications)",
+      "bounding": [
+        -220,
+        2410,
+        1330,
+        770
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 0.3234918430760678,
+      "offset": [
+        2237.5779513129555,
+        -1697.6233907763715
+      ]
+    },
+    "k2cf_state_id": "k2cf_1786849804470_56r1hbu29g9",
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

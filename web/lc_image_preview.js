@@ -38,6 +38,53 @@ const MIN_W = 260;
 const PAD = 16;
 const TITLE = 34;
 
+function lcPerfPolicy(node) {
+  const cls = node.comfyClass || node.type || "";
+  if (window.LC123Perf && typeof window.LC123Perf.policyFor === "function") {
+    return window.LC123Perf.policyFor(cls);
+  }
+  return {
+    hide: false,
+    wipe: true,
+    halfRes: false,
+    clampEdge: false,
+    maxEdge: 0,
+    skipCollapsed: true,
+    skinFull: false,
+  };
+}
+
+function drawCoverScaled(ctx, img, x, y, w, h, maxEdge) {
+  if (!img || !img.complete || !img.naturalWidth) return;
+  let src = img;
+  const nw = img.naturalWidth;
+  const nh = img.naturalHeight;
+  if (maxEdge > 0 && Math.max(nw, nh) > maxEdge) {
+    const scale = maxEdge / Math.max(nw, nh);
+    const cw = Math.max(1, Math.round(nw * scale));
+    const ch = Math.max(1, Math.round(nh * scale));
+    const key = cw + "x" + ch;
+    if (!img._lcScaled) img._lcScaled = {};
+    if (!img._lcScaled[key]) {
+      const c = document.createElement("canvas");
+      c.width = cw;
+      c.height = ch;
+      c.getContext("2d").drawImage(img, 0, 0, cw, ch);
+      img._lcScaled[key] = c;
+    }
+    src = img._lcScaled[key];
+  }
+  const iw = src.naturalWidth || src.width;
+  const ih = src.naturalHeight || src.height;
+  const scale = Math.min(w / iw, h / ih);
+  const sw = iw * scale;
+  const sh = ih * scale;
+  const ox = x + (w - sw) / 2;
+  const oy = y + (h - sh) / 2;
+  ctx.drawImage(src, ox, oy, sw, sh);
+}
+
+
 /** Display name → CSS font-family for live canvas preview */
 const LC_FONT_CSS = {
   "Arial": "Arial, Helvetica, sans-serif",
@@ -158,7 +205,8 @@ class LCPreviewCompare {
     const origMouseMove = node.onMouseMove;
     node.onMouseMove = function (e, pos, canvas) {
       self.pointerPos = pos;
-      if (self.pointerOver && self.imgA && self.imgB) {
+      const pol = lcPerfPolicy(this);
+      if (pol.wipe && !pol.hide && self.pointerOver && self.imgA && self.imgB) {
         app.canvas?.setDirty?.(true, true);
       }
       return origMouseMove ? origMouseMove.apply(this, arguments) : false;
@@ -244,9 +292,12 @@ class LCPreviewCompare {
 
   draw(ctx) {
     const node = this.node;
+    const pol = lcPerfPolicy(node);
+    if (pol.skipCollapsed && node.flags?.collapsed) return;
+    if (pol.hide) return;
+
     const imgA = this.imgA;
-    const imgB = this.imgB;
-    if (!imgA && !imgB) return;
+    if (!imgA && !this.imgB) return;
 
     const top = contentTop(node);
     const x = PAD;
@@ -255,20 +306,22 @@ class LCPreviewCompare {
     const h = Math.max(1, node.size[1] - top - PAD);
     if (h < 16) return;
 
+    const maxEdge = pol.maxEdge || 0;
+
     const drawCover = (img) => {
       if (!img) return;
-      const scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
-      const sw = img.naturalWidth * scale;
-      const sh = img.naturalHeight * scale;
-      const ox = x + (w - sw) / 2;
-      const oy = y + (h - sh) / 2;
-      ctx.drawImage(img, ox, oy, sw, sh);
+      let dw = w, dh = h, dx = x, dy = y;
+      if (pol.halfRes) {
+        dw = w * 0.5;
+        dh = h * 0.5;
+        dx = x + (w - dw) / 2;
+        dy = y + (h - dh) / 2;
+      }
+      drawCoverScaled(ctx, img, dx, dy, dw, dh, maxEdge);
     };
 
-    if (imgB) drawCover(imgB);
-    else drawCover(imgA);
-
-    if (imgA && imgB) {
+    if (pol.wipe && imgA && this.imgB) {
+      drawCoverScaled(ctx, this.imgB, x, y, w, h, maxEdge);
       let splitX = w;
       if (this.pointerOver) {
         splitX = Math.max(0, Math.min(w, this.pointerPos[0] - x));
@@ -277,7 +330,7 @@ class LCPreviewCompare {
       ctx.beginPath();
       ctx.rect(x, y, splitX, h);
       ctx.clip();
-      drawCover(imgA);
+      drawCoverScaled(ctx, imgA, x, y, w, h, maxEdge);
       ctx.restore();
       if (this.pointerOver) {
         ctx.strokeStyle = "rgba(255,255,255,0.9)";
@@ -289,6 +342,8 @@ class LCPreviewCompare {
       }
     } else if (imgA) {
       drawCover(imgA);
+    } else if (this.imgB) {
+      drawCover(this.imgB);
     }
 
     if (node._lcBypass) {

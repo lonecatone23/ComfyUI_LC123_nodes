@@ -1,8 +1,8 @@
 {
   "id": "4afd9f9b-4b25-42e3-a1e5-f257c28aa85d",
   "revision": 0,
-  "last_node_id": 118,
-  "last_link_id": 167,
+  "last_node_id": 119,
+  "last_link_id": 168,
   "nodes": [
     {
       "id": 44,
@@ -209,179 +209,6 @@
       "bgcolor": "#fff0"
     },
     {
-      "id": 85,
-      "type": "LCSkinBeauty",
-      "pos": [
-        350,
-        3310
-      ],
-      "size": [
-        300,
-        690
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 130
-        },
-        {
-          "name": "mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": 128
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            101
-          ]
-        },
-        {
-          "name": "skin_mask",
-          "type": "MASK",
-          "links": [
-            99,
-            140
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
-        "Node name for S&R": "LCSkinBeauty",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_after_temp_eclfh_00001_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ],
-        "lc_before_meta": [
-          {
-            "filename": "lc_before_temp_eclfh_00001_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Natural",
-        1,
-        0.22,
-        0.12,
-        0.08,
-        0.18,
-        0.15,
-        0.06,
-        0.88,
-        -0.08,
-        0.75,
-        0.55,
-        0.45
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
-      "id": 92,
-      "type": "LCSkinBeauty",
-      "pos": [
-        350,
-        2480
-      ],
-      "size": [
-        300,
-        690
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 131
-        },
-        {
-          "name": "mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            165
-          ]
-        },
-        {
-          "name": "skin_mask",
-          "type": "MASK",
-          "links": [
-            166
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
-        "Node name for S&R": "LCSkinBeauty",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_after_temp_nlkdh_00001_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ],
-        "lc_before_meta": [
-          {
-            "filename": "lc_before_temp_nlkdh_00001_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Natural",
-        1,
-        0.22,
-        0.12,
-        0.08,
-        0.18,
-        0.15,
-        0.06,
-        0.88,
-        -0.08,
-        0.75,
-        0.55,
-        0.45
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
       "id": 117,
       "type": "LayerMask: MaskPreview",
       "pos": [
@@ -462,67 +289,6 @@
       },
       "widgets_values": [],
       "color": "rgba(27, 80, 119, 0.7)"
-    },
-    {
-      "id": 115,
-      "type": "LCTextOverlay",
-      "pos": [
-        1430,
-        2530
-      ],
-      "size": [
-        300,
-        640
-      ],
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 163
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            164
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
-        "Node name for S&R": "LCTextOverlay",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_before_temp_grunq_00002_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Before        After",
-        "Arial",
-        100,
-        255,
-        255,
-        255,
-        50,
-        90,
-        "center-top"
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
     },
     {
       "id": 114,
@@ -708,91 +474,6 @@
       "bgcolor": "#fff0"
     },
     {
-      "id": 1,
-      "type": "LoadImage",
-      "pos": [
-        -750,
-        2430
-      ],
-      "size": [
-        500,
-        730
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            59,
-            102,
-            130,
-            131,
-            156,
-            161
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "title": "Starting Image",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "LoadImage",
-        "ue_properties": {
-          "widget_ue_connectable": {
-            "image": true,
-            "upload": true
-          },
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "1resize.png",
-        "image"
-      ],
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
-      "id": 104,
-      "type": "MarkdownNote",
-      "pos": [
-        -1690,
-        2650
-      ],
-      "size": [
-        270,
-        110
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "Notes",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "## Requires the following nodes:\n\n\n- [LayerStyle](https://github.com/chflame163/ComfyUI_LayerStyle)\n\n- [LC123 nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)"
-      ],
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 112,
       "type": "LCImageSplit",
       "pos": [
@@ -858,7 +539,7 @@
         1170
       ],
       "flags": {},
-      "order": 5,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -874,67 +555,6 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
-    },
-    {
-      "id": 113,
-      "type": "LCTextOverlay",
-      "pos": [
-        1430,
-        3370
-      ],
-      "size": [
-        300,
-        640
-      ],
-      "flags": {},
-      "order": 17,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 159
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            167
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
-        "Node name for S&R": "LCTextOverlay",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_before_temp_grunq_00002_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Before        After",
-        "Arial",
-        100,
-        255,
-        255,
-        255,
-        50,
-        90,
-        "center-top"
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
     },
     {
       "id": 116,
@@ -990,7 +610,7 @@
         460
       ],
       "flags": {},
-      "order": 18,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -1007,19 +627,449 @@
         }
       ],
       "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {}
-        },
         "cnr_id": "comfy-core",
         "ver": "0.31.0",
-        "Node name for S&R": "SaveImage"
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
       },
       "widgets_values": [
         "LC Skin Beauty"
       ],
       "color": "#233",
       "bgcolor": "#355"
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        -750,
+        2430
+      ],
+      "size": [
+        500,
+        730
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            59,
+            102,
+            130,
+            131,
+            156,
+            161
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Starting Image",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Anika face no easrrings.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 85,
+      "type": "LCSkinBeauty",
+      "pos": [
+        350,
+        3310
+      ],
+      "size": [
+        300,
+        690
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 130
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": 128
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            101
+          ]
+        },
+        {
+          "name": "skin_mask",
+          "type": "MASK",
+          "links": [
+            99,
+            140
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCSkinBeauty",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_pshaz_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_pshaz_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Warm keep",
+        1,
+        0.08,
+        0.1,
+        0.18,
+        0.25,
+        0.16,
+        0.08,
+        0.9,
+        -0.04,
+        0.8,
+        0.55,
+        0.45
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 92,
+      "type": "LCSkinBeauty",
+      "pos": [
+        350,
+        2480
+      ],
+      "size": [
+        300,
+        690
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 131
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            165
+          ]
+        },
+        {
+          "name": "skin_mask",
+          "type": "MASK",
+          "links": [
+            166
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCSkinBeauty",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_ortfp_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_ortfp_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Warm keep",
+        1,
+        0.08,
+        0.1,
+        0.18,
+        0.25,
+        0.16,
+        0.08,
+        0.9,
+        -0.04,
+        0.8,
+        0.55,
+        0.45
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 104,
+      "type": "MarkdownNote",
+      "pos": [
+        -1700,
+        2670
+      ],
+      "size": [
+        270,
+        110
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Notes",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "## Requires the following nodes:\n\n\n- [LayerStyle](https://github.com/chflame163/ComfyUI_LayerStyle)\n\n- [LC123 nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 113,
+      "type": "LCTextOverlay",
+      "pos": [
+        1430,
+        3370
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 159
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            167
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCTextOverlay",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_jmpst_00003_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Before                  After",
+        "Arial Bold",
+        238,
+        255,
+        255,
+        255,
+        50,
+        90,
+        "center-top"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 115,
+      "type": "LCTextOverlay",
+      "pos": [
+        1430,
+        2530
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 163
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            164,
+            168
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "99a038649b8e60b85ac471e7b20718ee2180ae3e",
+        "Node name for S&R": "LCTextOverlay",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_uqfqg_00002_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Before        After",
+        "Arial",
+        100,
+        255,
+        255,
+        255,
+        50,
+        90,
+        "center-top"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 119,
+      "type": "LCNotify",
+      "pos": [
+        1750,
+        3020
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": 168
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "614316bab898ba6520b0573b35c57bf8d62144e7",
+        "Node name for S&R": "LCNotify",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "always",
+        0.5,
+        "woo-hoo.mp3",
+        null
+      ],
+      "color": "#649632",
+      "bgcolor": "#649632"
     }
   ],
   "links": [
@@ -1166,6 +1216,14 @@
       118,
       0,
       "IMAGE"
+    ],
+    [
+      168,
+      115,
+      0,
+      119,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [
@@ -1200,10 +1258,10 @@
     "ue_links": [],
     "links_added_by_ue": [],
     "ds": {
-      "scale": 0.13310000000000397,
+      "scale": 0.14641000000000015,
       "offset": [
-        4226.090483494313,
-        7.707373448407907
+        4152.0722945431135,
+        -824.506170499973
       ]
     },
     "k2cf_state_id": "k2cf_1786849804470_56r1hbu29g9",

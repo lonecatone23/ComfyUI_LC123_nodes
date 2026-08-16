@@ -4,10 +4,36 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 - **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
+- **Version:** 1.9.0 · **~65 nodes**
 
-> Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
+> **"True, nothing is. Permitted, everything is"**  
+> — Yoda Auditore, *Assassin's Wars*
 
 For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
+
+---
+
+## ⚙️ LC123 Performance (Settings)
+
+**UI only** — smoother scrolling and lighter on-node previews. Does **not** change generation VRAM or socket output quality.
+
+**Settings → LC123 → Performance**
+
+![LC123 Performance settings](assets/readme/lc123_performance_settings.png)
+
+| Setting | Default | Effect |
+|--------|---------|--------|
+| **Remove wipe** | Off | No hover wipe on image FX previews |
+| **Half-resolution previews** | Off | FX previews at half the node image area |
+| **Clamp longest side** | Off | Cap on-node preview bitmap size |
+| **Max edge (px)** | 768 | Used when clamp is on |
+| **No preview when collapsed** | On | Skip draw on collapsed FX nodes |
+| **Hide FX on-node previews** | Off | Hide all LC image FX on-node previews |
+| **Skin Beauty full preview override** | On | Skin Beauty stays full quality on-node |
+
+**Not affected:** LC Image Compare · LC Dynamic Overlay · LC Image Split  
+
+Full directions: [`LC123_Performance_Settings_Note.md`](LC123_Performance_Settings_Note.md)
 
 ---
 
@@ -30,7 +56,7 @@ Mask-aware skin cooling and brightening in **CIELAB**. Grades **skin**, not the 
 
 ![Example workflow](assets/readme/lc_skin_beauty_workflow.png)
 
-Example graph: `workflows/LC Skin Beauty.json`
+Example graphs: `workflows/LC Skin Beauty.json`, `workflows/LC Skin Beauty basic (no deps).json`
 
 | Goal | Tip |
 |------|-----|
@@ -39,19 +65,15 @@ Example graph: `workflows/LC Skin Beauty.json`
 | Fabric leaks | Lower **mask_sensitivity**, or feed a person/skin **MASK** |
 | Check targeting | Inspect **skin_mask** output |
 
-Auto mask is heuristic, not a full person segmenter. For critical work, pair with SAM / face-parse on the mask input.
-
 ---
 
 ## 🖼️ Image Split
 
 **LC Image Split 🖼️** — sticky A|B wipe you can **save**.
 
-- Live wipe on the node (drag; **does not snap back**)
-- Output **`split 🖼️`** is the baked composite for Save Image / downstream
+- Live wipe on the node (drag; does not snap back)
+- Output **`split 🖼️`** is the baked composite
 - Standalone (no Skin Beauty or SAM required)
-
-Wire any two images (e.g. original + Skin Beauty) → set position → save.
 
 ---
 
@@ -82,8 +104,6 @@ Wire any two images (e.g. original + Skin Beauty) → set position → save.
 | **LC Sharpen / Clarity-style**, **Denoise**, **Lens FX / Profile**, **Chromatic Aberration** | Detail & optics. |
 | **LC Film Stock Color / BW**, **Color Match**, **Auto WB** | Stock & match. |
 | **LC Text Overlay**, **LC Watermark 💧** | Type and marks on image. |
-
-Most FX nodes support on-node preview / wipe where implemented.
 
 ---
 
@@ -126,11 +146,10 @@ Most FX nodes support on-node preview / wipe where implemented.
 
 ## 💡 Quick tips
 
-- **Skin Beauty:** fix seed, tune at moderate res, check **skin_mask**, then full run.  
-- **Image Split:** set wipe once; queue; Save Image on **`split 🖼️`**.  
-- **Bypasser:** hub + optional panel; collapse the hub.  
-- **Pipes + Get/Set:** if a graph always regenerates, try a direct link to confirm caching.  
-- **Collapsed nodes:** previews / face text hide when collapsed.
+- **Performance:** heavy graphs → half-res + clamp, or hide FX previews; leave Skin Beauty override on if you zoom the node.
+- **Skin Beauty:** fix seed, tune at moderate res, check **skin_mask**, then full run.
+- **Image Split:** set wipe once; queue; Save Image on **`split 🖼️`**.
+- **Pipes + Get/Set:** if a graph always regenerates, try a direct link to confirm caching.
 
 ---
 
@@ -140,7 +159,9 @@ Most FX nodes support on-node preview / wipe where implemented.
 ComfyUI/custom_nodes/ComfyUI_LC123_nodes/
 ```
 
-Restart ComfyUI. Optional: example workflows in `workflows/`.
+Restart ComfyUI. Optional workflows in `workflows/`.
+
+**Requirements:** ComfyUI’s normal Python env (`torch`, `numpy`). No extra pip packages. Optional SAM / LayerStyle for external masks are separate installs.
 
 ---
 
@@ -148,4 +169,5 @@ Restart ComfyUI. Optional: example workflows in `workflows/`.
 
 MIT — see `LICENSE`.
 
-*Lonecat’s LC123 — less friction, more making.*
+**"True, nothing is. Permitted, everything is"**  
+— Yoda Auditore, *Assassin's Wars*

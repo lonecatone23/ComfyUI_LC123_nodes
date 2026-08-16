@@ -8,6 +8,20 @@ import torch
 
 def tensor_to_np(image):
     """[B,H,W,C] float tensor 0-1 → list of HxWxC float32 arrays."""
+    if image is None:
+        raise ValueError(
+            "LC image node received no image (None). "
+            "Upstream node output is empty — check switches, bypassers, or disconnected IMAGE wires."
+        )
+    # Some nodes pass a list of tensors
+    if isinstance(image, (list, tuple)):
+        if not image:
+            raise ValueError("LC image node received an empty image list.")
+        image = image[0]
+    if not hasattr(image, "detach"):
+        raise TypeError(
+            f"LC image node expected an IMAGE tensor, got {type(image).__name__}."
+        )
     t = image.detach().cpu().numpy().astype(np.float32)
     return [t[i] for i in range(t.shape[0])]
 

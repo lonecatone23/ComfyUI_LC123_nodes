@@ -81,6 +81,7 @@ app.registerExtension({
     const onDrawFG = nodeType.prototype.onDrawForeground;
     nodeType.prototype.onDrawForeground = function (ctx) {
       if (onDrawFG) onDrawFG.apply(this, arguments);
+      if (this.flags?.collapsed) return;
       const raw = this._lcShowText;
       if (raw == null || raw === "") return;
 

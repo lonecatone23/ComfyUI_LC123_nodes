@@ -263,6 +263,7 @@ app.registerExtension({
     nodeType.prototype.onDrawForeground = function (ctx) {
       killNativePreview(this);
       const r = origDrawFG?.apply(this, arguments);
+      if (this.flags?.collapsed) return r;
       this._lcPaint(ctx);
       return r;
     };

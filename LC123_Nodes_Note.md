@@ -1,6 +1,6 @@
 # ComfyUI LC123 Nodes — quick note
 
-**Version 1.7.2** · [Repo](https://github.com/lonecatone23/ComfyUI_LC123_nodes) · [Ko-fi](https://ko-fi.com/lonecatone)
+**Version 1.7.3** · [Repo](https://github.com/lonecatone23/ComfyUI_LC123_nodes) · [Ko-fi](https://ko-fi.com/lonecatone)
 
 ### Image & size
 Aspect Ratio Simplifier (+ Pipe / Pipe Out), Get Image, Dimension Resize, Image Crop, Image Compare, Last Image Holder, Dynamic Overlay, Watermark

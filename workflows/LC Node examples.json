@@ -5054,8 +5054,8 @@
         -4450
       ],
       "size": [
-        740,
-        80
+        733.70361328125,
+        75
       ],
       "flags": {
         "allow_interaction": true
@@ -5315,7 +5315,7 @@
         -5880
       ],
       "size": [
-        1550,
+        1542.5537109375,
         150
       ],
       "flags": {
@@ -6640,57 +6640,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 219,
-      "type": "LCNotify",
-      "pos": [
-        -6710,
-        -3020
-      ],
-      "size": [
-        210,
-        130
-      ],
-      "flags": {},
-      "order": 128,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "any",
-          "shape": 7,
-          "type": "*",
-          "link": 310
-        }
-      ],
-      "outputs": [
-        {
-          "name": "any",
-          "type": "*",
-          "links": [
-            313
-          ]
-        }
-      ],
-      "title": "Notify 🔊",
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
-        "Node name for S&R": "LCNotify",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "always",
-        1,
-        "notify-2.mp3",
-        null
-      ],
-      "color": "#649632",
-      "bgcolor": "#649632"
-    },
-    {
       "id": 40,
       "type": "LCAspectRatioPipeOut",
       "pos": [
@@ -7290,7 +7239,7 @@
       ],
       "size": [
         270,
-        118
+        130
       ],
       "flags": {},
       "order": 101,
@@ -7337,11 +7286,12 @@
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "b5960f890540269a90c505ed069026c97a76513f",
+        "Node name for S&R": "LCDimensionResize",
         "ue_properties": {
           "widget_ue_connectable": {},
-          "input_ue_unconnectable": {}
-        },
-        "Node name for S&R": "LCDimensionResize"
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
       },
       "widgets_values": [
         1024,
@@ -7382,6 +7332,57 @@
       ],
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 219,
+      "type": "LCNotify",
+      "pos": [
+        -6710,
+        -3020
+      ],
+      "size": [
+        210,
+        130
+      ],
+      "flags": {},
+      "order": 128,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": 310
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": [
+            313
+          ]
+        }
+      ],
+      "title": "Notify 🔊",
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
+        "Node name for S&R": "LCNotify",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "always",
+        1,
+        "burp-1.mp3",
+        null
+      ],
+      "color": "#649632",
+      "bgcolor": "#649632"
     }
   ],
   "links": [
@@ -8388,10 +8389,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.5054470284992965,
+      "scale": 0.16105100000000103,
       "offset": [
-        13693.555381839975,
-        3530.2346561458753
+        14051.156940755165,
+        5645.695412325615
       ]
     },
     "links_added_by_ue": [],

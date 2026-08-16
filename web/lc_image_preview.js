@@ -150,6 +150,7 @@ class LCPreviewCompare {
     const origDrawFG = node.onDrawForeground;
     node.onDrawForeground = function (ctx) {
       if (origDrawFG) origDrawFG.apply(this, arguments);
+      if (this.flags?.collapsed) return;
       self.draw(ctx);
     };
 
@@ -378,6 +379,7 @@ class LCTextOverlayPreview {
     const origDrawFG = node.onDrawForeground;
     node.onDrawForeground = function (ctx) {
       if (origDrawFG) origDrawFG.apply(this, arguments);
+      if (this.flags?.collapsed) return;
       self.draw(ctx);
     };
 
@@ -659,6 +661,7 @@ class LCWatermarkPreview {
     const origDrawFG = node.onDrawForeground;
     node.onDrawForeground = function (ctx) {
       if (origDrawFG) origDrawFG.apply(this, arguments);
+      if (this.flags?.collapsed) return;
       self.draw(ctx);
     };
 

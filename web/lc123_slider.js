@@ -340,6 +340,7 @@ function attachFace(node) {
   const prevDraw = node.onDrawForeground;
   node.onDrawForeground = function (ctx, graphCanvas) {
     const r = prevDraw?.apply(this, arguments);
+    if (this.flags?.collapsed) return r;
     layoutFace(this);
     return r;
   };

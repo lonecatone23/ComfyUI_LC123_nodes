@@ -1,0 +1,69 @@
+# LC123 node inventory
+
+Registered class IDs (63):
+
+- `AnimaRegionalCanvasInline`
+- `AspectRatioSimplifier`
+- `Krea2RegionalCanvasInline`
+- `LC123SaveText`
+- `LCAdvancedFolder`
+- `LCAnySwitch`
+- `LCApplyLUT`
+- `LCAspectRatioPipe`
+- `LCAspectRatioPipeOut`
+- `LCAutoWhiteBalance`
+- `LCBasicScheduler`
+- `LCBatchImageComparer`
+- `LCBloom`
+- `LCBoolean`
+- `LCChromaticAberration`
+- `LCCivitaiStrip`
+- `LCClarity`
+- `LCColorMatch`
+- `LCComboSelector`
+- `LCDetailPipeOut`
+- `LCDimensionResize`
+- `LCDynamicOverlay`
+- `LCEasyFolder`
+- `LCFilmGrain`
+- `LCFilmStockBW`
+- `LCFilmStockColor`
+- `LCFloatCompare`
+- `LCGetImage`
+- `LCImageAdjust`
+- `LCImageCrop`
+- `LCImageDenoise`
+- `LCImageDesaturate`
+- `LCImageRGB`
+- `LCIntCompare`
+- `LCInvertBoolean`
+- `LCJoinStrings`
+- `LCLastImageHolder`
+- `LCLensFX`
+- `LCLensProfile`
+- `LCLiftGammaGain`
+- `LCNegative`
+- `LCNotify`
+- `LCPipeEdit`
+- `LCPipeOut`
+- `LCPositive`
+- `LCPromptToConditioning`
+- `LCPromptToConditioningZero`
+- `LCSamplerConfigure`
+- `LCSamplerConfigurePipe`
+- `LCSamplerConfigurePipeOut`
+- `LCSeedJump`
+- `LCShowText`
+- `LCSlider`
+- `LCSplitSigmaScheduler`
+- `LCSplitSigmasAdvanced`
+- `LCStop`
+- `LCTextOverlay`
+- `LCTextRemove`
+- `LCTextReplace`
+- `LCVRAMCacheClear`
+- `LCVibrance`
+- `LCVignette`
+- `LCWatermark`
+
+> Comfy Registry discovers nodes from `NODE_CLASS_MAPPINGS` at publish time; this file is a human-readable inventory. Manager “node count” depends on a successful registry publish, not this list alone.

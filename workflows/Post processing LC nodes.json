@@ -283,69 +283,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 47,
-      "type": "LCTextOverlay",
-      "pos": [
-        -8310,
-        -2020
-      ],
-      "size": [
-        300,
-        640
-      ],
-      "flags": {},
-      "order": 41,
-      "mode": 4,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 117
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            121,
-            148
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
-        "Node name for S&R": "LCTextOverlay",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_before_temp_lbnnn_00001_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Tell me what you want...\nwhat you really.... really want",
-        "Arial",
-        127,
-        255,
-        255,
-        255,
-        51.1,
-        62.2,
-        "center-bottom"
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
       "id": 48,
       "type": "LCImageCrop",
       "pos": [
@@ -440,14 +377,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_phtcp_00001_.png",
+            "filename": "lc_after_temp_spnhp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_phtcp_00001_.png",
+            "filename": "lc_before_temp_spnhp_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -474,7 +411,7 @@
       ],
       "flags": {},
       "order": 38,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -504,14 +441,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_epxjb_00001_.png",
+            "filename": "lc_after_temp_kycmk_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_epxjb_00001_.png",
+            "filename": "lc_before_temp_kycmk_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -592,7 +529,7 @@
         "collapsed": false
       },
       "order": 3,
-      "mode": 4,
+      "mode": 0,
       "inputs": [],
       "outputs": [
         {
@@ -626,70 +563,6 @@
       ],
       "color": "#233",
       "bgcolor": "#355"
-    },
-    {
-      "id": 54,
-      "type": "LC Bypasser Panel",
-      "pos": [
-        -7380,
-        -1980
-      ],
-      "size": [
-        310,
-        606
-      ],
-      "flags": {},
-      "order": 51,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "hub",
-          "type": "*",
-          "link": 125
-        }
-      ],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "properties": {
-        "toggleRestriction": "default",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        false,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false,
-        true
-      ],
-      "color": "#aa782d",
-      "bgcolor": "#966419"
     },
     {
       "id": 55,
@@ -844,70 +717,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 60,
-      "type": "LCLensProfile",
-      "pos": [
-        -8000,
-        -2540
-      ],
-      "size": [
-        300,
-        470
-      ],
-      "flags": {},
-      "order": 34,
-      "mode": 4,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 152
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            141,
-            153
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
-        "Node name for S&R": "LCLensProfile",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_preview_meta": [
-          {
-            "filename": "lc_after_temp_ebfhu_00005_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ],
-        "lc_before_meta": [
-          {
-            "filename": "lc_before_temp_ebfhu_00005_.png",
-            "subfolder": "",
-            "type": "temp"
-          }
-        ]
-      },
-      "widgets_values": [
-        "Canon EF 50mm f/1.8",
-        "Add Aberrations",
-        1
-      ],
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
       "id": 61,
       "type": "LCFilmStockBW",
       "pos": [
@@ -920,7 +729,7 @@
       ],
       "flags": {},
       "order": 35,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -950,14 +759,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_rgukg_00001_.png",
+            "filename": "lc_after_temp_akgek_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_rgukg_00001_.png",
+            "filename": "lc_before_temp_akgek_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -986,7 +795,7 @@
       ],
       "flags": {},
       "order": 36,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1016,14 +825,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_dmacm_00001_.png",
+            "filename": "lc_after_temp_unxfs_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_dmacm_00001_.png",
+            "filename": "lc_before_temp_unxfs_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1052,7 +861,7 @@
       ],
       "flags": {},
       "order": 37,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1090,14 +899,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_yrofz_00001_.png",
+            "filename": "lc_after_temp_kevhx_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_yrofz_00001_.png",
+            "filename": "lc_before_temp_kevhx_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1128,7 +937,7 @@
       ],
       "flags": {},
       "order": 33,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1166,14 +975,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_zisep_00001_.png",
+            "filename": "lc_after_temp_ncasq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_zisep_00001_.png",
+            "filename": "lc_before_temp_ncasq_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1233,14 +1042,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_kprmt_00001_.png",
+            "filename": "lc_after_temp_mnjvr_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_kprmt_00001_.png",
+            "filename": "lc_before_temp_mnjvr_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1299,14 +1108,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_kilsa_00001_.png",
+            "filename": "lc_after_temp_xqnng_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_kilsa_00001_.png",
+            "filename": "lc_before_temp_xqnng_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1338,7 +1147,7 @@
       ],
       "flags": {},
       "order": 30,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1368,14 +1177,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_qcrps_00001_.png",
+            "filename": "lc_after_temp_xyuvv_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_qcrps_00001_.png",
+            "filename": "lc_before_temp_xyuvv_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1405,7 +1214,7 @@
       ],
       "flags": {},
       "order": 22,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1441,14 +1250,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ktsmh_00001_.png",
+            "filename": "lc_after_temp_klrre_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ktsmh_00001_.png",
+            "filename": "lc_before_temp_klrre_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1474,7 +1283,7 @@
       ],
       "flags": {},
       "order": 19,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1504,14 +1313,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_kbkhu_00008_.png",
+            "filename": "lc_after_temp_attmn_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_kbkhu_00008_.png",
+            "filename": "lc_before_temp_attmn_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1539,7 +1348,7 @@
       ],
       "flags": {},
       "order": 24,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1569,14 +1378,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_gyfgc_00001_.png",
+            "filename": "lc_after_temp_qeydi_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_gyfgc_00001_.png",
+            "filename": "lc_before_temp_qeydi_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1606,7 +1415,7 @@
       ],
       "flags": {},
       "order": 25,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1636,14 +1445,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_diipp_00001_.png",
+            "filename": "lc_after_temp_urknx_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_diipp_00001_.png",
+            "filename": "lc_before_temp_urknx_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1705,14 +1514,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ciopy_00001_.png",
+            "filename": "lc_after_temp_tdcyl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ciopy_00001_.png",
+            "filename": "lc_before_temp_tdcyl_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1740,7 +1549,7 @@
       ],
       "flags": {},
       "order": 27,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1770,14 +1579,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_svctf_00001_.png",
+            "filename": "lc_after_temp_pxnti_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_svctf_00001_.png",
+            "filename": "lc_before_temp_pxnti_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1806,7 +1615,7 @@
       ],
       "flags": {},
       "order": 28,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -1836,14 +1645,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_ttjve_00001_.png",
+            "filename": "lc_after_temp_ipqin_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_ttjve_00001_.png",
+            "filename": "lc_before_temp_ipqin_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -1900,14 +1709,14 @@
         },
         "lc_preview_meta": [
           {
-            "filename": "lc_after_temp_cdqci_00001_.png",
+            "filename": "lc_after_temp_jnmjg_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_cdqci_00001_.png",
+            "filename": "lc_before_temp_jnmjg_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -2201,7 +2010,7 @@
       ],
       "outputs": [
         {
-          "name": "image",
+          "name": "blended Image",
           "type": "IMAGE",
           "links": [
             171
@@ -2587,82 +2396,32 @@
         }
       },
       "widgets_values": [
-        false,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        true,
-        false,
         true,
         true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
         true,
         true,
-        false,
-        false,
-        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
         true
       ],
       "color": "#28281E",
       "bgcolor": "#28281E"
-    },
-    {
-      "id": 86,
-      "type": "LCNotify",
-      "pos": [
-        -6160,
-        -1980
-      ],
-      "size": [
-        210,
-        130
-      ],
-      "flags": {},
-      "order": 46,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "any",
-          "shape": 7,
-          "type": "*",
-          "link": 173
-        }
-      ],
-      "outputs": [
-        {
-          "name": "any",
-          "type": "*",
-          "links": [
-            172
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
-        "Node name for S&R": "LCNotify",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "always",
-        0.5,
-        "T-rex.mp3",
-        null
-      ],
-      "color": "#649632",
-      "bgcolor": "#649632"
     },
     {
       "id": 87,
@@ -2912,13 +2671,14 @@
         }
       ],
       "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {}
-        },
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
-        "Node name for S&R": "LCLastImageHolder"
+        "Node name for S&R": "LCLastImageHolder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
       },
       "widgets_values": [
         "hold until cleared",
@@ -2940,7 +2700,7 @@
       ],
       "flags": {},
       "order": 42,
-      "mode": 4,
+      "mode": 0,
       "inputs": [
         {
           "name": "image",
@@ -2988,14 +2748,14 @@
         ],
         "lc_before_meta": [
           {
-            "filename": "lc_before_temp_dnuip_00001_.png",
+            "filename": "lc_before_temp_baxcu_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
         ],
         "lc_wm_meta": [
           {
-            "filename": "lc_wm_temp_dnuip_00001_.png",
+            "filename": "lc_wm_temp_baxcu_00001_.png",
             "subfolder": "",
             "type": "temp"
           }
@@ -3051,17 +2811,264 @@
         }
       ],
       "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {}
-        },
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
         "Node name for S&R": "LCBatchImageComparer",
-        "comparer_mode": "Slide"
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
       },
+      "widgets_values": [],
       "color": "#325A5A",
       "bgcolor": "#325A5A"
+    },
+    {
+      "id": 54,
+      "type": "LC Bypasser Panel",
+      "pos": [
+        -7380,
+        -1980
+      ],
+      "size": [
+        310,
+        606
+      ],
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "hub",
+          "type": "*",
+          "link": 125
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "toggleRestriction": "default",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "color": "#aa782d",
+      "bgcolor": "#966419"
+    },
+    {
+      "id": 86,
+      "type": "LCNotify",
+      "pos": [
+        -6160,
+        -1980
+      ],
+      "size": [
+        210,
+        130
+      ],
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": 173
+        }
+      ],
+      "outputs": [
+        {
+          "name": "any",
+          "type": "*",
+          "links": [
+            172
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
+        "Node name for S&R": "LCNotify",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "always",
+        0.5,
+        "car-horn.mp3",
+        null
+      ],
+      "color": "#649632",
+      "bgcolor": "#649632"
+    },
+    {
+      "id": 60,
+      "type": "LCLensProfile",
+      "pos": [
+        -8000,
+        -2540
+      ],
+      "size": [
+        300,
+        470
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 152
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            141,
+            153
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCLensProfile",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_pclyg_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_pclyg_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Canon EF 50mm f/1.8",
+        "Add Aberrations",
+        1
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 47,
+      "type": "LCTextOverlay",
+      "pos": [
+        -8310,
+        -2020
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 117
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            121,
+            148
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCTextOverlay",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_pjacp_00001_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Tell me what you want...\nwhat you really.... really want",
+        "Arial",
+        127,
+        255,
+        255,
+        255,
+        50.8,
+        88.5,
+        "center-bottom"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
     }
   ],
   "links": [
@@ -3605,10 +3612,10 @@
     "ue_links": [],
     "k2cf_state_id": "k2cf_1785113348833_apxfftyz2ud",
     "ds": {
-      "scale": 0.10000000000000049,
+      "scale": 0.259374246010002,
       "offset": [
-        14953.984541827793,
-        5792.00744374989
+        11152.398684188309,
+        3179.4177048615184
       ]
     },
     "links_added_by_ue": [],

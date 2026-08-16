@@ -7,7 +7,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
-**Version 1.7.2**
+**Version 1.7.3**
 
 For **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).
 

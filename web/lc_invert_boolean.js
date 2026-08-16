@@ -115,6 +115,7 @@ app.registerExtension({
     const onDrawFG = nodeType.prototype.onDrawForeground;
     nodeType.prototype.onDrawForeground = function (ctx) {
       const r = onDrawFG?.apply(this, arguments);
+      if (this.flags?.collapsed) return r;
 
       const out = outputState(this);
       this._lcBool = out;

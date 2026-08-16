@@ -87,6 +87,7 @@ class LCBatchImageComparer {
         const origDrawFG = node.onDrawForeground;
         node.onDrawForeground = function (ctx, graphCanvas) {
             if (origDrawFG) origDrawFG.apply(this, arguments);
+            if (this.flags?.collapsed) return;
             self.draw(ctx);
         };
 

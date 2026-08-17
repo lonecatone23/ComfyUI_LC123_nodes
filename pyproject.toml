@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.10.0"
+version = "1.10.1"
 description = "ComfyUI LC123 Nodes by lonecatone23 — aspect ratio, pipes, dual sigma, image FX, LC Skin Beauty, LC Photo Style, Image Split, Performance settings, notify, Civitai strip, bypassers, text tools, and more."
 readme = "README.md"
 requires-python = ">=3.10"

@@ -121,6 +121,17 @@ class LCImageSplitUI {
       }
       return onMouseUp?.apply(this, arguments);
     };
+
+    const origResize = node.onResize;
+    node.onResize = function (size) {
+      if (size) {
+        if (size[0] < MIN_W) size[0] = MIN_W;
+        if (size[1] < MIN_H) size[1] = MIN_H;
+      }
+      const r = origResize?.apply(this, arguments);
+      this.setDirtyCanvas?.(true, true);
+      return r;
+    };
   }
 
   _imgArea() {
@@ -185,35 +196,36 @@ class LCImageSplitUI {
     const t = posW ? Number(posW.value) : 0.5;
     const cut = x + t * w;
 
-    const drawCover = (img) => {
+    // Contain: fit full image inside the preview window (letterbox if needed)
+    const drawFit = (img) => {
       if (!img || !img.complete || !img.naturalWidth) return false;
       const ir = img.naturalWidth / img.naturalHeight;
       const ar = w / h;
       let dw, dh, dx, dy;
       if (ir > ar) {
-        dh = h;
-        dw = h * ir;
-        dx = x + (w - dw) / 2;
-        dy = y;
-      } else {
         dw = w;
         dh = w / ir;
         dx = x;
         dy = y + (h - dh) / 2;
+      } else {
+        dh = h;
+        dw = h * ir;
+        dx = x + (w - dw) / 2;
+        dy = y;
       }
       ctx.drawImage(img, dx, dy, dw, dh);
       return true;
     };
 
     // Full B, then clip A on the left of the wipe
-    drawCover(this.imgB || this.imgA);
+    drawFit(this.imgB || this.imgA);
 
     if (this.imgA && this.imgA.complete) {
       ctx.save();
       ctx.beginPath();
       ctx.rect(x, y, Math.max(0, cut - x), h);
       ctx.clip();
-      drawCover(this.imgA);
+      drawFit(this.imgA);
       ctx.restore();
     }
 

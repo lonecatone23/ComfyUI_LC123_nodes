@@ -885,6 +885,78 @@ class LCImageDenoise(PreviewImage):
 # ---------------------------------------------------------------------------
 # LC Color Match 🎨 (AdaIN / mean-std transfer)
 # ---------------------------------------------------------------------------
+
+def _rgb_to_hsv_np(rgb):
+    """rgb HxWx3 float 0-1 → h (0-360), s, v"""
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    cmax = np.maximum(np.maximum(r, g), b)
+    cmin = np.minimum(np.minimum(r, g), b)
+    delta = cmax - cmin
+    h = np.zeros_like(r)
+    s = np.zeros_like(r)
+    m = delta > 1e-7
+    mr = m & (cmax == r)
+    mg = m & (cmax == g) & ~mr
+    mb = m & ~mr & ~mg
+    h[mr] = 60.0 * (((g[mr] - b[mr]) / (delta[mr] + 1e-10)) % 6)
+    h[mg] = 60.0 * (((b[mg] - r[mg]) / (delta[mg] + 1e-10)) + 2)
+    h[mb] = 60.0 * (((r[mb] - g[mb]) / (delta[mb] + 1e-10)) + 4)
+    s[m] = delta[m] / (cmax[m] + 1e-10)
+    return h, s, cmax
+
+
+def _hsv_to_rgb_np(h, s, v):
+    h = np.mod(h, 360.0)
+    c = v * s
+    x = c * (1.0 - np.abs((h / 60.0) % 2 - 1.0))
+    m = v - c
+    z = np.zeros_like(h)
+    rgb = np.zeros(h.shape + (3,), dtype=np.float32)
+    i = (h // 60.0).astype(np.int32) % 6
+    sectors = [
+        (c, x, z), (x, c, z), (z, c, x), (z, x, c), (x, z, c), (c, z, x)
+    ]
+    for idx, (rc, gc, bc) in enumerate(sectors):
+        sel = i == idx
+        if not np.any(sel):
+            continue
+        rgb[sel, 0] = rc[sel] + m[sel]
+        rgb[sel, 1] = gc[sel] + m[sel]
+        rgb[sel, 2] = bc[sel] + m[sel]
+    return np.clip(rgb, 0, 1).astype(np.float32)
+
+
+def _skin_membership_hsv(h, s, v):
+    """Soft weight 0-1 for skin-like hues (approx 0–50°), mid sat, not too dark."""
+    # circular distance to skin center ~25°
+    center, half = 25.0, 28.0
+    dh = np.abs(((h - center + 180) % 360) - 180)
+    hue_w = np.clip(1.0 - dh / half, 0, 1)
+    sat_w = np.clip((s - 0.08) / 0.25, 0, 1) * np.clip((0.75 - s) / 0.25, 0, 1)
+    val_w = np.clip((v - 0.12) / 0.25, 0, 1)
+    return (hue_w * sat_w * val_w).astype(np.float32)
+
+
+def apply_skin_protect(original, matched, amount=0.5, max_chroma_gain=1.15):
+    """Hold original hue on skin; cap chroma gain. amount 0=off, 1=full protect."""
+    amount = float(np.clip(amount, 0, 1))
+    if amount <= 1e-4:
+        return matched
+    h0, s0, v0 = _rgb_to_hsv_np(original)
+    h1, s1, v1 = _rgb_to_hsv_np(matched)
+    w = _skin_membership_hsv(h0, s0, v0) * amount
+    if float(w.max()) < 1e-4:
+        return matched
+    # circular hue lerp toward original
+    d = ((h0 - h1 + 180) % 360) - 180
+    h = (h1 + d * w) % 360
+    # chroma (sat) cap: don't boost skin sat much past original
+    s_cap = np.minimum(s1, s0 * max_chroma_gain + 0.02)
+    s = s1 * (1.0 - w) + s_cap * w
+    # keep matched value (lightness-ish)
+    return _hsv_to_rgb_np(h, s, v1)
+
+
 class LCColorMatch(PreviewImage):
     @classmethod
     def INPUT_TYPES(cls):
@@ -906,6 +978,13 @@ class LCColorMatch(PreviewImage):
                 "reference": ("IMAGE", {
                     "tooltip": "Color reference (style). If empty, node bypasses and passes image through.",
                 }),
+                "skin_protect": ("FLOAT", {
+                    "default": 0.5,
+                    "min": 0.0,
+                    "max": 1.0,
+                    "step": 0.05,
+                    "tooltip": "Hold original skin hue and cap skin chroma gain after match (0=off, 1=full). Lightness still follows the match.",
+                }),
             },
         }
 
@@ -915,11 +994,10 @@ class LCColorMatch(PreviewImage):
     CATEGORY = "LC123/image"
     OUTPUT_NODE = True
     DESCRIPTION = (
-        "Match colors to a reference image (AdaIN / mean-std). No reference = bypass (pass-through, shows bypass). On-node preview + wipe."
+        "Match colors to a reference (AdaIN / mean-std). Optional skin_protect holds face hue. No reference = bypass. On-node preview + wipe."
     )
 
-    def run(self, image, method="adain", strength=1.0, reference=None):
-        # No reference → pass-through, flag bypass for UI
+    def run(self, image, method="adain", strength=1.0, reference=None, skin_protect=0.5):
         if reference is None:
             out = _preview(self, image, image)
             out["ui"]["lc_bypass"] = ["1"]
@@ -927,15 +1005,12 @@ class LCColorMatch(PreviewImage):
         if strength <= 0:
             return _preview(self, image, image)
 
-        # Use first frame of reference if batch
         ref = reference[0:1]
-        # Resize ref stats over full tensor; match per-image against ref[0]
         arrays = tensor_to_np(image)
         ref_np = tensor_to_np(ref)[0]
         out = []
 
         def stats(x):
-            # x HxWx3
             flat = x.reshape(-1, 3).astype(np.float64)
             mu = flat.mean(axis=0)
             sigma = flat.std(axis=0) + 1e-5
@@ -950,14 +1025,16 @@ class LCColorMatch(PreviewImage):
                 mu_s, sig_s = stats(lin)
                 matched = (lin - mu_s) * (sig_r / sig_s) + mu_r
                 matched = linear_to_srgb(np.clip(matched, 0, 1).astype(np.float32))
+                matched = apply_skin_protect(original, matched, skin_protect)
                 out.append(blend(original, matched, strength))
-        else:  # adain in display space
+        else:
             mu_r, sig_r = stats(ref_np)
             for img in arrays:
                 original = img.copy()
                 mu_s, sig_s = stats(img)
                 matched = (img.astype(np.float64) - mu_s) * (sig_r / sig_s) + mu_r
                 matched = np.clip(matched, 0, 1).astype(np.float32)
+                matched = apply_skin_protect(original, matched, skin_protect)
                 out.append(blend(original, matched, strength))
 
         return _preview(self, np_to_tensor(out), image)

@@ -1,0 +1,3532 @@
+{
+  "id": "637fc080-aa04-4d9c-afa0-a340faa4310d",
+  "revision": 0,
+  "last_node_id": 76,
+  "last_link_id": 166,
+  "nodes": [
+    {
+      "id": 24,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10850,
+        -430
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 93
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 16,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11470,
+        130
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 18
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 105
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 28,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10850,
+        130
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 36
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 103
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 36,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10230,
+        -430
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 48
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 97
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 20,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10850,
+        -990
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 24
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 89
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 32,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10230,
+        -990
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 42
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 3,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11470,
+        -990
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 91
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 12,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11470,
+        -430
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 12
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        -12320,
+        -470
+      ],
+      "size": [
+        310,
+        340
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            2,
+            10,
+            12,
+            16,
+            18,
+            22,
+            24,
+            28,
+            30,
+            34,
+            36,
+            40,
+            42,
+            46,
+            48,
+            52,
+            54,
+            131,
+            137,
+            139,
+            143,
+            145,
+            148,
+            150
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "565def19c12a1feed374ed26f52728b9.jpg",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 6,
+      "type": "Seed (rgthree)",
+      "pos": [
+        -12320,
+        -670
+      ],
+      "size": [
+        320,
+        130
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "SEED",
+          "shape": 3,
+          "type": "INT",
+          "links": [
+            6,
+            11,
+            17,
+            23,
+            29,
+            35,
+            41,
+            47,
+            53,
+            128,
+            141,
+            147,
+            152
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "6b76ee6f2c5a007710b5a16f97c94330d6ecc871",
+        "randomMax": 1125899906842624,
+        "randomMin": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        733270236130637,
+        "",
+        "",
+        "okay"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 68,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11440,
+        1300
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Base",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 134
+        },
+        {
+          "label": "New",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 133
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 67,
+      "type": "Reroute",
+      "pos": [
+        -10690,
+        760
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 131
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            132,
+            134
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 69,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11470,
+        680
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 137
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 138
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 71,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10850,
+        680
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 143
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 40,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10230,
+        130
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 54
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 101
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 73,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10230,
+        680
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 148
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 149
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 2,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11750,
+        -990
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 109
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            91,
+            154
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Standard",
+        0.95,
+        416825629545111,
+        "fixed",
+        0.08,
+        0,
+        0.04,
+        0.14,
+        0.28,
+        0.4,
+        0.25,
+        0.32,
+        0.65,
+        0.1,
+        0.12,
+        0.28,
+        0.18,
+        0.18,
+        0.12
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 19,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11130,
+        -990
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 22
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 110
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            89,
+            155
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Natural",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.04,
+        0,
+        0.02,
+        0.08,
+        0.18,
+        0.3,
+        0.15,
+        0.18,
+        0.75,
+        0.04,
+        0.06,
+        0.15,
+        0.1,
+        0.08,
+        0.06
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 31,
+      "type": "LCPhoneLook",
+      "pos": [
+        -10510,
+        -990
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 40
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 111
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            99,
+            156
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Dramatic",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.02,
+        0,
+        -0.06,
+        0.28,
+        0.08,
+        0.45,
+        0.25,
+        0.15,
+        0.6,
+        0.18,
+        0.1,
+        0.22,
+        0.22,
+        0.28,
+        0.12
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 11,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11750,
+        -430
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 10
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 112
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            95,
+            157
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Quiet",
+        0.85,
+        416825629545111,
+        "fixed",
+        -0.1,
+        -0.04,
+        -0.04,
+        0.04,
+        0.2,
+        0.2,
+        0.08,
+        0.02,
+        0.8,
+        0.16,
+        0.02,
+        0.06,
+        0.04,
+        0.12,
+        0.08
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 23,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11130,
+        -430
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 28
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 113
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            93,
+            158
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Muted",
+        0.85,
+        416825629545111,
+        "fixed",
+        0,
+        0,
+        0,
+        0.08,
+        0.15,
+        0.25,
+        0.08,
+        -0.2,
+        0.7,
+        0.08,
+        0.04,
+        0.08,
+        0.06,
+        0.08,
+        0.06
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 35,
+      "type": "LCPhoneLook",
+      "pos": [
+        -10510,
+        -430
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 46
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 114
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 47
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            97,
+            159
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Amateur",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.22,
+        0.08,
+        0.08,
+        0.24,
+        0.1,
+        0.18,
+        0.05,
+        0.3,
+        0.25,
+        0.02,
+        0.22,
+        0.28,
+        0.18,
+        0.32,
+        0.22
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 15,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11750,
+        130
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 115
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            105,
+            160
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Cool day",
+        0.85,
+        416825629545111,
+        "fixed",
+        -0.35,
+        -0.12,
+        0.02,
+        0.14,
+        0.22,
+        0.35,
+        0.18,
+        0.12,
+        0.55,
+        0.22,
+        0.04,
+        0.16,
+        0.14,
+        0.16,
+        0.1
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 27,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11130,
+        130
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 34
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 116
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            103,
+            161
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Warm evening",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.4,
+        0.08,
+        0.06,
+        0.16,
+        0.28,
+        0.28,
+        0.15,
+        0.18,
+        0.6,
+        0.02,
+        0.28,
+        0.14,
+        0.12,
+        0.2,
+        0.12
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 39,
+      "type": "LCPhoneLook",
+      "pos": [
+        -10510,
+        130
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 52
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 117
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 53
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            101,
+            162
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Bright open",
+        0.85,
+        416825629545111,
+        "fixed",
+        -0.02,
+        0.19,
+        0.37,
+        0.14,
+        0.79,
+        0.82,
+        0.51,
+        0.12,
+        0.61,
+        0.22,
+        0.04,
+        0.32,
+        0.33,
+        0.24,
+        0.16
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 70,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11750,
+        680
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 139
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 140
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 141
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            138,
+            163
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "iPhone",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.1,
+        0.02,
+        0.08,
+        0.12,
+        0.42,
+        0.48,
+        0.32,
+        0.28,
+        0.72,
+        0.14,
+        0.16,
+        0.22,
+        0.16,
+        0.08,
+        0.06
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 72,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11130,
+        680
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 145
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 146
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 147
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            144,
+            164
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Nikon Z7 II",
+        0.85,
+        416825629545111,
+        "fixed",
+        -0.04,
+        0,
+        0.02,
+        0.18,
+        0.22,
+        0.38,
+        0.14,
+        0.08,
+        0.7,
+        0.12,
+        0.06,
+        0.2,
+        0.18,
+        0.1,
+        0.05
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 74,
+      "type": "LCPhoneLook",
+      "pos": [
+        -10510,
+        680
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 150
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 151
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 152
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            149,
+            165
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Canon R5",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.14,
+        0.04,
+        0.05,
+        0.14,
+        0.32,
+        0.42,
+        0.2,
+        0.2,
+        0.68,
+        0.06,
+        0.18,
+        0.16,
+        0.14,
+        0.08,
+        0.05
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 66,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -10850,
+        1300
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Held",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 129
+        },
+        {
+          "label": "New",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 130
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 54,
+      "type": "mxSlider",
+      "pos": [
+        -12320,
+        -750
+      ],
+      "size": [
+        320,
+        30
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "FLOAT",
+          "links": [
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            124,
+            135,
+            140,
+            146,
+            151
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-mxtoolkit",
+        "ver": "0.9.92",
+        "Node name for S&R": "mxSlider",
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "decimals": 2,
+        "snap": true,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 56,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1210
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            118
+          ]
+        }
+      ],
+      "title": "Node Name",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "LC Phone Look"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 62,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1170
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            123
+          ]
+        }
+      ],
+      "title": "Slider Name",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Strength"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 61,
+      "type": "CR Float To String",
+      "pos": [
+        -12320,
+        -1130
+      ],
+      "size": [
+        190,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "float_",
+          "type": "FLOAT",
+          "link": 124
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            122
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Float To String",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 58,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1090
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 122
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            120
+          ]
+        }
+      ],
+      "title": "slider value $tring",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        " 0.5 strength"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 57,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -850
+      ],
+      "size": [
+        320,
+        60
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            119
+          ]
+        }
+      ],
+      "title": "Version",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "V6"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 63,
+      "type": "LCShowText",
+      "pos": [
+        -12320,
+        -1010
+      ],
+      "size": [
+        320,
+        120
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 125
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_show_text": "LC Phone Look V6 1.0 Strength"
+      },
+      "widgets_values": [],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 55,
+      "type": "LCJoinStrings",
+      "pos": [
+        -12320,
+        -1050
+      ],
+      "size": [
+        330,
+        174
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 118
+        },
+        {
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 119
+        },
+        {
+          "name": "string_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": 120
+        },
+        {
+          "name": "string_4",
+          "shape": 7,
+          "type": "STRING",
+          "link": 123
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            121,
+            125
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCJoinStrings",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        4,
+        " "
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 53,
+      "type": "LC Bypasser",
+      "pos": [
+        -9040,
+        -690
+      ],
+      "size": [
+        270,
+        120
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Save Image",
+          "type": "*",
+          "link": 108
+        },
+        {
+          "name": "enable",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "",
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "enable",
+          "type": "BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "toggleRestriction": "default",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        true
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 75,
+      "type": "BatchImagesNode",
+      "pos": [
+        -9860,
+        -980
+      ],
+      "size": [
+        173.958984375,
+        266
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image0",
+          "name": "images.image0",
+          "type": "IMAGE",
+          "link": 154
+        },
+        {
+          "label": "image1",
+          "name": "images.image1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 155
+        },
+        {
+          "label": "image2",
+          "name": "images.image2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 156
+        },
+        {
+          "label": "image3",
+          "name": "images.image3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 157
+        },
+        {
+          "label": "image4",
+          "name": "images.image4",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 158
+        },
+        {
+          "label": "image5",
+          "name": "images.image5",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 159
+        },
+        {
+          "label": "image6",
+          "name": "images.image6",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 160
+        },
+        {
+          "label": "image7",
+          "name": "images.image7",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 161
+        },
+        {
+          "label": "image8",
+          "name": "images.image8",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 162
+        },
+        {
+          "label": "image9",
+          "name": "images.image9",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 163
+        },
+        {
+          "label": "image10",
+          "name": "images.image10",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 164
+        },
+        {
+          "label": "image11",
+          "name": "images.image11",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 165
+        },
+        {
+          "label": "image12",
+          "name": "images.image12",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            166
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "BatchImagesNode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 47,
+      "type": "CR Image Grid Panel",
+      "pos": [
+        -9860,
+        -940
+      ],
+      "size": [
+        270,
+        200
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 166
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            61
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Image Grid Panel",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        3,
+        "custom",
+        2,
+        "white",
+        3,
+        "#000000"
+      ]
+    },
+    {
+      "id": 48,
+      "type": "PreviewImage",
+      "pos": [
+        -9860,
+        -690
+      ],
+      "size": [
+        800,
+        940
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            107
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PreviewImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 52,
+      "type": "SaveImage",
+      "pos": [
+        -9040,
+        -520
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 107
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 121
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            108
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "LC Phone Look test V4"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 64,
+      "type": "LCLastImageHolder",
+      "pos": [
+        -10850,
+        1260
+      ],
+      "size": [
+        300,
+        420
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "new_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 126
+        }
+      ],
+      "outputs": [
+        {
+          "name": "held image",
+          "type": "IMAGE",
+          "links": [
+            129
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCLastImageHolder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "hold previous generation",
+        "clear_btn"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 65,
+      "type": "LCPhoneLook",
+      "pos": [
+        -11130,
+        1300
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 132
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 135
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 128
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            126,
+            130,
+            133
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Cool day",
+        0.85,
+        416825629545111,
+        "fixed",
+        -0.02,
+        0.19,
+        0.37,
+        0.14,
+        0.79,
+        0.82,
+        0.51,
+        0.12,
+        0.61,
+        0.22,
+        0.04,
+        0.32,
+        0.33,
+        0.24,
+        0.16
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      6,
+      0,
+      2,
+      2,
+      "INT"
+    ],
+    [
+      10,
+      1,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      11,
+      6,
+      0,
+      11,
+      2,
+      "INT"
+    ],
+    [
+      12,
+      1,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      1,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      6,
+      0,
+      15,
+      2,
+      "INT"
+    ],
+    [
+      18,
+      1,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      1,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      6,
+      0,
+      19,
+      2,
+      "INT"
+    ],
+    [
+      24,
+      1,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      1,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      6,
+      0,
+      23,
+      2,
+      "INT"
+    ],
+    [
+      30,
+      1,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      1,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ],
+    [
+      35,
+      6,
+      0,
+      27,
+      2,
+      "INT"
+    ],
+    [
+      36,
+      1,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      40,
+      1,
+      0,
+      31,
+      0,
+      "IMAGE"
+    ],
+    [
+      41,
+      6,
+      0,
+      31,
+      2,
+      "INT"
+    ],
+    [
+      42,
+      1,
+      0,
+      32,
+      0,
+      "IMAGE"
+    ],
+    [
+      46,
+      1,
+      0,
+      35,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      6,
+      0,
+      35,
+      2,
+      "INT"
+    ],
+    [
+      48,
+      1,
+      0,
+      36,
+      0,
+      "IMAGE"
+    ],
+    [
+      52,
+      1,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ],
+    [
+      53,
+      6,
+      0,
+      39,
+      2,
+      "INT"
+    ],
+    [
+      54,
+      1,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ],
+    [
+      61,
+      47,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      89,
+      19,
+      0,
+      20,
+      1,
+      "IMAGE"
+    ],
+    [
+      91,
+      2,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      93,
+      23,
+      0,
+      24,
+      1,
+      "IMAGE"
+    ],
+    [
+      95,
+      11,
+      0,
+      12,
+      1,
+      "IMAGE"
+    ],
+    [
+      97,
+      35,
+      0,
+      36,
+      1,
+      "IMAGE"
+    ],
+    [
+      99,
+      31,
+      0,
+      32,
+      1,
+      "IMAGE"
+    ],
+    [
+      101,
+      39,
+      0,
+      40,
+      1,
+      "IMAGE"
+    ],
+    [
+      103,
+      27,
+      0,
+      28,
+      1,
+      "IMAGE"
+    ],
+    [
+      105,
+      15,
+      0,
+      16,
+      1,
+      "IMAGE"
+    ],
+    [
+      107,
+      48,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      52,
+      0,
+      53,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      54,
+      0,
+      2,
+      1,
+      "FLOAT"
+    ],
+    [
+      110,
+      54,
+      0,
+      19,
+      1,
+      "FLOAT"
+    ],
+    [
+      111,
+      54,
+      0,
+      31,
+      1,
+      "FLOAT"
+    ],
+    [
+      112,
+      54,
+      0,
+      11,
+      1,
+      "FLOAT"
+    ],
+    [
+      113,
+      54,
+      0,
+      23,
+      1,
+      "FLOAT"
+    ],
+    [
+      114,
+      54,
+      0,
+      35,
+      1,
+      "FLOAT"
+    ],
+    [
+      115,
+      54,
+      0,
+      15,
+      1,
+      "FLOAT"
+    ],
+    [
+      116,
+      54,
+      0,
+      27,
+      1,
+      "FLOAT"
+    ],
+    [
+      117,
+      54,
+      0,
+      39,
+      1,
+      "FLOAT"
+    ],
+    [
+      118,
+      56,
+      0,
+      55,
+      0,
+      "STRING"
+    ],
+    [
+      119,
+      57,
+      0,
+      55,
+      1,
+      "STRING"
+    ],
+    [
+      120,
+      58,
+      0,
+      55,
+      2,
+      "STRING"
+    ],
+    [
+      121,
+      55,
+      0,
+      52,
+      1,
+      "STRING"
+    ],
+    [
+      122,
+      61,
+      0,
+      58,
+      0,
+      "STRING"
+    ],
+    [
+      123,
+      62,
+      0,
+      55,
+      3,
+      "STRING"
+    ],
+    [
+      124,
+      54,
+      0,
+      61,
+      0,
+      "FLOAT"
+    ],
+    [
+      125,
+      55,
+      0,
+      63,
+      0,
+      "STRING"
+    ],
+    [
+      126,
+      65,
+      0,
+      64,
+      0,
+      "IMAGE"
+    ],
+    [
+      128,
+      6,
+      0,
+      65,
+      2,
+      "INT"
+    ],
+    [
+      129,
+      64,
+      0,
+      66,
+      0,
+      "IMAGE"
+    ],
+    [
+      130,
+      65,
+      0,
+      66,
+      1,
+      "IMAGE"
+    ],
+    [
+      131,
+      1,
+      0,
+      67,
+      0,
+      "IMAGE"
+    ],
+    [
+      132,
+      67,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      133,
+      65,
+      0,
+      68,
+      1,
+      "IMAGE"
+    ],
+    [
+      134,
+      67,
+      0,
+      68,
+      0,
+      "IMAGE"
+    ],
+    [
+      135,
+      54,
+      0,
+      65,
+      1,
+      "FLOAT"
+    ],
+    [
+      137,
+      1,
+      0,
+      69,
+      0,
+      "IMAGE"
+    ],
+    [
+      138,
+      70,
+      0,
+      69,
+      1,
+      "IMAGE"
+    ],
+    [
+      139,
+      1,
+      0,
+      70,
+      0,
+      "IMAGE"
+    ],
+    [
+      140,
+      54,
+      0,
+      70,
+      1,
+      "FLOAT"
+    ],
+    [
+      141,
+      6,
+      0,
+      70,
+      2,
+      "INT"
+    ],
+    [
+      143,
+      1,
+      0,
+      71,
+      0,
+      "IMAGE"
+    ],
+    [
+      144,
+      72,
+      0,
+      71,
+      1,
+      "IMAGE"
+    ],
+    [
+      145,
+      1,
+      0,
+      72,
+      0,
+      "IMAGE"
+    ],
+    [
+      146,
+      54,
+      0,
+      72,
+      1,
+      "FLOAT"
+    ],
+    [
+      147,
+      6,
+      0,
+      72,
+      2,
+      "INT"
+    ],
+    [
+      148,
+      1,
+      0,
+      73,
+      0,
+      "IMAGE"
+    ],
+    [
+      149,
+      74,
+      0,
+      73,
+      1,
+      "IMAGE"
+    ],
+    [
+      150,
+      1,
+      0,
+      74,
+      0,
+      "IMAGE"
+    ],
+    [
+      151,
+      54,
+      0,
+      74,
+      1,
+      "FLOAT"
+    ],
+    [
+      152,
+      6,
+      0,
+      74,
+      2,
+      "INT"
+    ],
+    [
+      154,
+      2,
+      0,
+      75,
+      0,
+      "IMAGE"
+    ],
+    [
+      155,
+      19,
+      0,
+      75,
+      1,
+      "IMAGE"
+    ],
+    [
+      156,
+      31,
+      0,
+      75,
+      2,
+      "IMAGE"
+    ],
+    [
+      157,
+      11,
+      0,
+      75,
+      3,
+      "IMAGE"
+    ],
+    [
+      158,
+      23,
+      0,
+      75,
+      4,
+      "IMAGE"
+    ],
+    [
+      159,
+      35,
+      0,
+      75,
+      5,
+      "IMAGE"
+    ],
+    [
+      160,
+      15,
+      0,
+      75,
+      6,
+      "IMAGE"
+    ],
+    [
+      161,
+      27,
+      0,
+      75,
+      7,
+      "IMAGE"
+    ],
+    [
+      162,
+      39,
+      0,
+      75,
+      8,
+      "IMAGE"
+    ],
+    [
+      163,
+      70,
+      0,
+      75,
+      9,
+      "IMAGE"
+    ],
+    [
+      164,
+      72,
+      0,
+      75,
+      10,
+      "IMAGE"
+    ],
+    [
+      165,
+      74,
+      0,
+      75,
+      11,
+      "IMAGE"
+    ],
+    [
+      166,
+      75,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Custom",
+      "bounding": [
+        -11450,
+        1190,
+        910,
+        610
+      ],
+      "color": "#A88",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 0.14641000000000007,
+      "offset": [
+        17343.066417289374,
+        2543.744770140227
+      ]
+    },
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

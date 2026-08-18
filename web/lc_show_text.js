@@ -1,129 +1,133 @@
 /**
- * LC Show Text — multiline text below widgets (preserve newlines).
- * Default size matches LC Join Strings (~270×118).
+ * LC Show Text 🔤 — ShowText 🐍 style display.
+ * Does NOT reset node size on load or after generation (user size is kept).
  */
-
 import { app } from "../../scripts/app.js";
+import { ComfyWidgets } from "../../scripts/widgets.js";
 
-const NODE_CLASS = "LCShowText";
+const TYPE = "LCShowText";
+const COLOR = "#28281E";
 const DEFAULT_W = 270;
-const DEFAULT_H = 118;
-const PAD = 8;
+const DEFAULT_H = 120;
 
-function contentTop(node) {
-  const titleH =
-    (typeof LiteGraph !== "undefined" && LiteGraph.NODE_TITLE_HEIGHT) || 30;
-  let y = titleH + 2;
-  if (node.widgets && node.widgets.length) {
-    for (const w of node.widgets) {
-      if (typeof w.last_y === "number") {
-        const wh = typeof w.computeSize === "function" ? w.computeSize(node.size[0])[1] : 20;
-        y = Math.max(y, w.last_y + wh + 4);
+function applyColor(node) {
+  try {
+    node.bgcolor = COLOR;
+    node.color = COLOR;
+  } catch (_) {}
+}
+
+function ensureDisplayWidget(node) {
+  let widget = node.widgets?.find((w) => w.name === "text");
+  if (widget) return widget;
+  // forceInput hides the linked input; add a read-only multiline face widget
+  try {
+    widget = ComfyWidgets["STRING"](
+      node,
+      "text",
+      ["STRING", { multiline: true }],
+      app
+    ).widget;
+  } catch (_) {
+    return null;
+  }
+  if (widget?.inputEl) {
+    widget.inputEl.readOnly = true;
+    widget.inputEl.style.opacity = "0.85";
+  }
+  // Don't let the widget force a huge default height every time
+  if (typeof widget.computeSize === "function") {
+    const orig = widget.computeSize.bind(widget);
+    widget.computeSize = function (width) {
+      // Prefer current node height contribution over expanding forever
+      try {
+        return orig(width);
+      } catch (_) {
+        return [width, 60];
+      }
+    };
+  }
+  return widget;
+}
+
+function setDisplayText(node, display) {
+  // Strip old experimental widgets if any
+  if (node.widgets) {
+    for (let i = node.widgets.length - 1; i >= 0; i--) {
+      const n = node.widgets[i]?.name;
+      if (n === "lc_show_display" || n === "show_display") {
+        node.widgets.splice(i, 1);
       }
     }
-    // Fallback if last_y not set yet: room for one widget row under title
-    if (y <= titleH + 2) {
-      y = titleH + 24 * node.widgets.length + 6;
-    }
   }
-  // Socket-only nodes (forceInput, no widgets): still clear title
-  return y + PAD;
+
+  const widget = ensureDisplayWidget(node);
+  if (!widget) return;
+  widget.value = display;
+  if (widget.inputEl) {
+    widget.inputEl.value = display;
+    widget.inputEl.readOnly = true;
+  }
 }
 
 app.registerExtension({
   name: "LC123.ShowText",
-
   async beforeRegisterNodeDef(nodeType, nodeData) {
-    if ((nodeData?.name || "") !== NODE_CLASS) return;
+    if (nodeData?.name !== TYPE) return;
 
-    const onCreated = nodeType.prototype.onNodeCreated;
+    const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
-      const r = onCreated?.apply(this, arguments);
-      this.color = "#28281E";
-      this.bgcolor = "#28281E";
-      this._lcShowText =
-        this.properties?.lc_show_text != null
-          ? String(this.properties.lc_show_text)
-          : "";
-      if (typeof this.setSize === "function") {
-        this.setSize([DEFAULT_W, DEFAULT_H]);
-      } else {
-        this.size = [DEFAULT_W, DEFAULT_H];
-      }
-      return r;
-    };
-
-    const onExecuted = nodeType.prototype.onExecuted;
-    nodeType.prototype.onExecuted = function (message) {
-      const r = onExecuted?.apply(this, arguments);
-      let t = null;
-      if (message?.text != null) {
-        t = Array.isArray(message.text) ? message.text[0] : message.text;
-      }
-      if (t != null) {
-        this._lcShowText = String(t);
-        if (!this.properties) this.properties = {};
-        this.properties.lc_show_text = this._lcShowText;
-        this.setDirtyCanvas?.(true, true);
+      const r = onNodeCreated?.apply(this, arguments);
+      applyColor(this);
+      // Default size only when brand-new (not restored from workflow)
+      if (!this._lcShowSized) {
+        this._lcShowSized = true;
+        if (!this.size || this.size[0] < 40) {
+          this.size = [DEFAULT_W, DEFAULT_H];
+        }
       }
       return r;
     };
 
     const onConfigure = nodeType.prototype.onConfigure;
     nodeType.prototype.onConfigure = function (data) {
+      // Capture size from workflow BEFORE anything else mutates it
+      const saved =
+        data?.size && Array.isArray(data.size)
+          ? [data.size[0], data.size[1]]
+          : this.size
+            ? [this.size[0], this.size[1]]
+            : null;
       const r = onConfigure?.apply(this, arguments);
-      if (this.properties?.lc_show_text != null) {
-        this._lcShowText = String(this.properties.lc_show_text);
+      applyColor(this);
+      if (saved && saved[0] > 40 && saved[1] > 40) {
+        this.size = saved;
+        this._lcShowSized = true;
       }
       return r;
     };
 
-    const onDrawFG = nodeType.prototype.onDrawForeground;
-    nodeType.prototype.onDrawForeground = function (ctx) {
-      if (onDrawFG) onDrawFG.apply(this, arguments);
-      if (this.flags?.collapsed) return;
-      const raw = this._lcShowText;
-      if (raw == null || raw === "") return;
+    const onExecuted = nodeType.prototype.onExecuted;
+    nodeType.prototype.onExecuted = function (message) {
+      // Remember user size before updating text
+      const keepW = this.size?.[0];
+      const keepH = this.size?.[1];
 
-      const x = PAD;
-      const top = contentTop(this);
-      const w = Math.max(1, (this.size?.[0] || DEFAULT_W) - PAD * 2);
-      const h = Math.max(1, (this.size?.[1] || DEFAULT_H) - top - PAD);
+      onExecuted?.apply(this, arguments);
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(x, top, w, h);
-      ctx.clip();
+      let texts = message?.text;
+      if (texts === undefined || texts === null) return;
+      if (!Array.isArray(texts)) texts = [String(texts)];
+      const display = texts.map((t) => (t == null ? "" : String(t))).join("");
 
-      ctx.fillStyle = "#e8e8e8";
-      ctx.font = "12px monospace";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "top";
+      setDisplayText(this, display);
 
-      const lineHeight = 14;
-      const lines = String(raw).split("\n");
-      let yy = top;
-      for (const line of lines) {
-        if (yy > top + h) break;
-        if (ctx.measureText(line).width <= w) {
-          ctx.fillText(line, x, yy);
-          yy += lineHeight;
-        } else {
-          let rest = line;
-          while (rest.length && yy <= top + h) {
-            let cut = rest.length;
-            while (cut > 1 && ctx.measureText(rest.slice(0, cut)).width > w) {
-              cut--;
-            }
-            const space = rest.lastIndexOf(" ", cut);
-            if (space > 8 && space < cut) cut = space + 1;
-            ctx.fillText(rest.slice(0, cut), x, yy);
-            rest = rest.slice(cut);
-            yy += lineHeight;
-          }
-        }
+      // Restore dimensions — never snap to computeSize()
+      if (keepW > 40 && keepH > 40) {
+        this.size[0] = keepW;
+        this.size[1] = keepH;
       }
-      ctx.restore();
+      app.graph?.setDirtyCanvas?.(true, true);
     };
   },
 });

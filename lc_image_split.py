@@ -1,8 +1,9 @@
 """
 LC Image Split — live sticky A|B wipe preview; baked split IMAGE out.
 
-Preview stays interactive (drag wipe, no snap-back). The output socket is the
-processed composite at split_position so you can Save Image.
+Wipe position is controlled only by the split_position slider (not by dragging
+the preview). The preview updates live when the slider moves. Output is the
+baked composite for Save Image.
 """
 
 from __future__ import annotations
@@ -55,7 +56,7 @@ class LCImageSplit(PreviewImage):
                         "min": 0.0,
                         "max": 1.0,
                         "step": 0.01,
-                        "tooltip": "Wipe position 0–1. Drag on the preview or move this; it stays put (no snap-back).",
+                        "tooltip": "Wipe position 0–1. Adjust with this slider only — dragging the image does not change it. Preview updates live.",
                     },
                 ),
                 "show_divider": (
@@ -78,7 +79,7 @@ class LCImageSplit(PreviewImage):
     CATEGORY = "LC123/image"
     OUTPUT_NODE = True
     DESCRIPTION = (
-        "Live sticky A|B wipe on the node; output is the baked split image for saving."
+        "A|B wipe on the node (slider-only; no drag on image). Output is the baked split for saving."
     )
 
     def run(

@@ -1,265 +1,228 @@
 /**
- * LC Image Split — live sticky wipe over A/B previews (does not snap back).
- * Output socket is baked by Python; preview stays interactive.
+ * LC Image Split 🖼️
+ * Live A|B wipe on the node, driven ONLY by the split_position widget.
+ * Dragging on the image does not change the wipe (avoids accidental moves).
  */
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
 
-const NODE_TYPE = "LCImageSplit";
+const TYPE = "LCImageSplit";
+const COLOR = "#324B4B";
 const DEFAULT_W = 300;
-const DEFAULT_H = 420;
-const MIN_W = 280;
-const MIN_H = 360;
-const PAD = 14;
-const SLOT_H = 22;
+const MIN_W = 260;
+const PAD = 16;
+const TITLE = 34;
 
-function imageDataToUrl(data) {
-  if (!data) return null;
-  const fmt =
-    typeof app.getPreviewFormatParam === "function"
-      ? app.getPreviewFormatParam()
-      : "";
-  const rand =
-    typeof app.getRandParam === "function" ? app.getRandParam() : "";
-  return api.apiURL(
-    `/view?filename=${encodeURIComponent(data.filename)}` +
-      `&type=${data.type || "temp"}` +
-      `&subfolder=${encodeURIComponent(data.subfolder || "")}` +
-      `${fmt}${rand}`
-  );
-}
-
-function widgetByName(node, name) {
-  return (node.widgets || []).find((w) => w.name === name);
-}
-
-function socketOffset(node) {
-  const nIn = (node.inputs || []).filter((s) => s && s.type).length;
-  const nOut = (node.outputs || []).filter((s) => s && s.type).length;
-  return Math.max(nIn, nOut, 1) * SLOT_H + 6;
-}
-
-function widgetsBottom(node) {
-  let y = socketOffset(node);
-  for (const w of node.widgets || []) {
-    if (!w || w.type === "hidden") continue;
-    const h =
-      typeof w.computeSize === "function"
-        ? w.computeSize(node.size[0])?.[1] ?? 22
-        : 22;
-    y += Math.max(20, h);
+function imageUrl(img) {
+  if (!img) return null;
+  if (img.filename) {
+    const params = new URLSearchParams();
+    params.set("filename", img.filename);
+    params.set("type", img.type || "temp");
+    params.set("subfolder", img.subfolder || "");
+    return api.apiURL(`/view?${params.toString()}`);
   }
-  return y + 6;
+  return null;
 }
 
-class LCImageSplitUI {
+function loadImg(meta) {
+  return new Promise((resolve) => {
+    const url = imageUrl(meta);
+    if (!url) {
+      resolve(null);
+      return;
+    }
+    const im = new Image();
+    im.crossOrigin = "anonymous";
+    im.onload = () => resolve(im);
+    im.onerror = () => resolve(null);
+    im.src = url;
+  });
+}
+
+function widgetVal(node, name, fallback) {
+  const w = (node.widgets || []).find((x) => x.name === name);
+  return w != null ? w.value : fallback;
+}
+
+class LCImageSplitPreview {
   constructor(node) {
     this.node = node;
-    this.imagesA = [];
-    this.imagesB = [];
     this.imgA = null;
     this.imgB = null;
-    this.dragging = false;
-    this._bind(node);
+    this._bound = false;
+    node.lcImageSplitPreview = this;
+    this._bind();
   }
 
-  _bind(node) {
-    if (!node.size || node.size[0] < MIN_W || node.size[1] < MIN_H) {
-      node.size = [
-        Math.max(node.size?.[0] || DEFAULT_W, DEFAULT_W),
-        Math.max(node.size?.[1] || DEFAULT_H, DEFAULT_H),
-      ];
-    }
-
-    const self = this;
-
-    const onExecuted = node.onExecuted;
-    node.onExecuted = function (message) {
-      onExecuted?.apply(this, arguments);
-      self.imagesA = message?.a_images || [];
-      self.imagesB = message?.b_images || [];
-      self._loadImages();
-      this.setDirtyCanvas?.(true, true);
-    };
-
-    const onDrawFG = node.onDrawForeground;
-    node.onDrawForeground = function (ctx) {
-      if (this.flags?.collapsed) return;
-      onDrawFG?.apply(this, arguments);
-      self.draw(ctx);
-    };
-
-    const onMouseDown = node.onMouseDown;
-    node.onMouseDown = function (e, pos, canvas) {
-      if (this.flags?.collapsed) return onMouseDown?.apply(this, arguments);
-      const area = self._imgArea();
-      if (pos[1] >= area.y && pos[1] <= area.y + area.h) {
-        self.dragging = true;
-        self._setPosFromLocalX(pos[0], area);
-        return true;
-      }
-      return onMouseDown?.apply(this, arguments);
-    };
-
-    const onMouseMove = node.onMouseMove;
-    node.onMouseMove = function (e, pos, canvas) {
-      if (self.dragging) {
-        const area = self._imgArea();
-        self._setPosFromLocalX(pos[0], area);
-        return true;
-      }
-      return onMouseMove?.apply(this, arguments);
-    };
-
-    const onMouseUp = node.onMouseUp;
-    node.onMouseUp = function (e, pos, canvas) {
-      if (self.dragging) {
-        self.dragging = false;
-        const area = self._imgArea();
-        self._setPosFromLocalX(pos[0], area);
-        return true;
-      }
-      return onMouseUp?.apply(this, arguments);
-    };
-
-    const origResize = node.onResize;
-    node.onResize = function (size) {
-      if (size) {
-        if (size[0] < MIN_W) size[0] = MIN_W;
-        if (size[1] < MIN_H) size[1] = MIN_H;
-      }
-      const r = origResize?.apply(this, arguments);
-      this.setDirtyCanvas?.(true, true);
-      return r;
-    };
-  }
-
-  _imgArea() {
+  _bind() {
+    if (this._bound) return;
+    this._bound = true;
     const node = this.node;
-    const y = widgetsBottom(node);
-    const w = Math.max(40, node.size[0] - PAD * 2);
-    const h = Math.max(40, node.size[1] - y - PAD);
-    return { x: PAD, y, w, h };
-  }
 
-  _setPosFromLocalX(localX, area) {
-    const t = Math.max(0, Math.min(1, (localX - area.x) / Math.max(1, area.w)));
-    const w = widgetByName(this.node, "split_position");
-    if (!w) return;
-    w.value = Math.round(t * 100) / 100;
-    if (typeof w.callback === "function") {
-      try {
-        w.callback(w.value, this.node, app.canvas);
-      } catch (_) {}
+    // Widget → live redraw only (no image drag)
+    for (const w of node.widgets || []) {
+      if (!w) continue;
+      const prev = w.callback;
+      w.callback = (...args) => {
+        const r = typeof prev === "function" ? prev.apply(w, args) : undefined;
+        app.canvas?.setDirty?.(true, true);
+        return r;
+      };
     }
-    this.node.setDirtyCanvas?.(true, true);
+
+    const origDraw = node.onDrawForeground;
+    node.onDrawForeground = function (ctx) {
+      origDraw?.apply(this, arguments);
+      this.lcImageSplitPreview?.draw(ctx);
+    };
+
+    const origExec = node.onExecuted;
+    node.onExecuted = function (message) {
+      origExec?.apply(this, arguments);
+      this.lcImageSplitPreview?.onExecuted(message);
+    };
+
+    // Explicitly do NOT attach pointer handlers that write split_position
   }
 
-  _loadImages() {
-    const a = this.imagesA[0];
-    const b = this.imagesB[0];
-    if (a) {
-      const url = imageDataToUrl(a);
-      if (!this.imgA || this.imgA._lcUrl !== url) {
-        const im = new Image();
-        im._lcUrl = url;
-        im.src = url;
-        this.imgA = im;
+  async onExecuted(message) {
+    if (!message) return;
+    const aMeta = message.a_images?.[0];
+    const bMeta = message.b_images?.[0];
+    const [a, b] = await Promise.all([loadImg(aMeta), loadImg(bMeta)]);
+    if (a) this.imgA = a;
+    if (b) this.imgB = b;
+    app.canvas?.setDirty?.(true, true);
+  }
+
+  _box() {
+    const node = this.node;
+    const w = Math.max(MIN_W, (node.size?.[0] || DEFAULT_W) - PAD);
+    const widgetsBottom = this._widgetsBottom();
+    const top = Math.max(TITLE + 8, widgetsBottom + 10);
+    const h = Math.max(80, (node.size?.[1] || 320) - top - 12);
+    return { x: PAD / 2, y: top, w, h };
+  }
+
+  _widgetsBottom() {
+    const node = this.node;
+    let y = TITLE;
+    try {
+      for (const w of node.widgets || []) {
+        if (!w || w.type === "converted-widget") continue;
+        const sz = w.computeSize?.(node.size[0]) || [0, LiteGraph?.NODE_WIDGET_HEIGHT || 20];
+        y += (sz[1] || 20) + 4;
       }
-    } else this.imgA = null;
-    if (b) {
-      const url = imageDataToUrl(b);
-      if (!this.imgB || this.imgB._lcUrl !== url) {
-        const im = new Image();
-        im._lcUrl = url;
-        im.src = url;
-        this.imgB = im;
-      }
-    } else this.imgB = null;
+    } catch (_) {
+      y = TITLE + 80;
+    }
+    return y;
   }
 
   draw(ctx) {
     const node = this.node;
-    const area = this._imgArea();
-    const { x, y, w, h } = area;
+    const box = this._box();
+    const { x, y, w, h } = box;
 
     ctx.save();
     ctx.beginPath();
     ctx.rect(x, y, w, h);
     ctx.clip();
-
-    // Placeholder
     ctx.fillStyle = "#111";
     ctx.fillRect(x, y, w, h);
 
-    const posW = widgetByName(node, "split_position");
-    const t = posW ? Number(posW.value) : 0.5;
-    const cut = x + t * w;
+    const a = this.imgA;
+    const b = this.imgB;
+    if (!a && !b) {
+      ctx.fillStyle = "#666";
+      ctx.font = "12px sans-serif";
+      ctx.fillText("Queue once for preview", x + 8, y + 20);
+      ctx.restore();
+      return;
+    }
 
-    // Contain: fit full image inside the preview window (letterbox if needed)
-    const drawFit = (img) => {
-      if (!img || !img.complete || !img.naturalWidth) return false;
-      const ir = img.naturalWidth / img.naturalHeight;
-      const ar = w / h;
-      let dw, dh, dx, dy;
-      if (ir > ar) {
-        dw = w;
-        dh = w / ir;
-        dx = x;
-        dy = y + (h - dh) / 2;
-      } else {
-        dh = h;
-        dw = h * ir;
-        dx = x + (w - dw) / 2;
-        dy = y;
-      }
-      ctx.drawImage(img, dx, dy, dw, dh);
-      return true;
-    };
+    const src = a || b;
+    const scale = Math.min(w / src.naturalWidth, h / src.naturalHeight);
+    const dw = src.naturalWidth * scale;
+    const dh = src.naturalHeight * scale;
+    const ox = x + (w - dw) / 2;
+    const oy = y + (h - dh) / 2;
 
-    // Full B, then clip A on the left of the wipe
-    drawFit(this.imgB || this.imgA);
+    // Position from widget only (0–1)
+    let pos = parseFloat(widgetVal(node, "split_position", 0.5));
+    if (!Number.isFinite(pos)) pos = 0.5;
+    pos = Math.max(0, Math.min(1, pos));
+    const cut = ox + dw * pos;
 
-    if (this.imgA && this.imgA.complete) {
+    // B full
+    if (b) {
+      ctx.drawImage(b, ox, oy, dw, dh);
+    } else {
+      ctx.fillStyle = "#222";
+      ctx.fillRect(ox, oy, dw, dh);
+    }
+
+    // A left of cut
+    if (a) {
       ctx.save();
       ctx.beginPath();
-      ctx.rect(x, y, Math.max(0, cut - x), h);
+      ctx.rect(ox, oy, Math.max(0, cut - ox), dh);
       ctx.clip();
-      drawFit(this.imgA);
+      ctx.drawImage(a, ox, oy, dw, dh);
       ctx.restore();
     }
 
-    // Wipe line
-    ctx.strokeStyle = "rgba(255,255,255,0.9)";
+    // Divider line (visual only)
+    ctx.strokeStyle = "rgba(255,255,255,0.85)";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(cut, y);
-    ctx.lineTo(cut, y + h);
-    ctx.stroke();
-    ctx.strokeStyle = "rgba(0,0,0,0.5)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(cut + 1, y);
-    ctx.lineTo(cut + 1, y + h);
+    ctx.moveTo(cut, oy);
+    ctx.lineTo(cut, oy + dh);
     ctx.stroke();
 
     ctx.restore();
-
-    // Soft border
-    ctx.strokeStyle = "#333";
-    ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1);
   }
 }
 
 app.registerExtension({
   name: "LC123.ImageSplit",
+  async beforeRegisterNodeDef(nodeType, nodeData) {
+    if (nodeData?.name !== TYPE) return;
+
+    const onNodeCreated = nodeType.prototype.onNodeCreated;
+    nodeType.prototype.onNodeCreated = function () {
+      const r = onNodeCreated?.apply(this, arguments);
+      try {
+        this.color = COLOR;
+        this.bgcolor = COLOR;
+        if (!this.size || this.size[0] < 40) {
+          this.size = [DEFAULT_W, 380];
+        }
+      } catch (_) {}
+      if (!this.lcImageSplitPreview) {
+        new LCImageSplitPreview(this);
+      }
+      return r;
+    };
+
+    const onConfigure = nodeType.prototype.onConfigure;
+    nodeType.prototype.onConfigure = function (data) {
+      const r = onConfigure?.apply(this, arguments);
+      if (!this.lcImageSplitPreview) {
+        new LCImageSplitPreview(this);
+      }
+      return r;
+    };
+  },
   nodeCreated(node) {
-    if (node.comfyClass !== NODE_TYPE && node.type !== NODE_TYPE) return;
-    node.color = "#324B4B";
-    node.bgcolor = "#324B4B";
-    if (!node.size || node.size[0] < MIN_W) {
-      node.size = [DEFAULT_W, DEFAULT_H];
+    if (node.comfyClass !== TYPE && node.type !== TYPE) return;
+    try {
+      node.color = COLOR;
+      node.bgcolor = COLOR;
+    } catch (_) {}
+    if (!node.lcImageSplitPreview) {
+      new LCImageSplitPreview(node);
     }
-    node._lcImageSplitUI = new LCImageSplitUI(node);
   },
 });

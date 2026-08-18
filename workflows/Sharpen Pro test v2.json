@@ -1,0 +1,1352 @@
+{
+  "id": "08fd485b-c947-4c24-89e8-79b867561a43",
+  "revision": 0,
+  "last_node_id": 148,
+  "last_link_id": 402,
+  "nodes": [
+    {
+      "id": 62,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1140
+      ],
+      "size": [
+        290,
+        60
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            242
+          ]
+        }
+      ],
+      "title": "Slider Name",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Strength"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 56,
+      "type": "PrimitiveString",
+      "pos": [
+        -12330,
+        -1340
+      ],
+      "size": [
+        300,
+        60
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            118,
+            343
+          ]
+        }
+      ],
+      "title": "Node Name",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "LC Sharpen Pro"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 57,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1240
+      ],
+      "size": [
+        290,
+        60
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            244,
+            344
+          ]
+        }
+      ],
+      "title": "Version",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "visible"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 55,
+      "type": "LCJoinStrings",
+      "pos": [
+        -12320,
+        -1040
+      ],
+      "size": [
+        330,
+        174
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 118
+        },
+        {
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 244
+        },
+        {
+          "name": "string_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": 242
+        },
+        {
+          "name": "string_4",
+          "shape": 7,
+          "type": "STRING",
+          "link": 243
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            125
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCJoinStrings",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        4,
+        " "
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 58,
+      "type": "PrimitiveString",
+      "pos": [
+        -12320,
+        -1000
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": 122
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            243
+          ]
+        }
+      ],
+      "title": "slider value $tring",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "PrimitiveString",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        " 0.5 strength"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 61,
+      "type": "CR Float To String",
+      "pos": [
+        -12320,
+        -960
+      ],
+      "size": [
+        190,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "float_",
+          "type": "FLOAT",
+          "link": 124
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            122
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Float To String",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 63,
+      "type": "LCShowText",
+      "pos": [
+        -12320,
+        -910
+      ],
+      "size": [
+        210,
+        90
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 125
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_show_text": "LC Sharpen Pro V6 1.0 Strength"
+      },
+      "widgets_values": [
+        "LC Sharpen Pro visible Strength 1.0"
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 54,
+      "type": "mxSlider",
+      "pos": [
+        -12320,
+        -780
+      ],
+      "size": [
+        320,
+        30
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "FLOAT",
+          "links": [
+            124,
+            402
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-mxtoolkit",
+        "ver": "0.9.92",
+        "Node name for S&R": "mxSlider",
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "decimals": 2,
+        "snap": true,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        -12320,
+        -710
+      ],
+      "size": [
+        320,
+        370
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            375,
+            400
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Original_00001_.png",
+        "image"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 97,
+      "type": "LCNodeSnapshot",
+      "pos": [
+        -11980,
+        -1360
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "shape": 7,
+          "type": "*",
+          "link": 401
+        }
+      ],
+      "outputs": [
+        {
+          "name": "selected",
+          "type": "STRING",
+          "links": [
+            396
+          ]
+        },
+        {
+          "name": "lines",
+          "type": "STRING",
+          "links": [
+            384
+          ]
+        },
+        {
+          "name": "json",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCNodeSnapshot",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "preset",
+        ""
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 141,
+      "type": "LCShowText",
+      "pos": [
+        -11980,
+        -1310
+      ],
+      "size": [
+        220,
+        240
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 384
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            386
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "node_id: 146\nnode_type: LCClarity\nnode_title: LC Sharpen Pro\npreset: Crisp\nclarity: 0.28\nsharpen: 0.36\nstrength: 1\nhalo: 0.72\nskin_protect: 0.55\nradius: 0.24\nblend_mode: Soft Light\nshadow_protect: 0.3\nhighlight_protect: 0.32"
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 136,
+      "type": "LCJoinStrings",
+      "pos": [
+        -11980,
+        -1170
+      ],
+      "size": [
+        330,
+        152
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 343
+        },
+        {
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 344
+        },
+        {
+          "name": "string_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            345,
+            390
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCJoinStrings",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        3,
+        " "
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 142,
+      "type": "LCShowText",
+      "pos": [
+        -11980,
+        -1210
+      ],
+      "size": [
+        220,
+        240
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 385
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            391
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "node_id: 146\n\n\npreset: Crisp\nclarity: 0.28\nsharpen: 0.36\nstrength: 1\nhalo: 0.72\nskin_protect: 0.55\nradius: 0.24\nblend_mode: Soft Light\nshadow_protect: 0.3\nhighlight_protect: 0.32"
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 140,
+      "type": "LCTextRemove",
+      "pos": [
+        -11980,
+        -1260
+      ],
+      "size": [
+        360,
+        232
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 386
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            385
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCTextRemove",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        3,
+        false,
+        0,
+        "node_id: 98",
+        "node_type: LCClarity",
+        "node_title: LC Sharpen Pro",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 99,
+      "type": "LCJoinStrings",
+      "pos": [
+        -11980,
+        -1130
+      ],
+      "size": [
+        330,
+        174
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 390
+        },
+        {
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 391
+        },
+        {
+          "name": "string_3",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "string_4",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            392
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCJoinStrings",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        4,
+        "\\n"
+      ],
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 135,
+      "type": "SaveImage",
+      "pos": [
+        -11980,
+        -300
+      ],
+      "size": [
+        300,
+        520
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 394
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 346
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 138,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -11650,
+        -1040
+      ],
+      "size": [
+        1040,
+        1270
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Base",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 375
+        },
+        {
+          "label": "Adjust",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 395
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 137,
+      "type": "LCEasyFolder",
+      "pos": [
+        -11980,
+        -1080
+      ],
+      "size": [
+        300,
+        160
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "prefix"
+          },
+          "link": 345
+        },
+        {
+          "name": "suffix",
+          "type": "STRING",
+          "widget": {
+            "name": "suffix"
+          },
+          "link": 396
+        }
+      ],
+      "outputs": [
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "links": [
+            346
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCEasyFolder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Tests",
+        "Test",
+        "",
+        "none",
+        "auto"
+      ],
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 143,
+      "type": "LCTextOverlay",
+      "pos": [
+        -11980,
+        -1030
+      ],
+      "size": [
+        300,
+        640
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 399
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 392
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            394,
+            395
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCTextOverlay",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_overlay_text": "LC Sharpen Pro visible\nnode_id: 146\n\n\npreset: Crisp\nclarity: 0.28\nsharpen: 0.36\nstrength: 1\nhalo: 0.72\nskin_protect: 0.55\nradius: 0.24\nblend_mode: Soft Light\nshadow_protect: 0.3\nhighlight_protect: 0.32",
+        "lc_preview_meta": [
+          {
+            "filename": "lc_before_temp_mhhnh_00004_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Hello",
+        "Arial",
+        30,
+        255,
+        255,
+        0,
+        97.3,
+        65.1,
+        "right"
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 146,
+      "type": "LCClarity",
+      "pos": [
+        -11980,
+        -980
+      ],
+      "size": [
+        300,
+        630
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 400
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": 402
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            399,
+            401
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCClarity",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_preview_meta": [
+          {
+            "filename": "lc_after_temp_pyhfs_00004_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ],
+        "lc_before_meta": [
+          {
+            "filename": "lc_before_temp_pyhfs_00004_.png",
+            "subfolder": "",
+            "type": "temp"
+          }
+        ]
+      },
+      "widgets_values": [
+        "Crisp",
+        0.28,
+        0.36,
+        1,
+        0.72,
+        0.55,
+        0.24,
+        "Soft Light",
+        0.3,
+        0.32
+      ],
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    }
+  ],
+  "links": [
+    [
+      118,
+      56,
+      0,
+      55,
+      0,
+      "STRING"
+    ],
+    [
+      122,
+      61,
+      0,
+      58,
+      0,
+      "STRING"
+    ],
+    [
+      124,
+      54,
+      0,
+      61,
+      0,
+      "FLOAT"
+    ],
+    [
+      125,
+      55,
+      0,
+      63,
+      0,
+      "STRING"
+    ],
+    [
+      242,
+      62,
+      0,
+      55,
+      2,
+      "STRING"
+    ],
+    [
+      243,
+      58,
+      0,
+      55,
+      3,
+      "STRING"
+    ],
+    [
+      244,
+      57,
+      0,
+      55,
+      1,
+      "STRING"
+    ],
+    [
+      343,
+      56,
+      0,
+      136,
+      0,
+      "STRING"
+    ],
+    [
+      344,
+      57,
+      0,
+      136,
+      1,
+      "STRING"
+    ],
+    [
+      345,
+      136,
+      0,
+      137,
+      0,
+      "STRING"
+    ],
+    [
+      346,
+      137,
+      0,
+      135,
+      1,
+      "STRING"
+    ],
+    [
+      375,
+      1,
+      0,
+      138,
+      0,
+      "IMAGE"
+    ],
+    [
+      384,
+      97,
+      1,
+      141,
+      0,
+      "STRING"
+    ],
+    [
+      385,
+      140,
+      0,
+      142,
+      0,
+      "STRING"
+    ],
+    [
+      386,
+      141,
+      0,
+      140,
+      0,
+      "STRING"
+    ],
+    [
+      390,
+      136,
+      0,
+      99,
+      0,
+      "STRING"
+    ],
+    [
+      391,
+      142,
+      0,
+      99,
+      1,
+      "STRING"
+    ],
+    [
+      392,
+      99,
+      0,
+      143,
+      1,
+      "STRING"
+    ],
+    [
+      394,
+      143,
+      0,
+      135,
+      0,
+      "IMAGE"
+    ],
+    [
+      395,
+      143,
+      0,
+      138,
+      1,
+      "IMAGE"
+    ],
+    [
+      396,
+      97,
+      0,
+      137,
+      1,
+      "STRING"
+    ],
+    [
+      399,
+      146,
+      0,
+      143,
+      0,
+      "IMAGE"
+    ],
+    [
+      400,
+      1,
+      0,
+      146,
+      0,
+      "IMAGE"
+    ],
+    [
+      401,
+      146,
+      0,
+      97,
+      0,
+      "IMAGE"
+    ],
+    [
+      402,
+      54,
+      0,
+      146,
+      1,
+      "FLOAT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 0.14641000000000004,
+      "offset": [
+        17322.147024269034,
+        1945.3966633374587
+      ]
+    },
+    "k2cf_state_id": "k2cf_1787002244522_cskf7v7e7mg",
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

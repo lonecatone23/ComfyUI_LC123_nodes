@@ -1,5 +1,5 @@
 /**
- * LC Photo Style — style preset loads all sliders (Skin Beauty pattern).
+ * LC Photo Style — style preset fills sliders; manual change → Custom.
  */
 import { app } from "../../scripts/app.js";
 
@@ -76,9 +76,11 @@ const PRESETS = {
     skin_protect: 0.68, shadow_cool: 0.06, highlight_warm: 0.18,
     texture: 0.16, clarity: 0.14, vignette: 0.08, grain: 0.05,
   },
+,
+  Custom: null,
 };
 
-const SLIDER_KEYS = Object.keys(PRESETS.Standard);
+const SLIDER_KEYS = Object.keys(PRESETS.Standard || PRESETS[Object.keys(PRESETS)[0]] || {});
 
 function widgetByName(node, name) {
   return (node.widgets || []).find((w) => w.name === name);
@@ -87,16 +89,27 @@ function widgetByName(node, name) {
 function applyPresetToSliders(node, presetName) {
   const cfg = PRESETS[presetName];
   if (!cfg) return;
-  for (const key of SLIDER_KEYS) {
-    const w = widgetByName(node, key);
-    if (!w || cfg[key] === undefined) continue;
-    w.value = cfg[key];
-    if (typeof w.callback === "function") {
-      try {
-        w.callback(w.value, node, app.canvas);
-      } catch (_) {}
+  node._lcApplyingPreset = true;
+  try {
+    for (const key of SLIDER_KEYS) {
+      const w = widgetByName(node, key);
+      if (!w || cfg[key] === undefined) continue;
+      w.value = cfg[key];
+      if (typeof w.callback === "function") {
+        try { w.callback(w.value, node, app.canvas); } catch (_) {}
+      }
     }
+  } finally {
+    node._lcApplyingPreset = false;
   }
+  node.setDirtyCanvas?.(true, true);
+}
+
+function snapToCustom(node) {
+  if (node._lcApplyingPreset) return;
+  const styleW = widgetByName(node, "style");
+  if (!styleW || styleW.value === "Custom") return;
+  styleW.value = "Custom";
   node.setDirtyCanvas?.(true, true);
 }
 
@@ -104,13 +117,33 @@ function hookPreset(node) {
   if (node._lcPhoneLookHooked) return;
   node._lcPhoneLookHooked = true;
   const styleW = widgetByName(node, "style");
-  if (!styleW) return;
-  const prev = styleW.callback;
-  styleW.callback = function (value, ...rest) {
-    applyPresetToSliders(node, value);
-    if (typeof prev === "function") return prev.apply(this, [value, ...rest]);
-  };
-  if (styleW.value) applyPresetToSliders(node, styleW.value);
+  if (styleW) {
+    const prev = styleW.callback;
+    styleW.callback = function (value, ...rest) {
+      if (value && value !== "Custom") applyPresetToSliders(node, value);
+      if (typeof prev === "function") return prev.apply(this, [value, ...rest]);
+    };
+    if (styleW.value && styleW.value !== "Custom") applyPresetToSliders(node, styleW.value);
+  }
+  for (const key of SLIDER_KEYS) {
+    const w = widgetByName(node, key);
+    if (!w || w._lcSnapCustom) continue;
+    w._lcSnapCustom = true;
+    const prev = w.callback;
+    w.callback = function (value, ...rest) {
+      snapToCustom(node);
+      if (typeof prev === "function") return prev.apply(this, [value, ...rest]);
+    };
+  }
+  const st = widgetByName(node, "strength");
+  if (st && !st._lcSnapCustom) {
+    st._lcSnapCustom = true;
+    const prev = st.callback;
+    st.callback = function (value, ...rest) {
+      snapToCustom(node);
+      if (typeof prev === "function") return prev.apply(this, [value, ...rest]);
+    };
+  }
 }
 
 app.registerExtension({
@@ -120,10 +153,7 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
-      try {
-        this.bgcolor = "#324B4B";
-        this.color = "#324B4B";
-      } catch (_) {}
+      try { this.bgcolor = "#324B4B"; this.color = "#324B4B"; } catch (_) {}
       return r;
     };
   },

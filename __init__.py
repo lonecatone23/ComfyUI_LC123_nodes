@@ -5,6 +5,12 @@ https://github.com/lonecatone23
 https://ko-fi.com/lonecatone
 """
 
+# Sample LUTs: assets/luts → models/luts (no overwrite)
+try:
+    from . import lc_lut_install  # noqa: F401
+except Exception as _lut_e:
+    print(f"[LC123] LUT install skip: {_lut_e}")
+
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 
@@ -44,6 +50,7 @@ _load("lc_text_replace")
 _load("lc_text_remove")
 _load("lc_compare")
 _load("lc_seed_jump")
+_load("lc_node_snapshot")
 _load("lc_notify")
 _load("lc_civitai_strip")
 
@@ -66,6 +73,7 @@ _load("lc_pipe_io")
 _load("lc_get_image")
 _load("lc_dimension_resize")
 _load("lc_image_crop")
+_load("lc_image_grid")
 _load("lc_image_tools")
 _load("lc_skin_beauty")
 _load("lc_phone_look")

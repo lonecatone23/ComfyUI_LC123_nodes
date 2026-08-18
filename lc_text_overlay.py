@@ -1,7 +1,7 @@
 """
 LC Text Overlay
 ---------------
-Draw text on an image. x/y percent = top-center of the text block.
+Draw text on an image. alignment = left/center/right. x/y = position (y = top of block; default near bottom).
 Curated fonts (real file paths + browser-friendly family names).
 """
 
@@ -12,6 +12,23 @@ from PIL import Image, ImageDraw, ImageFont
 from nodes import PreviewImage
 
 from .lc_image_helpers import tensor_to_np, np_to_tensor
+
+
+def _coerce_overlay_text(text):
+    """Accept str, list/tuple of str (Join/ShowText), or nested — always one string."""
+    if text is None:
+        return ""
+    if isinstance(text, (list, tuple)):
+        parts = []
+        for x in text:
+            if x is None:
+                continue
+            if isinstance(x, (list, tuple)):
+                parts.append(_coerce_overlay_text(x))
+            else:
+                parts.append(str(x))
+        return "\n".join(parts)
+    return str(text)
 
 
 def _preview(self, result_tensor, source_tensor=None):
@@ -97,7 +114,7 @@ def _resolve_fonts():
 
 _FONT_MAP = _resolve_fonts()
 _FONT_NAMES = list(_FONT_MAP.keys())
-MARGIN_PX = 6
+MARGIN_PX = 6  # must match IMAGE_MARGIN_PX in web/lc_image_preview.js (text overlay)
 
 
 def _text_bbox(draw, s, font):
@@ -178,19 +195,22 @@ class LCTextOverlay(PreviewImage):
                 }),
                 "x_percent": ("FLOAT", {
                     "default": 50.0, "min": 0.0, "max": 100.0, "step": 0.1,
-                    "tooltip": "X of text top-center (% from left). Drag on preview.",
+                    "tooltip": "X position (% from left). Drag on preview or use the widget.",
                 }),
                 "y_percent": ("FLOAT", {
-                    "default": 90.0, "min": 0.0, "max": 100.0, "step": 0.1,
-                    "tooltip": "Y of text top-center (% from top). Drag on preview.",
+                    "default": 92.0, "min": 0.0, "max": 100.0, "step": 0.1,
+                    "tooltip": "Y of the top of the text block (% from top). Default near bottom. Drag or use the widget.",
                 }),
-                "anchor": ([
+                "alignment": ([
+                    # Current controls
+                    "left", "center", "right",
+                    # Legacy anchor values (old workflows) — mapped to left/center/right
                     "left-top", "center-top", "right-top",
                     "left-center", "center-center", "right-center",
                     "left-bottom", "center-bottom", "right-bottom",
                 ], {
-                    "default": "center-top",
-                    "tooltip": "Horizontal align per line + vertical block align around x/y",
+                    "default": "center",
+                    "tooltip": "Horizontal alignment: left / center / right. Legacy *-top/center/bottom values still load and map to left/center/right.",
                 }),
             }
         }
@@ -218,13 +238,21 @@ class LCTextOverlay(PreviewImage):
             return ImageFont.load_default()
 
     def run(self, image, text, font, font_size, color_r, color_g, color_b,
-            x_percent, y_percent, anchor):
+            x_percent, y_percent, alignment="center", anchor=None, **kwargs):
+        text = _coerce_overlay_text(text)
         if not text:
             return _preview(self, image, image)
 
         color = (int(color_r), int(color_g), int(color_b), 255)
         font_obj = self._font(font, int(font_size))
-        ah, av = (anchor.split("-") + ["top"])[:2]
+        # Prefer alignment; accept legacy "anchor" or "left-top" style values
+        raw = alignment if alignment is not None else anchor
+        if raw is None:
+            raw = kwargs.get("anchor", "center")
+        raw = str(raw or "center").lower().strip()
+        ah = raw.split("-")[0] if "-" in raw else raw
+        if ah not in ("left", "center", "right"):
+            ah = "center"
 
         arrays = tensor_to_np(image)
         out = []
@@ -254,15 +282,8 @@ class LCTextOverlay(PreviewImage):
                     block_h += gap
 
             cx = int(w * (float(x_percent) / 100.0))
-            cy = int(h * (float(y_percent) / 100.0))
-
-            if av == "bottom":
-                top_y = cy - block_h
-            elif av == "center":
-                top_y = cy - block_h // 2
-            else:
-                top_y = cy
-
+            # y_percent = top of text block (no vertical anchor)
+            top_y = int(h * (float(y_percent) / 100.0))
             top_y = int(max(MARGIN_PX, min(h - MARGIN_PX - block_h, top_y)))
             if block_h > h - 2 * MARGIN_PX:
                 top_y = MARGIN_PX
@@ -284,7 +305,14 @@ class LCTextOverlay(PreviewImage):
             rgb = np.array(pil.convert("RGB")).astype(np.float32) / 255.0
             out.append(rgb)
 
-        return _preview(self, np_to_tensor(out), image)
+        result = _preview(self, np_to_tensor(out), image)
+        # So the on-node preview can show Join/etc. text after the first run
+        try:
+            result.setdefault("ui", {})
+            result["ui"]["lc_overlay_text"] = [text]
+        except Exception:
+            pass
+        return result
 
 
 NODE_CLASS_MAPPINGS = {

@@ -142,7 +142,7 @@ class LCApplyLUT(PreviewImage):
                 "image": ("IMAGE",),
                 "lut_name": (
                     names,
-                    {"tooltip": "Place .cube files in ComfyUI/models/luts/"},
+                    {"tooltip": "Folder: ComfyUI/models/luts/  — put .cube files there"},
                 ),
                 "strength": (
                     "FLOAT",

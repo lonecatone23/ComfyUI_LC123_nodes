@@ -152,6 +152,60 @@ function contentTop(node) {
   return widgetsHeight(node) + PAD;
 }
 
+/**
+ * Resolve STRING for live text overlay preview.
+ * - Unlinked: use local widget
+ * - Linked to a *primitive* string source (value/text widget only): use that
+ * - Linked to a *computed* node (Join Strings, etc.): return null → do not
+ *   redraw client text (would pick up delimiter/widgets). Show server image only.
+ */
+function isPrimitiveStringNode(origin) {
+  if (!origin) return false;
+  const t = String(origin.type || origin.comfyClass || "");
+  // Common primitive / constant string nodes
+  if (/Primitive|StringLiteral|TextBox|ConstantString|StringConstant/i.test(t)) return true;
+  if (t === "String" || t === "Text") return true;
+  // Single "value" string widget, no delimiter/inputcount → treat as primitive-like
+  const widgets = origin.widgets || [];
+  const names = widgets.map((w) => w?.name).filter(Boolean);
+  if (names.length === 1 && (names[0] === "value" || names[0] === "string" || names[0] === "text")) {
+    return true;
+  }
+  // Explicitly NOT join / concatenate style nodes
+  if (/Join|Concat|Replace|Combine|StringFunction/i.test(t)) return false;
+  if (names.includes("delimiter") || names.includes("inputcount")) return false;
+  return false;
+}
+
+function inputOrWidgetValue(node, name, fallback) {
+  try {
+    const inp = (node.inputs || []).find((i) => i.name === name);
+    if (inp && inp.link != null && app.graph?.links) {
+      const link = app.graph.links[inp.link];
+      if (link) {
+        const origin = app.graph.getNodeById(link.origin_id);
+        if (origin) {
+          if (!isPrimitiveStringNode(origin)) {
+            // Computed STRING — live text unknown; signal caller to skip overlay
+            return null;
+          }
+          const prefer = ["value", "string", "text", "STRING"];
+          for (const pn of prefer) {
+            const w = (origin.widgets || []).find((x) => x.name === pn);
+            if (w && w.value != null) return w.value;
+          }
+          for (const w of origin.widgets || []) {
+            if (w && typeof w.value === "string") return w.value;
+          }
+        }
+      }
+      // Linked but unresolved — don't fall back to stale local widget text
+      return null;
+    }
+  } catch (_) {}
+  return wval(node, name, fallback);
+}
+
 function wval(node, name, fallback) {
   const w = (node.widgets || []).find((x) => x.name === name);
   return w != null ? w.value : fallback;
@@ -432,6 +486,14 @@ class LCTextOverlayPreview {
       };
     }
 
+
+    const origConn = node.onConnectionsChange;
+    node.onConnectionsChange = function () {
+      const r = origConn?.apply(this, arguments);
+      app.canvas?.setDirty?.(true, true);
+      return r;
+    };
+
     const origDrawFG = node.onDrawForeground;
     node.onDrawForeground = function (ctx) {
       if (origDrawFG) origDrawFG.apply(this, arguments);
@@ -505,6 +567,30 @@ class LCTextOverlayPreview {
       if (size[0] < MIN_W) size[0] = MIN_W;
       if (origResize) origResize.apply(this, arguments);
     };
+
+    // Alignment → default X (user can still drag/override after)
+    const alignW = (node.widgets || []).find((w) => w.name === "alignment")
+      || (node.widgets || []).find((w) => w.name === "anchor");
+    if (alignW && !alignW._lcAlignHook) {
+      alignW._lcAlignHook = true;
+      const prevA = alignW.callback;
+      alignW.callback = function (v, ...rest) {
+        let key = String(v || "").toLowerCase();
+        if (key.includes("-")) key = key.split("-")[0];
+        const map = { left: 8, center: 50, right: 92 };
+        // Only snap X when user picks a simple left/center/right (not on every legacy load)
+        if (v === "left" || v === "center" || v === "right") {
+          const xw = (node.widgets || []).find((w) => w.name === "x_percent");
+          if (xw) {
+            xw.value = map[key];
+            if (typeof xw.callback === "function") {
+              try { xw.callback(xw.value); } catch (_) {}
+            }
+          }
+        }
+        if (typeof prevA === "function") return prevA.apply(this, [v, ...rest]);
+      };
+    }
   }
 
   _box() {
@@ -518,15 +604,38 @@ class LCTextOverlayPreview {
     };
   }
 
+  /**
+   * Map pointer to % of the *letterboxed image*, not the full node box
+   * (matches output: % of full image width/height).
+   * IMAGE_MARGIN_PX = 6 — same as Python MARGIN_PX.
+   */
+  _imageRect(box) {
+    const img = this.baseImg;
+    if (!img || !img.naturalWidth) {
+      return { ox: box.x, oy: box.y, sw: box.w, sh: box.h, scale: 1 };
+    }
+    const scale = Math.min(box.w / img.naturalWidth, box.h / img.naturalHeight);
+    const sw = img.naturalWidth * scale;
+    const sh = img.naturalHeight * scale;
+    const ox = box.x + (box.w - sw) / 2;
+    const oy = box.y + (box.h - sh) / 2;
+    return { ox, oy, sw, sh, scale };
+  }
+
   _setPosFromLocal(lx, ly, box) {
-    const xp = Math.max(0, Math.min(100, ((lx - box.x) / box.w) * 100));
-    const yp = Math.max(0, Math.min(100, ((ly - box.y) / box.h) * 100));
+    const { ox, oy, sw, sh } = this._imageRect(box);
+    if (sw < 1 || sh < 1) return;
+    const xp = Math.max(0, Math.min(100, ((lx - ox) / sw) * 100));
+    const yp = Math.max(0, Math.min(100, ((ly - oy) / sh) * 100));
     setWval(this.node, "x_percent", Math.round(xp * 10) / 10);
     setWval(this.node, "y_percent", Math.round(yp * 10) / 10);
   }
 
   _restoreFromProps() {
     const props = this.node.properties || {};
+    if (props.lc_overlay_text != null) {
+      this._linkedText = String(props.lc_overlay_text);
+    }
     const meta = props.lc_preview_meta || props.lc_before_meta;
     if (!meta?.length) return;
     const self = this;
@@ -544,6 +653,14 @@ class LCTextOverlayPreview {
   onExecuted(message) {
     if (!message) return;
     const self = this;
+    // Text actually drawn this run (works with Join Strings after first queue)
+    if (message.lc_overlay_text != null) {
+      const raw = message.lc_overlay_text;
+      const s = Array.isArray(raw) ? raw.join("") : String(raw);
+      this._linkedText = s;
+      if (!this.node.properties) this.node.properties = {};
+      this.node.properties.lc_overlay_text = s;
+    }
     const meta = message.lc_before || message.lc_preview || message.images;
     if (meta?.length) {
       if (!this.node.properties) this.node.properties = {};
@@ -608,18 +725,25 @@ class LCTextOverlayPreview {
     if (!img) return;
 
     const box = this._box();
-    const { x, y, w, h } = box;
-    if (h < 16) return;
+    if (box.h < 16) return;
 
-    const scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
-    const sw = img.naturalWidth * scale;
-    const sh = img.naturalHeight * scale;
-    const ox = x + (w - sw) / 2;
-    const oy = y + (h - sh) / 2;
-
+    const { ox, oy, sw, sh, scale } = this._imageRect(box);
     ctx.drawImage(img, ox, oy, sw, sh);
 
-    const text = String(wval(node, "text", "") ?? "");
+    let rawText = inputOrWidgetValue(node, "text", "");
+    // Linked computed (Join Strings, etc.): use text from last successful run
+    if (rawText === null) {
+      rawText =
+        this._linkedText ??
+        node.properties?.lc_overlay_text ??
+        null;
+      if (rawText === null || rawText === "") {
+        // First run: image from server may already include text after queue;
+        // skip client redraw so we don't paint delimiter/wrong text on top.
+        return;
+      }
+    }
+    const text = String(rawText ?? "");
     if (!text) return;
 
     const fontSize = Number(wval(node, "font_size", 64)) || 64;
@@ -629,12 +753,16 @@ class LCTextOverlayPreview {
     const g = Number(wval(node, "color_g", 255)) | 0;
     const b = Number(wval(node, "color_b", 255)) | 0;
     let xp = Number(wval(node, "x_percent", 50));
-    let yp = Number(wval(node, "y_percent", 90));
-    const anchor = String(wval(node, "anchor", "center-top"));
-    const [ah, av] = anchor.split("-");
+    let yp = Number(wval(node, "y_percent", 92));
+    // alignment preferred; fall back to legacy "anchor" widget if present
+    let ah = String(wval(node, "alignment", "") || wval(node, "anchor", "center") || "center").toLowerCase();
+    if (ah.includes("-")) ah = ah.split("-")[0];
+    if (ah !== "left" && ah !== "right" && ah !== "center") ah = "center";
 
+    // Same as Python MARGIN_PX = 6 (in *image* pixels), converted to display space
+    const IMAGE_MARGIN_PX = 6;
     const dispSize = Math.max(8, fontSize * scale);
-    const margin = Math.max(4, 6 * scale);
+    const margin = IMAGE_MARGIN_PX * scale;
     const maxW = Math.max(8, sw - 2 * margin);
 
     const weight = /bold/i.test(fontKey) ? "bold " : "";
@@ -649,10 +777,8 @@ class LCTextOverlayPreview {
     const lineH = dispSize * 1.2;
     const blockH = Math.max(lineH, lines.length * lineH);
 
-    // Desired top of block from percent
+    // y_percent = top of text block (no vertical anchor). Default ~92 = near bottom.
     let topY = oy + (yp / 100) * sh;
-    if (av === "bottom") topY -= blockH;
-    else if (av === "center") topY -= blockH / 2;
 
     // Hard clamp inside drawn image
     const minY = oy + margin;

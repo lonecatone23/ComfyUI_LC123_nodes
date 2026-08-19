@@ -1,22 +1,15 @@
-LC123 merge pack — 1.10.2
-Copy these files ON TOP of your unzipped ComfyUI_LC123_nodes folder
-(overwrite). Do NOT replace the whole folder with this zip alone.
+LC123 v1.11.0 — merge onto your unpacked ComfyUI_LC123_nodes folder
 
-Required:
-  README.md
-  pyproject.toml
-  lc_image_split.py
-  web/lc_image_split.js
+Overwrite these files. Do not replace the whole pack with this zip alone.
 
-Already matching on your attached build but included for safety:
-  lc_image_tools.py
-  web/lc_sharpen_pro.js
-  lc_image_grid.py
-  web/lc_image_grid.js
-  lc_node_snapshot.py
-  web/lc_node_snapshot.js
+Changelog highlights:
+- Aspect Ratio Simplifier: cleaned presets, 16:9 Widescreen, VALIDATE_INPUTS
+  (unknown/old preset → custom, no crash; legacy names not shown in list)
+- Display: 📐 Aspect Ratio Simplifier / (pipe)
+- LC Boolean Switch, LC Boolean Flip, LC Boolean Value (#28281E, width 270)
+- Bypasser Panel: size persists (min height only)
+- Image Split: standard image-node default size; slider-only wipe
+- Sharpen Pro: realism presets + Lineart / Anime sharp (if not already)
 
-After merge:
-  1) Delete __pycache__ inside the pack (optional but clean)
-  2) Rebuild node.zip from the pack root (exclude .git, __pycache__)
-  3) Restart ComfyUI + Ctrl+F5
+After merge: delete __pycache__, restart Comfy, Ctrl+F5.
+Rebuild node.zip if you ship it.

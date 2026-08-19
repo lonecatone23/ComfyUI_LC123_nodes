@@ -16,30 +16,18 @@ MAX_RESOLUTION = 16384
 # CR Aspect Ratio Social Media presets (Suzie1 / Comfyroll)
 ASPECT_PRESETS = {
     "custom": None,
-    "Instagram Portrait - 1080x1350": (1080, 1350),
-    "Instagram Square - 1080x1080": (1080, 1080),
-    "Instagram Landscape - 1080x608": (1080, 608),
-    "Instagram Stories/Reels - 1080x1920": (1080, 1920),
-    "Facebook Landscape - 1080x1350": (1080, 1350),
-    "Facebook Marketplace - 1200x1200": (1200, 1200),
-    "Facebook Stories - 1080x1920": (1080, 1920),
-    "TikTok - 1080x1920": (1080, 1920),
-    "YouTube Banner - 2560x1440": (2560, 1440),
-    "LinkedIn Profile Banner - 1584x396": (1584, 396),
-    "LinkedIn Page Cover - 1128x191": (1128, 191),
-    "LinkedIn Post - 1200x627": (1200, 627),
-    "Pinterest Pin Image - 1000x1500": (1000, 1500),
-    "CivitAI Cover - 1600x400": (1600, 400),
-    "OpenArt App - 1500x1000": (1500, 1000),
-    "SDXL Square - 1024x1024": (1024, 1024),
-    "SDXL Portrait - 832x1216": (832, 1216),
-    "SDXL Landscape - 1216x832": (1216, 832),
-    "1:1 - 1024x1024": (1024, 1024),
-    "3:4 - 896x1152": (896, 1152),
-    "4:3 - 1152x896": (1152, 896),
-    "9:16 - 768x1344": (768, 1344),
-    "16:9 - 1344x768": (1344, 768),
+    "Instagram Portrait (4:5) - 1080x1350": (1080, 1350),
+    "Instagram Square (1:1) - 1080x1080": (1080, 1080),
+    "Widescreen (16:9) - 1344x768": (1344, 768),
+    "TikTok (9:16) - 1080x1920": (1080, 1920),
+    "CivitAI Cover (4:1) - 1600x400": (1600, 400),
+    "2:3 (Portrait Photo) - 832x1248": (832, 1248),
+    "3:2 (Photo) - 1248x832": (1248, 832),
+    "3:4 (Portrait Standard) - 896x1152": (896, 1152),
+    "4:3 (Standard) - 1152x896": (1152, 896),
+    "21:9 (Ultrawide) - 1536x640": (1536, 640),
 }
+
 
 UPSCALE_METHODS = [
     "nearest-exact",
@@ -367,6 +355,12 @@ class AspectRatioSimplifier:
     RETURN_NAMES = ("image", "mask", "width", "height", "latent", "batch", "resolution")
     FUNCTION = "run"
     CATEGORY = "LC123"
+
+    @classmethod
+    def VALIDATE_INPUTS(cls, aspect_ratio=None, **kwargs):
+        """Allow saved workflows whose preset label was renamed/removed; run() falls back to custom."""
+        return True
+
     DESCRIPTION = (
         "Resize an image and/or mask to a target size. "
         "Size from input image/mask, or from a preset / custom width x height. "
@@ -413,11 +407,12 @@ class AspectRatioSimplifier:
             src_ref = None
 
         def _preset_size():
-            preset = ASPECT_PRESETS.get(aspect_ratio)
+            # Missing / unknown label → custom width×height (no crash)
+            preset = ASPECT_PRESETS.get(aspect_ratio, None)
             if preset is None:
                 tw, th = int(custom_width), int(custom_height)
             else:
-                tw, th = preset
+                tw, th = int(preset[0]), int(preset[1])
             if swap_dimensions == "On":
                 tw, th = th, tw
             return tw, th
@@ -515,6 +510,11 @@ class LCAspectRatioPipeOut:
     RETURN_NAMES = ("pipe", "image", "mask", "width", "height", "latent", "batch", "resolution")
     FUNCTION = "run"
     CATEGORY = "LC123"
+
+    @classmethod
+    def VALIDATE_INPUTS(cls, aspect_ratio=None, **kwargs):
+        return True
+
     DESCRIPTION = (
         "Same controls as Aspect Ratio Simplifier, plus a pipe output on top for Get/Set. "
         "Size from input image/mask, or from a preset / custom width x height. "
@@ -587,6 +587,6 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AspectRatioSimplifier": "📐 Aspect Ratio Simplifier",
-    "LCAspectRatioPipeOut": "LC Aspect Ratio Simplifier 📐(Pipe)",
+    "LCAspectRatioPipeOut": "📐 Aspect Ratio Simplifier (pipe)",
     "LCAspectRatioPipe": "LC Aspect Ratio Pipe Out",
 }

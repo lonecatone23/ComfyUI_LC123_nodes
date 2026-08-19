@@ -573,19 +573,23 @@ app.registerExtension({
           }
         }
 
-        // Generous bottom pad so last toggle isn't clipped (avoids layout thrash/flicker)
+        // Floor only — never force exact height (user resize must survive save/reload)
         const n = this.widgets.length;
-        const h = Math.max(56, 34 + Math.max(n, 0) * 24 + 20);
-        const width = Math.max(260, this.size?.[0] || 260);
-        const curW = this.size?.[0] || 0;
-        const curH = this.size?.[1] || 0;
-        if (Math.abs(curW - width) > 2 || Math.abs(curH - h) > 2) {
-          if (typeof this.setSize === "function") this.setSize([width, h]);
-          else {
-            if (!this.size) this.size = [width, h];
-            this.size[0] = width;
-            this.size[1] = h;
-          }
+        const minH = Math.max(56, 34 + Math.max(n, 0) * 24 + 12);
+        const minW = 260;
+        if (!this.size) this.size = [minW, minH];
+        let changed = false;
+        if ((this.size[0] || 0) < minW) {
+          this.size[0] = minW;
+          changed = true;
+        }
+        // Only grow if too short for toggles; do not snap taller custom sizes down
+        if ((this.size[1] || 0) < minH) {
+          this.size[1] = minH;
+          changed = true;
+        }
+        if (changed) {
+          if (typeof this.setSize === "function") this.setSize([this.size[0], this.size[1]]);
           this.setDirtyCanvas?.(true, true);
         }
       }

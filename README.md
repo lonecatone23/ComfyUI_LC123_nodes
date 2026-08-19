@@ -4,7 +4,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 - **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.10.2
+- **Version:** 1.11.0
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -80,11 +80,13 @@ Full control list: [`LC_Photo_Style_Note.md`](LC_Photo_Style_Note.md)
 ---
 
 ## 🖼️ Image & size
+> **Aspect ratio presets:** Dropdown shows the current list only. Older workflows with removed preset labels still run — unknown names fall back to **custom** width×height.
+
 
 | Node | What it does |
 |------|----------------|
 | **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. `resolution` = longer side. |
-| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |
+| **📐 Aspect Ratio Simplifier (pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |
 | **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |
 | **LC Get Image 📐** | Reads an image; shows megapixels, width, height, batch, aspect ratio, and resolution (longer side). |
 | **LC Dimension Resize 📐** | Width + height + one value; add / subtract / multiply / divide both sides; rounded width & height out. |
@@ -171,6 +173,9 @@ Most show the result on the node. Hover to wipe against the original
 | **LC Combo Selector** | Dropdown that mirrors another node’s combo options. |
 | **LC Boolean** | Coerce boolean / int / float → true/false; shows result on the face. |
 | **LC Invert Boolean** | Same coercion, then invert. |
+| **LC Boolean Switch** | `state` picks **on_true** or **on_false** (any type) → `*`. |
+| **LC Boolean Flip** | Boolean widget → BOOLEAN out. |
+| **LC Boolean Value** | Boolean widget → BOOLEAN out (primitive-style source). |
 | **LC Int Compare** | Two INT inputs → largest or smallest. |
 | **LC Float Compare** | Two FLOAT inputs → largest or smallest. |
 | **LC Seed Jump 🌱** | One seed + jump size → six stepped seed outputs. |

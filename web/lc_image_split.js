@@ -8,10 +8,31 @@ import { api } from "../../scripts/api.js";
 
 const TYPE = "LCImageSplit";
 const COLOR = "#324B4B";
-const DEFAULT_W = 300;
-const MIN_W = 260;
+const DEFAULT_W = 300; // same as other LC image nodes
+const MIN_W = 300;
 const PAD = 16;
 const TITLE = 34;
+
+function widgetsHeight(node) {
+  let h = TITLE;
+  for (const w of node.widgets || []) {
+    if (!w || w.type === "hidden") continue;
+    try {
+      const sz = w.computeSize?.(node.size?.[0] || DEFAULT_W) || [0, LiteGraph?.NODE_WIDGET_HEIGHT || 20];
+      h += (sz[1] || 20) + 4;
+    } catch (_) {
+      h += 24;
+    }
+  }
+  return h;
+}
+
+/** Match LC image FX nodes: ~4:5 image area under widgets */
+function defaultSize(node) {
+  const innerW = DEFAULT_W - PAD * 2;
+  const imgH = Math.round(innerW * (5 / 4));
+  return [DEFAULT_W, widgetsHeight(node) + PAD + imgH + PAD];
+}
 
 function imageUrl(img) {
   if (!img) return null;
@@ -98,7 +119,7 @@ class LCImageSplitPreview {
 
   _box() {
     const node = this.node;
-    const w = Math.max(MIN_W, (node.size?.[0] || DEFAULT_W) - PAD);
+    const w = Math.max(MIN_W - PAD * 2, (node.size?.[0] || DEFAULT_W) - PAD * 2);
     const widgetsBottom = this._widgetsBottom();
     const top = Math.max(TITLE + 8, widgetsBottom + 10);
     const h = Math.max(80, (node.size?.[1] || 320) - top - 12);
@@ -196,10 +217,13 @@ app.registerExtension({
       try {
         this.color = COLOR;
         this.bgcolor = COLOR;
-        if (!this.size || this.size[0] < 40) {
-          this.size = [DEFAULT_W, 380];
-        }
-      } catch (_) {}
+        // Always launch at standard image-node size (widgets + 4:5 preview)
+        this.size = defaultSize(this);
+      } catch (_) {
+        try {
+          this.size = [DEFAULT_W, 400];
+        } catch (__) {}
+      }
       if (!this.lcImageSplitPreview) {
         new LCImageSplitPreview(this);
       }
@@ -220,6 +244,9 @@ app.registerExtension({
     try {
       node.color = COLOR;
       node.bgcolor = COLOR;
+      if (!node.size || node.size[0] < MIN_W || (node.size[1] || 0) < 200) {
+        node.size = defaultSize(node);
+      }
     } catch (_) {}
     if (!node.lcImageSplitPreview) {
       new LCImageSplitPreview(node);

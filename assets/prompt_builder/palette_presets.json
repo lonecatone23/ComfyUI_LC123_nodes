@@ -1,0 +1,66 @@
+{
+  "Vibrant Primary": [
+    "#FF0000",
+    "#00FF00",
+    "#0000FF",
+    "#FFFF00",
+    "#FF00FF",
+    "#00FFFF"
+  ],
+  "Warm Sunset": [
+    "#FF6B35",
+    "#F7C59F",
+    "#EFEFD0",
+    "#004E89",
+    "#C44536",
+    "#FFC857"
+  ],
+  "Cool Ocean": [
+    "#03045E",
+    "#0077B6",
+    "#00B4D8",
+    "#90E0EF",
+    "#CAF0F8",
+    "#023E8A"
+  ],
+  "Earth Neutral": [
+    "#5C4033",
+    "#A67B5B",
+    "#D2B48C",
+    "#F5F0E6",
+    "#8B7355",
+    "#3E2723"
+  ],
+  "Monochrome": [
+    "#000000",
+    "#404040",
+    "#808080",
+    "#B0B0B0",
+    "#D8D8D8",
+    "#FFFFFF"
+  ],
+  "Pastel Soft": [
+    "#FFD6E0",
+    "#C9E4DE",
+    "#F7E8A0",
+    "#D4C1EC",
+    "#B5EAD7",
+    "#FFDAC1"
+  ],
+  "Neon Night": [
+    "#FF00FF",
+    "#00FFFF",
+    "#39FF14",
+    "#1A1A2E",
+    "#FF6EC7",
+    "#7DF9FF"
+  ],
+  "Forest": [
+    "#1B4332",
+    "#2D6A4F",
+    "#95D5B2",
+    "#D8F3DC",
+    "#081C15",
+    "#52B788"
+  ]
+}

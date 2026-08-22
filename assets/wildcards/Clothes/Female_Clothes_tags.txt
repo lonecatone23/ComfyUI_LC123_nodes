@@ -1,0 +1,83 @@
+t-shirt
+tank top
+blouse
+button-up shirt
+sweater
+hoodie
+jeans
+leggings
+yoga pants
+shorts
+skirt
+mini skirt
+dress
+maxi dress
+sun dress
+little black dress
+pencil skirt
+blazer
+jacket
+coat
+bra
+panties
+thong
+boyshorts
+hipster panties
+high-waisted panties
+bikini panties
+bralette
+sports bra
+push-up bra
+lace bra
+strapless bra
+sports bra
+chemise
+babydoll
+teddy
+bodysuit
+basque
+bustier
+corset
+garter belt
+stockings
+thigh-high stockings
+fishnet stockings
+pantyhose
+suspenders / garters
+ negligee
+robe
+silk robe
+kimono robe
+high heels
+stilettos
+boots
+knee-high boots
+thigh-high boots
+platform heels
+ballet heels
+pasties
+cupless bra
+open-cup bra
+crotchless panties
+open-crotch bodysuit
+crotchless bodystocking
+bodystocking
+fishnet bodysuit
+harness bra
+strap harness
+bondage harness
+leather harness
+body harness
+latex dress
+PVC dress
+wet look dress
+latex bodysuit
+PVC catsuit
+latex catsuit
+leather skirt
+latex skirt
+bondage corset
+cupless corset
+underbust corset
+overbust corset
+

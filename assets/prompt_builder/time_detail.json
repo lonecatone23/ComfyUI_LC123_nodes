@@ -1,0 +1,11 @@
+{
+  "Dawn": "first light of dawn, cool blue-pink sky gradient, quiet low sun",
+  "Morning": "clear morning light, fresh cooler key, soft long shadows",
+  "Midday": "midday overhead light, shorter shadows, brighter exposure",
+  "Afternoon": "afternoon light with warmer tilt, comfortable outdoor contrast",
+  "Golden hour": "golden hour low sun, amber warmth, long edge light",
+  "Dusk": "dusk transition, fading warm residual light into cooler sky",
+  "Evening": "evening practicals and residual sky glow, settled night approach",
+  "Night": "nighttime, artificial practicals dominate, deep ambient darkness",
+  "none": ""
+}

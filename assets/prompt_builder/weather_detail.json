@@ -1,0 +1,10 @@
+{
+  "Clear": "clear sky conditions, crisp air, clean distant detail",
+  "Partly cloudy": "partly cloudy sky, soft cloud diffusion mixed with sun breaks",
+  "Overcast": "overcast cloud layer, broad soft light, muted shadows",
+  "Foggy": "foggy atmosphere, softened distance, lowered contrast, air perspective",
+  "Rainy": "rainy conditions, wet surfaces, specular ground reflections, heavy air",
+  "Snowy": "snowy weather, soft white ground cover, cool reflected fill",
+  "Windy": "windy conditions, motion in hair, fabric, and foliage",
+  "none": ""
+}

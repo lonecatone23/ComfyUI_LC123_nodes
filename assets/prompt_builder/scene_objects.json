@@ -1,0 +1,652 @@
+{
+  "Luxury penthouse": [
+    {
+      "desc": "floor-to-ceiling windows with city skyline beyond the glass",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "low designer sofa with brass leg accents",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "polished light-oak floor reflecting soft window spill",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "minimal console table with a single sculptural lamp",
+      "h": "right",
+      "v": "bottom",
+      "d": "midground"
+    }
+  ],
+  "Apartment balcony": [
+    {
+      "desc": "metal balcony railing in the near foreground",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "potted plants along the balcony edge",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "distant residential buildings across the street",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "simple outdoor chair or small side table",
+      "h": "right",
+      "v": "bottom",
+      "d": "midground"
+    }
+  ],
+  "Modern kitchen": [
+    {
+      "desc": "matte cabinetry wall with clean appliance fronts",
+      "h": "left",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "stone kitchen island or countertop surface",
+      "h": "center",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "pendant lights hanging above the work surface",
+      "h": "center",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "window over the sink with soft daylight",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    }
+  ],
+  "Cozy bedroom": [
+    {
+      "desc": "bed with rumpled linen bedding and pillows",
+      "h": "center",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "warm bedside lamp on a nightstand",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "soft curtains filtering daylight at the window",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "neutral wall and a small framed print kept unreadable",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    }
+  ],
+  "Hotel room window": [
+    {
+      "desc": "large hotel window with layered sheer curtains",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "upholstered chair or chaise near the window",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "made hotel bed with crisp linens in the midground",
+      "h": "center",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "city or courtyard view soft beyond the glass",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Cafe interior": [
+    {
+      "desc": "espresso machine and bar counter in the background",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "wooden cafe tables and chairs",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "warm pendant lights with soft bokeh",
+      "h": "center",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "steam and ambient cafe atmosphere near the service area",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Corner coffee shop": [
+    {
+      "desc": "large street-facing windows with overcast light",
+      "h": "left",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "brick and wood textured wall",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "corner seating table with chairs",
+      "h": "center",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "blurred chalkboard menu on the wall, text unreadable",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Corporate office": [
+    {
+      "desc": "glass partition walls and open-plan desks",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "standing desk or workstation cluster",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "cool LED ceiling panels mixed with window light",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "neutral carpet and cable-tidy floor plane",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    }
+  ],
+  "Home office desk": [
+    {
+      "desc": "desk with laptop and open notebook",
+      "h": "center",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "adjustable desk lamp casting a warm pool of light",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "bookshelf softly out of focus in the background",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "houseplant near the window edge",
+      "h": "right",
+      "v": "bottom",
+      "d": "midground"
+    }
+  ],
+  "Urban street": [
+    {
+      "desc": "storefront facades along the block",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "parked cars along the curb",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "crosswalk markings on the asphalt",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "mixed architecture skyline further down the street",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Rain-slick street": [
+    {
+      "desc": "wet asphalt with neon and streetlamp reflections",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "glowing storefront and streetlight practicals",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "umbrella silhouettes in the middle distance",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "rain-streaked atmosphere and shallow depth haze",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Alley with graffiti": [
+    {
+      "desc": "graffiti-covered brick wall running the alley length",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "metal dumpsters and service doors",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "fire escape stairs zigzagging upward",
+      "h": "left",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "narrow wet ground strip with patchy sunlight from above",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    }
+  ],
+  "City rooftop": [
+    {
+      "desc": "rooftop HVAC units and vent stacks",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "safety railing along the roof edge",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "city skyline beyond the roof parapet",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "open sky with wind-swept cloud streaks",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Park path": [
+    {
+      "desc": "tree-lined path receding into soft green bokeh",
+      "h": "center",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "wooden park bench beside the path",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "dappled sunlight on the ground and leaves",
+      "h": "right",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "grass and path texture in the near foreground",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    }
+  ],
+  "Forest clearing": [
+    {
+      "desc": "tall tree trunks ringing the clearing",
+      "h": "left",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "mossy ground and fallen leaves in the clearing center",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "volumetric god rays through the canopy",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "dense foliage wall on the far side of the clearing",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    }
+  ],
+  "Beach shoreline": [
+    {
+      "desc": "horizon line where ocean meets sky",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "gentle breaking waves along the shore",
+      "h": "center",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "wet sand with subtle ripple texture",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "late-afternoon sun path and salt-air haze",
+      "h": "right",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Studio seamless white": [
+    {
+      "desc": "pure white seamless paper curve from wall to floor",
+      "h": "center",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "soft even wrap lighting with minimal falloff",
+      "h": "left",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "clean studio floor plane with a faint contact shadow zone",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "softbox edge barely suggested out of frame",
+      "h": "right",
+      "v": "top",
+      "d": "midground"
+    }
+  ],
+  "Studio seamless gray": [
+    {
+      "desc": "medium-gray seamless backdrop paper",
+      "h": "center",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "controlled softbox key light direction",
+      "h": "left",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "fill light keeping shadow side open",
+      "h": "right",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "neutral gray floor meeting the seamless sweep",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    }
+  ],
+  "Warehouse loft": [
+    {
+      "desc": "exposed brick wall and steel structural beams",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "tall multi-pane factory windows",
+      "h": "left",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "polished concrete floor with scattered daylight patches",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "industrial column or beam in the midground",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    }
+  ],
+  "Museum gallery": [
+    {
+      "desc": "long white gallery wall with museum track lighting",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "polished reflective gallery floor",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "sparse pedestal or plinth with abstract unreadable art",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "high ceiling with soft recessed lighting",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Library stacks": [
+    {
+      "desc": "tall wooden book stacks receding in rows",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "reading table with warm practical lamp",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "wood floor aisle between the stacks",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "dust motes in a side-light shaft between shelves",
+      "h": "center",
+      "v": "top",
+      "d": "midground"
+    }
+  ],
+  "Subway platform": [
+    {
+      "desc": "tiled platform wall with fluorescent strip lights",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "waiting benches along the platform",
+      "h": "left",
+      "v": "bottom",
+      "d": "midground"
+    },
+    {
+      "desc": "train tunnel mouth receding into darkness",
+      "h": "center",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "platform edge and tactile warning strip",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    }
+  ],
+  "Gym interior": [
+    {
+      "desc": "mirror wall reflecting the gym floor",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "free-weight rack and dumbbells",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "rubber gym flooring in the near field",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "overhead LED panels and slight interior haze",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    }
+  ],
+  "Nightclub interior": [
+    {
+      "desc": "DJ booth soft in the far background",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    },
+    {
+      "desc": "colored spotlights cutting through haze",
+      "h": "center",
+      "v": "top",
+      "d": "background"
+    },
+    {
+      "desc": "reflective dance floor with light streaks",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "bar counter silhouette with bottle backlight",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    }
+  ],
+  "Restaurant booth": [
+    {
+      "desc": "leather booth seating along the wall",
+      "h": "left",
+      "v": "middle",
+      "d": "midground"
+    },
+    {
+      "desc": "set table with plates, glassware, and cutlery",
+      "h": "center",
+      "v": "bottom",
+      "d": "foreground"
+    },
+    {
+      "desc": "warm pendant light hanging over the table",
+      "h": "center",
+      "v": "top",
+      "d": "midground"
+    },
+    {
+      "desc": "dim restaurant interior depth behind the booth",
+      "h": "right",
+      "v": "middle",
+      "d": "background"
+    }
+  ]
+}

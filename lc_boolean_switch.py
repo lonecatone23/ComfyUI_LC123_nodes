@@ -2,7 +2,7 @@
 LC Boolean utilities — switch + sources
 ---------------------------------------
 1) LCBooleanSwitch  — pick on_true / on_false by a boolean widget (any-type passthrough)
-2) LCBooleanFlip    — boolean widget → BOOLEAN out
+2) LCBooleanFlip    — boolean widget inverted → BOOLEAN out (False→True, True→False)
 3) LCBooleanValue   — boolean widget → BOOLEAN out (display: LC Boolean Value)
 
 Utility color #28281E, width 270 (see web/lc_boolean_switch.js)
@@ -51,7 +51,7 @@ class LCBooleanSwitch:
 
 
 class LCBooleanFlip:
-    """Simple boolean source (widget → BOOLEAN)."""
+    """Widget boolean, inverted on output (False→True, True→False)."""
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -61,7 +61,7 @@ class LCBooleanFlip:
                     "BOOLEAN",
                     {
                         "default": False,
-                        "tooltip": "Boolean value to output.",
+                        "tooltip": "Inverted on output: off→True, on→False.",
                     },
                 ),
             },
@@ -71,10 +71,10 @@ class LCBooleanFlip:
     RETURN_NAMES = ("boolean",)
     FUNCTION = "emit"
     CATEGORY = "LC123/utils"
-    DESCRIPTION = "Boolean widget source."
+    DESCRIPTION = "Boolean flip: widget False → output True; widget True → output False."
 
     def emit(self, boolean):
-        return (bool(boolean),)
+        return (not bool(boolean),)
 
 
 class LCBooleanValue:

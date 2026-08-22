@@ -1,0 +1,14 @@
+{
+  "eye level": "camera at eye level, neutral documentary perspective, natural proportions",
+  "slightly high angle": "slightly high camera angle looking gently down, softens features, slight vulnerability",
+  "slightly low angle": "slightly low camera angle looking up, subtle confidence and presence",
+  "from below": "camera placed low looking upward, dramatic stature, elongated legs and strong jaw emphasis",
+  "low-angle hero shot": "classic low-angle hero shot, powerful stance, sky or ceiling behind subject",
+  "3/4 angle": "three-quarter view of the face and body, dimensional cheek and shoulder line",
+  "rear 3/4 angle": "rear three-quarter view, subject looking back over the shoulder, editorial fashion energy",
+  "profile angle": "true side profile, clean silhouette of nose and jaw, graphic outline",
+  "dutch angle": "dutch tilt canted horizon, uneasy or dynamic tension in the frame",
+  "overhead selfie angle": "high overhead phone-like angle, face tilted up toward lens, social-media selfie grammar",
+  "mirror selfie angle": "mirror selfie composition, phone partially visible, subject reflected in glass",
+  "phone camera angle": "handheld phone camera feel, slight wide-angle distortion, casual snapshot realism"
+}

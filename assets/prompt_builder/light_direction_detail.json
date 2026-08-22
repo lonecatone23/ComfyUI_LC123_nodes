@@ -1,0 +1,12 @@
+{
+  "front": "key light from the front along the lens axis, even facial illumination",
+  "front-left": "key from front-left of the subject, natural interview-style modeling",
+  "front-right": "key from front-right of the subject, mirrored modeling of front-left",
+  "side left": "side light from camera-left, strong dimension and texture",
+  "side right": "side light from camera-right, strong dimension and texture",
+  "above": "top light from above, deeper eye sockets, fashion editorial drama",
+  "above-front": "high front key, butterfly-adjacent wrap with soft under-eye shadow",
+  "below": "under-light from below, unusual horror or experimental mood",
+  "back": "light primarily from behind the subject, rim and separation",
+  "three-point (key+fill+rim)": "classic three-point setup with distinct key, soft fill, and separating rim"
+}

@@ -1,0 +1,20 @@
+{
+  "soft ambient": "soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere",
+  "soft window light": "large soft window light as key, feathered shadows on the far side of the face, cool exterior spill balanced with warm interior bounce",
+  "golden hour": "golden-hour sunlight low on the horizon, warm amber key, long soft shadows, luminous rim on hair and shoulders",
+  "blue hour": "blue-hour twilight, cool cobalt ambient, residual warm practicals in windows, quiet cinematic mood",
+  "overcast diffuse": "overcast skylight, broad diffuse illumination, soft shadow edges, muted contrast, true-to-life color",
+  "studio softbox": "large studio softbox key at 45 degrees, controlled fill card, clean commercial beauty lighting",
+  "beauty dish": "beauty dish key with subtle specular wrap, defined cheek contour, fashion-portrait punch without harshness",
+  "rembrandt": "Rembrandt lighting with a clear triangle of light on the shadowed cheek, classic painterly portrait contrast",
+  "butterfly / paramount": "butterfly lighting from directly above the lens axis, soft nose shadow under the tip, glamour portrait symmetry",
+  "split lighting": "split lighting half the face in light and half in shadow, graphic mood, strong character emphasis",
+  "rim / hair light": "strong rim and hair light separating the subject from the background, glowing outline on hair and shoulders",
+  "backlit silhouette": "heavy backlight creating a near-silhouette, translucent edges, atmosphere and shape over facial detail",
+  "neon practicals": "mixed neon practical lights, magenta and cyan spill on skin, urban night color contrast",
+  "harsh midday sun": "harsh midday sun, crisp short shadows, high contrast, sun-bleached highlights, outdoor realism",
+  "candle / practical warm": "warm practical candle or lamp light, intimate falloff, orange-amber key, deep surrounding shadow",
+  "cinematic contrast": "cinematic contrast ratio, motivated practicals, rich blacks, controlled highlight roll-off, film still mood",
+  "high key": "high-key lighting, bright background, minimal shadow, airy optimistic commercial look",
+  "low key": "low-key lighting, dominant negative fill, selective highlights, dramatic mystery"
+}

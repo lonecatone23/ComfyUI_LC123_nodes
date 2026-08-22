@@ -1,0 +1,1237 @@
+{
+  "id": "f3ffa36a-6418-4617-85ff-003ab06c2f3e",
+  "revision": 0,
+  "last_node_id": 22,
+  "last_link_id": 14,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LCWildcard",
+      "pos": [
+        -16320,
+        -1600
+      ],
+      "size": [
+        340,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCWildcard",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "people/Female_Type.txt",
+        7254565020501130000,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "wildcard": "people/Female_Type.txt",
+        "base_seed": 7254565020501130000,
+        "seed_mode": "randomize"
+      },
+      "color": "#625a9f",
+      "bgcolor": "#4e468b"
+    },
+    {
+      "id": 2,
+      "type": "LCSubject",
+      "pos": [
+        -15970,
+        -1600
+      ],
+      "size": [
+        340,
+        340
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "description",
+          "type": "STRING",
+          "widget": {
+            "name": "description"
+          },
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCSubject",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "none",
+        "none",
+        "none",
+        "center",
+        "middle",
+        "midground",
+        "position: center, middle, midground"
+      ],
+      "widgets_values_named": {
+        "description": "",
+        "pose": "none",
+        "action": "none",
+        "outfit": "none",
+        "position_horizontal": "center",
+        "position_vertical": "middle",
+        "position_depth": "midground",
+        "lc_live_prompt": "position: center, middle, midground"
+      },
+      "color": "#326432",
+      "bgcolor": "#326432"
+    },
+    {
+      "id": 4,
+      "type": "LCSubjectArray",
+      "pos": [
+        -15260,
+        -1600
+      ],
+      "size": [
+        180,
+        170
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "subject_01",
+          "shape": 7,
+          "type": "STRING",
+          "link": 2
+        },
+        {
+          "name": "subject_02",
+          "shape": 7,
+          "type": "STRING",
+          "link": 3
+        },
+        {
+          "name": "subject_03",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "subject_04",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "subject_05",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "subject_06",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "subject_07",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "subject_08",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCSubjectArray",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#141914",
+      "bgcolor": "#000500"
+    },
+    {
+      "id": 5,
+      "type": "LCWildcard",
+      "pos": [
+        -16320,
+        -1450
+      ],
+      "size": [
+        340,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCWildcard",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Actions/Everyday_actions.txt",
+        2988160981682066400,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "wildcard": "Actions/Everyday_actions.txt",
+        "base_seed": 2988160981682066400,
+        "seed_mode": "randomize"
+      },
+      "color": "#625a9f",
+      "bgcolor": "#4e468b"
+    },
+    {
+      "id": 6,
+      "type": "LCJoinStrings",
+      "pos": [
+        -16150,
+        -1300
+      ],
+      "size": [
+        330,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 4
+        },
+        {
+          "name": "string_2",
+          "shape": 7,
+          "type": "STRING",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCJoinStrings",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        2,
+        " "
+      ],
+      "widgets_values_named": {
+        "inputcount": 2,
+        "delimiter": " "
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 8,
+      "type": "LCPromptAssembler",
+      "pos": [
+        -15260,
+        -1380
+      ],
+      "size": [
+        340,
+        360
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "subjects",
+          "shape": 7,
+          "type": "STRING",
+          "link": 6
+        },
+        {
+          "name": "scene",
+          "shape": 7,
+          "type": "STRING",
+          "link": 7
+        },
+        {
+          "name": "camera",
+          "shape": 7,
+          "type": "STRING",
+          "link": 8
+        },
+        {
+          "name": "lighting",
+          "shape": 7,
+          "type": "STRING",
+          "link": 9
+        },
+        {
+          "name": "style",
+          "shape": 7,
+          "type": "STRING",
+          "link": 10
+        },
+        {
+          "name": "palette",
+          "shape": 7,
+          "type": "STRING",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            12
+          ]
+        },
+        {
+          "name": "json",
+          "type": "STRING",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCPromptAssembler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        true,
+        true,
+        false,
+        "",
+        "",
+        "",
+        "",
+        0.05
+      ],
+      "widgets_values_named": {
+        "pretty_print": true,
+        "remove_empty": true,
+        "include_scene_bboxes": false,
+        "mood": "",
+        "background": "",
+        "composition": "",
+        "extra": "",
+        "margin": 0.05
+      },
+      "color": "#141914",
+      "bgcolor": "#000500"
+    },
+    {
+      "id": 9,
+      "type": "LCSubject",
+      "pos": [
+        -15970,
+        -1220
+      ],
+      "size": [
+        340,
+        340
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCSubject",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "blue haired hippie chick",
+        "standing",
+        "talking",
+        "Female/halter top and palazzo pants",
+        "left",
+        "middle",
+        "background",
+        "blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants, position: left, middle, background"
+      ],
+      "widgets_values_named": {
+        "description": "blue haired hippie chick",
+        "pose": "standing",
+        "action": "talking",
+        "outfit": "Female/halter top and palazzo pants",
+        "position_horizontal": "left",
+        "position_vertical": "middle",
+        "position_depth": "background",
+        "lc_live_prompt": "blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants, position: left, middle, background"
+      },
+      "color": "#326432",
+      "bgcolor": "#326432"
+    },
+    {
+      "id": 10,
+      "type": "LCLighting",
+      "pos": [
+        -15620,
+        -1220
+      ],
+      "size": [
+        340,
+        240
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCLighting",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "soft ambient",
+        "front-left",
+        "soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling"
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "lighting": "soft ambient",
+        "light_direction": "front-left",
+        "lc_live_prompt": "soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling"
+      },
+      "color": "#534317",
+      "bgcolor": "#3f2f03"
+    },
+    {
+      "id": 13,
+      "type": "LCStyleSelector",
+      "pos": [
+        -15620,
+        -940
+      ],
+      "size": [
+        340,
+        270
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCStyleSelector",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "Commercial / product",
+        "Cinematic film still",
+        "Editorial quality",
+        "Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready"
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "style_category": "Commercial / product",
+        "style_preset": "Cinematic film still",
+        "quality_level": "Editorial quality",
+        "lc_live_prompt": "Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready"
+      },
+      "color": "#5d2a64",
+      "bgcolor": "#491650"
+    },
+    {
+      "id": 14,
+      "type": "LCSceneBuilder",
+      "pos": [
+        -15970,
+        -840
+      ],
+      "size": [
+        340,
+        340
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCSceneBuilder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Rain-slick street",
+        "",
+        "Dawn",
+        "Clear",
+        "",
+        "rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail"
+      ],
+      "widgets_values_named": {
+        "scene_preset": "Rain-slick street",
+        "description": "",
+        "time_of_day": "Dawn",
+        "weather": "Clear",
+        "environment_details": "",
+        "lc_live_prompt": "rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail"
+      },
+      "color": "#551e1e",
+      "bgcolor": "#410a0a"
+    },
+    {
+      "id": 17,
+      "type": "Label (rgthree)",
+      "pos": [
+        -16340,
+        -1830
+      ],
+      "size": [
+        452.734375,
+        100
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": " Lonecat's",
+      "properties": {
+        "fontSize": 100,
+        "fontFamily": "Arial",
+        "fontColor": "#ffdd77",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 18,
+      "type": "Label (rgthree)",
+      "pos": [
+        -15870,
+        -1830
+      ],
+      "size": [
+        1033.837890625,
+        100
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Prompt builder Module ",
+      "properties": {
+        "fontSize": 100,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 21,
+      "type": "Label (rgthree)",
+      "pos": [
+        -14840,
+        -1830
+      ],
+      "size": [
+        272.314453125,
+        100
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "(V2.0)",
+      "properties": {
+        "fontSize": 100,
+        "fontFamily": "Arial",
+        "fontColor": "#ff00ff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 22,
+      "type": "Label (rgthree)",
+      "pos": [
+        -14780,
+        -1740
+      ],
+      "size": [
+        136.1865234375,
+        5
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "What? were you expecting to see something important here? ",
+      "properties": {
+        "fontSize": 5,
+        "fontFamily": "Arial",
+        "fontColor": "#ffff00",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        },
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 11,
+      "type": "LCShowText",
+      "pos": [
+        -14900,
+        -1600
+      ],
+      "size": [
+        350,
+        470
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Prompt",
+      "properties": {
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Subject: a short Venezuelan woman with long wavy dark hair, warm tan skin, voluptuous curves chatting with friends at a rooftop bar, blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\nScene: rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail\nCamera: camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow\nLighting: soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling\nStyle: Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready\nPalette: #000000, #332211, #221100, #111100, #110000, #666655"
+      ],
+      "widgets_values_named": {
+        "text": "Subject: a short Venezuelan woman with long wavy dark hair, warm tan skin, voluptuous curves chatting with friends at a rooftop bar, blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\nScene: rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail\nCamera: camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow\nLighting: soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling\nStyle: Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready\nPalette: #000000, #332211, #221100, #111100, #110000, #666655"
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 3,
+      "type": "LCCamera",
+      "pos": [
+        -15620,
+        -1600
+      ],
+      "size": [
+        340,
+        340
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCCamera",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "eye level",
+        "Medium shot",
+        "Very shallow",
+        "camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow"
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "angle": "eye level",
+        "distance": "Medium shot",
+        "depth_of_field": "Very shallow",
+        "lc_live_prompt": "camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow"
+      },
+      "color": "#4c3d3d",
+      "bgcolor": "#382929"
+    },
+    {
+      "id": 16,
+      "type": "LCColorPalette",
+      "pos": [
+        -16320,
+        -890
+      ],
+      "size": [
+        340,
+        350
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "preview",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "71d771a59e409597e4de43a6ffb8fde461f30eb3",
+        "Node name for S&R": "LCColorPalette",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "from_image",
+        "Vibrant Primary",
+        6
+      ],
+      "widgets_values_named": {
+        "mode": "from_image",
+        "preset": "Vibrant Primary",
+        "num_colors": 6
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 15,
+      "type": "LoadImage",
+      "pos": [
+        -16320,
+        -1260
+      ],
+      "size": [
+        290,
+        320
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Lonecats Z-Image Ver14 With Metadata 2026-06-21-184153.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "Lonecats Z-Image Ver14 With Metadata 2026-06-21-184153.png",
+        "upload": "image"
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 7,
+      "type": "MarkdownNote",
+      "pos": [
+        -14530,
+        -1600
+      ],
+      "size": [
+        670,
+        1220
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# 🗒️ LC Prompt Builder\n\nModular prompt tools for ComfyUI. Build a clean **text prompt** and optional **Krea2 / Ideogram-style JSON** without drawing boxes by hand.\n\n> Wire each block → **Assembler** → use **prompt** for normal conditioning, **json** for regional builders.\n\n---\n\n## 🔗 Basic flow\n\n```\nSubject(s) ──┐\nScene ───────┤\nCamera ──────┼──► 🗒️LC Prompt Assembler ──► prompt  → CLIP / conditioning\nLighting ────┤                           ──► json    → Krea2 / Ideogram builder\nStyle ───────┤\nColor palette┘\n```\n\nOptional: **🎲LC Wildcard** into a subject description (or any STRING) for random lines from `assets/wildcards/`.\n\n---\n\n## 👤 Subjects\n\n| Node | What it does |\n|------|----------------|\n| **🗒️LC Subject** | One person/character: description, pose, action, outfit, position (left/center/right, top/middle/bottom, foreground/mid/background). Live prompt at the bottom. |\n| **🗒️LC Subject Array** | Merge several subjects into one string for the assembler (grows with connections). |\n\n**Tips**\n- Set **pose / action / outfit** to **none** when you type your own text or feed a wildcard.\n- **Position** drives bbox placement in the JSON (thirds + depth). You can still move boxes on the Krea canvas later.\n- Trailers like placement metadata are stripped from the readable **prompt**; they only feed the **json**.\n\n---\n\n## 🌆 Scene · 📷 Camera · 💡 Lighting · 🎨 Style\n\n| Node | What it does |\n|------|----------------|\n| **🗒️LC Scene Builder** | Preset environments + time of day + weather + optional extra notes. Detailed preset text; clashes with time/weather are cleaned up in the live preview. |\n| **🗒️LC Camera** | Angle, distance (shot size), depth of field, optional free prompt. |\n| **🗒️LC Lighting** | Lighting style + direction, optional free prompt. |\n| **🗒️LC Style Selector** | Category, preset, quality level → style line for the stack. |\n\n**Tips**\n- Prefer presets for consistency; use the free **prompt** fields for one-off details.\n- Scene still contributes **background text** even when scene bboxes are off.\n\n---\n\n## 🎨 Color palette\n\n| Node | What it does |\n|------|----------------|\n| **🎨LC Color Palette** | Preset swatches or sample colors **from an image**. Prompt text (hex list) + preview image. |\n\nImage-node color (`#324B4B`). Use the **prompt** socket into the assembler **palette** input.\n\n---\n\n## 🎲 Wildcard\n\n| Node | What it does |\n|------|----------------|\n| **🎲LC Wildcard** | Pick a list under `assets/wildcards/`, output one random line (seed-stable). |\n\n- **base_seed** + **seed_mode**: fixed / randomize / increment / decrement (works on partial runs).\n- No seed output — plug **text** into subject description, join strings, etc.\n- Lists are plain `.txt` files (one entry per line). Edit anytime; restart once if the dropdown is stale.\n\n---\n\n## 🧩 Assembler (the hub)\n\n**🧩LC Prompt Assembler**\n\n| Output | Use for |\n|--------|---------|\n| **prompt** | Human-readable stack → **CLIP / conditioning** (no regional builder). |\n| **json** | Krea2 Regional / Ideogram-style **import_json** (structured caption + subject bboxes). |\n\n| Widget | Meaning |\n|--------|---------|\n| **pretty_print** | Indented JSON vs compact. |\n| **remove_empty** | Drop blank sections. |\n| **include_scene_bboxes** | **Off by default.** On = also emit furniture/landmark boxes from the scene. Off = **subject boxes only**. |\n| **margin** | Inset all boxes from the frame edge (default **5%**). |\n\n**Important**\n- **Krea2 does not “read JSON” inside the model.** Builders parse JSON; the model still sees text + any regional conditioning those builders create.\n- Plain path: **prompt → conditioning**.  \n- Regional path: **json → builder →** that node’s outputs.\n\n\n---\n\n## ✅ Quick recipes\n\n**1. Simple text-only (no regional)**  \nSubjects + scene + camera + lighting + style → Assembler → **prompt** → CLIP.\n\n**2. Multi-subject regional (Krea2)**  \nTwo+ Subjects (different positions) → Array → Assembler → **json** → Krea2 builder (outputs must be connected so it runs). Leave **include_scene_bboxes** off unless you want furniture boxes.\n\n**3. Random outfit / action**  \nWildcard → Subject **description** (or outfit via your own wiring) → rest of chain.\n\n**4. Palette from reference still**  \nImage → Color Palette → Assembler **palette**.\n\n---\n\n## 📁 Editable assets\n\n```\nassets/wildcards/          ← .txt lists for 🎲LC Wildcard\nassets/prompt_builder/     ← preset JSON (scenes, outfits, poses, scene objects, …)\n```\n\nNo special `__wildcard__` syntax — just choose a file and get a line.\n\n---\n\n## 💡 Habits that save pain\n\n- Fix seeds while dialing composition; randomize when exploring.\n- Run the **assembler** (and the Krea builder) with outputs connected, or nothing updates downstream.\n- For conditioning only, ignore **json**.\n- For regional only, still keep **prompt** around for debugging what the stack “says” in plain language.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
+      ],
+      "widgets_values_named": {
+        "text": "# 🗒️ LC Prompt Builder\n\nModular prompt tools for ComfyUI. Build a clean **text prompt** and optional **Krea2 / Ideogram-style JSON** without drawing boxes by hand.\n\n> Wire each block → **Assembler** → use **prompt** for normal conditioning, **json** for regional builders.\n\n---\n\n## 🔗 Basic flow\n\n```\nSubject(s) ──┐\nScene ───────┤\nCamera ──────┼──► 🗒️LC Prompt Assembler ──► prompt  → CLIP / conditioning\nLighting ────┤                           ──► json    → Krea2 / Ideogram builder\nStyle ───────┤\nColor palette┘\n```\n\nOptional: **🎲LC Wildcard** into a subject description (or any STRING) for random lines from `assets/wildcards/`.\n\n---\n\n## 👤 Subjects\n\n| Node | What it does |\n|------|----------------|\n| **🗒️LC Subject** | One person/character: description, pose, action, outfit, position (left/center/right, top/middle/bottom, foreground/mid/background). Live prompt at the bottom. |\n| **🗒️LC Subject Array** | Merge several subjects into one string for the assembler (grows with connections). |\n\n**Tips**\n- Set **pose / action / outfit** to **none** when you type your own text or feed a wildcard.\n- **Position** drives bbox placement in the JSON (thirds + depth). You can still move boxes on the Krea canvas later.\n- Trailers like placement metadata are stripped from the readable **prompt**; they only feed the **json**.\n\n---\n\n## 🌆 Scene · 📷 Camera · 💡 Lighting · 🎨 Style\n\n| Node | What it does |\n|------|----------------|\n| **🗒️LC Scene Builder** | Preset environments + time of day + weather + optional extra notes. Detailed preset text; clashes with time/weather are cleaned up in the live preview. |\n| **🗒️LC Camera** | Angle, distance (shot size), depth of field, optional free prompt. |\n| **🗒️LC Lighting** | Lighting style + direction, optional free prompt. |\n| **🗒️LC Style Selector** | Category, preset, quality level → style line for the stack. |\n\n**Tips**\n- Prefer presets for consistency; use the free **prompt** fields for one-off details.\n- Scene still contributes **background text** even when scene bboxes are off.\n\n---\n\n## 🎨 Color palette\n\n| Node | What it does |\n|------|----------------|\n| **🎨LC Color Palette** | Preset swatches or sample colors **from an image**. Prompt text (hex list) + preview image. |\n\nImage-node color (`#324B4B`). Use the **prompt** socket into the assembler **palette** input.\n\n---\n\n## 🎲 Wildcard\n\n| Node | What it does |\n|------|----------------|\n| **🎲LC Wildcard** | Pick a list under `assets/wildcards/`, output one random line (seed-stable). |\n\n- **base_seed** + **seed_mode**: fixed / randomize / increment / decrement (works on partial runs).\n- No seed output — plug **text** into subject description, join strings, etc.\n- Lists are plain `.txt` files (one entry per line). Edit anytime; restart once if the dropdown is stale.\n\n---\n\n## 🧩 Assembler (the hub)\n\n**🧩LC Prompt Assembler**\n\n| Output | Use for |\n|--------|---------|\n| **prompt** | Human-readable stack → **CLIP / conditioning** (no regional builder). |\n| **json** | Krea2 Regional / Ideogram-style **import_json** (structured caption + subject bboxes). |\n\n| Widget | Meaning |\n|--------|---------|\n| **pretty_print** | Indented JSON vs compact. |\n| **remove_empty** | Drop blank sections. |\n| **include_scene_bboxes** | **Off by default.** On = also emit furniture/landmark boxes from the scene. Off = **subject boxes only**. |\n| **margin** | Inset all boxes from the frame edge (default **5%**). |\n\n**Important**\n- **Krea2 does not “read JSON” inside the model.** Builders parse JSON; the model still sees text + any regional conditioning those builders create.\n- Plain path: **prompt → conditioning**.  \n- Regional path: **json → builder →** that node’s outputs.\n\n\n---\n\n## ✅ Quick recipes\n\n**1. Simple text-only (no regional)**  \nSubjects + scene + camera + lighting + style → Assembler → **prompt** → CLIP.\n\n**2. Multi-subject regional (Krea2)**  \nTwo+ Subjects (different positions) → Array → Assembler → **json** → Krea2 builder (outputs must be connected so it runs). Leave **include_scene_bboxes** off unless you want furniture boxes.\n\n**3. Random outfit / action**  \nWildcard → Subject **description** (or outfit via your own wiring) → rest of chain.\n\n**4. Palette from reference still**  \nImage → Color Palette → Assembler **palette**.\n\n---\n\n## 📁 Editable assets\n\n```\nassets/wildcards/          ← .txt lists for 🎲LC Wildcard\nassets/prompt_builder/     ← preset JSON (scenes, outfits, poses, scene objects, …)\n```\n\nNo special `__wildcard__` syntax — just choose a file and get a line.\n\n---\n\n## 💡 Habits that save pain\n\n- Fix seeds while dialing composition; randomize when exploring.\n- Run the **assembler** (and the Krea builder) with outputs connected, or nothing updates downstream.\n- For conditioning only, ignore **json**.\n- For regional only, still keep **prompt** around for debugging what the stack “says” in plain language.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 12,
+      "type": "LCShowText",
+      "pos": [
+        -14900,
+        -1080
+      ],
+      "size": [
+        360,
+        710
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": ".Json (works with Ideogram KJ node)",
+      "properties": {
+        "Node name for S&R": "LCShowText",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "{\n  \"aspect_ratio\": \"1:1\",\n  \"bbox_order\": \"yx\",\n  \"high_level_description\": \"an average-height Syrian woman with long dark wavy hair, olive skin, expressive dark eyes stretching after a workout in the gym, blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\",\n  \"style_description\": {\n    \"aesthetics\": \"Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready\",\n    \"lighting\": \"soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling, camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow\",\n    \"medium\": \"photograph\",\n    \"color_palette\": [\n      \"#000000\",\n      \"#332211\",\n      \"#221100\",\n      \"#111100\",\n      \"#110000\",\n      \"#666655\"\n    ]\n  },\n  \"compositional_deconstruction\": {\n    \"background\": \"rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail\",\n    \"elements\": [\n      {\n        \"type\": \"obj\",\n        \"bbox\": [\n          218,\n          218,\n          782,\n          782\n        ],\n        \"desc\": \"an average-height Syrian woman with long dark wavy hair, olive skin, expressive dark eyes stretching after a workout in the gym\"\n      },\n      {\n        \"type\": \"obj\",\n        \"bbox\": [\n          314,\n          140,\n          686,\n          390\n        ],\n        \"desc\": \"blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\"\n      }\n    ]\n  }\n}"
+      ],
+      "widgets_values_named": {
+        "text": "{\n  \"aspect_ratio\": \"1:1\",\n  \"bbox_order\": \"yx\",\n  \"high_level_description\": \"an average-height Syrian woman with long dark wavy hair, olive skin, expressive dark eyes stretching after a workout in the gym, blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\",\n  \"style_description\": {\n    \"aesthetics\": \"Commercial / product, cinematic film still, anamorphic-inspired oval bokeh suggestion, filmic contrast, motivated practical lights, narrative atmosphere, subtle grain, editorial-grade finish, selective sharpness, refined color, publication ready\",\n    \"lighting\": \"soft ambient fill with gentle falloff, minimal hard shadows, even skin tones, calm indoor atmosphere, key from front-left of the subject, natural interview-style modeling, camera at eye level, neutral documentary perspective, natural proportions, medium shot waist-up, standard lens perspective, readable pose and wardrobe, natural conversational distance, depth of field: Very shallow\",\n    \"medium\": \"photograph\",\n    \"color_palette\": [\n      \"#000000\",\n      \"#332211\",\n      \"#221100\",\n      \"#111100\",\n      \"#110000\",\n      \"#666655\"\n    ]\n  },\n  \"compositional_deconstruction\": {\n    \"background\": \"rain-slick city street, neon or streetlamp reflections on wet asphalt, shallow depth of field, umbrella silhouettes in the distance, cool-magenta and sodium practical lights, no main person, no readable brand names, first light of dawn, cool blue-pink sky gradient, quiet low sun, clear sky conditions, crisp air, clean distant detail\",\n    \"elements\": [\n      {\n        \"type\": \"obj\",\n        \"bbox\": [\n          218,\n          218,\n          782,\n          782\n        ],\n        \"desc\": \"an average-height Syrian woman with long dark wavy hair, olive skin, expressive dark eyes stretching after a workout in the gym\"\n      },\n      {\n        \"type\": \"obj\",\n        \"bbox\": [\n          314,\n          140,\n          686,\n          390\n        ],\n        \"desc\": \"blue haired hippie chick, pose: standing, action: talking, wearing halter top and palazzo pants\"\n      }\n    ]\n  }\n}"
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    }
+  ],
+  "links": [
+    [
+      1,
+      6,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      9,
+      0,
+      4,
+      1,
+      "STRING"
+    ],
+    [
+      4,
+      1,
+      0,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      5,
+      5,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      6,
+      4,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      14,
+      0,
+      8,
+      1,
+      "STRING"
+    ],
+    [
+      8,
+      3,
+      0,
+      8,
+      2,
+      "STRING"
+    ],
+    [
+      9,
+      10,
+      0,
+      8,
+      3,
+      "STRING"
+    ],
+    [
+      10,
+      13,
+      0,
+      8,
+      4,
+      "STRING"
+    ],
+    [
+      11,
+      16,
+      0,
+      8,
+      5,
+      "STRING"
+    ],
+    [
+      12,
+      8,
+      0,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      8,
+      1,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      14,
+      15,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "🗒️LC Prompt Builder",
+      "bounding": [
+        -16330,
+        -1680,
+        2490,
+        1320
+      ],
+      "color": "#8A8",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "k2cf_state_id": "k2cf_1785113348833_apxfftyz2ud",
+    "ds": {
+      "scale": 0.3452271214393154,
+      "offset": [
+        17676.991874577965,
+        2215.0186959146567
+      ]
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.49.6",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

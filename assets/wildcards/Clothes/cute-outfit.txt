@@ -1,0 +1,153 @@
+a black cropped_blazer, white fitted_bustier_top, high-waisted black pleated_skirt, black knee-high_boots, matching black belt
+a pink frilled_stage-dress, white lace-trimmed_petticoat, white knee-high_boots, matching pink satin_gloves, pearl_embellishments
+a blue off-shoulder_blouse, white high-waisted_tennis-skirt, white knee-high_socks, white platform_sneakers, matching blue ribbon_necktie
+a red plaid_cropped_blazer, black fitted_top, high-waisted black shorts, black thigh-high_stockings, black lace-up_boots, silver chain_accessories
+a purple leather_cropped-jacket, black fitted_leotard, high-waisted black vinyl_pants, black thigh-high_heels, silver chain_belt
+a white cropped_bolero-jacket, blue fitted_bustier_top, high-waisted white pleated_skirt, white thigh-high_socks, blue platform_shoes, matching blue ribbon_choker
+a black asymmetrical_military-jacket, red fitted_crop-top, high-waisted black leather-shorts, fishnet_tights, black knee-high_platform-boots, matching black studded_gloves
+a pink layered_tulle-dress, white lace-trimmed_safety-shorts, white thigh-high_stockings, pink ribbon_heels, matching pink pearl_necklace
+a navy double-breasted_blazer, white collared_cropped_top, high-waisted navy plaid_skirt, black knee-high_socks, brown loafers, matching navy beret
+a black cropped_harness-jacket, purple fitted_tank-top, high-waisted black pleated_skirt, black ripped_tights, black lace-up_boots, matching purple fingerless_gloves
+a red plaid_cropped_jacket, black fitted_corset_top, high-waisted black leather_shorts, black thigh-high_socks, red platform_boots, matching black choker
+a white off-shoulder_blouse, pink high-waisted_ruffled_skirt, white knee-high_stockings, pink ribbon_heels, matching pink lace_gloves
+a black sleeveless_cropped_blazer, white fitted_leotard, high-waisted black pleated_skirt, black lace_tights, black platform_boots, matching black ribbon_tie
+a blue satin_halter_top, white high-waisted_shorts, white knee-high_socks, blue platform_sneakers, matching blue pearl_bracelet
+a purple leather_cropped_jacket, black strappy_bustier_top, high-waisted black plaid_skirt, black ripped_stockings, black lace-up_boots, matching silver chain_belt
+a black cropped_biker-jacket, white fitted_t-shirt, high-waisted black pleated_skirt, black thigh-high_socks, black combat_boots, silver chain_belt
+a purple off-shoulder_blouse, white high-waisted_tulle_skirt, black thigh-high_socks, purple ribbon_boots, matching purple choker
+a black long-sleeve_cropped_top, red high-waisted_skirt, black fishnet_tights, black ankle_boots, red plaid_shirt tied around waist
+a pink satin_cropped_jacket, white lace-trimmed_leotard, high-waisted pink pleated_skirt, white thigh-high_stockings, pink platform_heels
+a blue denim_cropped_jacket, white fitted_top, high-waisted blue ripped_shorts, black thigh-high_socks, black combat_boots, matching black belt
+a black asymmetrical_cropped_jacket, white fitted_tank_top, high-waisted black pleated_skirt, black fishnet_tights, black platform_boots, silver chain_belt
+a red off-shoulder_blouse, white high-waisted_ruffled_skirt, black thigh-high_socks, red ribbon_heels, matching red lace_gloves
+a purple leather_cropped_jacket, black fitted_leotard, high-waisted black vinyl_skirt, black thigh-high_boots, silver chain_belt
+a pink satin_cropped_top, white high-waisted_pleated_skirt, white knee-high_socks, pink platform_heels, matching pink lace_gloves
+a black long-sleeve_cropped_top, red plaid_tartan_skirt, black fishnet_tights, black ankle_boots, matching black belt
+a white off-shoulder_sweater, blue high-waisted_denim_skirt, white thigh-high_socks, white sneakers, matching white pearl_bracelet
+a black lace-cropped_turtleneck, high-waisted black leather_shorts, black thigh-high_boots, matching black leather_belt, silver chains
+a purple satin_off-shoulder_bustier, high-waisted black leather_skirt, black thigh-high_stockings, purple ribbon_tie_boots
+a blue denim_cropped_jacket, white fitted_t-shirt, high-waisted black shorts, black knee-high_socks, black combat_boots, matching black belt
+a pink ruffled_stage-dress, white lace-trimmed_safety-shorts, pink platform_boots, white thigh-high_socks, matching pink pearl_bracelet
+a black cropped_motorcycle_jacket, white fitted_t-shirt, high-waisted black leather_skirt, black lace-up_boots, silver chain_accessories
+a red plaid_cropped_blazer, black fitted_bustier_top, high-waisted black pleated_skirt, black thigh-high_socks, red platform_boots
+a blue velvet_off-shoulder_bustier, high-waisted black leather_shorts, black thigh-high_socks, blue ribbon_boots, silver choker
+a white cropped_puffy_sleeve_blouse, high-waisted white denim_skirt, white knee-high_socks, white platform_sneakers, matching pearl_necklace
+a black cropped_hoodie, red plaid_skirt, black fishnet_stockings, black combat_boots, matching red plaid_shirt_tied around waist
+a purple satin_cropped_bomber-jacket, white fitted_leotard, high-waisted purple pleated_skirt, black thigh-high_boots, matching purple beret
+a black leather_cropped_blazer, red lace-trimmed_bustier, high-waisted black vinyl_pants, black thigh-high_heels, silver chain_belt
+a pink off-shoulder_knit_top, white high-waisted_flared_skirt, white thigh-high_socks, pink platform_heels, matching pink bow_headband
+a green cropped_bomber-jacket, white fitted_top, high-waisted green cargo_pants, green platform_sneakers, matching green accessories
+a navy double-breasted_blazer, white collared_cropped_top, high-waisted navy plaid_skirt, black knee-high_socks, brown loafers
+a black cropped_motorcycle_jacket, white fitted_t-shirt, high-waisted black leather_skirt, black lace-up_boots, silver chain_accessories
+a red plaid_cropped_blazer, black fitted_bustier_top, high-waisted black pleated_skirt, black thigh-high_socks, red platform_boots
+a blue velvet_off-shoulder_bustier, high-waisted black leather_shorts, black thigh-high_socks, blue ribbon_boots, silver choker
+a white cropped_puffy_sleeve_blouse, high-waisted white denim_skirt, white knee-high_socks, white platform_sneakers, matching pearl_necklace
+a black cropped_hoodie, red plaid_skirt, black fishnet_stockings, black combat_boots, matching red plaid_shirt_tied around waist
+a purple satin_cropped_bomber-jacket, white fitted_leotard, high-waisted purple pleated_skirt, black thigh-high_boots, matching purple beret
+a black leather_cropped_blazer, red lace-trimmed_bustier, high-waisted black vinyl_pants, black thigh-high_heels, silver chain_belt
+a pink off-shoulder_knit_top, white high-waisted_flared_skirt, white thigh-high_socks, pink platform_heels, matching pink bow_headband
+a green cropped_bomber-jacket, white fitted_top, high-waisted green cargo_pants, green platform_sneakers, matching green accessories
+a navy double-breasted_blazer, white collared_cropped_top, high-waisted navy plaid_skirt, black knee-high_socks, brown loafers
+a black asymmetrical_cropped_top, white fitted_leotard, high-waisted black leather_skirt, black thigh-high_boots, silver chain_belt
+a white lace-cropped_blouse, red plaid_skirt, black knee-high_socks, red platform_boots, matching black ribbon_headband
+a black oversized_cropped_jacket, white fitted_t-shirt, high-waisted black denim_skirt, black thigh-high_socks, black ankle_boots
+a pink satin_bustier, high-waisted black pleated_skirt, pink thigh-high_socks, pink platform_heels, matching pink choker
+a purple cropped_cape, white fitted_bustier_top, high-waisted purple velvet_skirt, black thigh-high_boots, silver chain_belt
+a red velvet_cropped_jacket, black fitted_leotard, high-waisted black leather_shorts, black lace-up_boots, matching silver bracelet
+a green cropped_bomber-jacket, white fitted_t-shirt, high-waisted green plaid_skirt, white thigh-high_socks, green platform_boots
+a black satin_cropped_top, high-waisted black leather_skirt, black thigh-high_socks, black combat_boots, silver chain_belt
+a yellow off-shoulder_bustier, white high-waisted_ruffled_skirt, yellow ribbon_heels, matching yellow pearl_bracelet
+a black sleeveless_cropped_hoodie, high-waisted black denim_pants, black knee-high_socks, black combat_boots, matching black belt
+a white button-up_blouse, black high-waisted_skirt, black thigh-high_socks, black platform_boots, matching silver choker
+a red fitted_t-shirt, black high-waisted_pleated_skirt, white knee-high_socks, red platform_boots, matching red ribbon_headband
+a black oversized_t-shirt, high-waisted black denim_skirt, black thigh-high_socks, black ankle_boots, matching silver bracelet
+a pink off-shoulder_blouse, high-waisted white plaid_skirt, pink ribbon_heels, matching pink pearl_necklace
+a white fitted_leotard, black high-waisted leather_skirt, black thigh-high_boots, black lace-up_boots, silver chain_belt
+a navy blue blazer, white collared_cropped_top, high-waisted navy plaid_skirt, black knee-high_socks, brown loafers
+a green oversized_hoodie, black high-waisted_leggings, black combat_boots, matching green beret
+a purple satin_tank_top, black high-waisted pleated_skirt, black thigh-high_stockings, purple ribbon_boots
+a blue denim_jacket, white fitted_t-shirt, black high-waisted ripped_skirt, white thigh-high_socks, white sneakers
+a black long-sleeve_leotard, red pleated_skirt, black thigh-high_boots, silver chain_belt, matching red ribbon_headband
+a black high-neck_leotard, white high-waisted_pleated_skirt, black thigh-high_socks, black platform_boots, silver chain_belt
+a white button-up_shirt, black high-waisted_leather_skirt, black thigh-high_boots, black lace-up_boots, matching black belt
+a pink satin_ruffled_blouse, high-waisted white plaid_skirt, pink thigh-high_socks, pink platform_boots
+a green cropped_bomber-jacket, white fitted_t-shirt, black high-waisted pants, green platform_sneakers, matching green beret
+a purple satin_bustier_top, high-waisted black leather_skirt, purple thigh-high_boots, silver chain_belt
+a red plaid_cropped_jacket, black fitted_turtleneck_body, high-waisted black denim_skirt, black fishnet_tights, red platform_boots
+a yellow oversized_t-shirt, high-waisted black pleated_skirt, yellow ribbon_heels, matching yellow bow_headband
+a blue velvet_cropped_bomber-jacket, white fitted_leotard, high-waisted blue denim_skirt, white thigh-high_socks, blue platform_boots
+a black lace-cropped_blouse, high-waisted black leather_shorts, black thigh-high_boots, silver chains
+a pink off-shoulder_top, high-waisted black vinyl_skirt, pink thigh-high_socks, matching pink lace_gloves
+a black high-neck_leotard, high-waisted black vinyl_skirt, black thigh-high_boots, silver chain_belt, black leather_jacket
+a white button-up_shirt, high-waisted black leather_shorts, black lace-up_boots, silver choker, black thigh-high_socks
+a red satin_bustier, high-waisted black pleated_skirt, black combat_boots, red platform_sneakers, silver chain_belt
+a navy cropped_sweater, high-waisted white denim_skirt, navy thigh-high_socks, navy platform_boots
+a yellow oversized_t-shirt, black high-waisted jeans, yellow platform_sneakers, black beret
+a pink off-shoulder_bustier, white high-waisted pleated_skirt, pink platform_boots, matching pink pearl_necklace
+a black cropped_cape, white fitted_leotard, high-waisted black leather_skirt, black combat_boots, silver chain_belt
+a green satin_tank_top, high-waisted black denim_skirt, black knee-high_socks, green ribbon_boots
+a purple long-sleeve_leotard, black high-waisted leather_shorts, purple lace-up_boots, matching purple beret
+a black high-neck_leotard, high-waisted red pleated_skirt, black thigh-high_socks, black combat_boots, silver chain_belt
+a white cropped_t-shirt, high-waisted plaid_skirt, white knee-high_socks, black platform_boots, matching silver necklace
+a green off-shoulder_bustier, high-waisted black leather_skirt, green thigh-high_boots, matching green beret
+a red satin_ruffled_blouse, high-waisted black vinyl_skirt, black lace-up_boots, red ribbon_heels
+a black oversized_t-shirt, high-waisted ripped_jeans, black knee-high_socks, black combat_boots, matching silver bracelet
+a white lace-cropped_blouse, high-waisted blue denim_skirt, white thigh-high_socks, white platform_boots
+a yellow cropped_hoodie, high-waisted black leather_shorts, yellow thigh-high_boots, matching yellow headband
+a black velvet_bustier_top, high-waisted red pleated_skirt, black lace-up_boots, silver chain_belt
+a pink satin_off-shoulder_blouse, high-waisted white plaid_skirt, pink platform_boots, matching pink pearl_bracelet
+a purple satin_cropped_jacket, white fitted_leotard, high-waisted black denim_skirt, purple platform_boots
+a navy cropped_bomber-jacket, white fitted_t-shirt, high-waisted black vinyl_skirt, white thigh-high_socks, navy ribbon_boots
+black shirt, spaghetti strap, torn shorts, bracelets, jewelry, hoop earrings, piercings, puffer jacket, fur trim, long sleeves, clothing logos
+big hoodie, hoodie down past waist, beanie, loose clothes, torn shorts, bracelets, jewelry, hoop earrings, piercings, long sleeves, clothing logos
+choker, denim, eyewear on head, jeans, smile, solo, sunglasses, torn jeans, front tied shirt, camo T-shirt, short sleeves, handbag, bracelets, jewelry, hoop earrings, piercings, 
+tanktop, torn pants, denim jeans, bracelets, jewelry, hoop earrings, piercings, jacket, long sleeves, clothing logos 
+overalls, pocket chain, belts, velcro straps, bracelets, jewelry, hoop earrings, piercings
+black shirt, spaghetti strap, torn pants, denim jeans, beanie, black choker, red plaid clothes around waist, clothing logos, bracelets, jewelry, hoop earrings, piercings, 
+black shirt, spaghetti strap, torn shorts, black hairband with bunny ribbons tied together, black choker, red plaid clothes around waist, clothing logos, bracelets, jewelry, hoop earrings, piercings, 
+bare shoulders, black-framed eyewear, legwear, sweater, collarbone, long sleeves, off shoulder, ribbed sweater, thighhighs, thighs, dress, long sweater, adjusting glasses, 
+black shirt, choker, cutoffs, denim, denim shorts, fishnet legwear, fishnets, pantyhose, shorts, torn jeans, torn legwear, off shoulder
+ribbed sweater, gold chain necklace, shorts, belt, (no sleeves:1.5), bracelets, jewelry, hoop earrings, piercings
+form-fitting, (lace bodysuit:1.2), sheer lace detailing, spaghetti straps, Jed-Lcbdyst, <lora:LaceBodysuit:1> floral design, torn shorts, fishnet tights, bracelets, jewelry, hoop earrings, piercings, 
+bracelet, choker, collar, collarbone, ear piercing, earrings, jewelry, piercing, black plaid skirt, plectrum, skirt, black top, punk chains, chains on skirt, chain necklace, keychains, gothic chains, black lipstick, black eyeliner
+sports shorts, sporty look, Baseball Jersey, Tshirt, clothing logos, sweatbands, socks, hair tied up, ponytail, bandaids, bandages
+(white dress:1.3, floral design, summer dress), open shoulders, sleeves, long dress, bracelets, flower, sunhat, straw hat, see through silhouette, sun shining through dress, strapless, 
+({black and red | white and blue} school uniform:2), sailor collar, collarbone, crop top, crop top overhang, eyebrows visible through hair, neckerchief, {pleated | mini} skirt, short sleeves,
+bag, bare shoulders, black choker,  jacket, legwear, choker, clothes writing, collarbone, crop top, earrings, floral print, flower earrings, handbag, heart earrings, hoop earrings, jacket, jewelry, long sleeves, off shoulder, open clothes, open jacket, pink skirt, pleated skirt, puffy sleeves, shirt, shirt tucked in, shoulder bag, sleeveless shirt, socks
+sunflower design, bikini, spaghetti strap, tied straps, floral print, see through skirt, knee length, bracelets, jewelry, hoop earrings, piercings
+belt, black choker, black nails, black skirt, blush, collarbone, hair over one eye, long sleeves, multicolored nails, nail art, nail polish, off shoulder, one side up, pink nails, purple nails, red nails, shirt, skirt, solo, striped, striped shirt, thigh strap, yellow nails
+black jacket, black pants, clothing cutout, hair ornament, black shirt, skull logos, jacket, long sleeves, torn jeans, long coat, baggy sleeves, spikes on outfit, spikes, long belts, spiked choker, hanging belts, jacket logos, lipstick, black eyeliner, thick eyeliner, skull hairclips, skull earrings, key chains, pocket chains, clothing chains
+aran sweater, backless outfit, bare back, bare shoulders, dress, halterneck, ribbed sweater, sweater, sweater dress, turtleneck, turtleneck sweater, virgin killer sweater
+compression shorts, sporty look, sports bra, clothing logos, sweatbands, socks, running shoes, hair tied up, ponytail, bandaids, bandages, 
+bare shoulders, china dress, chinese clothes, detached sleeves, hair ornament, dress, earrings, jewelry, floral design, silk clothing, thigh, bottomless, no panties
+bare shoulders, bowtie, leotard, nails, detached collar, fake animal ears, heart earrings, highleg leotard, jewelry, leotard, nail polish, playboy bunny, rabbit ears, strapless leotard, wrist cuffs, thigh belt, gold jewelry, fishnet tights, high heels, heart accessories, 
+plaid clothes, baggy sweater, (very long sweater:1.5), skirt, sleeves past hands, very long sleeves, thighhighs, clothing logos, shirt past hips
+black shirt, spaghetti strap, torn shorts, black hairband with bunny ribbons tied together, black choker, red plaid clothes around waist, clothing logos, bracelets, jewelry, hoop earrings, piercings, 
+Baggy pants, cargo pants, spiked boots, (checkered pattern clothing:1.3), Multiple belts, String bikini, bikini top, black hairband with bunny ribbons tied together, arm bandages, arm guards, metal armor, fingerless gloves, ski goggles on head, long red scarf
+beanie, red scarf, long scarf, baggy sweater, long sleeves, sleeves past wrists, shorts, black tights, colored nails, black nails, warm clothes
+naked shirt, long shirt, silhouette, see through shirt, sun shining through clothes, clothing logos, black panties, black bra
+frill dress, gothic lace, black seams, cute earrings, Lolita skirt, multilayered, hair bow ribbon, fishnet tights, frill bracelet, frill collar, pink bows, pink ribbons, floral designs, see through clothes, silhouette, pink eyeliner, light pink lipstick
+(very long white hair:1.5, red gradient hair:1.3), amaterasu, bare shoulders, dress, off shoulder, spot color, Red tattoos, glowing tattoos, animal ears, cat ears, facial mark, forehead mark, Japanese clothes, kimono, sash, wolf tail, whisker markings, white kimono, wide sleeves, glowing hair, Hair tips red flames, embers, pink sakura petals <lora:Amaterasu_Okami_PonyXL_prototype:1>
+baggy hoodie, long shirt, long sleeves, loose sleeves, clothing logo, logo designs, pink bandaids, star hairclip, pink choker, star pupils, eye highlights, pink nails, pink cellphone, pink earrings, multicolored hair, pink highlights
+Black dress, tight fit, dress thigh, hidden thigh straps, knife strapped to thigh, black high heels, open shoulder, sleeves, white floral pattern, black nails, long dress, lips, jewelry, gold bracelet, gold earrings, gold necklace
+black bra, black shorts, mesh shirt, black transparent top, fishnet shirt, fishnet tights, black eyeshadow, nose piercing, lip piercing, earrings, silver piercings, floral tattoos, rose tattoos, leg tattoo, belly tattoo, arm tattoo
+(paint on body, paint on face, paint on clothing, covered in paint, gas mask:2, graffiti:1.5), graffiti designs, headphones, sweat pants, basketball jersey, hair streaks, multi colored hair, jacket hoodie, off shoulders, painted nails
+(fishnet bodysuit:1.5), holding weapon, katana, leg straped kunai knives, kunai on arms, ninja star, oni mask, fake horns, shinobi, ninja outfit, hip vent, pelvic curtain, sideboob, sash, japanese clothes, scarf, metal headband, sleeveless, see through top
+string bikini, blue, white, bracelets, tanned skin, unbuttoned jean shorts, sunglasses, innertube, beach umbrella, beachball, starfish
+kimono, floral print, obi, sash, bracelet, long sleeves, , long clothes, hair clips, flower in hair
+bracelets, jewelry, gold chain necklace, hoop earrings, tongue piercing, baggy pants, tubetop, fur trim jacket, open shoulders, colors nails, sunglasses, tattoos, belly button piercing, beanie
+crop top, black bunny hair ribbon, bracelets, earrings, long croptop, croptop overhang, jean shorts, clothing logos, short sleeves, belly button piercing
+baggy cargo pants, belts, baggy sweatshirt, choker, nail polish, single open shoulder, earrings, punk aesthetic, belt chain
+off shoulder, t-shirt, (baggy shirt:1.2, loose clothes:1.2, long shirt, shirt past hips:1.2, nipples:0.4, navel:0.4), body silhouette, see-through silhouette, clothing logos, naked under shirt, standing in door frame
+black bikini top, see through top, tied shirt, ripped shorts, sunglasses, bikini straps
+amplifier instrument, black footwear, black jacket, choker, cross-laced footwear, earrings, electric guitar, fishnet legwear, hair flower, hair ornament, holding instrument, jewelry, knee boots, lace-up boots, left-handed, microphone, music, pantyhose, playing instrument, sparkle, spiked bracelet, spikes, streaked hair, studded belt, thighhighs, violi
+tan lines, torn jean shorts, exposed pockets, hoop earrings, flower in hair, hibiscus flower, colored nails, bracelets, sunglasses on head, Brazilian jersey, yellow jersey, soccer jersey
+wide rimmed hat, witch hat, long dress, black high heels, ribbons, frills, purple black clothing, dangling accessories, silver jewelry, black dress, blue flower, blue headwear, constellation, crescent, dark skin, dress, glint, gloves, hat, high heels, holding wand, jewelry, sparkle, sparkle background, star symbol, starry sky print, wand, water, witch, witch hat
+frill top, frill sleeves, strapless, croptop, (croptop overhang:1.5), (loose top), highwaist jean shorts, wrist bracelet, sandals
+new york jersey, white and blue striped jacket, open clothes, white tanktop, baseball cap, sideways cap, hat loose on head, jeans, hoop earrings, new york logo, nike logo
+frill top, frill sleeves, strapless, croptop, (croptop overhang:1.5), (loose top), highwaist jean shorts, wrist bracelet, sandals
+(gyaru), button up shirt, front tied shirt, ({loose tie:2 | loose bowtie:2}), bra, plaid mini skirt, long nails, colorful nails, pink hair highlights, black choker, bead bracelet, pierced ears, baggy socks, school shoes
+wearing blanket, flowing clothes, silk clothing, see through, body sillouette, baggy clothes, sun shining through clothing, (black bra:0.8, black thong:0.8)
+black shirt, short sleeves, (band logos on clothing:1.5), pentagram, (black and white skirt), pleated skirt, thighhighs, black nails, legbelt, cross, garter belt, arm belt, choker, hairclips, skull accessories
+naked apron, (nipples:0.1), white thighhighs, spatula, cooking pan, chefs hat, ribbon bow
+white and red chef uniform, chef hat, short skirt, tight skirt, black tights, shirt buttons, apron, oven mits

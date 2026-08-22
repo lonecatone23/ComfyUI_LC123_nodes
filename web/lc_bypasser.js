@@ -183,6 +183,14 @@ app.registerExtension({
         this.scheduleStabilize(80);
         this.scheduleStabilize(300);
       }
+
+      onResize(size) {
+        // Keep height at fitted minimum for current slot count
+        const fitH = this._lcPanelFitH || Math.max(56, 34 + (this.widgets?.length || 0) * 24 + 20);
+        if (size && size[1] < fitH) size[1] = fitH;
+        if (size && size[0] < 260) size[0] = 260;
+        return size;
+      }
       scheduleStabilize(ms = 20) {
         clearTimeout(this._lcTimer);
         this._lcTimer = setTimeout(() => {
@@ -480,6 +488,14 @@ app.registerExtension({
         this.scheduleStabilize(300);
       }
 
+      onResize(size) {
+        // Keep height at fitted minimum for current slot count
+        const fitH = this._lcPanelFitH || Math.max(56, 34 + (this.widgets?.length || 0) * 24 + 20);
+        if (size && size[1] < fitH) size[1] = fitH;
+        if (size && size[0] < 260) size[0] = 260;
+        return size;
+      }
+
       getHub() {
         const hubInp = (this.inputs || []).find((i) => i && i.name === "hub");
         return resolveHub(getLinkedOrigin(app.graph, hubInp), app.graph);
@@ -573,23 +589,26 @@ app.registerExtension({
           }
         }
 
-        // Floor only — never force exact height (user resize must survive save/reload)
+        // Height tracks connection count: grow/shrink to exact fit when slots change.
+        // No optional trim — min height IS the fitted height (avoids 10px shrink + reload snap).
         const n = this.widgets.length;
-        const minH = Math.max(56, 34 + Math.max(n, 0) * 24 + 12);
+        const fitH = Math.max(56, 34 + Math.max(n, 0) * 24 + 20);
         const minW = 260;
-        if (!this.size) this.size = [minW, minH];
-        let changed = false;
-        if ((this.size[0] || 0) < minW) {
-          this.size[0] = minW;
-          changed = true;
-        }
-        // Only grow if too short for toggles; do not snap taller custom sizes down
-        if ((this.size[1] || 0) < minH) {
-          this.size[1] = minH;
-          changed = true;
-        }
-        if (changed) {
-          if (typeof this.setSize === "function") this.setSize([this.size[0], this.size[1]]);
+        const prevN = this._lcPanelSlotCount;
+        this._lcPanelSlotCount = n;
+        this._lcPanelFitH = fitH;
+
+        if (!this.size) this.size = [minW, fitH];
+        const width = Math.max(minW, this.size[0] || minW);
+        // Always lock height to fitted size for current connections (no trim / no snap fight)
+        const h = fitH;
+
+        if (Math.abs((this.size[0] || 0) - width) > 1 || Math.abs((this.size[1] || 0) - h) > 1) {
+          if (typeof this.setSize === "function") this.setSize([width, h]);
+          else {
+            this.size[0] = width;
+            this.size[1] = h;
+          }
           this.setDirtyCanvas?.(true, true);
         }
       }

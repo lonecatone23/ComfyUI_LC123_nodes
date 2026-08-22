@@ -45,6 +45,7 @@ _load("lc_combo")
 _load("lc_invert_boolean")
 _load("lc_boolean")
 _load("lc_boolean_switch")
+_load("lc_prompt_builder")
 _load("lc_join_strings")
 _load("lc_show_text")
 _load("lc_text_replace")
@@ -96,3 +97,23 @@ WEB_DIRECTORY = "./web"
 print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
+
+# LC Wildcard
+try:
+    from .lc_wildcard import NODE_CLASS_MAPPINGS as _LC_WC_MAP
+    from .lc_wildcard import NODE_DISPLAY_NAME_MAPPINGS as _LC_WC_DISP
+    NODE_CLASS_MAPPINGS.update(_LC_WC_MAP)
+    NODE_DISPLAY_NAME_MAPPINGS.update(_LC_WC_DISP)
+except Exception as _e:
+    print(f"[LC123] lc_wildcard load skipped: {_e}")
+
+# LC Seed (utility)
+try:
+    from .lc_seed import NODE_CLASS_MAPPINGS as _LC_SEED_MAP
+    from .lc_seed import NODE_DISPLAY_NAME_MAPPINGS as _LC_SEED_DISP
+    NODE_CLASS_MAPPINGS.update(_LC_SEED_MAP)
+    NODE_DISPLAY_NAME_MAPPINGS.update(_LC_SEED_DISP)
+except Exception as _e:
+    print(f"[LC123] lc_seed load skipped: {_e}")
+
+

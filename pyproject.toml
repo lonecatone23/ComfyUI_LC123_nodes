@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.11.0"
-description = "ComfyUI LC123 Nodes by lonecatone23 — aspect ratio presets, dual sigma, image FX, Skin Beauty, Photo Style, boolean switch/flip/value, pipes, notify, performance settings, and more."
+version = "1.12.0"
+description = "ComfyUI LC123 Nodes by lonecatone23 — prompt builder (subject/scene/camera/lighting/style/palette/assembler), wildcards, seed utility, aspect ratio, dual sigma, image FX, Skin Beauty, Photo Style, pipes, notify, performance settings."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -10,7 +10,8 @@ keywords = [
   "comfyui", "custom-nodes", "slider", "regional", "aspect-ratio",
   "image-processing", "post-processing", "film-grain", "lut", "pipes",
   "watermark", "bypasser", "sigma", "scheduler", "notify", "lonecat",
-  "skin-beauty", "photo-style", "image-split", "performance", "boolean-switch", "aspect-ratio",
+  "skin-beauty", "photo-style", "image-split", "performance", "boolean-switch",
+  "prompt-builder", "wildcard", "krea2", "ideogram",
 ]
 
 [project.urls]

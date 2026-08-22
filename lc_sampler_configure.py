@@ -1,18 +1,34 @@
 """
 LC Sampler Configure
 --------------------
-Central config node for dual-pass / split-sigma workflows.
+Central config nodes for dual-pass / split-sigma and simple single-CFG workflows.
 
-LC Sampler Configure (pipe) — same widgets, adds a pipe output at the top.
-LC Sampler Configure Pipe — unpack-only (pipe in → individual sockets).
+- LC Sampler Configure — full dual-pass widgets
+- LC Sampler Configure (pipe) — same + optional pipe in (left) + pipe out (top)
+- LC Sampler Configure Pipe Out — unpack pipe → sockets
+- LC Sampler Configure Simple — no step_swap / cfg_2
+- LC Sampler Configure Simple (pipe) — simple + optional pipe in + pipe out
 """
+
+from __future__ import annotations
 
 import comfy.samplers
 
 PIPE_TYPE = "LC_PIPE"
 
 
-def _sampler_input_types():
+def _gap():
+    return (
+        "STRING",
+        {
+            "default": "",
+            "multiline": False,
+            "tooltip": "Layout spacer",
+        },
+    )
+
+
+def _full_widgets():
     return {
         "required": {
             "total_steps": (
@@ -53,15 +69,7 @@ def _sampler_input_types():
                     "tooltip": "Denoise strength used when building the sigma schedule (1.0 = full).",
                 },
             ),
-            # Visual gap markers — rendered as ~5px spacers by web/lc_sampler_configure.js
-            "_gap1": (
-                "STRING",
-                {
-                    "default": "",
-                    "multiline": False,
-                    "tooltip": "Layout spacer",
-                },
-            ),
+            "_gap1": _gap(),
             "cfg_1": (
                 "FLOAT",
                 {
@@ -82,14 +90,7 @@ def _sampler_input_types():
                     "tooltip": "CFG for the second (low-sigma) pass.",
                 },
             ),
-            "_gap2": (
-                "STRING",
-                {
-                    "default": "",
-                    "multiline": False,
-                    "tooltip": "Layout spacer",
-                },
-            ),
+            "_gap2": _gap(),
             "sampler_name": (
                 comfy.samplers.KSampler.SAMPLERS,
                 {
@@ -108,12 +109,140 @@ def _sampler_input_types():
     }
 
 
+def _simple_widgets():
+    return {
+        "required": {
+            "total_steps": (
+                "INT",
+                {
+                    "default": 40,
+                    "min": 1,
+                    "max": 10000,
+                    "tooltip": "Total sampling steps.",
+                },
+            ),
+            "detailer_steps": (
+                "INT",
+                {
+                    "default": 0,
+                    "min": 0,
+                    "max": 10000,
+                    "tooltip": "Steps reserved for a detailer / refiner stage (0 = unused).",
+                },
+            ),
+            "denoise": (
+                "FLOAT",
+                {
+                    "default": 1.0,
+                    "min": 0.0,
+                    "max": 1.0,
+                    "step": 0.01,
+                    "round": 0.01,
+                    "tooltip": "Denoise strength (1.0 = full).",
+                },
+            ),
+            "_gap1": _gap(),
+            "cfg": (
+                "FLOAT",
+                {
+                    "default": 8.0,
+                    "min": 0.0,
+                    "max": 100.0,
+                    "step": 0.1,
+                    "tooltip": "Classifier-free guidance scale.",
+                },
+            ),
+            "_gap2": _gap(),
+            "sampler_name": (
+                comfy.samplers.KSampler.SAMPLERS,
+                {
+                    "default": "euler",
+                    "tooltip": "Sampler algorithm.",
+                },
+            ),
+            "scheduler": (
+                comfy.samplers.KSampler.SCHEDULERS,
+                {
+                    "default": "normal",
+                    "tooltip": "Noise schedule.",
+                },
+            ),
+        },
+    }
+
+
+def _vals_from_full(total_steps, sampler_name, scheduler, **kwargs):
+    return (
+        int(total_steps),
+        float(kwargs.get("cfg_1", 8.0)),
+        float(kwargs.get("denoise", 1.0)),
+        int(kwargs.get("step_swap", 0)),
+        float(kwargs.get("cfg_2", 1.0)),
+        sampler_name,
+        scheduler,
+        int(kwargs.get("detailer_steps", 0)),
+    )
+
+
+def _vals_from_simple(total_steps, sampler_name, scheduler, **kwargs):
+    cfg = float(kwargs.get("cfg", 8.0))
+    return (
+        int(total_steps),
+        cfg,
+        float(kwargs.get("denoise", 1.0)),
+        sampler_name,
+        scheduler,
+        int(kwargs.get("detailer_steps", 0)),
+    )
+
+
+def _pipe_from_full_vals(vals, base=None):
+    """vals order: total_steps, cfg_1, denoise, step_swap, cfg_2, sampler, scheduler, detailer_steps"""
+    pipe = dict(base) if isinstance(base, dict) else {}
+    pipe["_type"] = PIPE_TYPE
+    pipe.update(
+        {
+            "total_steps": vals[0],
+            "cfg_1": vals[1],
+            "denoise": vals[2],
+            "step_swap": vals[3],
+            "cfg_2": vals[4],
+            "sampler_name": vals[5],
+            "scheduler": vals[6],
+            "detailer_steps": vals[7],
+        }
+    )
+    return pipe
+
+
+def _pipe_from_simple_vals(vals, base=None):
+    """vals: total_steps, cfg, denoise, sampler, scheduler, detailer_steps
+    Pack into full LC_PIPE with safe dual-pass defaults (step_swap=0, cfg_2=cfg).
+    """
+    pipe = dict(base) if isinstance(base, dict) else {}
+    pipe["_type"] = PIPE_TYPE
+    cfg = vals[1]
+    pipe.update(
+        {
+            "total_steps": vals[0],
+            "cfg_1": cfg,
+            "denoise": vals[2],
+            "step_swap": 0,
+            "cfg_2": cfg,
+            "sampler_name": vals[3],
+            "scheduler": vals[4],
+            "detailer_steps": vals[5],
+        }
+    )
+    return pipe
+
+
 class LCSamplerConfigure:
     @classmethod
     def INPUT_TYPES(cls):
-        return _sampler_input_types()
+        return _full_widgets()
 
-    # Keep historical socket order for existing graphs; detailer_steps appended last.
+    # Historical socket order for existing graphs
     RETURN_TYPES = (
         "INT",
         "FLOAT",
@@ -142,30 +271,24 @@ class LCSamplerConfigure:
     )
 
     def configure(self, total_steps, sampler_name, scheduler, **kwargs):
-        step_swap = int(kwargs.get("step_swap", 0))
-        detailer_steps = int(kwargs.get("detailer_steps", 0))
-        denoise = float(kwargs.get("denoise", 1.0))
-        cfg_1 = float(kwargs.get("cfg_1", 8.0))
-        cfg_2 = float(kwargs.get("cfg_2", 1.0))
-        # gaps ignored
-        return (
-            int(total_steps),
-            cfg_1,
-            denoise,
-            step_swap,
-            cfg_2,
-            sampler_name,
-            scheduler,
-            detailer_steps,
-        )
+        return _vals_from_full(total_steps, sampler_name, scheduler, **kwargs)
 
 
 class LCSamplerConfigurePipeOut:
-    """Same as LC Sampler Configure, plus pipe as the top output."""
+    """Full dual-pass configure + optional pipe in (left) + pipe out (top)."""
 
     @classmethod
     def INPUT_TYPES(cls):
-        return LCSamplerConfigure.INPUT_TYPES()
+        d = _full_widgets()
+        d["optional"] = {
+            "pipe": (
+                PIPE_TYPE,
+                {
+                    "tooltip": "Optional LC_PIPE in. Sampler keys from this node overwrite matching keys; other pipe fields pass through.",
+                },
+            ),
+        }
+        return d
 
     RETURN_TYPES = (
         PIPE_TYPE,
@@ -192,26 +315,14 @@ class LCSamplerConfigurePipeOut:
     FUNCTION = "configure"
     CATEGORY = "LC123/sampling"
     DESCRIPTION = (
-        "Same as LC Sampler Configure, with a pipe output at the top "
-        "for Get/Set and LC Sampler Configure Pipe Out unpack."
+        "Dual-pass sampler configure with optional pipe in (left) and pipe out (top). "
+        "Widget values write into the pipe; other keys from pipe in are kept."
     )
 
-    def configure(self, total_steps, sampler_name, scheduler, **kwargs):
-        vals = LCSamplerConfigure().configure(
-            total_steps, sampler_name, scheduler, **kwargs
-        )
-        pipe = {
-            "_type": PIPE_TYPE,
-            "total_steps": vals[0],
-            "cfg_1": vals[1],
-            "denoise": vals[2],
-            "step_swap": vals[3],
-            "cfg_2": vals[4],
-            "sampler_name": vals[5],
-            "scheduler": vals[6],
-            "detailer_steps": vals[7],
-        }
-        return (pipe,) + vals
+    def configure(self, total_steps, sampler_name, scheduler, pipe=None, **kwargs):
+        vals = _vals_from_full(total_steps, sampler_name, scheduler, **kwargs)
+        out_pipe = _pipe_from_full_vals(vals, base=pipe)
+        return (out_pipe,) + vals
 
 
 class LCSamplerConfigurePipe:
@@ -275,14 +386,99 @@ class LCSamplerConfigurePipe:
         )
 
 
+class LCSamplerConfigureSimple:
+    """Single-CFG configure — no step_swap / cfg_2."""
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return _simple_widgets()
+
+    RETURN_TYPES = (
+        "INT",
+        "FLOAT",
+        "FLOAT",
+        comfy.samplers.KSampler.SAMPLERS,
+        comfy.samplers.KSampler.SCHEDULERS,
+        "INT",
+    )
+    RETURN_NAMES = (
+        "total_steps",
+        "cfg",
+        "denoise",
+        "sampler_name",
+        "scheduler",
+        "detailer_steps",
+    )
+    FUNCTION = "configure"
+    CATEGORY = "LC123/sampling"
+    DESCRIPTION = (
+        "Simple sampler settings: steps, detailer steps, denoise, one CFG, sampler, scheduler. "
+        "No step_swap / cfg_2 (single-pass friendly)."
+    )
+
+    def configure(self, total_steps, sampler_name, scheduler, **kwargs):
+        return _vals_from_simple(total_steps, sampler_name, scheduler, **kwargs)
+
+
+class LCSamplerConfigureSimplePipeOut:
+    """Simple configure + optional pipe in + pipe out."""
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        d = _simple_widgets()
+        d["optional"] = {
+            "pipe": (
+                PIPE_TYPE,
+                {
+                    "tooltip": "Optional LC_PIPE in. Sampler keys from this node overwrite; other keys pass through.",
+                },
+            ),
+        }
+        return d
+
+    RETURN_TYPES = (
+        PIPE_TYPE,
+        "INT",
+        "FLOAT",
+        "FLOAT",
+        comfy.samplers.KSampler.SAMPLERS,
+        comfy.samplers.KSampler.SCHEDULERS,
+        "INT",
+    )
+    RETURN_NAMES = (
+        "pipe",
+        "total_steps",
+        "cfg",
+        "denoise",
+        "sampler_name",
+        "scheduler",
+        "detailer_steps",
+    )
+    FUNCTION = "configure"
+    CATEGORY = "LC123/sampling"
+    DESCRIPTION = (
+        "Simple sampler configure with optional pipe in (left) and pipe out (top). "
+        "Packs into LC_PIPE with step_swap=0 and cfg_2=cfg for dual-pass consumers."
+    )
+
+    def configure(self, total_steps, sampler_name, scheduler, pipe=None, **kwargs):
+        vals = _vals_from_simple(total_steps, sampler_name, scheduler, **kwargs)
+        out_pipe = _pipe_from_simple_vals(vals, base=pipe)
+        return (out_pipe,) + vals
+
+
 NODE_CLASS_MAPPINGS = {
     "LCSamplerConfigure": LCSamplerConfigure,
     "LCSamplerConfigurePipeOut": LCSamplerConfigurePipeOut,
     "LCSamplerConfigurePipe": LCSamplerConfigurePipe,
+    "LCSamplerConfigureSimple": LCSamplerConfigureSimple,
+    "LCSamplerConfigureSimplePipeOut": LCSamplerConfigureSimplePipeOut,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LCSamplerConfigure": "LC Sampler Configure",
     "LCSamplerConfigurePipeOut": "LC Sampler Configure (pipe)",
     "LCSamplerConfigurePipe": "LC Sampler Configure Pipe Out",
+    "LCSamplerConfigureSimple": "LC Sampler Configure Simple",
+    "LCSamplerConfigureSimplePipeOut": "LC Sampler Configure Simple (pipe)",
 }

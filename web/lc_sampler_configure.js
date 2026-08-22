@@ -1,63 +1,52 @@
 /**
- * LC Sampler Configure — turn _gap1 / _gap2 into ~5px visual spacers.
+ * LC Sampler Configure family — hide layout spacer widgets (_gap1, _gap2)
+ * and keep a thin vertical gap without showing empty STRING fields.
  */
-
 import { app } from "../../scripts/app.js";
 
-const CLASSES = new Set([
+const TYPES = new Set([
   "LCSamplerConfigure",
   "LCSamplerConfigurePipeOut",
+  "LCSamplerConfigurePipe",
+  "LCSamplerConfigureSimple",
+  "LCSamplerConfigureSimplePipeOut",
 ]);
 
+const GAP_PX = 6;
 
-function forceDenoiseStep(node) {
+function hideGaps(node) {
   if (!node?.widgets) return;
   for (const w of node.widgets) {
-    if (w?.name !== "denoise") continue;
-    w.options = w.options || {};
-    w.options.step = 0.01;
-    w.options.round = 0.01;
-    if (typeof w.step !== "undefined") w.step = 0.01;
+    const n = (w.name || "").toString();
+    if (!n.startsWith("_gap")) continue;
+    w.type = "converted-widget"; // not drawn as text field
+    w.computeSize = () => [0, GAP_PX];
+    w.draw = function () {};
+    w.serializeValue = () => "";
+    try {
+      w.hidden = true;
+    } catch (_) {}
   }
-}
-
-function applyGaps(node) {
-  if (!node.widgets) return;
-  for (const w of node.widgets) {
-    if (!w || (w.name !== "_gap1" && w.name !== "_gap2")) continue;
-    w.hidden = false;
-    w.type = "converted-widget"; // avoid normal text field chrome when possible
-    w.computeSize = () => [node.size?.[0] || 200, 5];
-    w.draw = function (ctx, n, width, y) {
-      // empty 5px band
-      return y + 5;
-    };
-    // Prevent serializing noise into prompts
-    w.serializeValue = async () => "";
-    w.options = w.options || {};
-  }
+  // Force layout refresh
+  try {
+    node.setDirtyCanvas?.(true, true);
+  } catch (_) {}
 }
 
 app.registerExtension({
   name: "LC123.SamplerConfigureGaps",
-
   async beforeRegisterNodeDef(nodeType, nodeData) {
-    if (!CLASSES.has(nodeData?.name || "")) return;
-
+    if (!TYPES.has(nodeData?.name)) return;
     const onCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
-      applyGaps(this);
-      forceDenoiseStep(this);
-      setTimeout(() => { applyGaps(this); forceDenoiseStep(this); }, 0);
+      hideGaps(this);
+      requestAnimationFrame(() => hideGaps(this));
       return r;
     };
-
-    const onConfigure = nodeType.prototype.onConfigure;
-    nodeType.prototype.onConfigure = function (o) {
-      const r = onConfigure?.apply(this, arguments);
-      setTimeout(() => { applyGaps(this); forceDenoiseStep(this); }, 0);
-      return r;
-    };
+  },
+  nodeCreated(node) {
+    const t = node.comfyClass || node.type;
+    if (TYPES.has(t)) hideGaps(node);
   },
 });

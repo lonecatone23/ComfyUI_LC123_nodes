@@ -116,4 +116,21 @@ try:
 except Exception as _e:
     print(f"[LC123] lc_seed load skipped: {_e}")
 
+# LC Reference Latent
+try:
+    from .lc_reference_latent import NODE_CLASS_MAPPINGS as _LC_REFLAT_MAP
+    from .lc_reference_latent import NODE_DISPLAY_NAME_MAPPINGS as _LC_REFLAT_DISP
+    NODE_CLASS_MAPPINGS.update(_LC_REFLAT_MAP)
+    NODE_DISPLAY_NAME_MAPPINGS.update(_LC_REFLAT_DISP)
+except Exception as _e:
+    print(f"[LC123] lc_reference_latent load skipped: {_e}")
+
+# LC Denoise
+try:
+    from .lc_denoise import NODE_CLASS_MAPPINGS as _LC_DENOISE_MAP
+    from .lc_denoise import NODE_DISPLAY_NAME_MAPPINGS as _LC_DENOISE_DISP
+    NODE_CLASS_MAPPINGS.update(_LC_DENOISE_MAP)
+    NODE_DISPLAY_NAME_MAPPINGS.update(_LC_DENOISE_DISP)
+except Exception as _e:
+    print(f"[LC123] lc_denoise load skipped: {_e}")
 

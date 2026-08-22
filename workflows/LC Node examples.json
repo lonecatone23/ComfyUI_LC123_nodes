@@ -1,8 +1,8 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 341,
-  "last_link_id": 457,
+  "last_node_id": 351,
+  "last_link_id": 463,
   "nodes": [
     {
       "id": 21,
@@ -248,7 +248,7 @@
         130
       ],
       "flags": {},
-      "order": 88,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -294,7 +294,7 @@
         250
       ],
       "flags": {},
-      "order": 87,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -377,7 +377,7 @@
         50
       ],
       "flags": {},
-      "order": 115,
+      "order": 141,
       "mode": 0,
       "inputs": [
         {
@@ -512,7 +512,7 @@
         280
       ],
       "flags": {},
-      "order": 135,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -569,7 +569,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 93,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -619,7 +619,7 @@
         30
       ],
       "flags": {},
-      "order": 105,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -661,7 +661,7 @@
         50
       ],
       "flags": {},
-      "order": 106,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -810,7 +810,7 @@
         90
       ],
       "flags": {},
-      "order": 89,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -904,7 +904,7 @@
         60
       ],
       "flags": {},
-      "order": 104,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -956,7 +956,7 @@
         50
       ],
       "flags": {},
-      "order": 103,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -999,13 +999,20 @@
         -4340
       ],
       "size": [
-        290,
+        300,
         410
       ],
       "flags": {},
       "order": 10,
       "mode": 0,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "pipe",
+          "shape": 7,
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
       "outputs": [
         {
           "name": "pipe",
@@ -1088,165 +1095,8 @@
         "sampler_name": "euler",
         "scheduler": "normal"
       },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 105,
-      "type": "LCGetImage",
-      "pos": [
-        -9790,
-        -5510
-      ],
-      "size": [
-        270,
-        130
-      ],
-      "flags": {},
-      "order": 90,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 44
-        }
-      ],
-      "outputs": [
-        {
-          "name": "megapixels",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "resolution",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "batch",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "aspect ratio",
-          "type": "STRING",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
-        "Node name for S&R": "LCGetImage",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 108,
-      "type": "GetNode",
-      "pos": [
-        -9790,
-        -5340
-      ],
-      "size": [
-        210,
-        60
-      ],
-      "flags": {},
-      "order": 11,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            44,
-            45,
-            46,
-            47
-          ]
-        }
-      ],
-      "title": "Get_Image 1",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "Image 1"
-      ],
-      "widgets_values_named": {
-        "Constant": "Image 1"
-      },
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 109,
-      "type": "GetNode",
-      "pos": [
-        -9790,
-        -5240
-      ],
-      "size": [
-        210,
-        60
-      ],
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            48,
-            49
-          ]
-        }
-      ],
-      "title": "Get_Image 2",
-      "properties": {
-        "Node name for S&R": "GetNode",
-        "aux_id": "kijai/ComfyUI-KJNodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "Image 2"
-      ],
-      "widgets_values_named": {
-        "Constant": "Image 2"
-      },
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
+      "color": "#707070",
+      "bgcolor": "#707070"
     },
     {
       "id": 54,
@@ -1260,7 +1110,7 @@
         340
       ],
       "flags": {},
-      "order": 91,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -1311,7 +1161,7 @@
         520
       ],
       "flags": {},
-      "order": 92,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -1370,7 +1220,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 13,
+      "order": 11,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1414,7 +1264,7 @@
         320
       ],
       "flags": {},
-      "order": 14,
+      "order": 12,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1466,7 +1316,7 @@
         118
       ],
       "flags": {},
-      "order": 15,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
@@ -1547,7 +1397,7 @@
         90
       ],
       "flags": {},
-      "order": 16,
+      "order": 14,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1593,7 +1443,7 @@
         90
       ],
       "flags": {},
-      "order": 17,
+      "order": 15,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1641,7 +1491,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 166,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -1694,7 +1544,7 @@
         260
       ],
       "flags": {},
-      "order": 18,
+      "order": 16,
       "mode": 4,
       "inputs": [],
       "outputs": [],
@@ -1727,7 +1577,7 @@
         130
       ],
       "flags": {},
-      "order": 168,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -1798,7 +1648,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 19,
+      "order": 17,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1849,7 +1699,7 @@
         582
       ],
       "flags": {},
-      "order": 175,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -1938,7 +1788,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 167,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -1988,7 +1838,7 @@
         640
       ],
       "flags": {},
-      "order": 169,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -2031,7 +1881,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 95,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -2081,7 +1931,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 98,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -2129,7 +1979,7 @@
         120
       ],
       "flags": {},
-      "order": 96,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -2189,7 +2039,7 @@
         60
       ],
       "flags": {},
-      "order": 20,
+      "order": 18,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -2232,7 +2082,7 @@
         220
       ],
       "flags": {},
-      "order": 21,
+      "order": 19,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -2265,7 +2115,7 @@
         90
       ],
       "flags": {},
-      "order": 22,
+      "order": 20,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -2297,7 +2147,7 @@
         450
       ],
       "flags": {},
-      "order": 97,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -2414,7 +2264,7 @@
         400
       ],
       "flags": {},
-      "order": 117,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -2455,7 +2305,7 @@
         60
       ],
       "flags": {},
-      "order": 23,
+      "order": 21,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -2502,7 +2352,7 @@
         180
       ],
       "flags": {},
-      "order": 24,
+      "order": 22,
       "mode": 0,
       "inputs": [
         {
@@ -2583,655 +2433,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 81,
-      "type": "LCPipeEdit",
-      "pos": [
-        -10490,
-        -4850
-      ],
-      "size": [
-        200,
-        530
-      ],
-      "flags": {},
-      "order": 25,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "pipe",
-          "name": "pipe",
-          "shape": 7,
-          "type": "LC_PIPE",
-          "link": null
-        },
-        {
-          "label": "Model 1",
-          "name": "model_1",
-          "shape": 7,
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "label": "Clip 1",
-          "name": "clip_1",
-          "shape": 7,
-          "type": "CLIP",
-          "link": null
-        },
-        {
-          "label": "VAE 1",
-          "name": "vae_1",
-          "shape": 7,
-          "type": "VAE",
-          "link": null
-        },
-        {
-          "label": "Model 2",
-          "name": "model_2",
-          "shape": 7,
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "label": "Clip 2",
-          "name": "clip_2",
-          "shape": 7,
-          "type": "CLIP",
-          "link": null
-        },
-        {
-          "label": "VAE 2",
-          "name": "vae_2",
-          "shape": 7,
-          "type": "VAE",
-          "link": null
-        },
-        {
-          "label": "Image",
-          "name": "image",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": null
-        },
-        {
-          "label": "Mask",
-          "name": "mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": null
-        },
-        {
-          "label": "Width",
-          "name": "width",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "Height",
-          "name": "height",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "Latent",
-          "name": "latent",
-          "shape": 7,
-          "type": "LATENT",
-          "link": null
-        },
-        {
-          "label": "Batch",
-          "name": "batch",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "Positive prompt",
-          "name": "positive_prompt",
-          "shape": 7,
-          "type": "STRING",
-          "link": null
-        },
-        {
-          "label": "Positive conditioning",
-          "name": "positive",
-          "shape": 7,
-          "type": "CONDITIONING",
-          "link": null
-        },
-        {
-          "label": "Negative prompt",
-          "name": "negative_prompt",
-          "shape": 7,
-          "type": "STRING",
-          "link": null
-        },
-        {
-          "label": "Negative conditioning",
-          "name": "negative",
-          "shape": 7,
-          "type": "CONDITIONING",
-          "link": null
-        },
-        {
-          "label": "Seed",
-          "name": "seed",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "total_steps",
-          "name": "total_steps",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "cfg_1",
-          "name": "cfg_1",
-          "shape": 7,
-          "type": "FLOAT",
-          "link": null
-        },
-        {
-          "label": "denoise",
-          "name": "denoise",
-          "shape": 7,
-          "type": "FLOAT",
-          "link": null
-        },
-        {
-          "label": "step_swap",
-          "name": "step_swap",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        },
-        {
-          "label": "cfg_2",
-          "name": "cfg_2",
-          "shape": 7,
-          "type": "FLOAT",
-          "link": null
-        },
-        {
-          "label": "sampler_name",
-          "name": "sampler_name",
-          "shape": 7,
-          "type": "COMBO",
-          "link": null
-        },
-        {
-          "label": "scheduler",
-          "name": "scheduler",
-          "shape": 7,
-          "type": "COMBO",
-          "link": null
-        },
-        {
-          "label": "detailer_steps",
-          "name": "detailer_steps",
-          "shape": 7,
-          "type": "INT",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
-        "Node name for S&R": "LCPipeEdit",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 80,
-      "type": "LCPipeOut",
-      "pos": [
-        -10270,
-        -4850
-      ],
-      "size": [
-        200,
-        530
-      ],
-      "flags": {},
-      "order": 26,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "pipe",
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        },
-        {
-          "name": "Model 1",
-          "type": "MODEL",
-          "links": null
-        },
-        {
-          "name": "Clip 1",
-          "type": "CLIP",
-          "links": null
-        },
-        {
-          "name": "VAE 1",
-          "type": "VAE",
-          "links": null
-        },
-        {
-          "name": "Model 2",
-          "type": "MODEL",
-          "links": null
-        },
-        {
-          "name": "Clip 2",
-          "type": "CLIP",
-          "links": null
-        },
-        {
-          "name": "VAE 2",
-          "type": "VAE",
-          "links": null
-        },
-        {
-          "name": "Image",
-          "type": "IMAGE",
-          "links": null
-        },
-        {
-          "name": "Mask",
-          "type": "MASK",
-          "links": null
-        },
-        {
-          "name": "Width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "Height",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "Latent",
-          "type": "LATENT",
-          "links": null
-        },
-        {
-          "name": "Batch",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "Positive prompt",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "Positive conditioning",
-          "type": "CONDITIONING",
-          "links": null
-        },
-        {
-          "name": "Negative prompt",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "Negative conditioning",
-          "type": "CONDITIONING",
-          "links": null
-        },
-        {
-          "name": "Seed",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "total_steps",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg_1",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "denoise",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "step_swap",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg_2",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "sampler_name",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "detailer_steps",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
-        "Node name for S&R": "LCPipeOut",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 38,
-      "type": "LCAspectRatioPipe",
-      "pos": [
-        -10500,
-        -4250
-      ],
-      "size": [
-        260,
-        170
-      ],
-      "flags": {},
-      "order": 27,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "links": null
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "latent",
-          "type": "LATENT",
-          "links": null
-        },
-        {
-          "name": "batch",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "resolution",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
-        "Node name for S&R": "LCAspectRatioPipe",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 35,
-      "type": "LCSamplerConfigurePipe",
-      "pos": [
-        -10200,
-        -4270
-      ],
-      "size": [
-        260,
-        190
-      ],
-      "flags": {},
-      "order": 28,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        },
-        {
-          "name": "total_steps",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg_1",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "denoise",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "step_swap",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg_2",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "sampler_name",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "detailer_steps",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
-        "Node name for S&R": "LCSamplerConfigurePipe",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 205,
-      "type": "LCDetailPipeOut",
-      "pos": [
-        -10500,
-        -4030
-      ],
-      "size": [
-        200,
-        270
-      ],
-      "flags": {},
-      "order": 29,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "pipe",
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        },
-        {
-          "name": "Model 1",
-          "type": "MODEL",
-          "links": null
-        },
-        {
-          "name": "Clip 1",
-          "type": "CLIP",
-          "links": null
-        },
-        {
-          "name": "VAE 1",
-          "type": "VAE",
-          "links": null
-        },
-        {
-          "name": "Positive prompt",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "Positive conditioning",
-          "type": "CONDITIONING",
-          "links": null
-        },
-        {
-          "name": "Negative prompt",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "Negative conditioning",
-          "type": "CONDITIONING",
-          "links": null
-        },
-        {
-          "name": "Seed",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg_1",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "sampler_name",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "detailer_steps",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "79b81758ac54ba8f9b46ecf7682902e87dc26684",
-        "Node name for S&R": "LCDetailPipeOut",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
       "id": 78,
       "type": "MarkdownNote",
       "pos": [
@@ -3243,7 +2444,7 @@
         120
       ],
       "flags": {},
-      "order": 30,
+      "order": 23,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3278,7 +2479,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 31,
+      "order": 24,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3313,7 +2514,7 @@
         320
       ],
       "flags": {},
-      "order": 32,
+      "order": 25,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3356,15 +2557,15 @@
       "id": 63,
       "type": "LCSplitSigmaScheduler",
       "pos": [
-        -11490,
-        -4540
+        -11520,
+        -4550
       ],
       "size": [
         270,
         170
       ],
       "flags": {},
-      "order": 33,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
@@ -3419,41 +2620,8 @@
         "step_swap": 30,
         "denoise": 1
       },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
-      "id": 73,
-      "type": "MarkdownNote",
-      "pos": [
-        -11480,
-        -4320
-      ],
-      "size": [
-        460,
-        240
-      ],
-      "flags": {},
-      "order": 34,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "LC Split Sigmas",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n"
-      ],
-      "widgets_values_named": {
-        "text": "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
     },
     {
       "id": 146,
@@ -3467,7 +2635,7 @@
         1210
       ],
       "flags": {},
-      "order": 35,
+      "order": 27,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3502,7 +2670,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 173,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -3805,118 +2973,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 40,
-      "type": "LCAspectRatioPipeOut",
-      "pos": [
-        -10830,
-        -4850
-      ],
-      "size": [
-        320,
-        470
-      ],
-      "flags": {},
-      "order": 36,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": null
-        },
-        {
-          "name": "mask",
-          "shape": 7,
-          "type": "MASK",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pipe",
-          "type": "LC_PIPE",
-          "links": null
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": null
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "links": null
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "latent",
-          "type": "LATENT",
-          "links": null
-        },
-        {
-          "name": "batch",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "resolution",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
-        "Node name for S&R": "LCAspectRatioPipeOut",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        2048,
-        false,
-        "custom",
-        1024,
-        1024,
-        "Off",
-        "lanczos",
-        "crop",
-        "center",
-        "0, 0, 0",
-        8,
-        1
-      ],
-      "widgets_values_named": {
-        "max_resolution": 2048,
-        "resolution_source": false,
-        "aspect_ratio": "custom",
-        "custom_width": 1024,
-        "custom_height": 1024,
-        "swap_dimensions": "Off",
-        "upscale_method": "lanczos",
-        "proportion": "crop",
-        "crop_location": "center",
-        "pad_color": "0, 0, 0",
-        "divisible_by": 8,
-        "batch_size": 1
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
       "id": 206,
       "type": "LCIntCompare",
       "pos": [
@@ -3928,7 +2984,7 @@
         80
       ],
       "flags": {},
-      "order": 37,
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -3981,7 +3037,7 @@
         80
       ],
       "flags": {},
-      "order": 38,
+      "order": 29,
       "mode": 0,
       "inputs": [
         {
@@ -4034,7 +3090,7 @@
         30
       ],
       "flags": {},
-      "order": 39,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
@@ -4076,7 +3132,7 @@
         140
       ],
       "flags": {},
-      "order": 102,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -4146,7 +3202,7 @@
         130
       ],
       "flags": {},
-      "order": 171,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -4205,7 +3261,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 118,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -4256,7 +3312,7 @@
         420
       ],
       "flags": {},
-      "order": 119,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -4314,7 +3370,7 @@
         640
       ],
       "flags": {},
-      "order": 137,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -4387,7 +3443,7 @@
         390
       ],
       "flags": {},
-      "order": 145,
+      "order": 154,
       "mode": 0,
       "inputs": [
         {
@@ -4428,7 +3484,7 @@
         700
       ],
       "flags": {},
-      "order": 40,
+      "order": 31,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -4460,7 +3516,7 @@
         320
       ],
       "flags": {},
-      "order": 41,
+      "order": 32,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4512,7 +3568,7 @@
         1100
       ],
       "flags": {},
-      "order": 42,
+      "order": 33,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -4547,7 +3603,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 43,
+      "order": 34,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -4571,59 +3627,6 @@
       "bgcolor": "#fff0"
     },
     {
-      "id": 285,
-      "type": "LCBatchImageComparer",
-      "pos": [
-        -7180,
-        -2130
-      ],
-      "size": [
-        300,
-        400
-      ],
-      "flags": {
-        "pinned": false
-      },
-      "order": 121,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "Original",
-          "name": "image_a",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 386
-        },
-        {
-          "label": "Photo Style 📷",
-          "name": "image_b",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 390
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
-        "Node name for S&R": "LCBatchImageComparer",
-        "comparer_mode": "Slide",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#325A5A",
-      "bgcolor": "#325A5A"
-    },
-    {
       "id": 184,
       "type": "LCShowText",
       "pos": [
@@ -4635,7 +3638,7 @@
         120
       ],
       "flags": {},
-      "order": 123,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -4678,7 +3681,7 @@
         90
       ],
       "flags": {},
-      "order": 44,
+      "order": 35,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4713,91 +3716,6 @@
       "bgcolor": "#326432"
     },
     {
-      "id": 282,
-      "type": "LCPhoneLook",
-      "pos": [
-        -7460,
-        -2130
-      ],
-      "size": [
-        270,
-        490
-      ],
-      "flags": {},
-      "order": 101,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 384
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            390
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
-        "Node name for S&R": "LCPhoneLook",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "Muted",
-        0.85,
-        416825629545111,
-        "fixed",
-        0.33,
-        0,
-        0.09,
-        0.45,
-        0.08,
-        0.45,
-        0.25,
-        0.15,
-        0.6,
-        0.18,
-        0.1,
-        0.22,
-        0.22,
-        0.28,
-        0.12
-      ],
-      "widgets_values_named": {
-        "style": "Muted",
-        "strength": 0.85,
-        "seed": 416825629545111,
-        "control_after_generate": "fixed",
-        "wb_temperature": 0.33,
-        "wb_tint": 0,
-        "exposure": 0.09,
-        "contrast": 0.45,
-        "shadows": 0.08,
-        "highlights": 0.45,
-        "hdr_local": 0.25,
-        "vibrance": 0.15,
-        "skin_protect": 0.6,
-        "shadow_cool": 0.18,
-        "highlight_warm": 0.1,
-        "texture": 0.22,
-        "clarity": 0.22,
-        "vignette": 0.28,
-        "grain": 0.12
-      },
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
       "id": 273,
       "type": "LCSkinBeauty",
       "pos": [
@@ -4809,7 +3727,7 @@
         690
       ],
       "flags": {},
-      "order": 99,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -4908,7 +3826,7 @@
         60
       ],
       "flags": {},
-      "order": 45,
+      "order": 36,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4951,7 +3869,7 @@
         690
       ],
       "flags": {},
-      "order": 100,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -5049,7 +3967,7 @@
         490
       ],
       "flags": {},
-      "order": 94,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -5115,7 +4033,7 @@
         540
       ],
       "flags": {},
-      "order": 136,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -5191,7 +4109,7 @@
         580
       ],
       "flags": {},
-      "order": 144,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -5271,7 +4189,7 @@
         490
       ],
       "flags": {},
-      "order": 147,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -5343,7 +4261,7 @@
         520
       ],
       "flags": {},
-      "order": 150,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -5417,7 +4335,7 @@
         470
       ],
       "flags": {},
-      "order": 151,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -5487,7 +4405,7 @@
         490
       ],
       "flags": {},
-      "order": 152,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -5561,7 +4479,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 46,
+      "order": 37,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -5604,7 +4522,7 @@
         470
       ],
       "flags": {},
-      "order": 116,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -5680,7 +4598,7 @@
         540
       ],
       "flags": {},
-      "order": 153,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -5756,7 +4674,7 @@
         630
       ],
       "flags": {},
-      "order": 154,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -5840,7 +4758,7 @@
         520
       ],
       "flags": {},
-      "order": 155,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -5914,7 +4832,7 @@
         540
       ],
       "flags": {},
-      "order": 156,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -5990,7 +4908,7 @@
         470
       ],
       "flags": {},
-      "order": 157,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -6060,7 +4978,7 @@
         520
       ],
       "flags": {},
-      "order": 158,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -6134,7 +5052,7 @@
         520
       ],
       "flags": {},
-      "order": 159,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -6208,7 +5126,7 @@
         560
       ],
       "flags": {},
-      "order": 160,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -6286,7 +5204,7 @@
         450
       ],
       "flags": {},
-      "order": 161,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -6354,7 +5272,7 @@
         470
       ],
       "flags": {},
-      "order": 162,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -6424,7 +5342,7 @@
         430
       ],
       "flags": {},
-      "order": 163,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -6484,7 +5402,7 @@
         640
       ],
       "flags": {},
-      "order": 164,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -6560,7 +5478,7 @@
         520
       ],
       "flags": {},
-      "order": 165,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -6650,7 +5568,7 @@
         230
       ],
       "flags": {},
-      "order": 174,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -6713,7 +5631,7 @@
         170
       ],
       "flags": {},
-      "order": 47,
+      "order": 38,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6746,7 +5664,7 @@
         1050
       ],
       "flags": {},
-      "order": 176,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -6789,7 +5707,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 170,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -6806,27 +5724,6 @@
           "link": 407
         },
         {
-          "label": "image17",
-          "name": "images.image17",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 423
-        },
-        {
-          "label": "image18",
-          "name": "images.image18",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 424
-        },
-        {
-          "label": "image19",
-          "name": "images.image19",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 425
-        },
-        {
           "label": "image20",
           "name": "images.image20",
           "shape": 7,
@@ -6839,27 +5736,6 @@
           "shape": 7,
           "type": "IMAGE",
           "link": null
-        },
-        {
-          "label": "image9",
-          "name": "images.image9",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 415
-        },
-        {
-          "label": "image10",
-          "name": "images.image10",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 416
-        },
-        {
-          "label": "image11",
-          "name": "images.image11",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 417
         },
         {
           "label": "image12",
@@ -6897,18 +5773,25 @@
           "link": 422
         },
         {
-          "label": "image2",
-          "name": "images.image2",
+          "label": "image17",
+          "name": "images.image17",
           "shape": 7,
           "type": "IMAGE",
-          "link": 408
+          "link": 423
         },
         {
-          "label": "image3",
-          "name": "images.image3",
+          "label": "image18",
+          "name": "images.image18",
           "shape": 7,
           "type": "IMAGE",
-          "link": 409
+          "link": 424
+        },
+        {
+          "label": "image19",
+          "name": "images.image19",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 425
         },
         {
           "label": "image4",
@@ -6944,6 +5827,41 @@
           "shape": 7,
           "type": "IMAGE",
           "link": 414
+        },
+        {
+          "label": "image9",
+          "name": "images.image9",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 415
+        },
+        {
+          "label": "image10",
+          "name": "images.image10",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 416
+        },
+        {
+          "label": "image11",
+          "name": "images.image11",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 417
+        },
+        {
+          "label": "image2",
+          "name": "images.image2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 408
+        },
+        {
+          "label": "image3",
+          "name": "images.image3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 409
         }
       ],
       "outputs": [
@@ -6978,7 +5896,7 @@
         450
       ],
       "flags": {},
-      "order": 172,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -7086,7 +6004,7 @@
         410
       ],
       "flags": {},
-      "order": 48,
+      "order": 39,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7137,7 +6055,7 @@
         120
       ],
       "flags": {},
-      "order": 125,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -7180,7 +6098,7 @@
         130
       ],
       "flags": {},
-      "order": 49,
+      "order": 40,
       "mode": 0,
       "inputs": [
         {
@@ -7234,7 +6152,7 @@
         200
       ],
       "flags": {},
-      "order": 50,
+      "order": 41,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7266,7 +6184,7 @@
         90
       ],
       "flags": {},
-      "order": 142,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -7314,7 +6232,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 51,
+      "order": 42,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7347,7 +6265,7 @@
         90
       ],
       "flags": {},
-      "order": 141,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -7393,7 +6311,7 @@
         60
       ],
       "flags": {},
-      "order": 52,
+      "order": 43,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7436,7 +6354,7 @@
         320
       ],
       "flags": {},
-      "order": 53,
+      "order": 44,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7469,7 +6387,7 @@
         270
       ],
       "flags": {},
-      "order": 54,
+      "order": 45,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7501,7 +6419,7 @@
         130
       ],
       "flags": {},
-      "order": 120,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -7567,7 +6485,7 @@
         100
       ],
       "flags": {},
-      "order": 55,
+      "order": 46,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7625,7 +6543,7 @@
         130
       ],
       "flags": {},
-      "order": 122,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -7701,7 +6619,7 @@
         260
       ],
       "flags": {},
-      "order": 139,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -7743,7 +6661,7 @@
         310
       ],
       "flags": {},
-      "order": 140,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -7785,7 +6703,7 @@
         90
       ],
       "flags": {},
-      "order": 138,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -7816,78 +6734,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 218,
-      "type": "LCSplitSigmasAdvanced",
-      "pos": [
-        -11200,
-        -4530
-      ],
-      "size": [
-        290,
-        150
-      ],
-      "flags": {},
-      "order": 56,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model_1",
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "name": "sigmas_1",
-          "type": "SIGMAS",
-          "link": null
-        },
-        {
-          "name": "model_2",
-          "shape": 7,
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "name": "sigmas_2",
-          "shape": 7,
-          "type": "SIGMAS",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "sigmas_high",
-          "type": "SIGMAS",
-          "links": null
-        },
-        {
-          "name": "sigmas_low",
-          "type": "SIGMAS",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
-        "Node name for S&R": "LCSplitSigmasAdvanced",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        10,
-        1
-      ],
-      "widgets_values_named": {
-        "step_swap": 10,
-        "denoise": 1
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
       "id": 30,
       "type": "MarkdownNote",
       "pos": [
@@ -7899,7 +6745,7 @@
         130
       ],
       "flags": {},
-      "order": 57,
+      "order": 47,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7932,7 +6778,7 @@
         200
       ],
       "flags": {},
-      "order": 58,
+      "order": 48,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7977,7 +6823,7 @@
         90
       ],
       "flags": {},
-      "order": 59,
+      "order": 49,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8009,7 +6855,7 @@
         90
       ],
       "flags": {},
-      "order": 60,
+      "order": 50,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8053,7 +6899,7 @@
         160
       ],
       "flags": {},
-      "order": 111,
+      "order": 113,
       "mode": 0,
       "inputs": [
         {
@@ -8138,7 +6984,7 @@
         90
       ],
       "flags": {},
-      "order": 127,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -8185,7 +7031,7 @@
         90
       ],
       "flags": {},
-      "order": 131,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -8231,7 +7077,7 @@
         90
       ],
       "flags": {},
-      "order": 128,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -8278,7 +7124,7 @@
         90
       ],
       "flags": {},
-      "order": 129,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -8325,7 +7171,7 @@
         90
       ],
       "flags": {},
-      "order": 132,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -8371,7 +7217,7 @@
         90
       ],
       "flags": {},
-      "order": 130,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -8420,7 +7266,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 108,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -8518,7 +7364,7 @@
         350
       ],
       "flags": {},
-      "order": 61,
+      "order": 51,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8550,7 +7396,7 @@
         236
       ],
       "flags": {},
-      "order": 109,
+      "order": 111,
       "mode": 0,
       "inputs": [
         {
@@ -8684,7 +7530,7 @@
         90
       ],
       "flags": {},
-      "order": 62,
+      "order": 52,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8732,7 +7578,7 @@
         120
       ],
       "flags": {},
-      "order": 126,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -8774,7 +7620,7 @@
         110
       ],
       "flags": {},
-      "order": 63,
+      "order": 53,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8817,7 +7663,7 @@
         60
       ],
       "flags": {},
-      "order": 110,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -8855,39 +7701,6 @@
       "bgcolor": "#643232"
     },
     {
-      "id": 238,
-      "type": "MarkdownNote",
-      "pos": [
-        -14460,
-        -5550
-      ],
-      "size": [
-        1070,
-        3410
-      ],
-      "flags": {},
-      "order": 64,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "ComfyUI LC123 Nodes",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "\n\n# ComfyUI LC123 Nodes\n\nCustom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).\n\n- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)\n- **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)\n- **Version:** 1.10.2\n\n> Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.\n\n> **\"True, nothing is. Permitted, everything is\"**  \n> — Yoda Auditore, *Assassin's Wars*\n\nFor **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).\n\n---\n\n\n## ⚙️ LC123 Performance (Settings)\n\n**UI only** — smoother scrolling and lighter on-node previews. Does **not** change generation VRAM or socket output quality.\n\n**Settings → LC123 → Performance**\n\n| Setting | Default | Effect |\n|--------|---------|--------|\n| **Remove wipe** | Off | No hover wipe on image FX previews |\n| **Half-resolution previews** | Off | FX previews at half the node image area |\n| **Clamp longest side** | Off | Cap on-node preview bitmap size |\n| **Max edge (px)** | 768 | Used when clamp is on |\n| **No preview when collapsed** | On | Skip draw on collapsed FX nodes |\n| **Hide FX on-node previews** | Off | Hide all LC image FX on-node previews |\n| **Skin Beauty full preview override** | On | Skin Beauty stays full quality on-node |\n\n**Not affected:** LC Image Compare · LC Dynamic Overlay · LC Image Split  \n\nFull directions: [`LC123_Performance_Settings_Note.md`](LC123_Performance_Settings_Note.md)\n\n---\n\n## ✨ LC Skin Beauty\n\nMask-aware skin cooling and brightening in **CIELAB**. Grades **skin**, not the whole frame. Presets + full slider control; optional external mask.\n\n---\n\n## 📷 LC Photo Style\n\nCamera / phone **finish** look (not lens geometry). Style presets drive the sliders; most controls use **0 = no change**. **Strength** blends with the original.\n\nPresets include Standard, Natural, Dramatic, Quiet, Muted, Amateur, Cool day, Warm evening, Bright open, iPhone, **Nikon Z7 II**, **Canon R5**.\n\nFull control list: [`LC_Photo_Style_Note.md`](LC_Photo_Style_Note.md)\n\n---\n\n## 🔪 LC Sharpen Pro — quick use\n\n- **Default path (realism / influencers / NSFW):** start on **Natural** or **Portrait**. Raise **clarity** before **sharpen**. Keep **halo** and **skin_protect** up on faces.\n- **Crisp:** photo snap, not ink outlines (higher halo, moderate sharpen).\n- **Lineart / Anime sharp:** deliberate edge punch for art workflows — lower skin/halo on purpose.\n- Moving any slider after a preset → **Custom**.\n- **strength** at 1.0 = full effect; use a bypasser if you want a hard off switch.\n\n---\n\n## 🖼️ Image & size\n\n| Node | What it does |\n|------|----------------|\n| **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. `resolution` = longer side. |\n| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |\n| **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |\n| **LC Get Image 📐** | Reads an image; shows megapixels, width, height, batch, aspect ratio, and resolution (longer side). |\n| **LC Dimension Resize 📐** | Width + height + one value; add / subtract / multiply / divide both sides; rounded width & height out. |\n| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |\n| **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |\n| **LC Image Split 🖼️** | Saveable wipe: **slider only** sets the split; position sticks until you change it. Output = split image. |\n| **LC Image Grid 🖼️** | Multi-image contact sheet (max columns, gap, cell pad, outline/border colors). |\n| **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. Modes: hold last generation / hold until cleared. |\n| **LC Dynamic Overlay** | Overlay B on A (A sets resolution). After one queue, drag the opacity knob — no re-gen to preview. Output: **blended Image**. |\n| **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |\n\n---\n\n## 🎨 Image FX (on-node preview + before/after wipe)\n\nMost show the result on the node. Hover to wipe against the original  \n(see **LC123 Performance** to lighten UI load).\n\n| Node | What it does |\n|------|----------------|\n| **LC Image Adjust** | Brightness, contrast, saturation, hue, etc. (−1…1 style controls). |\n| **LC Auto White Balance** | Auto white-balance correction. |\n| **LC Sharpen Pro** | **Photorealism-first** clarity + edge sharpen. Guided + box hybrid high-pass; auto halo; skin protect. Presets: Natural, Subtle, Portrait, Product, Landscape, Crisp, **Lineart**, **Anime sharp**. |\n| **LC Lens Effects** | Lens-style FX suite. |\n| **LC Lens Profile** | Lens profile / correction style FX. |\n| **LC Lift Gamma Gain** | Lift / gamma / gain color-wheel style adjust. |\n| **LC Image RGB** | Per-channel RGB adjust. |\n| **LC Film Grain** | Film grain overlay. |\n| **LC Film Stock (B&W)** | B&W film stock look. |\n| **LC Film Stock (Color)** | Color film stock look. |\n| **LC Vibrance** | Vibrance (smart saturation). |\n| **LC Vignette** | Vignette darkening. |\n| **LC Bloom** | Soft bloom / glow. |\n| **LC Chromatic Aberration** | RGB fringe / CA control. |\n| **LC Image Denoise** | Detail-preserving denoise. |\n| **LC Color Match 🎨** | Match colors to a reference; strength; skin-protect aware. |\n| **LC Image Desaturate** | Desaturate (Essentials-style). |\n| **LC Skin Beauty ✨** | Skin-focused beauty pass (see above). |\n| **LC Photo Style 📷** | Camera / phone finish (see above). |\n| **LC Apply LUT** | Apply a LUT from **`ComfyUI/models/luts/`**. Pack may seed samples into that folder on load without overwriting. Ship extras under `assets/luts/` as assets only. |\n| **LC Text Overlay** | Text on image; font size/color; **alignment** left/center/right (bottom default); drag + widgets. |\n\n---\n\n## 🧬 Sampling, sigma & pipes\n\n| Node | What it does |\n|------|----------------|\n| **LC Sampler Configure** | total steps, step swap, detailer steps, denoise (0.01 steps), CFG1/2, sampler, scheduler. |\n| **LC Sampler Configure (pipe)** | Same, pipe-oriented layout. |\n| **LC Sampler Configure Pipe Out** | Unpacks sampler configure pipe. |\n| **LC Pipe (in/edit)** | Pack/edit full LC pipe (models, clips, VAEs, size, latent, prompts, conds, seed, steps, CFGs, sampler…). |\n| **LC Pipe Out** | Unpack full LC pipe. |\n| **LC Detail Pipe Out** | Detailer-oriented unpack (model/clip/vae, prompts, conds, seed, cfg, sampler, scheduler, detailer steps). |\n| **LC Split Sigma Scheduler** | Split one schedule across two models at step swap. |\n| **LC Split Sigmas (Advanced)** | Two sigma curves in (sigma 1 / sigma 2); model 1 / model 2; step swap + denoise; sigmas high/low out. Missing model/sigma 2 falls back to 1. |\n| **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |\n| **Prompt to Conditioning** | String → conditioning. |\n| **LC Prompt to Conditioning + Zero** | Encode + zero-out style second socket. |\n| **Positive / Negative** | Prompt boxes (green / red). |\n\n---\n\n## 📁 Save paths & text\n\n| Node | What it does |\n|------|----------------|\n| **LC Easy Folder 📂** | Builds `filename_prefix` for native Save Image (`Folder\\prefix_suffix_timestamp`). |\n| **LC Advanced Folder 📂** | Split filename + path (Image Saver Simple style). |\n| **📝 LC Save Text** | Write text to a file; **sanitizes** illegal path characters. |\n| **LC Join Strings 🔗** | Join N strings with a delimiter; empty/null slots skip the delimiter; `\\n` allowed. |\n| **LC Show Text 🔤** | Display text on the node (list-friendly). |\n| **LC Text Replace ✂️** | Up to 20 find/replace pairs; grows/shrinks with entry count. |\n| **LC Text Remove 🔪** | Same layout as replace, remove-only. |\n| **Civitai 🚩🔪** | Compliance strip from `assets/lists/civitai_compliance_remove.txt`. **Your** responsibility to meet Civitai TOS; list is not guaranteed complete. |\n\n---\n\n## 🔀 Switches, logic & control\n\n| Node | What it does |\n|------|----------------|\n| **LC AnySwitch** | First connected input among many; type-locks from first wire; 2–20 inputs. |\n| **LC Combo Selector** | Dropdown that mirrors another node’s combo options. |\n| **LC Boolean** | Coerce boolean / int / float → true/false; shows result on the face. |\n| **LC Invert Boolean** | Same coercion, then invert. |\n| **LC Int Compare** | Two INT inputs → largest or smallest. |\n| **LC Float Compare** | Two FLOAT inputs → largest or smallest. |\n| **LC Seed Jump 🌱** | One seed + jump size → six stepped seed outputs. |\n| **LC Slider** | On-node slider; min/max/step/decimals in settings. INT or FLOAT. |\n| **LC Node Snapshot 📋** | Wire a **source** node (or type id/title); pick a **widget**; outputs selected value, full newline string, and JSON (includes node id). Multiple snapshots can target the same node. |\n| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run; ▶ preview on the node. |\n| **LC Bypasser** | Bypass linked nodes; toggle restriction: default / max one / always one. |\n| **LC Groups Bypasser** | Same for graph groups. |\n| **LC Bypasser Panel** | Widgets-only remote for a bypasser hub. |\n| **LC Stop 🛑** | Pause until button (with enable/bypass). |\n| **LC VRAM Cache Clear** | Clear VRAM / cache; any-in / any-out pass-through. |\n\n---\n\n## 🎨 Regional canvas\n\n| Node | What it does |\n|------|----------------|\n| **Anima Regional Inline Canvas** | RGB paint canvas for Sen-sou Anima regional conditioning. |\n| **Krea2 Regional Inline Canvas** | Same idea for Krea2 CLIP regions (**beta**). |\n\n---\n\n## 📦 Assets\n\n| Path | Use |\n|------|-----|\n| `assets/sounds/` | Notification sounds for **LC Notify 🔊** |\n| `assets/lists/` | Text lists (e.g. Civitai compliance strip) |\n| `assets/luts/` | Sample LUTs shipped with the pack (copied to **`models/luts/`** on load if missing — never overwrites) |\n| `assets/readme/` | Images used in this README (optional) |\n\n**LUT path for Apply LUT:** `ComfyUI/models/luts/` (not under custom_nodes).\n\n---\n\n## 💡 Quick tips\n\n- **Image FX:** fix seed, run low-res, tune, then full run.\n- **Sharpen Pro:** realism users live on Natural/Portrait; art users use Lineart/Anime sharp.\n- **Bypasser:** wire hubs; optional Panel so the hub can stay collapsed.\n- **Save Text / folders:** avoid `? < > : \" | *` in names — Save Text sanitizes; folders still prefer clean names.\n- **Pipes + Get/Set:** if a graph “always regenerates,” try a direct pipe link to confirm caching.\n- **Dual sigma:** encode prompts to CONDITIONING before CFGGuider — empty conds fail.\n- **Notify:** drop `.mp3` / `.wav` into `assets/sounds/`, restart once so the dropdown refreshes.\n- **Snapshot:** optional `source` input preferred; target id/title still works when linked resolution succeeds.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore. *Assassin's Wars*_"
-      ],
-      "widgets_values_named": {
-        "text": "\n\n# ComfyUI LC123 Nodes\n\nCustom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).\n\n- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)\n- **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)\n- **Version:** 1.10.2\n\n> Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.\n\n> **\"True, nothing is. Permitted, everything is\"**  \n> — Yoda Auditore, *Assassin's Wars*\n\nFor **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).\n\n---\n\n\n## ⚙️ LC123 Performance (Settings)\n\n**UI only** — smoother scrolling and lighter on-node previews. Does **not** change generation VRAM or socket output quality.\n\n**Settings → LC123 → Performance**\n\n| Setting | Default | Effect |\n|--------|---------|--------|\n| **Remove wipe** | Off | No hover wipe on image FX previews |\n| **Half-resolution previews** | Off | FX previews at half the node image area |\n| **Clamp longest side** | Off | Cap on-node preview bitmap size |\n| **Max edge (px)** | 768 | Used when clamp is on |\n| **No preview when collapsed** | On | Skip draw on collapsed FX nodes |\n| **Hide FX on-node previews** | Off | Hide all LC image FX on-node previews |\n| **Skin Beauty full preview override** | On | Skin Beauty stays full quality on-node |\n\n**Not affected:** LC Image Compare · LC Dynamic Overlay · LC Image Split  \n\nFull directions: [`LC123_Performance_Settings_Note.md`](LC123_Performance_Settings_Note.md)\n\n---\n\n## ✨ LC Skin Beauty\n\nMask-aware skin cooling and brightening in **CIELAB**. Grades **skin**, not the whole frame. Presets + full slider control; optional external mask.\n\n---\n\n## 📷 LC Photo Style\n\nCamera / phone **finish** look (not lens geometry). Style presets drive the sliders; most controls use **0 = no change**. **Strength** blends with the original.\n\nPresets include Standard, Natural, Dramatic, Quiet, Muted, Amateur, Cool day, Warm evening, Bright open, iPhone, **Nikon Z7 II**, **Canon R5**.\n\nFull control list: [`LC_Photo_Style_Note.md`](LC_Photo_Style_Note.md)\n\n---\n\n## 🔪 LC Sharpen Pro — quick use\n\n- **Default path (realism / influencers / NSFW):** start on **Natural** or **Portrait**. Raise **clarity** before **sharpen**. Keep **halo** and **skin_protect** up on faces.\n- **Crisp:** photo snap, not ink outlines (higher halo, moderate sharpen).\n- **Lineart / Anime sharp:** deliberate edge punch for art workflows — lower skin/halo on purpose.\n- Moving any slider after a preset → **Custom**.\n- **strength** at 1.0 = full effect; use a bypasser if you want a hard off switch.\n\n---\n\n## 🖼️ Image & size\n\n| Node | What it does |\n|------|----------------|\n| **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. `resolution` = longer side. |\n| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |\n| **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |\n| **LC Get Image 📐** | Reads an image; shows megapixels, width, height, batch, aspect ratio, and resolution (longer side). |\n| **LC Dimension Resize 📐** | Width + height + one value; add / subtract / multiply / divide both sides; rounded width & height out. |\n| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |\n| **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |\n| **LC Image Split 🖼️** | Saveable wipe: **slider only** sets the split; position sticks until you change it. Output = split image. |\n| **LC Image Grid 🖼️** | Multi-image contact sheet (max columns, gap, cell pad, outline/border colors). |\n| **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. Modes: hold last generation / hold until cleared. |\n| **LC Dynamic Overlay** | Overlay B on A (A sets resolution). After one queue, drag the opacity knob — no re-gen to preview. Output: **blended Image**. |\n| **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |\n\n---\n\n## 🎨 Image FX (on-node preview + before/after wipe)\n\nMost show the result on the node. Hover to wipe against the original  \n(see **LC123 Performance** to lighten UI load).\n\n| Node | What it does |\n|------|----------------|\n| **LC Image Adjust** | Brightness, contrast, saturation, hue, etc. (−1…1 style controls). |\n| **LC Auto White Balance** | Auto white-balance correction. |\n| **LC Sharpen Pro** | **Photorealism-first** clarity + edge sharpen. Guided + box hybrid high-pass; auto halo; skin protect. Presets: Natural, Subtle, Portrait, Product, Landscape, Crisp, **Lineart**, **Anime sharp**. |\n| **LC Lens Effects** | Lens-style FX suite. |\n| **LC Lens Profile** | Lens profile / correction style FX. |\n| **LC Lift Gamma Gain** | Lift / gamma / gain color-wheel style adjust. |\n| **LC Image RGB** | Per-channel RGB adjust. |\n| **LC Film Grain** | Film grain overlay. |\n| **LC Film Stock (B&W)** | B&W film stock look. |\n| **LC Film Stock (Color)** | Color film stock look. |\n| **LC Vibrance** | Vibrance (smart saturation). |\n| **LC Vignette** | Vignette darkening. |\n| **LC Bloom** | Soft bloom / glow. |\n| **LC Chromatic Aberration** | RGB fringe / CA control. |\n| **LC Image Denoise** | Detail-preserving denoise. |\n| **LC Color Match 🎨** | Match colors to a reference; strength; skin-protect aware. |\n| **LC Image Desaturate** | Desaturate (Essentials-style). |\n| **LC Skin Beauty ✨** | Skin-focused beauty pass (see above). |\n| **LC Photo Style 📷** | Camera / phone finish (see above). |\n| **LC Apply LUT** | Apply a LUT from **`ComfyUI/models/luts/`**. Pack may seed samples into that folder on load without overwriting. Ship extras under `assets/luts/` as assets only. |\n| **LC Text Overlay** | Text on image; font size/color; **alignment** left/center/right (bottom default); drag + widgets. |\n\n---\n\n## 🧬 Sampling, sigma & pipes\n\n| Node | What it does |\n|------|----------------|\n| **LC Sampler Configure** | total steps, step swap, detailer steps, denoise (0.01 steps), CFG1/2, sampler, scheduler. |\n| **LC Sampler Configure (pipe)** | Same, pipe-oriented layout. |\n| **LC Sampler Configure Pipe Out** | Unpacks sampler configure pipe. |\n| **LC Pipe (in/edit)** | Pack/edit full LC pipe (models, clips, VAEs, size, latent, prompts, conds, seed, steps, CFGs, sampler…). |\n| **LC Pipe Out** | Unpack full LC pipe. |\n| **LC Detail Pipe Out** | Detailer-oriented unpack (model/clip/vae, prompts, conds, seed, cfg, sampler, scheduler, detailer steps). |\n| **LC Split Sigma Scheduler** | Split one schedule across two models at step swap. |\n| **LC Split Sigmas (Advanced)** | Two sigma curves in (sigma 1 / sigma 2); model 1 / model 2; step swap + denoise; sigmas high/low out. Missing model/sigma 2 falls back to 1. |\n| **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |\n| **Prompt to Conditioning** | String → conditioning. |\n| **LC Prompt to Conditioning + Zero** | Encode + zero-out style second socket. |\n| **Positive / Negative** | Prompt boxes (green / red). |\n\n---\n\n## 📁 Save paths & text\n\n| Node | What it does |\n|------|----------------|\n| **LC Easy Folder 📂** | Builds `filename_prefix` for native Save Image (`Folder\\prefix_suffix_timestamp`). |\n| **LC Advanced Folder 📂** | Split filename + path (Image Saver Simple style). |\n| **📝 LC Save Text** | Write text to a file; **sanitizes** illegal path characters. |\n| **LC Join Strings 🔗** | Join N strings with a delimiter; empty/null slots skip the delimiter; `\\n` allowed. |\n| **LC Show Text 🔤** | Display text on the node (list-friendly). |\n| **LC Text Replace ✂️** | Up to 20 find/replace pairs; grows/shrinks with entry count. |\n| **LC Text Remove 🔪** | Same layout as replace, remove-only. |\n| **Civitai 🚩🔪** | Compliance strip from `assets/lists/civitai_compliance_remove.txt`. **Your** responsibility to meet Civitai TOS; list is not guaranteed complete. |\n\n---\n\n## 🔀 Switches, logic & control\n\n| Node | What it does |\n|------|----------------|\n| **LC AnySwitch** | First connected input among many; type-locks from first wire; 2–20 inputs. |\n| **LC Combo Selector** | Dropdown that mirrors another node’s combo options. |\n| **LC Boolean** | Coerce boolean / int / float → true/false; shows result on the face. |\n| **LC Invert Boolean** | Same coercion, then invert. |\n| **LC Int Compare** | Two INT inputs → largest or smallest. |\n| **LC Float Compare** | Two FLOAT inputs → largest or smallest. |\n| **LC Seed Jump 🌱** | One seed + jump size → six stepped seed outputs. |\n| **LC Slider** | On-node slider; min/max/step/decimals in settings. INT or FLOAT. |\n| **LC Node Snapshot 📋** | Wire a **source** node (or type id/title); pick a **widget**; outputs selected value, full newline string, and JSON (includes node id). Multiple snapshots can target the same node. |\n| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run; ▶ preview on the node. |\n| **LC Bypasser** | Bypass linked nodes; toggle restriction: default / max one / always one. |\n| **LC Groups Bypasser** | Same for graph groups. |\n| **LC Bypasser Panel** | Widgets-only remote for a bypasser hub. |\n| **LC Stop 🛑** | Pause until button (with enable/bypass). |\n| **LC VRAM Cache Clear** | Clear VRAM / cache; any-in / any-out pass-through. |\n\n---\n\n## 🎨 Regional canvas\n\n| Node | What it does |\n|------|----------------|\n| **Anima Regional Inline Canvas** | RGB paint canvas for Sen-sou Anima regional conditioning. |\n| **Krea2 Regional Inline Canvas** | Same idea for Krea2 CLIP regions (**beta**). |\n\n---\n\n## 📦 Assets\n\n| Path | Use |\n|------|-----|\n| `assets/sounds/` | Notification sounds for **LC Notify 🔊** |\n| `assets/lists/` | Text lists (e.g. Civitai compliance strip) |\n| `assets/luts/` | Sample LUTs shipped with the pack (copied to **`models/luts/`** on load if missing — never overwrites) |\n| `assets/readme/` | Images used in this README (optional) |\n\n**LUT path for Apply LUT:** `ComfyUI/models/luts/` (not under custom_nodes).\n\n---\n\n## 💡 Quick tips\n\n- **Image FX:** fix seed, run low-res, tune, then full run.\n- **Sharpen Pro:** realism users live on Natural/Portrait; art users use Lineart/Anime sharp.\n- **Bypasser:** wire hubs; optional Panel so the hub can stay collapsed.\n- **Save Text / folders:** avoid `? < > : \" | *` in names — Save Text sanitizes; folders still prefer clean names.\n- **Pipes + Get/Set:** if a graph “always regenerates,” try a direct pipe link to confirm caching.\n- **Dual sigma:** encode prompts to CONDITIONING before CFGGuider — empty conds fail.\n- **Notify:** drop `.mp3` / `.wav` into `assets/sounds/`, restart once so the dropdown refreshes.\n- **Snapshot:** optional `source` input preferred; target id/title still works when linked resolution succeeds.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore. *Assassin's Wars*_"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 312,
       "type": "Label (rgthree)",
       "pos": [
@@ -8901,7 +7714,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 65,
+      "order": 54,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8938,7 +7751,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 66,
+      "order": 55,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8962,39 +7775,6 @@
       "bgcolor": "#fff0"
     },
     {
-      "id": 44,
-      "type": "MarkdownNote",
-      "pos": [
-        -9770,
-        -4940
-      ],
-      "size": [
-        610,
-        320
-      ],
-      "flags": {},
-      "order": 67,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "Notes:",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "**LC Dynamic Overlay**\n- designed to do a real time image blend. You can save the output once complete\n\n**LC Stop 🛑**\n- Pauses the generaton until you hit the button (or run)\n\n**LC Easy Folder 📂**\n- meant to replace multiple nodes to change names and folders of files. Also an **LC advanced folder 📂** for subfolders and timestamps\n\n**LC Last Image Holder**\n- Holds onto an image you generate until you clear it, or holds onto the last image generated. \n- Can be plugged into the image comparison node. \n- Good when you are trying to adjust details\n- **This image stays in this node, regardless of which workflow you are in.** If you want to compare ZIT with Krea2 and this node is in both of them when launched, it will be in both workflows  👍\n\n**LC Image Compare 🔎**\n- Designed to better handle batch image comparisons. \n- when batch images are processed, use the ⬅️arrows➡️ to compare "
-      ],
-      "widgets_values_named": {
-        "text": "**LC Dynamic Overlay**\n- designed to do a real time image blend. You can save the output once complete\n\n**LC Stop 🛑**\n- Pauses the generaton until you hit the button (or run)\n\n**LC Easy Folder 📂**\n- meant to replace multiple nodes to change names and folders of files. Also an **LC advanced folder 📂** for subfolders and timestamps\n\n**LC Last Image Holder**\n- Holds onto an image you generate until you clear it, or holds onto the last image generated. \n- Can be plugged into the image comparison node. \n- Good when you are trying to adjust details\n- **This image stays in this node, regardless of which workflow you are in.** If you want to compare ZIT with Krea2 and this node is in both of them when launched, it will be in both workflows  👍\n\n**LC Image Compare 🔎**\n- Designed to better handle batch image comparisons. \n- when batch images are processed, use the ⬅️arrows➡️ to compare "
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 177,
       "type": "LCJoinStrings",
       "pos": [
@@ -9008,7 +7788,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 107,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -9079,7 +7859,7 @@
         150
       ],
       "flags": {},
-      "order": 124,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -9130,7 +7910,7 @@
         60
       ],
       "flags": {},
-      "order": 68,
+      "order": 56,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9171,7 +7951,7 @@
         80
       ],
       "flags": {},
-      "order": 69,
+      "order": 57,
       "mode": 0,
       "inputs": [
         {
@@ -9225,7 +8005,7 @@
         500
       ],
       "flags": {},
-      "order": 70,
+      "order": 58,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9258,7 +8038,7 @@
         130
       ],
       "flags": {},
-      "order": 71,
+      "order": 59,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9291,7 +8071,7 @@
         90
       ],
       "flags": {},
-      "order": 72,
+      "order": 60,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9325,39 +8105,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 322,
-      "type": "MarkdownNote",
-      "pos": [
-        -13340,
-        -4550
-      ],
-      "size": [
-        270,
-        140
-      ],
-      "flags": {},
-      "order": 73,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "🌱LC Seed",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "\"Oh yay! another seed generator 🙄\"\n\nNot really. This one creates its own seed internally. why?\nbasically if you have ever generated up to a node (hitting the play button above), the random seed does not change. Makes the button pretty useless for testing. \n\n*Just FYI, This is [Regis's](https://github.com/rgthree) concept*"
-      ],
-      "widgets_values_named": {
-        "text": "\"Oh yay! another seed generator 🙄\"\n\nNot really. This one creates its own seed internally. why?\nbasically if you have ever generated up to a node (hitting the play button above), the random seed does not change. Makes the button pretty useless for testing. \n\n*Just FYI, This is [Regis's](https://github.com/rgthree) concept*"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 320,
       "type": "LCBooleanFlip",
       "pos": [
@@ -9369,7 +8116,7 @@
         60
       ],
       "flags": {},
-      "order": 74,
+      "order": 61,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9410,7 +8157,7 @@
         60
       ],
       "flags": {},
-      "order": 75,
+      "order": 62,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9455,7 +8202,7 @@
         40
       ],
       "flags": {},
-      "order": 112,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -9500,7 +8247,7 @@
         720
       ],
       "flags": {},
-      "order": 133,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -9549,7 +8296,7 @@
           "link": null
         },
         {
-          "name": "Split Sigmas",
+          "name": "Split Sigmas & Noise",
           "type": "BOOLEAN",
           "link": null
         },
@@ -9704,7 +8451,7 @@
         "Enable LC Bypasser Group": true,
         "Enable Pipe Options": true,
         "Enable LC Seed Jump 🌱": true,
-        "Enable Split Sigmas": true,
+        "Enable Split Sigmas & Noise": true,
         "Enable 🎨 Post Processing Suite 260811": true,
         "Enable Utility Nodes": true,
         "Enable 🗒️LC Prompt Builder": true,
@@ -9727,7 +8474,7 @@
         320
       ],
       "flags": {},
-      "order": 76,
+      "order": 63,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9760,7 +8507,7 @@
         110
       ],
       "flags": {},
-      "order": 77,
+      "order": 64,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9807,7 +8554,7 @@
         110
       ],
       "flags": {},
-      "order": 78,
+      "order": 65,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9856,7 +8603,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 113,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -9914,7 +8661,7 @@
         340
       ],
       "flags": {},
-      "order": 79,
+      "order": 66,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9971,7 +8718,7 @@
         340
       ],
       "flags": {},
-      "order": 134,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -10037,7 +8784,7 @@
         340
       ],
       "flags": {},
-      "order": 80,
+      "order": 67,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10088,7 +8835,7 @@
         240
       ],
       "flags": {},
-      "order": 81,
+      "order": 68,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10137,7 +8884,7 @@
         270
       ],
       "flags": {},
-      "order": 82,
+      "order": 69,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10188,7 +8935,7 @@
         340
       ],
       "flags": {},
-      "order": 83,
+      "order": 70,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10241,7 +8988,7 @@
         170
       ],
       "flags": {},
-      "order": 143,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -10332,7 +9079,7 @@
         860
       ],
       "flags": {},
-      "order": 149,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -10371,7 +9118,7 @@
         320
       ],
       "flags": {},
-      "order": 84,
+      "order": 71,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10421,7 +9168,7 @@
         340
       ],
       "flags": {},
-      "order": 114,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -10480,7 +9227,7 @@
         1110
       ],
       "flags": {},
-      "order": 85,
+      "order": 72,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -10512,7 +9259,7 @@
         360
       ],
       "flags": {},
-      "order": 146,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -10613,7 +9360,7 @@
         470
       ],
       "flags": {},
-      "order": 148,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -10641,18 +9388,1670 @@
       "bgcolor": "#28281E"
     },
     {
+      "id": 282,
+      "type": "LCPhoneLook",
+      "pos": [
+        -7460,
+        -2130
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 103,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 384
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            390
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Dramatic",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.33,
+        0,
+        0.09,
+        0.45,
+        0.08,
+        0.45,
+        0.25,
+        0.15,
+        0.6,
+        0.18,
+        0.1,
+        0.22,
+        0.22,
+        0.28,
+        0.12
+      ],
+      "widgets_values_named": {
+        "style": "Dramatic",
+        "strength": 0.85,
+        "seed": 416825629545111,
+        "control_after_generate": "fixed",
+        "wb_temperature": 0.33,
+        "wb_tint": 0,
+        "exposure": 0.09,
+        "contrast": 0.45,
+        "shadows": 0.08,
+        "highlights": 0.45,
+        "hdr_local": 0.25,
+        "vibrance": 0.15,
+        "skin_protect": 0.6,
+        "shadow_cool": 0.18,
+        "highlight_warm": 0.1,
+        "texture": 0.22,
+        "clarity": 0.22,
+        "vignette": 0.28,
+        "grain": 0.12
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 285,
+      "type": "LCBatchImageComparer",
+      "pos": [
+        -7180,
+        -2120
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {
+        "pinned": false
+      },
+      "order": 126,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Original",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 386
+        },
+        {
+          "label": "Photo Style 📷",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 390
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 322,
+      "type": "MarkdownNote",
+      "pos": [
+        -13340,
+        -4540
+      ],
+      "size": [
+        270,
+        170
+      ],
+      "flags": {},
+      "order": 73,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "🌱LC Seed",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "### \"Oh yay! another seed generator 🙄\"\n\n**Not really.** This one creates its own seed internally. why?\nBasically if you have ever generated up to a node (hitting the play button above), the random seed does not change because it does not move the *\"control after generate\"* def. This makes the button pretty useless for testing. This overcomes that issue. \n\n*Just FYI, This is [Regis's](https://github.com/rgthree) concept*"
+      ],
+      "widgets_values_named": {
+        "text": "### \"Oh yay! another seed generator 🙄\"\n\n**Not really.** This one creates its own seed internally. why?\nBasically if you have ever generated up to a node (hitting the play button above), the random seed does not change because it does not move the *\"control after generate\"* def. This makes the button pretty useless for testing. This overcomes that issue. \n\n*Just FYI, This is [Regis's](https://github.com/rgthree) concept*"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 108,
+      "type": "GetNode",
+      "pos": [
+        -9790,
+        -5500
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 74,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            44,
+            45,
+            46,
+            47
+          ]
+        }
+      ],
+      "title": "Get_Image 1",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Image 1"
+      ],
+      "widgets_values_named": {
+        "Constant": "Image 1"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 109,
+      "type": "GetNode",
+      "pos": [
+        -9790,
+        -5400
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 75,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48,
+            49
+          ]
+        }
+      ],
+      "title": "Get_Image 2",
+      "properties": {
+        "Node name for S&R": "GetNode",
+        "aux_id": "kijai/ComfyUI-KJNodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "Image 2"
+      ],
+      "widgets_values_named": {
+        "Constant": "Image 2"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 105,
+      "type": "LCGetImage",
+      "pos": [
+        -9790,
+        -5290
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 117,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "megapixels",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            459
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            460
+          ]
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "batch",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "aspect ratio",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCGetImage",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#324b4b",
+      "bgcolor": "#324b4b"
+    },
+    {
+      "id": 343,
+      "type": "LCSlider",
+      "pos": [
+        -9140,
+        -4760
+      ],
+      "size": [
+        270,
+        100
+      ],
+      "flags": {},
+      "order": 76,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "*",
+          "name": "*",
+          "type": "*",
+          "links": [
+            461
+          ]
+        }
+      ],
+      "title": "Dimension resize slider",
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCSlider",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "min": 1,
+        "max": 4,
+        "step": 0.25,
+        "decimals": 2
+      },
+      "widgets_values": [
+        1.75,
+        1,
+        4,
+        0.25,
+        2,
+        ""
+      ],
+      "widgets_values_named": {
+        "value": 1.75,
+        "min": 1,
+        "max": 4,
+        "step": 0.25,
+        "decimals": 2,
+        "lc123_face": ""
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 342,
+      "type": "LCDimensionResize",
+      "pos": [
+        -8850,
+        -4760
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 140,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "link": 461
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 459
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 460
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            462
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            463
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCDimensionResize",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "multiply"
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1024,
+        "operation": "multiply"
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 345,
+      "type": "easy showAnything",
+      "pos": [
+        -8520,
+        -4700
+      ],
+      "size": [
+        210,
+        90
+      ],
+      "flags": {},
+      "order": 151,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 463
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "595e0738a9e3f8d0d9c4d875461b2d2c9e7559c7",
+        "Node name for S&R": "easy showAnything",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "3528"
+      ],
+      "widgets_values_named": {
+        "text": "3528"
+      }
+    },
+    {
+      "id": 344,
+      "type": "easy showAnything",
+      "pos": [
+        -8520,
+        -4830
+      ],
+      "size": [
+        210,
+        90
+      ],
+      "flags": {},
+      "order": 150,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 462
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "595e0738a9e3f8d0d9c4d875461b2d2c9e7559c7",
+        "Node name for S&R": "easy showAnything",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "2828"
+      ],
+      "widgets_values_named": {
+        "text": "2828"
+      }
+    },
+    {
+      "id": 44,
+      "type": "MarkdownNote",
+      "pos": [
+        -9770,
+        -4940
+      ],
+      "size": [
+        610,
+        320
+      ],
+      "flags": {},
+      "order": 77,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Notes:",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "**LC Dynamic Overlay**\n- designed to do a real time image blend. You can save the output once complete\n\n**LC Stop 🛑**\n- Pauses the generaton until you hit the button (or run)\n\n**LC Easy Folder 📂**\n- meant to replace multiple nodes to change names and folders of files. Also an **LC advanced folder 📂** for subfolders and timestamps\n\n**LC Last Image Holder**\n- Holds onto an image you generate until you clear it, or holds onto the last image generated. \n- Can be plugged into the image comparison node. \n- Good when you are trying to adjust details\n- **This image stays in this node, regardless of which workflow you are in.** If you want to compare ZIT with Krea2 and this node is in both of them when launched, it will be in both workflows  👍\n\n**LC Image Compare 🔎**\n- Designed to better handle batch image comparisons. \n- when batch images are processed, use the ⬅️arrows➡️ to compare \n\n**LC Dimension Resize📐 **\n- saves from having to do width & height math twice"
+      ],
+      "widgets_values_named": {
+        "text": "**LC Dynamic Overlay**\n- designed to do a real time image blend. You can save the output once complete\n\n**LC Stop 🛑**\n- Pauses the generaton until you hit the button (or run)\n\n**LC Easy Folder 📂**\n- meant to replace multiple nodes to change names and folders of files. Also an **LC advanced folder 📂** for subfolders and timestamps\n\n**LC Last Image Holder**\n- Holds onto an image you generate until you clear it, or holds onto the last image generated. \n- Can be plugged into the image comparison node. \n- Good when you are trying to adjust details\n- **This image stays in this node, regardless of which workflow you are in.** If you want to compare ZIT with Krea2 and this node is in both of them when launched, it will be in both workflows  👍\n\n**LC Image Compare 🔎**\n- Designed to better handle batch image comparisons. \n- when batch images are processed, use the ⬅️arrows➡️ to compare \n\n**LC Dimension Resize📐 **\n- saves from having to do width & height math twice"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 347,
+      "type": "LCSamplerConfigureSimplePipeOut",
+      "pos": [
+        -10830,
+        -3890
+      ],
+      "size": [
+        300,
+        350
+      ],
+      "flags": {},
+      "order": 78,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "shape": 7,
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCSamplerConfigureSimplePipeOut",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        40,
+        0,
+        1,
+        "",
+        8,
+        "",
+        "euler",
+        "normal"
+      ],
+      "widgets_values_named": {
+        "total_steps": 40,
+        "detailer_steps": 0,
+        "denoise": 1,
+        "_gap1": "",
+        "cfg": 8,
+        "_gap2": "",
+        "sampler_name": "euler",
+        "scheduler": "normal"
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 40,
+      "type": "LCAspectRatioPipeOut",
+      "pos": [
+        -10830,
+        -4850
+      ],
+      "size": [
+        300,
+        470
+      ],
+      "flags": {},
+      "order": 79,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "batch",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
+        "Node name for S&R": "LCAspectRatioPipeOut",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        2048,
+        false,
+        "custom",
+        1024,
+        1024,
+        "Off",
+        "lanczos",
+        "crop",
+        "center",
+        "0, 0, 0",
+        8,
+        1
+      ],
+      "widgets_values_named": {
+        "max_resolution": 2048,
+        "resolution_source": false,
+        "aspect_ratio": "custom",
+        "custom_width": 1024,
+        "custom_height": 1024,
+        "swap_dimensions": "Off",
+        "upscale_method": "lanczos",
+        "proportion": "crop",
+        "crop_location": "center",
+        "pad_color": "0, 0, 0",
+        "divisible_by": 8,
+        "batch_size": 1
+      },
+      "color": "#324b4b",
+      "bgcolor": "#324b4b"
+    },
+    {
+      "id": 81,
+      "type": "LCPipeEdit",
+      "pos": [
+        -10520,
+        -4850
+      ],
+      "size": [
+        200,
+        530
+      ],
+      "flags": {},
+      "order": 80,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "pipe",
+          "name": "pipe",
+          "shape": 7,
+          "type": "LC_PIPE",
+          "link": null
+        },
+        {
+          "label": "Model 1",
+          "name": "model_1",
+          "shape": 7,
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "label": "Clip 1",
+          "name": "clip_1",
+          "shape": 7,
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "label": "VAE 1",
+          "name": "vae_1",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "label": "Model 2",
+          "name": "model_2",
+          "shape": 7,
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "label": "Clip 2",
+          "name": "clip_2",
+          "shape": 7,
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "label": "VAE 2",
+          "name": "vae_2",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "label": "Image",
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "Mask",
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "label": "Width",
+          "name": "width",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "Height",
+          "name": "height",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "Latent",
+          "name": "latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "label": "Batch",
+          "name": "batch",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "Positive prompt",
+          "name": "positive_prompt",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "label": "Positive conditioning",
+          "name": "positive",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": null
+        },
+        {
+          "label": "Negative prompt",
+          "name": "negative_prompt",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "label": "Negative conditioning",
+          "name": "negative",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": null
+        },
+        {
+          "label": "Seed",
+          "name": "seed",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "total_steps",
+          "name": "total_steps",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "cfg_1",
+          "name": "cfg_1",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "label": "denoise",
+          "name": "denoise",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "label": "step_swap",
+          "name": "step_swap",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "label": "cfg_2",
+          "name": "cfg_2",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "label": "sampler_name",
+          "name": "sampler_name",
+          "shape": 7,
+          "type": "COMBO",
+          "link": null
+        },
+        {
+          "label": "scheduler",
+          "name": "scheduler",
+          "shape": 7,
+          "type": "COMBO",
+          "link": null
+        },
+        {
+          "label": "detailer_steps",
+          "name": "detailer_steps",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
+        "Node name for S&R": "LCPipeEdit",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 80,
+      "type": "LCPipeOut",
+      "pos": [
+        -10300,
+        -4850
+      ],
+      "size": [
+        200,
+        530
+      ],
+      "flags": {},
+      "order": 81,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "pipe",
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "Model 1",
+          "type": "MODEL",
+          "links": null
+        },
+        {
+          "name": "Clip 1",
+          "type": "CLIP",
+          "links": null
+        },
+        {
+          "name": "VAE 1",
+          "type": "VAE",
+          "links": null
+        },
+        {
+          "name": "Model 2",
+          "type": "MODEL",
+          "links": null
+        },
+        {
+          "name": "Clip 2",
+          "type": "CLIP",
+          "links": null
+        },
+        {
+          "name": "VAE 2",
+          "type": "VAE",
+          "links": null
+        },
+        {
+          "name": "Image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "Mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "Width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "Height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "Latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "Batch",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "Positive prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "Positive conditioning",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "Negative prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "Negative conditioning",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "Seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_1",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "step_swap",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_2",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
+        "Node name for S&R": "LCPipeOut",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 38,
+      "type": "LCAspectRatioPipe",
+      "pos": [
+        -10520,
+        -4280
+      ],
+      "size": [
+        260,
+        170
+      ],
+      "flags": {},
+      "order": 82,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        },
+        {
+          "name": "batch",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
+        "Node name for S&R": "LCAspectRatioPipe",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 35,
+      "type": "LCSamplerConfigurePipe",
+      "pos": [
+        -10250,
+        -4280
+      ],
+      "size": [
+        300,
+        190
+      ],
+      "flags": {},
+      "order": 83,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_1",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "step_swap",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_2",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1afce535c58024dd0995f5f1a31e91510260f194",
+        "Node name for S&R": "LCSamplerConfigurePipe",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 205,
+      "type": "LCDetailPipeOut",
+      "pos": [
+        -10510,
+        -4060
+      ],
+      "size": [
+        200,
+        270
+      ],
+      "flags": {},
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "pipe",
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "LC_PIPE",
+          "links": null
+        },
+        {
+          "name": "Model 1",
+          "type": "MODEL",
+          "links": null
+        },
+        {
+          "name": "Clip 1",
+          "type": "CLIP",
+          "links": null
+        },
+        {
+          "name": "VAE 1",
+          "type": "VAE",
+          "links": null
+        },
+        {
+          "name": "Positive prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "Positive conditioning",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "Negative prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "Negative conditioning",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "Seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_1",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "79b81758ac54ba8f9b46ecf7682902e87dc26684",
+        "Node name for S&R": "LCDetailPipeOut",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 348,
+      "type": "LCSamplerConfigure",
+      "pos": [
+        -10840,
+        -3400
+      ],
+      "size": [
+        300,
+        420
+      ],
+      "flags": {},
+      "order": 85,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_1",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "step_swap",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg_2",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCSamplerConfigure",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        40,
+        30,
+        0,
+        1,
+        "",
+        8,
+        1,
+        "",
+        "euler",
+        "normal"
+      ],
+      "widgets_values_named": {
+        "total_steps": 40,
+        "step_swap": 30,
+        "detailer_steps": 0,
+        "denoise": 1,
+        "_gap1": "",
+        "cfg_1": 8,
+        "cfg_2": 1,
+        "_gap2": "",
+        "sampler_name": "euler",
+        "scheduler": "normal"
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 346,
+      "type": "LCSamplerConfigureSimple",
+      "pos": [
+        -10530,
+        -3400
+      ],
+      "size": [
+        300,
+        330
+      ],
+      "flags": {},
+      "order": 86,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCSamplerConfigureSimple",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        40,
+        0,
+        1,
+        "",
+        8,
+        "",
+        "euler",
+        "normal"
+      ],
+      "widgets_values_named": {
+        "total_steps": 40,
+        "detailer_steps": 0,
+        "denoise": 1,
+        "_gap1": "",
+        "cfg": 8,
+        "_gap2": "",
+        "sampler_name": "euler",
+        "scheduler": "normal"
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
+      "id": 238,
+      "type": "MarkdownNote",
+      "pos": [
+        -14470,
+        -5550
+      ],
+      "size": [
+        1070,
+        3410
+      ],
+      "flags": {},
+      "order": 87,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "ComfyUI LC123 Nodes",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "\n\n# ComfyUI LC123 Nodes\n\nCustom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).\n\n- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)\n- **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)\n- **Version:** 1.10.2\n\n> Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.\n\n> **\"True, nothing is. Permitted, everything is\"**  \n> — Yoda Auditore, *Assassin's Wars*\n\nFor **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).\n\n---\n\n\n## ⚙️ LC123 Performance (Settings)\n\n**UI only** — smoother scrolling and lighter on-node previews. Does **not** change generation VRAM or socket output quality.\n\n**Settings → LC123 → Performance**\n\n| Setting | Default | Effect |\n|--------|---------|--------|\n| **Remove wipe** | Off | No hover wipe on image FX previews |\n| **Half-resolution previews** | Off | FX previews at half the node image area |\n| **Clamp longest side** | Off | Cap on-node preview bitmap size |\n| **Max edge (px)** | 768 | Used when clamp is on |\n| **No preview when collapsed** | On | Skip draw on collapsed FX nodes |\n| **Hide FX on-node previews** | Off | Hide all LC image FX on-node previews |\n| **Skin Beauty full preview override** | On | Skin Beauty stays full quality on-node |\n\n**Not affected:** LC Image Compare · LC Dynamic Overlay · LC Image Split  \n\nFull directions: [`LC123_Performance_Settings_Note.md`](LC123_Performance_Settings_Note.md)\n\n---\n\n## ✨ LC Skin Beauty\n\nMask-aware skin cooling and brightening in **CIELAB**. Grades **skin**, not the whole frame. Presets + full slider control; optional external mask.\n\n---\n\n## 📷 LC Photo Style\n\nCamera / phone **finish** look (not lens geometry). Style presets drive the sliders; most controls use **0 = no change**. **Strength** blends with the original.\n\nPresets include Standard, Natural, Dramatic, Quiet, Muted, Amateur, Cool day, Warm evening, Bright open, iPhone, **Nikon Z7 II**, **Canon R5**.\n\nFull control list: [`LC_Photo_Style_Note.md`](LC_Photo_Style_Note.md)\n\n---\n\n## 🔪 LC Sharpen Pro — quick use\n\n- **Default path (realism / influencers / NSFW):** start on **Natural** or **Portrait**. Raise **clarity** before **sharpen**. Keep **halo** and **skin_protect** up on faces.\n- **Crisp:** photo snap, not ink outlines (higher halo, moderate sharpen).\n- **Lineart / Anime sharp:** deliberate edge punch for art workflows — lower skin/halo on purpose.\n- Moving any slider after a preset → **Custom**.\n- **strength** at 1.0 = full effect; use a bypasser if you want a hard off switch.\n\n---\n\n## 🖼️ Image & size\n\n| Node | What it does |\n|------|----------------|\n| **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. `resolution` = longer side. |\n| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |\n| **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |\n| **LC Get Image 📐** | Reads an image; shows megapixels, width, height, batch, aspect ratio, and resolution (longer side). |\n| **LC Dimension Resize 📐** | Width + height + one value; add / subtract / multiply / divide both sides; rounded width & height out. |\n| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |\n| **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |\n| **LC Image Split 🖼️** | Saveable wipe: **slider only** sets the split; position sticks until you change it. Output = split image. |\n| **LC Image Grid 🖼️** | Multi-image contact sheet (max columns, gap, cell pad, outline/border colors). |\n| **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. Modes: hold last generation / hold until cleared. |\n| **LC Dynamic Overlay** | Overlay B on A (A sets resolution). After one queue, drag the opacity knob — no re-gen to preview. Output: **blended Image**. |\n| **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |\n\n---\n\n## 🎨 Image FX (on-node preview + before/after wipe)\n\nMost show the result on the node. Hover to wipe against the original  \n(see **LC123 Performance** to lighten UI load).\n\n| Node | What it does |\n|------|----------------|\n| **LC Image Adjust** | Brightness, contrast, saturation, hue, etc. (−1…1 style controls). |\n| **LC Auto White Balance** | Auto white-balance correction. |\n| **LC Sharpen Pro** | **Photorealism-first** clarity + edge sharpen. Guided + box hybrid high-pass; auto halo; skin protect. Presets: Natural, Subtle, Portrait, Product, Landscape, Crisp, **Lineart**, **Anime sharp**. |\n| **LC Lens Effects** | Lens-style FX suite. |\n| **LC Lens Profile** | Lens profile / correction style FX. |\n| **LC Lift Gamma Gain** | Lift / gamma / gain color-wheel style adjust. |\n| **LC Image RGB** | Per-channel RGB adjust. |\n| **LC Film Grain** | Film grain overlay. |\n| **LC Film Stock (B&W)** | B&W film stock look. |\n| **LC Film Stock (Color)** | Color film stock look. |\n| **LC Vibrance** | Vibrance (smart saturation). |\n| **LC Vignette** | Vignette darkening. |\n| **LC Bloom** | Soft bloom / glow. |\n| **LC Chromatic Aberration** | RGB fringe / CA control. |\n| **LC Image Denoise** | Detail-preserving denoise. |\n| **LC Color Match 🎨** | Match colors to a reference; strength; skin-protect aware. |\n| **LC Image Desaturate** | Desaturate (Essentials-style). |\n| **LC Skin Beauty ✨** | Skin-focused beauty pass (see above). |\n| **LC Photo Style 📷** | Camera / phone finish (see above). |\n| **LC Apply LUT** | Apply a LUT from **`ComfyUI/models/luts/`**. Pack may seed samples into that folder on load without overwriting. Ship extras under `assets/luts/` as assets only. |\n| **LC Text Overlay** | Text on image; font size/color; **alignment** left/center/right (bottom default); drag + widgets. |\n\n---\n\n## 🧬 Sampling, sigma & pipes\n\n| Node | What it does |\n|------|----------------|\n| **LC Sampler Configure** | total steps, step swap, detailer steps, denoise (0.01 steps), CFG1/2, sampler, scheduler. |\n| **LC Sampler Configure (pipe)** | Same, pipe-oriented layout. |\n| **LC Sampler Configure Pipe Out** | Unpacks sampler configure pipe. |\n| **LC Pipe (in/edit)** | Pack/edit full LC pipe (models, clips, VAEs, size, latent, prompts, conds, seed, steps, CFGs, sampler…). |\n| **LC Pipe Out** | Unpack full LC pipe. |\n| **LC Detail Pipe Out** | Detailer-oriented unpack (model/clip/vae, prompts, conds, seed, cfg, sampler, scheduler, detailer steps). |\n| **LC Split Sigma Scheduler** | Split one schedule across two models at step swap. |\n| **LC Split Sigmas (Advanced)** | Two sigma curves in (sigma 1 / sigma 2); model 1 / model 2; step swap + denoise; sigmas high/low out. Missing model/sigma 2 falls back to 1. |\n| **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |\n| **Prompt to Conditioning** | String → conditioning. |\n| **LC Prompt to Conditioning + Zero** | Encode + zero-out style second socket. |\n| **Positive / Negative** | Prompt boxes (green / red). |\n\n---\n\n## 📁 Save paths & text\n\n| Node | What it does |\n|------|----------------|\n| **LC Easy Folder 📂** | Builds `filename_prefix` for native Save Image (`Folder\\prefix_suffix_timestamp`). |\n| **LC Advanced Folder 📂** | Split filename + path (Image Saver Simple style). |\n| **📝 LC Save Text** | Write text to a file; **sanitizes** illegal path characters. |\n| **LC Join Strings 🔗** | Join N strings with a delimiter; empty/null slots skip the delimiter; `\\n` allowed. |\n| **LC Show Text 🔤** | Display text on the node (list-friendly). |\n| **LC Text Replace ✂️** | Up to 20 find/replace pairs; grows/shrinks with entry count. |\n| **LC Text Remove 🔪** | Same layout as replace, remove-only. |\n| **Civitai 🚩🔪** | Compliance strip from `assets/lists/civitai_compliance_remove.txt`. **Your** responsibility to meet Civitai TOS; list is not guaranteed complete. |\n\n---\n\n## 🔀 Switches, logic & control\n\n| Node | What it does |\n|------|----------------|\n| **LC AnySwitch** | First connected input among many; type-locks from first wire; 2–20 inputs. |\n| **LC Combo Selector** | Dropdown that mirrors another node’s combo options. |\n| **LC Boolean** | Coerce boolean / int / float → true/false; shows result on the face. |\n| **LC Invert Boolean** | Same coercion, then invert. |\n| **LC Int Compare** | Two INT inputs → largest or smallest. |\n| **LC Float Compare** | Two FLOAT inputs → largest or smallest. |\n| **LC Seed Jump 🌱** | One seed + jump size → six stepped seed outputs. |\n| **LC Slider** | On-node slider; min/max/step/decimals in settings. INT or FLOAT. |\n| **LC Node Snapshot 📋** | Wire a **source** node (or type id/title); pick a **widget**; outputs selected value, full newline string, and JSON (includes node id). Multiple snapshots can target the same node. |\n| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run; ▶ preview on the node. |\n| **LC Bypasser** | Bypass linked nodes; toggle restriction: default / max one / always one. |\n| **LC Groups Bypasser** | Same for graph groups. |\n| **LC Bypasser Panel** | Widgets-only remote for a bypasser hub. |\n| **LC Stop 🛑** | Pause until button (with enable/bypass). |\n| **LC VRAM Cache Clear** | Clear VRAM / cache; any-in / any-out pass-through. |\n\n---\n\n## 🎨 Regional canvas\n\n| Node | What it does |\n|------|----------------|\n| **Anima Regional Inline Canvas** | RGB paint canvas for Sen-sou Anima regional conditioning. |\n| **Krea2 Regional Inline Canvas** | Same idea for Krea2 CLIP regions (**beta**). |\n\n---\n\n## 📦 Assets\n\n| Path | Use |\n|------|-----|\n| `assets/sounds/` | Notification sounds for **LC Notify 🔊** |\n| `assets/lists/` | Text lists (e.g. Civitai compliance strip) |\n| `assets/luts/` | Sample LUTs shipped with the pack (copied to **`models/luts/`** on load if missing — never overwrites) |\n| `assets/readme/` | Images used in this README (optional) |\n\n**LUT path for Apply LUT:** `ComfyUI/models/luts/` (not under custom_nodes).\n\n---\n\n## 💡 Quick tips\n\n- **Image FX:** fix seed, run low-res, tune, then full run.\n- **Sharpen Pro:** realism users live on Natural/Portrait; art users use Lineart/Anime sharp.\n- **Bypasser:** wire hubs; optional Panel so the hub can stay collapsed.\n- **Save Text / folders:** avoid `? < > : \" | *` in names — Save Text sanitizes; folders still prefer clean names.\n- **Pipes + Get/Set:** if a graph “always regenerates,” try a direct pipe link to confirm caching.\n- **Dual sigma:** encode prompts to CONDITIONING before CFGGuider — empty conds fail.\n- **Notify:** drop `.mp3` / `.wav` into `assets/sounds/`, restart once so the dropdown refreshes.\n- **Snapshot:** optional `source` input preferred; target id/title still works when linked resolution succeeds.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore. *Assassin's Wars*_"
+      ],
+      "widgets_values_named": {
+        "text": "\n\n# ComfyUI LC123 Nodes\n\nCustom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [lonecatone23](https://github.com/lonecatone23).\n\n- **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)\n- **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)\n- **Version:** 1.10.2\n\n> Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.\n\n> **\"True, nothing is. Permitted, everything is\"**  \n> — Yoda Auditore, *Assassin's Wars*\n\nFor **Anima regional attention**, also install [Sen-sou Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning).\n\n---\n\n\n## ⚙️ LC123 Performance (Settings)\n\n**UI only** — smoother scrolling and lighter on-node previews. Does **not** change generation VRAM or socket output quality.\n\n**Settings → LC123 → Performance**\n\n| Setting | Default | Effect |\n|--------|---------|--------|\n| **Remove wipe** | Off | No hover wipe on image FX previews |\n| **Half-resolution previews** | Off | FX previews at half the node image area |\n| **Clamp longest side** | Off | Cap on-node preview bitmap size |\n| **Max edge (px)** | 768 | Used when clamp is on |\n| **No preview when collapsed** | On | Skip draw on collapsed FX nodes |\n| **Hide FX on-node previews** | Off | Hide all LC image FX on-node previews |\n| **Skin Beauty full preview override** | On | Skin Beauty stays full quality on-node |\n\n**Not affected:** LC Image Compare · LC Dynamic Overlay · LC Image Split  \n\nFull directions: [`LC123_Performance_Settings_Note.md`](LC123_Performance_Settings_Note.md)\n\n---\n\n## ✨ LC Skin Beauty\n\nMask-aware skin cooling and brightening in **CIELAB**. Grades **skin**, not the whole frame. Presets + full slider control; optional external mask.\n\n---\n\n## 📷 LC Photo Style\n\nCamera / phone **finish** look (not lens geometry). Style presets drive the sliders; most controls use **0 = no change**. **Strength** blends with the original.\n\nPresets include Standard, Natural, Dramatic, Quiet, Muted, Amateur, Cool day, Warm evening, Bright open, iPhone, **Nikon Z7 II**, **Canon R5**.\n\nFull control list: [`LC_Photo_Style_Note.md`](LC_Photo_Style_Note.md)\n\n---\n\n## 🔪 LC Sharpen Pro — quick use\n\n- **Default path (realism / influencers / NSFW):** start on **Natural** or **Portrait**. Raise **clarity** before **sharpen**. Keep **halo** and **skin_protect** up on faces.\n- **Crisp:** photo snap, not ink outlines (higher halo, moderate sharpen).\n- **Lineart / Anime sharp:** deliberate edge punch for art workflows — lower skin/halo on purpose.\n- Moving any slider after a preset → **Custom**.\n- **strength** at 1.0 = full effect; use a bypasser if you want a hard off switch.\n\n---\n\n## 🖼️ Image & size\n\n| Node | What it does |\n|------|----------------|\n| **📐 Aspect Ratio Simplifier** | Size from image, mask, or preset. Resize image + mask together. Crop / stretch / pad / total pixels. Empty latent out. Default upscale: **lanczos**. `resolution` = longer side. |\n| **LC Aspect Ratio Simplifier 📐(Pipe)** | Same controls, plus a **pipe** output on top for Get/Set routing. |\n| **LC Aspect Ratio Pipe Out** | Unpacks an aspect-ratio pipe into image, mask, width, height, latent, batch, resolution. |\n| **LC Get Image 📐** | Reads an image; shows megapixels, width, height, batch, aspect ratio, and resolution (longer side). |\n| **LC Dimension Resize 📐** | Width + height + one value; add / subtract / multiply / divide both sides; rounded width & height out. |\n| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock; preview on the node; cropped image out. |\n| **LC Image Compare 🔎** | Batch A/B compare with one slider (A1↔B1, A2↔B2, …). Layout stays fixed. |\n| **LC Image Split 🖼️** | Saveable wipe: **slider only** sets the split; position sticks until you change it. Output = split image. |\n| **LC Image Grid 🖼️** | Multi-image contact sheet (max columns, gap, cell pad, outline/border colors). |\n| **LC Last Image Holder** | Holds the last image for before/after. Survives disconnect; clear empties without re-running. Modes: hold last generation / hold until cleared. |\n| **LC Dynamic Overlay** | Overlay B on A (A sets resolution). After one queue, drag the opacity knob — no re-gen to preview. Output: **blended Image**. |\n| **LC Watermark 💧** | Image watermark: size, opacity, drag place. Bypasses if no watermark image. |\n\n---\n\n## 🎨 Image FX (on-node preview + before/after wipe)\n\nMost show the result on the node. Hover to wipe against the original  \n(see **LC123 Performance** to lighten UI load).\n\n| Node | What it does |\n|------|----------------|\n| **LC Image Adjust** | Brightness, contrast, saturation, hue, etc. (−1…1 style controls). |\n| **LC Auto White Balance** | Auto white-balance correction. |\n| **LC Sharpen Pro** | **Photorealism-first** clarity + edge sharpen. Guided + box hybrid high-pass; auto halo; skin protect. Presets: Natural, Subtle, Portrait, Product, Landscape, Crisp, **Lineart**, **Anime sharp**. |\n| **LC Lens Effects** | Lens-style FX suite. |\n| **LC Lens Profile** | Lens profile / correction style FX. |\n| **LC Lift Gamma Gain** | Lift / gamma / gain color-wheel style adjust. |\n| **LC Image RGB** | Per-channel RGB adjust. |\n| **LC Film Grain** | Film grain overlay. |\n| **LC Film Stock (B&W)** | B&W film stock look. |\n| **LC Film Stock (Color)** | Color film stock look. |\n| **LC Vibrance** | Vibrance (smart saturation). |\n| **LC Vignette** | Vignette darkening. |\n| **LC Bloom** | Soft bloom / glow. |\n| **LC Chromatic Aberration** | RGB fringe / CA control. |\n| **LC Image Denoise** | Detail-preserving denoise. |\n| **LC Color Match 🎨** | Match colors to a reference; strength; skin-protect aware. |\n| **LC Image Desaturate** | Desaturate (Essentials-style). |\n| **LC Skin Beauty ✨** | Skin-focused beauty pass (see above). |\n| **LC Photo Style 📷** | Camera / phone finish (see above). |\n| **LC Apply LUT** | Apply a LUT from **`ComfyUI/models/luts/`**. Pack may seed samples into that folder on load without overwriting. Ship extras under `assets/luts/` as assets only. |\n| **LC Text Overlay** | Text on image; font size/color; **alignment** left/center/right (bottom default); drag + widgets. |\n\n---\n\n## 🧬 Sampling, sigma & pipes\n\n| Node | What it does |\n|------|----------------|\n| **LC Sampler Configure** | total steps, step swap, detailer steps, denoise (0.01 steps), CFG1/2, sampler, scheduler. |\n| **LC Sampler Configure (pipe)** | Same, pipe-oriented layout. |\n| **LC Sampler Configure Pipe Out** | Unpacks sampler configure pipe. |\n| **LC Pipe (in/edit)** | Pack/edit full LC pipe (models, clips, VAEs, size, latent, prompts, conds, seed, steps, CFGs, sampler…). |\n| **LC Pipe Out** | Unpack full LC pipe. |\n| **LC Detail Pipe Out** | Detailer-oriented unpack (model/clip/vae, prompts, conds, seed, cfg, sampler, scheduler, detailer steps). |\n| **LC Split Sigma Scheduler** | Split one schedule across two models at step swap. |\n| **LC Split Sigmas (Advanced)** | Two sigma curves in (sigma 1 / sigma 2); model 1 / model 2; step swap + denoise; sigmas high/low out. Missing model/sigma 2 falls back to 1. |\n| **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |\n| **Prompt to Conditioning** | String → conditioning. |\n| **LC Prompt to Conditioning + Zero** | Encode + zero-out style second socket. |\n| **Positive / Negative** | Prompt boxes (green / red). |\n\n---\n\n## 📁 Save paths & text\n\n| Node | What it does |\n|------|----------------|\n| **LC Easy Folder 📂** | Builds `filename_prefix` for native Save Image (`Folder\\prefix_suffix_timestamp`). |\n| **LC Advanced Folder 📂** | Split filename + path (Image Saver Simple style). |\n| **📝 LC Save Text** | Write text to a file; **sanitizes** illegal path characters. |\n| **LC Join Strings 🔗** | Join N strings with a delimiter; empty/null slots skip the delimiter; `\\n` allowed. |\n| **LC Show Text 🔤** | Display text on the node (list-friendly). |\n| **LC Text Replace ✂️** | Up to 20 find/replace pairs; grows/shrinks with entry count. |\n| **LC Text Remove 🔪** | Same layout as replace, remove-only. |\n| **Civitai 🚩🔪** | Compliance strip from `assets/lists/civitai_compliance_remove.txt`. **Your** responsibility to meet Civitai TOS; list is not guaranteed complete. |\n\n---\n\n## 🔀 Switches, logic & control\n\n| Node | What it does |\n|------|----------------|\n| **LC AnySwitch** | First connected input among many; type-locks from first wire; 2–20 inputs. |\n| **LC Combo Selector** | Dropdown that mirrors another node’s combo options. |\n| **LC Boolean** | Coerce boolean / int / float → true/false; shows result on the face. |\n| **LC Invert Boolean** | Same coercion, then invert. |\n| **LC Int Compare** | Two INT inputs → largest or smallest. |\n| **LC Float Compare** | Two FLOAT inputs → largest or smallest. |\n| **LC Seed Jump 🌱** | One seed + jump size → six stepped seed outputs. |\n| **LC Slider** | On-node slider; min/max/step/decimals in settings. INT or FLOAT. |\n| **LC Node Snapshot 📋** | Wire a **source** node (or type id/title); pick a **widget**; outputs selected value, full newline string, and JSON (includes node id). Multiple snapshots can target the same node. |\n| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run; ▶ preview on the node. |\n| **LC Bypasser** | Bypass linked nodes; toggle restriction: default / max one / always one. |\n| **LC Groups Bypasser** | Same for graph groups. |\n| **LC Bypasser Panel** | Widgets-only remote for a bypasser hub. |\n| **LC Stop 🛑** | Pause until button (with enable/bypass). |\n| **LC VRAM Cache Clear** | Clear VRAM / cache; any-in / any-out pass-through. |\n\n---\n\n## 🎨 Regional canvas\n\n| Node | What it does |\n|------|----------------|\n| **Anima Regional Inline Canvas** | RGB paint canvas for Sen-sou Anima regional conditioning. |\n| **Krea2 Regional Inline Canvas** | Same idea for Krea2 CLIP regions (**beta**). |\n\n---\n\n## 📦 Assets\n\n| Path | Use |\n|------|-----|\n| `assets/sounds/` | Notification sounds for **LC Notify 🔊** |\n| `assets/lists/` | Text lists (e.g. Civitai compliance strip) |\n| `assets/luts/` | Sample LUTs shipped with the pack (copied to **`models/luts/`** on load if missing — never overwrites) |\n| `assets/readme/` | Images used in this README (optional) |\n\n**LUT path for Apply LUT:** `ComfyUI/models/luts/` (not under custom_nodes).\n\n---\n\n## 💡 Quick tips\n\n- **Image FX:** fix seed, run low-res, tune, then full run.\n- **Sharpen Pro:** realism users live on Natural/Portrait; art users use Lineart/Anime sharp.\n- **Bypasser:** wire hubs; optional Panel so the hub can stay collapsed.\n- **Save Text / folders:** avoid `? < > : \" | *` in names — Save Text sanitizes; folders still prefer clean names.\n- **Pipes + Get/Set:** if a graph “always regenerates,” try a direct pipe link to confirm caching.\n- **Dual sigma:** encode prompts to CONDITIONING before CFGGuider — empty conds fail.\n- **Notify:** drop `.mp3` / `.wav` into `assets/sounds/`, restart once so the dropdown refreshes.\n- **Snapshot:** optional `source` input preferred; target id/title still works when linked resolution succeeds.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore. *Assassin's Wars*_"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
       "id": 280,
       "type": "MarkdownNote",
       "pos": [
-        -10840,
-        -3570
+        -14480,
+        -2070
       ],
       "size": [
         980,
         790
       ],
       "flags": {},
-      "order": 86,
+      "order": 88,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -10672,6 +11071,207 @@
       },
       "color": "#dc6947",
       "bgcolor": "#c85533"
+    },
+    {
+      "id": 218,
+      "type": "LCSplitSigmasAdvanced",
+      "pos": [
+        -11520,
+        -4340
+      ],
+      "size": [
+        270,
+        150
+      ],
+      "flags": {},
+      "order": 89,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_1",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "sigmas_1",
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "model_2",
+          "shape": 7,
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "sigmas_2",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas_high",
+          "type": "SIGMAS",
+          "links": null
+        },
+        {
+          "name": "sigmas_low",
+          "type": "SIGMAS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
+        "Node name for S&R": "LCSplitSigmasAdvanced",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        10,
+        1
+      ],
+      "widgets_values_named": {
+        "step_swap": 10,
+        "denoise": 1
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
+    },
+    {
+      "id": 350,
+      "type": "LCDenoise",
+      "pos": [
+        -11520,
+        -4150
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {},
+      "order": 90,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCDenoise",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "denoise": 1
+      },
+      "color": "#823282",
+      "bgcolor": "#823282"
+    },
+    {
+      "id": 351,
+      "type": "LCBasicScheduler",
+      "pos": [
+        -11240,
+        -4180
+      ],
+      "size": [
+        290,
+        90
+      ],
+      "flags": {},
+      "order": 91,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCBasicScheduler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "normal",
+        20
+      ],
+      "widgets_values_named": {
+        "scheduler": "normal",
+        "steps": 20
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
+    },
+    {
+      "id": 73,
+      "type": "MarkdownNote",
+      "pos": [
+        -11240,
+        -4540
+      ],
+      "size": [
+        290,
+        320
+      ],
+      "flags": {},
+      "order": 92,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Split Sigmas",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
+      ],
+      "widgets_values_named": {
+        "text": "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -11696,7 +12296,7 @@
       161,
       0,
       307,
-      15,
+      20,
       "IMAGE"
     ],
     [
@@ -11704,7 +12304,7 @@
       159,
       0,
       307,
-      16,
+      21,
       "IMAGE"
     ],
     [
@@ -11712,7 +12312,7 @@
       156,
       0,
       307,
-      17,
+      12,
       "IMAGE"
     ],
     [
@@ -11720,7 +12320,7 @@
       157,
       0,
       307,
-      18,
+      13,
       "IMAGE"
     ],
     [
@@ -11728,7 +12328,7 @@
       158,
       0,
       307,
-      19,
+      14,
       "IMAGE"
     ],
     [
@@ -11736,7 +12336,7 @@
       160,
       0,
       307,
-      20,
+      15,
       "IMAGE"
     ],
     [
@@ -11744,7 +12344,7 @@
       173,
       0,
       307,
-      21,
+      16,
       "IMAGE"
     ],
     [
@@ -11752,7 +12352,7 @@
       167,
       0,
       307,
-      7,
+      17,
       "IMAGE"
     ],
     [
@@ -11760,7 +12360,7 @@
       162,
       0,
       307,
-      8,
+      18,
       "IMAGE"
     ],
     [
@@ -11768,7 +12368,7 @@
       154,
       0,
       307,
-      9,
+      19,
       "IMAGE"
     ],
     [
@@ -11776,7 +12376,7 @@
       152,
       0,
       307,
-      10,
+      4,
       "IMAGE"
     ],
     [
@@ -11784,7 +12384,7 @@
       151,
       0,
       307,
-      11,
+      5,
       "IMAGE"
     ],
     [
@@ -11792,7 +12392,7 @@
       149,
       0,
       307,
-      12,
+      6,
       "IMAGE"
     ],
     [
@@ -11800,7 +12400,7 @@
       147,
       0,
       307,
-      13,
+      7,
       "IMAGE"
     ],
     [
@@ -11808,7 +12408,7 @@
       171,
       0,
       307,
-      14,
+      8,
       "IMAGE"
     ],
     [
@@ -11816,7 +12416,7 @@
       166,
       0,
       307,
-      2,
+      9,
       "IMAGE"
     ],
     [
@@ -11824,7 +12424,7 @@
       163,
       0,
       307,
-      3,
+      10,
       "IMAGE"
     ],
     [
@@ -11832,7 +12432,7 @@
       155,
       0,
       307,
-      4,
+      11,
       "IMAGE"
     ],
     [
@@ -11840,7 +12440,7 @@
       194,
       0,
       307,
-      5,
+      2,
       "IMAGE"
     ],
     [
@@ -11978,6 +12578,46 @@
       328,
       0,
       "STRING"
+    ],
+    [
+      459,
+      105,
+      1,
+      342,
+      1,
+      "INT"
+    ],
+    [
+      460,
+      105,
+      2,
+      342,
+      2,
+      "INT"
+    ],
+    [
+      461,
+      343,
+      0,
+      342,
+      0,
+      "*"
+    ],
+    [
+      462,
+      342,
+      0,
+      344,
+      0,
+      "INT"
+    ],
+    [
+      463,
+      342,
+      1,
+      345,
+      0,
+      "INT"
     ]
   ],
   "groups": [
@@ -12023,8 +12663,8 @@
       "bounding": [
         -10840,
         -4920,
-        950,
-        1260
+        930,
+        1390
       ],
       "color": "#3f789e",
       "flags": {}
@@ -12127,11 +12767,11 @@
     },
     {
       "id": 14,
-      "title": "Split Sigmas",
+      "title": "Split Sigmas & Noise",
       "bounding": [
-        -11500,
-        -4610,
-        600,
+        -11530,
+        -4620,
+        590,
         540
       ],
       "color": "#3f789e",
@@ -12178,10 +12818,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.14641000000000012,
+      "scale": 0.1,
       "offset": [
-        19810.59309127299,
-        5518.837872722985
+        19259.045919210686,
+        6794.459812860006
       ]
     },
     "links_added_by_ue": [],

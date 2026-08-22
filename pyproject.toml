@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.12.0"
-description = "ComfyUI LC123 Nodes by lonecatone23 — prompt builder (subject/scene/camera/lighting/style/palette/assembler), wildcards, seed utility, aspect ratio, dual sigma, image FX, Skin Beauty, Photo Style, pipes, notify, performance settings."
+version = "1.13.0"
+description = "ComfyUI LC123 Nodes by lonecatone23 — prompt builder, sampler configure simple, reference latent, denoise inject, dual sigma, image FX, Skin Beauty, Photo Style, pipes, notify, performance settings."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -11,7 +11,7 @@ keywords = [
   "image-processing", "post-processing", "film-grain", "lut", "pipes",
   "watermark", "bypasser", "sigma", "scheduler", "notify", "lonecat",
   "skin-beauty", "photo-style", "image-split", "performance", "boolean-switch",
-  "prompt-builder", "wildcard", "krea2", "ideogram",
+  "prompt-builder", "wildcard", "krea2", "ideogram", "reference-latent", "denoise",
 ]
 
 [project.urls]

@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.14.0"
-description = "ComfyUI LC123 Nodes by lonecatone23 — lighting control/relight, custom combo + index switch, prompt builder, sampler configure, reference latent, denoise inject, dual sigma, image FX, Skin Beauty, Photo Style, pipes, notify, performance settings."
+version = "1.14.1"
+description = "ComfyUI LC123 Nodes by lonecatone23 — lighting control/relight, custom combo + index switch, node size retention, prompt builder, sampler configure, reference latent, denoise inject, dual sigma, image FX, Skin Beauty, Photo Style, pipes, notify, performance settings."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

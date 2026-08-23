@@ -107,9 +107,11 @@ app.registerExtension({
         }
       }
       this._lcBool = null;
-      this.size = this.size || [270, 30];
-      this.size[0] = 270;
-      this.size[1] = 30;
+      if (!this._lcUserSized) {
+        this.size = this.size || [270, 30];
+        if ((this.size[0] || 0) < 270) this.size[0] = 270;
+        if (!this.properties?.lc_h) this.size[1] = 30;
+      }
       return r;
     };
 

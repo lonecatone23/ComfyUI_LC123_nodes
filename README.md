@@ -4,7 +4,14 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 - **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.14.0
+- **Version:** 1.14.1
+
+## What’s new in 1.14.1
+
+| Area | Changes |
+|------|---------|
+| **Node size retention** | Manual node sizes stick across reload/reconnect for Sampler Configure family, AnySwitch, Index Switch, Custom Combo (+ panel), Boolean utils, Image Grid, Node Snapshot. Auto-fit only on first create or when `inputcount` changes. |
+
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 

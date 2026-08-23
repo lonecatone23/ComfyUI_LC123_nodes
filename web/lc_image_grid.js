@@ -18,10 +18,8 @@ app.registerExtension({
         this.color = COLOR;
         this.bgcolor = COLOR;
         // Utility-node default width; height from widgets
-        if (!this.size || this.size[0] < 10) {
+        if (!this._lcUserSized && (!this.size || this.size[0] < 10)) {
           this.setSize?.([UTILITY_W, this.size?.[1] || 200]);
-        } else {
-          this.size[0] = UTILITY_W;
         }
       } catch (_) {}
       return r;
@@ -32,7 +30,7 @@ app.registerExtension({
     try {
       node.color = COLOR;
       node.bgcolor = COLOR;
-      if (Array.isArray(node.size)) {
+      if (Array.isArray(node.size) && !node._lcUserSized && (node.size[0] || 0) < 10) {
         node.size[0] = UTILITY_W;
       }
     } catch (_) {}

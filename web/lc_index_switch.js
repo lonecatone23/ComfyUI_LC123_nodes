@@ -1,5 +1,5 @@
 /**
- * LC Any Index Switch — dynamic slots, tight size, size remembered
+ * LC Any Index Switch — dynamic slots; manual size retained.
  */
 import { app } from "../../scripts/app.js";
 
@@ -21,26 +21,45 @@ function typeOf(node, inp) {
   return origin?.outputs?.[link.origin_slot]?.type || null;
 }
 
+function rememberSize(node) {
+  if (!node.properties) node.properties = {};
+  if (node.size) {
+    node.properties.lc_w = node.size[0];
+    node.properties.lc_h = node.size[1];
+  }
+  node._lcUserSized = true;
+}
+
+function restoreSize(node) {
+  const w = node.properties?.lc_w;
+  const h = node.properties?.lc_h;
+  if (w && h) {
+    if (!node.size) node.size = [w, h];
+    else {
+      node.size[0] = w;
+      node.size[1] = h;
+    }
+    node._lcUserSized = true;
+    return true;
+  }
+  return false;
+}
+
 function desiredHeight(node) {
   const nW = (node.widgets || []).filter((x) => x && x.type !== "hidden").length;
   const nI = (node.inputs || []).length;
-  // tight: title ~28, ~24/widget, ~20/input, small pad
   return 28 + nW * 24 + nI * 20 + 8;
 }
 
-function applySize(node, forceHeight) {
-  if (!node.size) return;
+function applySize(node, force = false) {
+  if (!node.size) node.size = [W, desiredHeight(node)];
   node.size[0] = Math.max(W, node.size[0] || W);
-  if (forceHeight || !node._lcUserSized) {
+  if (force || !node._lcUserSized) {
     node.size[1] = desiredHeight(node);
   }
-  // Persist
-  if (!node.properties) node.properties = {};
-  node.properties.lc_size_w = node.size[0];
-  node.properties.lc_size_h = node.size[1];
 }
 
-function syncSlots(node) {
+function syncSlots(node, { forceFit = false } = {}) {
   const w = (node.widgets || []).find((x) => x.name === "inputcount");
   let count = w ? parseInt(w.value, 10) : MIN;
   if (Number.isNaN(count)) count = MIN;
@@ -110,9 +129,7 @@ function syncSlots(node) {
     node.outputs[0].name = t === "*" ? "*" : t;
   }
 
-  // Only auto-height when inputcount changes, not every connection
-  applySize(node, !!node._lcForceFit);
-  node._lcForceFit = false;
+  applySize(node, forceFit);
   node.setDirtyCanvas?.(true, true);
 }
 
@@ -127,9 +144,12 @@ app.registerExtension({
       this.color = COLOR;
       this.bgcolor = COLOR;
       this._lcLockedType = null;
-      this._lcUserSized = false;
-      this._lcForceFit = true;
-      syncSlots(this);
+      if (!restoreSize(this)) {
+        this._lcUserSized = false;
+        syncSlots(this, { forceFit: true });
+      } else {
+        syncSlots(this, { forceFit: false });
+      }
 
       const w = (this.widgets || []).find((x) => x.name === "inputcount");
       if (w && !w._lcBound) {
@@ -137,45 +157,38 @@ app.registerExtension({
         const prev = w.callback;
         w.callback = (v, ...a) => {
           const out = prev?.apply(w, [v, ...a]);
-          this._lcForceFit = true; // grow/shrink with slot count
           this._lcUserSized = false;
-          syncSlots(this);
+          syncSlots(this, { forceFit: true });
           return out;
         };
       }
 
-      // Remember manual resize
       const prevResize = this.onResize;
       this.onResize = function (size) {
-        this._lcUserSized = true;
-        if (!this.properties) this.properties = {};
-        this.properties.lc_size_w = size?.[0] ?? this.size?.[0];
-        this.properties.lc_size_h = size?.[1] ?? this.size?.[1];
-        return prevResize?.apply(this, arguments);
+        const out = prevResize?.apply(this, arguments);
+        rememberSize(this);
+        return out;
       };
 
-      setTimeout(() => syncSlots(this), 0);
+      setTimeout(() => {
+        syncSlots(this, { forceFit: false });
+        restoreSize(this);
+      }, 0);
       return r;
     };
 
     const onConfigure = nodeType.prototype.onConfigure;
     nodeType.prototype.onConfigure = function (data) {
       const r = onConfigure?.apply(this, arguments);
-      // Restore saved size after reload
-      const pw = this.properties?.lc_size_w;
-      const ph = this.properties?.lc_size_h;
-      if (pw && ph && this.size) {
-        this.size[0] = pw;
-        this.size[1] = ph;
+      if (data?.size) {
+        if (!this.properties) this.properties = {};
+        this.properties.lc_w = data.size[0];
+        this.properties.lc_h = data.size[1];
         this._lcUserSized = true;
       }
       setTimeout(() => {
-        syncSlots(this);
-        // Re-apply saved size after slot sync
-        if (this._lcUserSized && this.properties?.lc_size_w) {
-          this.size[0] = this.properties.lc_size_w;
-          this.size[1] = this.properties.lc_size_h;
-        }
+        syncSlots(this, { forceFit: false });
+        restoreSize(this);
       }, 20);
       return r;
     };
@@ -183,7 +196,7 @@ app.registerExtension({
     const onConn = nodeType.prototype.onConnectionsChange;
     nodeType.prototype.onConnectionsChange = function (...args) {
       const r = onConn?.apply(this, args);
-      setTimeout(() => syncSlots(this), 0);
+      setTimeout(() => syncSlots(this, { forceFit: false }), 0);
       return r;
     };
   },

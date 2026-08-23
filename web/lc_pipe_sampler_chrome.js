@@ -2,7 +2,7 @@
  * Chrome for LC pipes + sampler configure family.
  * Color #707070 for pipes / aspect pipe out / all sampler configures.
  * Does NOT style 📐 Aspect Ratio Simplifier (pipe) [LCAspectRatioPipeOut].
- * Sampler configure nodes share a fixed default width so Simple matches Full.
+ * Sampler width default 300 on first create only — manual size is retained.
  */
 import { app } from "../../scripts/app.js";
 
@@ -13,7 +13,7 @@ const COLOR_TYPES = new Set([
   "LCPipeOut",
   "LCPipeEdit",
   "LCDetailPipeOut",
-  "LCAspectRatioPipe", // LC Aspect Ratio Pipe Out only
+  "LCAspectRatioPipe",
   "LCSamplerConfigure",
   "LCSamplerConfigurePipeOut",
   "LCSamplerConfigurePipe",
@@ -36,16 +36,64 @@ function paint(node) {
   } catch (_) {}
 }
 
-function sizeSampler(node) {
-  if (!node.size) node.size = [SAMPLER_WIDTH, 200];
-  node.size[0] = SAMPLER_WIDTH;
-  // Keep height from widget layout; only lock width on first create
-  try {
-    if (typeof node.computeSize === "function") {
-      const s = node.computeSize();
-      if (s && s[1]) node.size[1] = Math.max(node.size[1] || 0, s[1]);
+function rememberSize(node) {
+  if (!node.properties) node.properties = {};
+  if (node.size) {
+    node.properties.lc_w = node.size[0];
+    node.properties.lc_h = node.size[1];
+  }
+  node._lcUserSized = true;
+}
+
+function restoreSize(node) {
+  const w = node.properties?.lc_w;
+  const h = node.properties?.lc_h;
+  if (w && h) {
+    if (!node.size) node.size = [w, h];
+    else {
+      node.size[0] = w;
+      node.size[1] = h;
     }
-  } catch (_) {}
+    node._lcUserSized = true;
+    return true;
+  }
+  return false;
+}
+
+/** Default sampler width once; never overwrite a user-resized node. */
+function sizeSampler(node) {
+  if (node._lcUserSized || node.properties?.lc_w) {
+    restoreSize(node);
+    return;
+  }
+  if (!node.size) node.size = [SAMPLER_WIDTH, 200];
+  // Only set default width if still at a tiny/placeholder size
+  if ((node.size[0] || 0) < 40) node.size[0] = SAMPLER_WIDTH;
+  if ((node.size[0] || 0) === 0) node.size[0] = SAMPLER_WIDTH;
+  // Do not force height — let LiteGraph / widgets own it after first layout
+}
+
+function hookResize(node) {
+  if (node._lcSamplerResizeHooked) return;
+  node._lcSamplerResizeHooked = true;
+  const prev = node.onResize;
+  node.onResize = function (size) {
+    const r = prev?.apply(this, arguments);
+    rememberSize(this);
+    return r;
+  };
+  const prevCfg = node.onConfigure;
+  node.onConfigure = function (data) {
+    const r = prevCfg?.apply(this, arguments);
+    if (data?.size) {
+      if (!this.properties) this.properties = {};
+      this.properties.lc_w = data.size[0];
+      this.properties.lc_h = data.size[1];
+      this._lcUserSized = true;
+    }
+    restoreSize(this);
+    return r;
+  };
 }
 
 app.registerExtension({
@@ -59,11 +107,8 @@ app.registerExtension({
       const r = onCreated?.apply(this, arguments);
       if (COLOR_TYPES.has(name)) paint(this);
       if (SAMPLER_TYPES.has(name)) {
-        sizeSampler(this);
-        requestAnimationFrame(() => {
-          paint(this);
-          sizeSampler(this);
-        });
+        hookResize(this);
+        if (!restoreSize(this)) sizeSampler(this);
       } else {
         requestAnimationFrame(() => paint(this));
       }
@@ -73,6 +118,9 @@ app.registerExtension({
   nodeCreated(node) {
     const t = node.comfyClass || node.type;
     if (COLOR_TYPES.has(t)) paint(node);
-    if (SAMPLER_TYPES.has(t)) sizeSampler(node);
+    if (SAMPLER_TYPES.has(t)) {
+      hookResize(node);
+      if (!restoreSize(node)) sizeSampler(node);
+    }
   },
 });

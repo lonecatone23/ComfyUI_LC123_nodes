@@ -35,16 +35,40 @@ function filled(node) {
   return out;
 }
 
-function fitHub(node) {
+function fitHub(node, force = false) {
   const vis = (node.widgets || []).filter((w) => w && w.type !== "hidden").length;
-  if (node.size) {
-    node.size[0] = Math.max(270, node.size[0] || 270);
-    // a few extra px under the last widget
+  if (!node.size) node.size = [270, 100];
+  node.size[0] = Math.max(270, node.size[0] || 270);
+  if (force || !node._lcUserSized) {
     node.size[1] = 34 + vis * 26 + 24;
   }
 }
 
-function showSlots(node) {
+function rememberSize(node) {
+  if (!node.properties) node.properties = {};
+  if (node.size) {
+    node.properties.lc_w = node.size[0];
+    node.properties.lc_h = node.size[1];
+  }
+  node._lcUserSized = true;
+}
+
+function restoreSize(node) {
+  const w = node.properties?.lc_w;
+  const h = node.properties?.lc_h;
+  if (w && h) {
+    if (!node.size) node.size = [w, h];
+    else {
+      node.size[0] = w;
+      node.size[1] = h;
+    }
+    node._lcUserSized = true;
+    return true;
+  }
+  return false;
+}
+
+function showSlots(node, forceFit = false) {
   const n = count(node);
   for (let i = 1; i <= MAX; i++) {
     const w = wget(node, opt(i));
@@ -59,7 +83,7 @@ function showSlots(node) {
       w.computeSize = () => [0, 0];
     }
   }
-  fitHub(node);
+  fitHub(node, forceFit);
 }
 
 function makeChoiceCombo(node) {
@@ -113,15 +137,26 @@ function applyDefaultColorOnce(node) {
 
 function hookHub(node) {
   applyDefaultColorOnce(node);
+  restoreSize(node);
 
   if (!node._lcHooked) {
     node._lcHooked = true;
+    if (!node._lcResizeHooked) {
+      node._lcResizeHooked = true;
+      const prevR = node.onResize;
+      node.onResize = function (size) {
+        const o = prevR?.apply(this, arguments);
+        rememberSize(this);
+        return o;
+      };
+    }
     const ic = wget(node, "inputcount");
     if (ic) {
       const prev = ic.callback;
       ic.callback = function (v, ...a) {
         const o = prev?.apply(this, [v, ...a]);
-        showSlots(node);
+        node._lcUserSized = false;
+        showSlots(node, true);
         makeChoiceCombo(node);
         refreshAllPanels();
         return o;
@@ -208,7 +243,16 @@ function syncPanel(panel) {
 
   if (panel.size) {
     panel.size[0] = Math.max(220, panel.size[0] || 220);
-    panel.size[1] = 64;
+    if (!panel._lcUserSized) panel.size[1] = 64;
+  }
+  if (!panel._lcResizeHooked) {
+    panel._lcResizeHooked = true;
+    const prevR = panel.onResize;
+    panel.onResize = function () {
+      const o = prevR?.apply(this, arguments);
+      rememberSize(this);
+      return o;
+    };
   }
   panel.setDirtyCanvas?.(true, true);
   app.canvas?.setDirty?.(true, true);

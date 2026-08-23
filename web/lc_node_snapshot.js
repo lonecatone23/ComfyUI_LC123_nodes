@@ -334,13 +334,18 @@ function hidePayloadWidgets(node) {
   }
 }
 
-/** Fit height to visible widgets + standard padding (utility width). */
+/** Fit height to visible widgets + standard padding (utility width).
+ *  Skips height when user has manually resized (properties.lc_h / _lcUserSized).
+ */
 function trimNodeSize(node) {
   hidePayloadWidgets(node);
   try {
     node.size = node.size || [UTILITY_W, 120];
-    node.size[0] = UTILITY_W;
-    // Let LiteGraph compute from widgets, then clamp excess empty space
+    if (!node._lcUserSized) node.size[0] = Math.max(UTILITY_W, node.size[0] || UTILITY_W);
+    if (node._lcUserSized) {
+      node.setDirtyCanvas?.(true, true);
+      return;
+    }
     if (typeof node.computeSize === "function") {
       const computed = node.computeSize(UTILITY_W);
       if (Array.isArray(computed) && computed[1] > 0) {
@@ -350,12 +355,20 @@ function trimNodeSize(node) {
       const nVis = (node.widgets || []).filter(
         (w) => w && w.type !== "converted-widget" && !PAYLOAD.has(w.name)
       ).length;
-      // title + slots + widgets + padding
       const slotH = Math.max((node.inputs?.length || 0), (node.outputs?.length || 0)) * 20;
       node.size[1] = Math.max(80, 40 + slotH + nVis * 28 + 16);
     }
     node.setDirtyCanvas?.(true, true);
   } catch (_) {}
+}
+
+function rememberSize(node) {
+  if (!node.properties) node.properties = {};
+  if (node.size) {
+    node.properties.lc_w = node.size[0];
+    node.properties.lc_h = node.size[1];
+  }
+  node._lcUserSized = true;
 }
 
 function scheduleRefresh(node) {

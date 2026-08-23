@@ -41,6 +41,8 @@ _load("dynamic_overlay")
 
 # Utils
 _load("lc_any_switch")
+_load("lc_index_switch")
+_load("lc_custom_combo")
 _load("lc_combo")
 _load("lc_invert_boolean")
 _load("lc_boolean")
@@ -134,3 +136,11 @@ try:
 except Exception as _e:
     print(f"[LC123] lc_denoise load skipped: {_e}")
 
+# LC Relight
+try:
+    from .lc_relight import NODE_CLASS_MAPPINGS as _LC_RELIGHT_MAP
+    from .lc_relight import NODE_DISPLAY_NAME_MAPPINGS as _LC_RELIGHT_DISP
+    NODE_CLASS_MAPPINGS.update(_LC_RELIGHT_MAP)
+    NODE_DISPLAY_NAME_MAPPINGS.update(_LC_RELIGHT_DISP)
+except Exception as _e:
+    print(f"[LC123] lc_relight load skipped: {_e}")

@@ -1,8 +1,8 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 351,
-  "last_link_id": 463,
+  "last_node_id": 364,
+  "last_link_id": 470,
   "nodes": [
     {
       "id": 21,
@@ -248,7 +248,7 @@
         130
       ],
       "flags": {},
-      "order": 94,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -294,7 +294,7 @@
         250
       ],
       "flags": {},
-      "order": 93,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -377,7 +377,7 @@
         50
       ],
       "flags": {},
-      "order": 141,
+      "order": 150,
       "mode": 0,
       "inputs": [
         {
@@ -512,7 +512,7 @@
         280
       ],
       "flags": {},
-      "order": 152,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -569,7 +569,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 120,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -619,7 +619,7 @@
         30
       ],
       "flags": {},
-      "order": 107,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -661,7 +661,7 @@
         50
       ],
       "flags": {},
-      "order": 108,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -810,7 +810,7 @@
         90
       ],
       "flags": {},
-      "order": 95,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -904,7 +904,7 @@
         60
       ],
       "flags": {},
-      "order": 106,
+      "order": 113,
       "mode": 0,
       "inputs": [
         {
@@ -956,7 +956,7 @@
         50
       ],
       "flags": {},
-      "order": 105,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -1110,7 +1110,7 @@
         340
       ],
       "flags": {},
-      "order": 118,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -1161,7 +1161,7 @@
         520
       ],
       "flags": {},
-      "order": 119,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -1491,7 +1491,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 175,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -1577,7 +1577,7 @@
         130
       ],
       "flags": {},
-      "order": 177,
+      "order": 187,
       "mode": 0,
       "inputs": [
         {
@@ -1699,7 +1699,7 @@
         582
       ],
       "flags": {},
-      "order": 184,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -1788,7 +1788,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 176,
+      "order": 186,
       "mode": 0,
       "inputs": [
         {
@@ -1838,7 +1838,7 @@
         640
       ],
       "flags": {},
-      "order": 178,
+      "order": 188,
       "mode": 0,
       "inputs": [
         {
@@ -1881,7 +1881,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 97,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -1931,7 +1931,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 100,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -1979,7 +1979,7 @@
         120
       ],
       "flags": {},
-      "order": 98,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -2147,7 +2147,7 @@
         450
       ],
       "flags": {},
-      "order": 99,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -2264,7 +2264,7 @@
         400
       ],
       "flags": {},
-      "order": 122,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -2670,7 +2670,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 182,
+      "order": 192,
       "mode": 0,
       "inputs": [
         {
@@ -3132,7 +3132,7 @@
         140
       ],
       "flags": {},
-      "order": 104,
+      "order": 111,
       "mode": 0,
       "inputs": [
         {
@@ -3202,7 +3202,7 @@
         130
       ],
       "flags": {},
-      "order": 180,
+      "order": 190,
       "mode": 0,
       "inputs": [
         {
@@ -3261,7 +3261,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 123,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -3312,7 +3312,7 @@
         420
       ],
       "flags": {},
-      "order": 124,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -3370,7 +3370,7 @@
         640
       ],
       "flags": {},
-      "order": 143,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -3443,7 +3443,7 @@
         390
       ],
       "flags": {},
-      "order": 154,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -3638,7 +3638,7 @@
         120
       ],
       "flags": {},
-      "order": 128,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -3655,10 +3655,10 @@
         }
       ],
       "properties": {
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCShowText",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -3727,7 +3727,7 @@
         690
       ],
       "flags": {},
-      "order": 101,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -3869,7 +3869,7 @@
         690
       ],
       "flags": {},
-      "order": 102,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -3967,7 +3967,7 @@
         490
       ],
       "flags": {},
-      "order": 96,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -4033,7 +4033,7 @@
         540
       ],
       "flags": {},
-      "order": 142,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -4109,7 +4109,7 @@
         580
       ],
       "flags": {},
-      "order": 153,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -4189,7 +4189,7 @@
         490
       ],
       "flags": {},
-      "order": 156,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -4261,7 +4261,7 @@
         520
       ],
       "flags": {},
-      "order": 159,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -4335,7 +4335,7 @@
         470
       ],
       "flags": {},
-      "order": 160,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -4405,7 +4405,7 @@
         490
       ],
       "flags": {},
-      "order": 161,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -4522,7 +4522,7 @@
         470
       ],
       "flags": {},
-      "order": 121,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -4598,7 +4598,7 @@
         540
       ],
       "flags": {},
-      "order": 162,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -4674,7 +4674,7 @@
         630
       ],
       "flags": {},
-      "order": 163,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -4758,7 +4758,7 @@
         520
       ],
       "flags": {},
-      "order": 164,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -4832,7 +4832,7 @@
         540
       ],
       "flags": {},
-      "order": 165,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -4908,7 +4908,7 @@
         470
       ],
       "flags": {},
-      "order": 166,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -4978,7 +4978,7 @@
         520
       ],
       "flags": {},
-      "order": 167,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -5052,7 +5052,7 @@
         520
       ],
       "flags": {},
-      "order": 168,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -5126,7 +5126,7 @@
         560
       ],
       "flags": {},
-      "order": 169,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -5204,7 +5204,7 @@
         450
       ],
       "flags": {},
-      "order": 170,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -5272,7 +5272,7 @@
         470
       ],
       "flags": {},
-      "order": 171,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -5342,7 +5342,7 @@
         430
       ],
       "flags": {},
-      "order": 172,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -5402,7 +5402,7 @@
         640
       ],
       "flags": {},
-      "order": 173,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -5478,7 +5478,7 @@
         520
       ],
       "flags": {},
-      "order": 174,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -5568,7 +5568,7 @@
         230
       ],
       "flags": {},
-      "order": 183,
+      "order": 193,
       "mode": 0,
       "inputs": [
         {
@@ -5664,7 +5664,7 @@
         1050
       ],
       "flags": {},
-      "order": 185,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -5707,7 +5707,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 179,
+      "order": 189,
       "mode": 0,
       "inputs": [
         {
@@ -5724,6 +5724,20 @@
           "link": 407
         },
         {
+          "label": "image18",
+          "name": "images.image18",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 424
+        },
+        {
+          "label": "image19",
+          "name": "images.image19",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 425
+        },
+        {
           "label": "image20",
           "name": "images.image20",
           "shape": 7,
@@ -5736,6 +5750,20 @@
           "shape": 7,
           "type": "IMAGE",
           "link": null
+        },
+        {
+          "label": "image10",
+          "name": "images.image10",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 416
+        },
+        {
+          "label": "image11",
+          "name": "images.image11",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 417
         },
         {
           "label": "image12",
@@ -5780,18 +5808,18 @@
           "link": 423
         },
         {
-          "label": "image18",
-          "name": "images.image18",
+          "label": "image2",
+          "name": "images.image2",
           "shape": 7,
           "type": "IMAGE",
-          "link": 424
+          "link": 408
         },
         {
-          "label": "image19",
-          "name": "images.image19",
+          "label": "image3",
+          "name": "images.image3",
           "shape": 7,
           "type": "IMAGE",
-          "link": 425
+          "link": 409
         },
         {
           "label": "image4",
@@ -5834,34 +5862,6 @@
           "shape": 7,
           "type": "IMAGE",
           "link": 415
-        },
-        {
-          "label": "image10",
-          "name": "images.image10",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 416
-        },
-        {
-          "label": "image11",
-          "name": "images.image11",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 417
-        },
-        {
-          "label": "image2",
-          "name": "images.image2",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 408
-        },
-        {
-          "label": "image3",
-          "name": "images.image3",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 409
         }
       ],
       "outputs": [
@@ -5896,7 +5896,7 @@
         450
       ],
       "flags": {},
-      "order": 181,
+      "order": 191,
       "mode": 0,
       "inputs": [
         {
@@ -6055,7 +6055,7 @@
         120
       ],
       "flags": {},
-      "order": 130,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -6072,10 +6072,10 @@
         }
       ],
       "properties": {
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "79b81758ac54ba8f9b46ecf7682902e87dc26684",
+        "Node name for S&R": "LCShowText",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -6184,7 +6184,7 @@
         90
       ],
       "flags": {},
-      "order": 148,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -6265,7 +6265,7 @@
         90
       ],
       "flags": {},
-      "order": 147,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -6419,7 +6419,7 @@
         130
       ],
       "flags": {},
-      "order": 125,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -6543,7 +6543,7 @@
         130
       ],
       "flags": {},
-      "order": 127,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -6619,7 +6619,7 @@
         260
       ],
       "flags": {},
-      "order": 145,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -6636,9 +6636,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -6661,7 +6661,7 @@
         310
       ],
       "flags": {},
-      "order": 146,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -6678,9 +6678,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -6703,7 +6703,7 @@
         90
       ],
       "flags": {},
-      "order": 144,
+      "order": 154,
       "mode": 0,
       "inputs": [
         {
@@ -6720,9 +6720,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7e3acfe3772496704add647805164d0cf28034c1",
+        "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -6899,7 +6899,7 @@
         160
       ],
       "flags": {},
-      "order": 113,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -6984,7 +6984,7 @@
         90
       ],
       "flags": {},
-      "order": 132,
+      "order": 141,
       "mode": 0,
       "inputs": [
         {
@@ -7031,7 +7031,7 @@
         90
       ],
       "flags": {},
-      "order": 136,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -7077,7 +7077,7 @@
         90
       ],
       "flags": {},
-      "order": 133,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -7124,7 +7124,7 @@
         90
       ],
       "flags": {},
-      "order": 134,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -7171,7 +7171,7 @@
         90
       ],
       "flags": {},
-      "order": 137,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -7217,7 +7217,7 @@
         90
       ],
       "flags": {},
-      "order": 135,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -7266,7 +7266,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 110,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -7396,7 +7396,7 @@
         236
       ],
       "flags": {},
-      "order": 111,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -7578,7 +7578,7 @@
         120
       ],
       "flags": {},
-      "order": 131,
+      "order": 140,
       "mode": 0,
       "inputs": [
         {
@@ -7595,9 +7595,9 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "LCShowText",
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
+        "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -7663,7 +7663,7 @@
         60
       ],
       "flags": {},
-      "order": 112,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -7788,7 +7788,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 109,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -7859,7 +7859,7 @@
         150
       ],
       "flags": {},
-      "order": 129,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -8202,7 +8202,7 @@
         40
       ],
       "flags": {},
-      "order": 114,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -8244,10 +8244,10 @@
       ],
       "size": [
         350,
-        720
+        762
       ],
       "flags": {},
-      "order": 138,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -8307,6 +8307,11 @@
         },
         {
           "name": "Utility Nodes",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "Index Selectors",
           "type": "BOOLEAN",
           "link": null
         },
@@ -8415,6 +8420,10 @@
           "id:19": {
             "value": true,
             "originId": null
+          },
+          "id:20": {
+            "value": true,
+            "originId": null
           }
         },
         "ue_properties": {
@@ -8427,6 +8436,7 @@
         true,
         true,
         false,
+        true,
         true,
         true,
         true,
@@ -8454,6 +8464,7 @@
         "Enable Split Sigmas & Noise": true,
         "Enable 🎨 Post Processing Suite 260811": true,
         "Enable Utility Nodes": true,
+        "Enable Index Selectors": true,
         "Enable 🗒️LC Prompt Builder": true,
         "Enable LC Dimension Resize 📐": true,
         "Enable LC Node Snapshot 📋": true,
@@ -8603,7 +8614,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 115,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -8718,7 +8729,7 @@
         340
       ],
       "flags": {},
-      "order": 139,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -8988,7 +8999,7 @@
         170
       ],
       "flags": {},
-      "order": 149,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -9079,7 +9090,7 @@
         860
       ],
       "flags": {},
-      "order": 158,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -9096,6 +9107,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
         "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -9168,7 +9181,7 @@
         340
       ],
       "flags": {},
-      "order": 116,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -9259,7 +9272,7 @@
         360
       ],
       "flags": {},
-      "order": 155,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -9360,7 +9373,7 @@
         470
       ],
       "flags": {},
-      "order": 157,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -9377,6 +9390,8 @@
         }
       ],
       "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
         "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -9399,7 +9414,7 @@
         490
       ],
       "flags": {},
-      "order": 103,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -9471,59 +9486,6 @@
       },
       "color": "#324B4B",
       "bgcolor": "#324B4B"
-    },
-    {
-      "id": 285,
-      "type": "LCBatchImageComparer",
-      "pos": [
-        -7180,
-        -2120
-      ],
-      "size": [
-        300,
-        400
-      ],
-      "flags": {
-        "pinned": false
-      },
-      "order": 126,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "Original",
-          "name": "image_a",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 386
-        },
-        {
-          "label": "Photo Style 📷",
-          "name": "image_b",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 390
-        }
-      ],
-      "outputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
-        "Node name for S&R": "LCBatchImageComparer",
-        "comparer_mode": "Slide",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#325A5A",
-      "bgcolor": "#325A5A"
     },
     {
       "id": 322,
@@ -9660,7 +9622,7 @@
         130
       ],
       "flags": {},
-      "order": 117,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -9790,7 +9752,7 @@
         130
       ],
       "flags": {},
-      "order": 140,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -9866,7 +9828,7 @@
         90
       ],
       "flags": {},
-      "order": 151,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -9912,7 +9874,7 @@
         90
       ],
       "flags": {},
-      "order": 150,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -10833,18 +10795,419 @@
       "bgcolor": "#707070"
     },
     {
+      "id": 218,
+      "type": "LCSplitSigmasAdvanced",
+      "pos": [
+        -11520,
+        -4340
+      ],
+      "size": [
+        270,
+        150
+      ],
+      "flags": {},
+      "order": 85,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_1",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "sigmas_1",
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "model_2",
+          "shape": 7,
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "sigmas_2",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas_high",
+          "type": "SIGMAS",
+          "links": null
+        },
+        {
+          "name": "sigmas_low",
+          "type": "SIGMAS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
+        "Node name for S&R": "LCSplitSigmasAdvanced",
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        10,
+        1
+      ],
+      "widgets_values_named": {
+        "step_swap": 10,
+        "denoise": 1
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
+    },
+    {
+      "id": 350,
+      "type": "LCDenoise",
+      "pos": [
+        -11520,
+        -4150
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {},
+      "order": 86,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCDenoise",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "denoise": 1
+      },
+      "color": "#823282",
+      "bgcolor": "#823282"
+    },
+    {
+      "id": 351,
+      "type": "LCBasicScheduler",
+      "pos": [
+        -11240,
+        -4180
+      ],
+      "size": [
+        290,
+        90
+      ],
+      "flags": {},
+      "order": 87,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCBasicScheduler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "normal",
+        20
+      ],
+      "widgets_values_named": {
+        "scheduler": "normal",
+        "steps": 20
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
+    },
+    {
+      "id": 73,
+      "type": "MarkdownNote",
+      "pos": [
+        -11240,
+        -4540
+      ],
+      "size": [
+        290,
+        320
+      ],
+      "flags": {},
+      "order": 88,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Split Sigmas",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
+      ],
+      "widgets_values_named": {
+        "text": "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 352,
+      "type": "LCReferenceLatent",
+      "pos": [
+        -10110,
+        -3410
+      ],
+      "size": [
+        190,
+        190
+      ],
+      "flags": {},
+      "order": 89,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": null
+        },
+        {
+          "name": "latent_1",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_2",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_3",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_4",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_5",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_6",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_7",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "latent_8",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCReferenceLatent",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      }
+    },
+    {
+      "id": 353,
+      "type": "MarkdownNote",
+      "pos": [
+        -10120,
+        -3170
+      ],
+      "size": [
+        210,
+        100
+      ],
+      "flags": {},
+      "order": 90,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Reference Latent",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "**LC Reference Latent**\n- designed for Flux2 taht uses reference latents\n- will pass through conditioning when no reference latent is found"
+      ],
+      "widgets_values_named": {
+        "text": "**LC Reference Latent**\n- designed for Flux2 taht uses reference latents\n- will pass through conditioning when no reference latent is found"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 346,
+      "type": "LCSamplerConfigureSimple",
+      "pos": [
+        -10470,
+        -3410
+      ],
+      "size": [
+        300,
+        330
+      ],
+      "flags": {},
+      "order": 91,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "total_steps",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": null
+        },
+        {
+          "name": "detailer_steps",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
+        "Node name for S&R": "LCSamplerConfigureSimple",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        40,
+        0,
+        1,
+        "",
+        8,
+        "",
+        "euler",
+        "normal"
+      ],
+      "widgets_values_named": {
+        "total_steps": 40,
+        "detailer_steps": 0,
+        "denoise": 1,
+        "_gap1": "",
+        "cfg": 8,
+        "_gap2": "",
+        "sampler_name": "euler",
+        "scheduler": "normal"
+      },
+      "color": "#707070",
+      "bgcolor": "#707070"
+    },
+    {
       "id": 348,
       "type": "LCSamplerConfigure",
       "pos": [
-        -10840,
-        -3400
+        -10830,
+        -3410
       ],
       "size": [
         300,
         420
       ],
       "flags": {},
-      "order": 85,
+      "order": 92,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10927,98 +11290,478 @@
       "bgcolor": "#707070"
     },
     {
-      "id": 346,
-      "type": "LCSamplerConfigureSimple",
+      "id": 285,
+      "type": "LCBatchImageComparer",
       "pos": [
-        -10530,
-        -3400
+        -7160,
+        -2130
       ],
       "size": [
         300,
-        330
+        400
       ],
-      "flags": {},
-      "order": 86,
+      "flags": {
+        "pinned": false
+      },
+      "order": 135,
       "mode": 0,
-      "inputs": [],
+      "inputs": [
+        {
+          "label": "Original",
+          "name": "image_a",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 386
+        },
+        {
+          "label": "Photo Style 📷",
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 390
+        }
+      ],
       "outputs": [
         {
-          "name": "total_steps",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "cfg",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "denoise",
-          "type": "FLOAT",
-          "links": null
-        },
-        {
-          "name": "sampler_name",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "links": null
-        },
-        {
-          "name": "detailer_steps",
-          "type": "INT",
+          "name": "images",
+          "type": "IMAGE",
           "links": null
         }
       ],
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
-        "Node name for S&R": "LCSamplerConfigureSimple",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCBatchImageComparer",
+        "comparer_mode": "Slide",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         }
       },
+      "color": "#325A5A",
+      "bgcolor": "#325A5A"
+    },
+    {
+      "id": 358,
+      "type": "LCShowText",
+      "pos": [
+        -13180,
+        -3910
+      ],
+      "size": [
+        160,
+        80
+      ],
+      "flags": {},
+      "order": 151,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 465
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "LCShowText"
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 359,
+      "type": "LCCustomComboPanel",
+      "pos": [
+        -13600,
+        -3910
+      ],
+      "size": [
+        270,
+        64
+      ],
+      "flags": {},
+      "order": 129,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "hub",
+          "shape": 7,
+          "type": "*",
+          "link": 466
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "LCCustomComboPanel"
+      },
       "widgets_values": [
-        40,
-        0,
-        1,
-        "",
-        8,
-        "",
-        "euler",
-        "normal"
+        "Pears"
       ],
       "widgets_values_named": {
-        "total_steps": 40,
-        "detailer_steps": 0,
-        "denoise": 1,
-        "_gap1": "",
-        "cfg": 8,
-        "_gap2": "",
-        "sampler_name": "euler",
-        "scheduler": "normal"
+        "choice": "Pears"
       },
-      "color": "#707070",
-      "bgcolor": "#707070"
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 360,
+      "type": "LCIndexSwitch",
+      "pos": [
+        -13600,
+        -3790
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 128,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "index",
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": 467
+        },
+        {
+          "label": "STRING",
+          "name": "any_01",
+          "shape": 7,
+          "type": "STRING",
+          "link": 468
+        },
+        {
+          "label": "STRING",
+          "name": "any_02",
+          "shape": 7,
+          "type": "STRING",
+          "link": 469
+        },
+        {
+          "label": "STRING",
+          "name": "any_03",
+          "shape": 7,
+          "type": "STRING",
+          "link": 470
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            465
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "LCIndexSwitch",
+        "lc_size_w": 270,
+        "lc_size_h": 130
+      },
+      "widgets_values": [
+        0,
+        3
+      ],
+      "widgets_values_named": {
+        "index": 0,
+        "inputcount": 3
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 361,
+      "type": "PrimitiveString",
+      "pos": [
+        -13960,
+        -3710
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {},
+      "order": 93,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            468
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "cheese"
+      ],
+      "widgets_values_named": {
+        "value": "cheese"
+      }
+    },
+    {
+      "id": 362,
+      "type": "PrimitiveString",
+      "pos": [
+        -13960,
+        -3610
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {},
+      "order": 94,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            469
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "Apples"
+      ],
+      "widgets_values_named": {
+        "value": "Apples"
+      }
+    },
+    {
+      "id": 363,
+      "type": "MarkdownNote",
+      "pos": [
+        -13600,
+        -3610
+      ],
+      "size": [
+        300,
+        190
+      ],
+      "flags": {},
+      "order": 95,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "**LC Any index switch\n- controls index entries\n\n**LC Custom Combo**\n- designed so you can name your choices\n- ⚠️ if it has more than the index switch, it will just continue to choose teh bottom selection\n\n**LC Custom Combo Panel**\n- space saver (so you don't have to....subgraph😱)\n- you can collapse the Custom Combo with this "
+      ],
+      "widgets_values_named": {
+        "text": "**LC Any index switch\n- controls index entries\n\n**LC Custom Combo**\n- designed so you can name your choices\n- ⚠️ if it has more than the index switch, it will just continue to choose teh bottom selection\n\n**LC Custom Combo Panel**\n- space saver (so you don't have to....subgraph😱)\n- you can collapse the Custom Combo with this "
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 364,
+      "type": "PrimitiveString",
+      "pos": [
+        -13960,
+        -3510
+      ],
+      "size": [
+        270,
+        60
+      ],
+      "flags": {},
+      "order": 96,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            470
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        "Pears"
+      ],
+      "widgets_values_named": {
+        "value": "Pears"
+      }
+    },
+    {
+      "id": 357,
+      "type": "LCCustomCombo",
+      "pos": [
+        -13960,
+        -3940
+      ],
+      "size": [
+        270,
+        188
+      ],
+      "flags": {},
+      "order": 97,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "INDEX",
+          "type": "INT",
+          "links": [
+            467
+          ]
+        },
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": [
+            466
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "Node name for S&R": "LCCustomCombo"
+      },
+      "widgets_values": [
+        3,
+        "Pears",
+        "cheese",
+        "apples",
+        "Pears",
+        "cat",
+        "dddd",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "widgets_values_named": {
+        "inputcount": 3,
+        "choice": "Pears",
+        "option_01": "cheese",
+        "option_02": "apples",
+        "option_03": "Pears",
+        "option_04": "cat",
+        "option_05": "dddd",
+        "option_06": "",
+        "option_07": "",
+        "option_08": "",
+        "option_09": "",
+        "option_10": "",
+        "option_11": "",
+        "option_12": "",
+        "option_13": "",
+        "option_14": "",
+        "option_15": "",
+        "option_16": "",
+        "option_17": "",
+        "option_18": "",
+        "option_19": "",
+        "option_20": ""
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
     },
     {
       "id": 238,
       "type": "MarkdownNote",
       "pos": [
-        -14470,
-        -5550
+        -15120,
+        -5540
       ],
       "size": [
         1070,
         3410
       ],
       "flags": {},
-      "order": 87,
+      "order": 98,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11043,15 +11786,15 @@
       "id": 280,
       "type": "MarkdownNote",
       "pos": [
-        -14480,
-        -2070
+        -15120,
+        -2060
       ],
       "size": [
-        980,
-        790
+        1030,
+        840
       ],
       "flags": {},
-      "order": 88,
+      "order": 99,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11071,207 +11814,6 @@
       },
       "color": "#dc6947",
       "bgcolor": "#c85533"
-    },
-    {
-      "id": 218,
-      "type": "LCSplitSigmasAdvanced",
-      "pos": [
-        -11520,
-        -4340
-      ],
-      "size": [
-        270,
-        150
-      ],
-      "flags": {},
-      "order": 89,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model_1",
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "name": "sigmas_1",
-          "type": "SIGMAS",
-          "link": null
-        },
-        {
-          "name": "model_2",
-          "shape": 7,
-          "type": "MODEL",
-          "link": null
-        },
-        {
-          "name": "sigmas_2",
-          "shape": 7,
-          "type": "SIGMAS",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "sigmas_high",
-          "type": "SIGMAS",
-          "links": null
-        },
-        {
-          "name": "sigmas_low",
-          "type": "SIGMAS",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "5832ec12d24dc0e316809e990ca4bb50852e4b72",
-        "Node name for S&R": "LCSplitSigmasAdvanced",
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        10,
-        1
-      ],
-      "widgets_values_named": {
-        "step_swap": 10,
-        "denoise": 1
-      },
-      "color": "#1c6d6d",
-      "bgcolor": "#1c6d6d"
-    },
-    {
-      "id": 350,
-      "type": "LCDenoise",
-      "pos": [
-        -11520,
-        -4150
-      ],
-      "size": [
-        270,
-        60
-      ],
-      "flags": {},
-      "order": 90,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "samples",
-          "type": "LATENT",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "latent",
-          "type": "LATENT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
-        "Node name for S&R": "LCDenoise",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        1
-      ],
-      "widgets_values_named": {
-        "denoise": 1
-      },
-      "color": "#823282",
-      "bgcolor": "#823282"
-    },
-    {
-      "id": 351,
-      "type": "LCBasicScheduler",
-      "pos": [
-        -11240,
-        -4180
-      ],
-      "size": [
-        290,
-        90
-      ],
-      "flags": {},
-      "order": 91,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "sigmas",
-          "type": "SIGMAS",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "637aebea42741c3844e15e8c851113de043a6ba2",
-        "Node name for S&R": "LCBasicScheduler",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "normal",
-        20
-      ],
-      "widgets_values_named": {
-        "scheduler": "normal",
-        "steps": 20
-      },
-      "color": "#1c6d6d",
-      "bgcolor": "#1c6d6d"
-    },
-    {
-      "id": 73,
-      "type": "MarkdownNote",
-      "pos": [
-        -11240,
-        -4540
-      ],
-      "size": [
-        290,
-        320
-      ],
-      "flags": {},
-      "order": 92,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "LC Split Sigmas",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
-      ],
-      "widgets_values_named": {
-        "text": "**LC Split Sigma Scheduler**\n\n- Designed to mimic two Ksamplers chained, but for sampler custom advanced nodes\n- keeps the Sampler path open to plug in nodes like **detail daemon** and **🤡 ClownSampler**\n- ⚠️ requires a disable noise plugged into the second pass noise slot.\n- You have the option of using two models (defaults to top slot if not used). great for **controlnet cleanup** or when you want a seperate detailer\n\n**LC Split Sigmas (Advanced)** \n- *Experimental* \n- Allows you to not only do what the split sigma scheduler does, but it allows you to run two entirely different schedules and switch in between\n- It defaults to the first Sigma schedule when nothing is plugged in (or bypassed) on slot 2\n- very good for running timestep or custom sigma scales\n\n\n**LC Denoise 💉**\n- injects noise across the latent when you do not have the option of denoise on a sampler.\n\n**LC Basic Scheduler**\n- same as a standard basic scheduler, but without noise injection"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
     }
   ],
   "links": [
@@ -12296,7 +12838,7 @@
       161,
       0,
       307,
-      20,
+      14,
       "IMAGE"
     ],
     [
@@ -12304,7 +12846,7 @@
       159,
       0,
       307,
-      21,
+      15,
       "IMAGE"
     ],
     [
@@ -12312,7 +12854,7 @@
       156,
       0,
       307,
-      12,
+      16,
       "IMAGE"
     ],
     [
@@ -12320,7 +12862,7 @@
       157,
       0,
       307,
-      13,
+      17,
       "IMAGE"
     ],
     [
@@ -12328,7 +12870,7 @@
       158,
       0,
       307,
-      14,
+      18,
       "IMAGE"
     ],
     [
@@ -12336,7 +12878,7 @@
       160,
       0,
       307,
-      15,
+      19,
       "IMAGE"
     ],
     [
@@ -12344,7 +12886,7 @@
       173,
       0,
       307,
-      16,
+      20,
       "IMAGE"
     ],
     [
@@ -12352,7 +12894,7 @@
       167,
       0,
       307,
-      17,
+      21,
       "IMAGE"
     ],
     [
@@ -12360,7 +12902,7 @@
       162,
       0,
       307,
-      18,
+      6,
       "IMAGE"
     ],
     [
@@ -12368,7 +12910,7 @@
       154,
       0,
       307,
-      19,
+      7,
       "IMAGE"
     ],
     [
@@ -12376,7 +12918,7 @@
       152,
       0,
       307,
-      4,
+      8,
       "IMAGE"
     ],
     [
@@ -12384,7 +12926,7 @@
       151,
       0,
       307,
-      5,
+      9,
       "IMAGE"
     ],
     [
@@ -12392,7 +12934,7 @@
       149,
       0,
       307,
-      6,
+      10,
       "IMAGE"
     ],
     [
@@ -12400,7 +12942,7 @@
       147,
       0,
       307,
-      7,
+      11,
       "IMAGE"
     ],
     [
@@ -12408,7 +12950,7 @@
       171,
       0,
       307,
-      8,
+      12,
       "IMAGE"
     ],
     [
@@ -12416,7 +12958,7 @@
       166,
       0,
       307,
-      9,
+      13,
       "IMAGE"
     ],
     [
@@ -12424,7 +12966,7 @@
       163,
       0,
       307,
-      10,
+      2,
       "IMAGE"
     ],
     [
@@ -12432,7 +12974,7 @@
       155,
       0,
       307,
-      11,
+      3,
       "IMAGE"
     ],
     [
@@ -12440,7 +12982,7 @@
       194,
       0,
       307,
-      2,
+      4,
       "IMAGE"
     ],
     [
@@ -12618,6 +13160,54 @@
       345,
       0,
       "INT"
+    ],
+    [
+      465,
+      360,
+      0,
+      358,
+      0,
+      "STRING"
+    ],
+    [
+      466,
+      357,
+      2,
+      359,
+      0,
+      "*"
+    ],
+    [
+      467,
+      357,
+      1,
+      360,
+      0,
+      "INT"
+    ],
+    [
+      468,
+      361,
+      0,
+      360,
+      1,
+      "STRING"
+    ],
+    [
+      469,
+      362,
+      0,
+      360,
+      2,
+      "STRING"
+    ],
+    [
+      470,
+      364,
+      0,
+      360,
+      3,
+      "STRING"
     ]
   ],
   "groups": [
@@ -12812,16 +13402,28 @@
       ],
       "color": "#8A8",
       "flags": {}
+    },
+    {
+      "id": 20,
+      "title": "Index Selectors",
+      "bounding": [
+        -13970,
+        -4010,
+        960,
+        600
+      ],
+      "color": "#3f789e",
+      "flags": {}
     }
   ],
   "config": {},
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.1,
+      "scale": 0.11000000000000017,
       "offset": [
-        19259.045919210686,
-        6794.459812860006
+        25706.01919611798,
+        6941.832143610632
       ]
     },
     "links_added_by_ue": [],

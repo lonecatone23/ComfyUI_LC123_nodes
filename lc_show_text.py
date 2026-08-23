@@ -80,8 +80,10 @@ class LCShowText:
         except Exception:
             pass
 
-        # ui.text as list — frontend joins for display
-        return {"ui": {"text": [display]}, "result": (parts if len(parts) > 1 else [display],)}
+        # ui.text stays a list for the frontend display widget.
+        # result MUST be a plain str — Ideogram4 / Krea2 Regional call .strip() on
+        # import_json and crash if they receive a list (Comfy passes the socket value as-is).
+        return {"ui": {"text": [display]}, "result": (display,)}
 
 
 NODE_CLASS_MAPPINGS = {

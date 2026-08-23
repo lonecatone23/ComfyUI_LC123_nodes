@@ -4,7 +4,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 
 - **Repo:** [https://github.com/lonecatone23/ComfyUI_LC123_nodes](https://github.com/lonecatone23/ComfyUI_LC123_nodes)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.13.0
+- **Version:** 1.14.0
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -15,7 +15,17 @@ For **Anima regional attention**, also install [Sen-sou Anima Regional Condition
 
 ---
 
-## What’s new in 1.13.0
+## What’s new in 1.14.0
+
+| Area | Changes |
+|------|---------|
+| **LC Lighting Control** | Post-process relight from normal + depth maps; optional subject mask (virtual-dome normals); depth falloff; optional screen-space cast shadows; interactive light stage (handles, Z via Shift+drag / wheel). |
+| **LC Custom Combo** | `inputcount` option slots + choice dropdown → **STRING** + **INDEX** + **OPT_CONNECTION**. |
+| **LC Custom Combo Panel** | Compact remote for the combo (hub ← OPT_CONNECTION); choice stays in sync. |
+| **LC Any Index Switch** | Index widget (right-click → Convert to Input to wire INDEX) + dynamic `any_*` slots (type-locks from first wire). |
+| **LC AnySwitch** | First-connected-wins any-type switch (restored / unchanged). |
+
+### Prior — 1.13.0
 
 | Area | Changes |
 |------|---------|
@@ -64,11 +74,21 @@ See [`LC_Prompt_Builder_Note.md`](LC_Prompt_Builder_Note.md).
 
 ## 🖼️ Image · FX · utility (summary)
 
-Aspect ratio / pipes / image compare-split-grid-crop / FX suite (denoise, color match, sharpen pro, skin beauty, photo style, LUT, …) / bypassers / boolean / join-show text / folders / notify / seed jump / **🌱LC Seed** / performance settings.
+**LC Lighting Control** (relight) / aspect ratio / pipes / image compare-split-grid-crop / FX suite (denoise, color match, sharpen pro, skin beauty, photo style, LUT, …) / bypassers / boolean / **Custom Combo** + **Any Index Switch** / join-show text / folders / notify / seed jump / **🌱LC Seed** / performance settings.
 
 Full tables remain in earlier release notes and on-node tooltips.
 
 ---
+
+
+## 📂 Example workflows
+
+| File | Description |
+|------|-------------|
+| [`workflows/LC Lighting Control (BETA).json`](workflows/LC%20Lighting%20Control%20(BETA).json) | Load image → normals / depth / mask → **LC Lighting Control** |
+| [`workflows/LC Node examples.json`](workflows/LC%20Node%20examples.json) | Broad tour of LC123 utility / image / prompt nodes |
+
+Load via ComfyUI **Workflow → Open** (or drag onto canvas). External deps for the lighting example: Depth Anything V2, a normal-map node (e.g. Image-Filters), optional remBG / mask blur.
 
 ## 📦 Assets
 

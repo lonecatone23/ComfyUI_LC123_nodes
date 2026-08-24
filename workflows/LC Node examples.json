@@ -1,7 +1,7 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 364,
+  "last_node_id": 367,
   "last_link_id": 470,
   "nodes": [
     {
@@ -248,7 +248,7 @@
         130
       ],
       "flags": {},
-      "order": 101,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -294,7 +294,7 @@
         250
       ],
       "flags": {},
-      "order": 100,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -377,7 +377,7 @@
         50
       ],
       "flags": {},
-      "order": 150,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -512,7 +512,7 @@
         280
       ],
       "flags": {},
-      "order": 162,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -569,7 +569,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 127,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -619,7 +619,7 @@
         30
       ],
       "flags": {},
-      "order": 114,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -661,7 +661,7 @@
         50
       ],
       "flags": {},
-      "order": 115,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -810,7 +810,7 @@
         90
       ],
       "flags": {},
-      "order": 102,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -904,7 +904,7 @@
         60
       ],
       "flags": {},
-      "order": 113,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -956,7 +956,7 @@
         50
       ],
       "flags": {},
-      "order": 112,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -1069,7 +1069,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 300,
+        "lc_h": 410
       },
       "widgets_values": [
         40,
@@ -1110,7 +1112,7 @@
         340
       ],
       "flags": {},
-      "order": 125,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -1161,7 +1163,7 @@
         520
       ],
       "flags": {},
-      "order": 126,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -1313,7 +1315,7 @@
       ],
       "size": [
         270,
-        118
+        120
       ],
       "flags": {},
       "order": 13,
@@ -1374,7 +1376,9 @@
           "apply_to_unrepeated": 0,
           "version": "7.8"
         },
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes"
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "lc_w": 270,
+        "lc_h": 120
       },
       "widgets_values": [
         2
@@ -1389,8 +1393,8 @@
       "id": 179,
       "type": "LCPositive",
       "pos": [
-        -12180,
-        -3580
+        -12460,
+        -3200
       ],
       "size": [
         210,
@@ -1435,8 +1439,8 @@
       "id": 180,
       "type": "LCPositive",
       "pos": [
-        -12180,
-        -3440
+        -12460,
+        -3060
       ],
       "size": [
         210,
@@ -1491,7 +1495,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 185,
+      "order": 188,
       "mode": 0,
       "inputs": [
         {
@@ -1577,7 +1581,7 @@
         130
       ],
       "flags": {},
-      "order": 187,
+      "order": 190,
       "mode": 0,
       "inputs": [
         {
@@ -1699,7 +1703,7 @@
         582
       ],
       "flags": {},
-      "order": 194,
+      "order": 197,
       "mode": 0,
       "inputs": [
         {
@@ -1788,7 +1792,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 186,
+      "order": 189,
       "mode": 0,
       "inputs": [
         {
@@ -1838,7 +1842,7 @@
         640
       ],
       "flags": {},
-      "order": 188,
+      "order": 191,
       "mode": 0,
       "inputs": [
         {
@@ -1881,7 +1885,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 104,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -1931,7 +1935,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 107,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -1979,7 +1983,7 @@
         120
       ],
       "flags": {},
-      "order": 105,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -2147,7 +2151,7 @@
         450
       ],
       "flags": {},
-      "order": 106,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -2264,7 +2268,7 @@
         400
       ],
       "flags": {},
-      "order": 131,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -2344,8 +2348,8 @@
       "id": 204,
       "type": "LCTextRemove",
       "pos": [
-        -12960,
-        -3650
+        -13240,
+        -3270
       ],
       "size": [
         360,
@@ -2670,7 +2674,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 192,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -3132,7 +3136,7 @@
         140
       ],
       "flags": {},
-      "order": 111,
+      "order": 113,
       "mode": 0,
       "inputs": [
         {
@@ -3202,7 +3206,7 @@
         130
       ],
       "flags": {},
-      "order": 190,
+      "order": 193,
       "mode": 0,
       "inputs": [
         {
@@ -3261,7 +3265,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 132,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -3312,7 +3316,7 @@
         420
       ],
       "flags": {},
-      "order": 133,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -3370,7 +3374,7 @@
         640
       ],
       "flags": {},
-      "order": 153,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -3443,7 +3447,7 @@
         390
       ],
       "flags": {},
-      "order": 164,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -3557,39 +3561,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 288,
-      "type": "MarkdownNote",
-      "pos": [
-        -7450,
-        -1580
-      ],
-      "size": [
-        580,
-        1100
-      ],
-      "flags": {},
-      "order": 33,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "title": "LC Photo Style 📷",
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "# LC Photo Style 📷\n\nStandalone **camera / phone finish** look. Pick a **style**, then tweak the sliders.  \nMost controls use **0 = no change**. **Strength** blends with the original image.\n\nNot a lens tool — color, tone, texture, vignette, and grain only.\n\n---\n\n## Widgets\n\n| Widget | What it does |\n|--------|----------------|\n| **style** | Starting preset (fills the sliders). Customize freely after. |\n| **strength** | 0 = original image · 1 = full processed look. |\n| **seed** | Grain seed only (same seed = same grain pattern). |\n| **wb_temperature** | 0 = no change. − cooler · + warmer. |\n| **wb_tint** | 0 = no change. − green · + magenta. |\n| **exposure** | 0 = no change. Overall brightness (EV-style). |\n| **contrast** | 0 = no change. + punches midtones · − flattens. |\n| **shadows** | 0 = off. Lifts **dark areas only** (no white haze). |\n| **highlights** | 0 = off. Softly compresses bright areas. |\n| **hdr_local** | 0 = off. Mild local tone (opens shadows a bit / softens local contrast). |\n| **vibrance** | 0 = no change. + boosts muted colors · − pulls them down. |\n| **skin_protect** | Limits vibrance on skin hues (only matters when vibrance ≠ 0). |\n| **shadow_cool** | 0 = off. Cool (blue) tint in mid-shadows — skips pure black. |\n| **highlight_warm** | 0 = off. Warm tint in highlights. |\n| **texture** | 0 = no change. Fine detail · − softens. |\n| **clarity** | 0 = no change. Mid-scale local contrast · − softens. |\n| **vignette** | 0 = off. Darkens the corners. |\n| **grain** | 0 = off. Neutral mono grain (stronger in shadows). |\n\n---\n\n## Styles (presets)\n\n| Style | Intent |\n|-------|--------|\n| **Standard** | Balanced default |\n| **Natural** | Soft / restrained |\n| **Dramatic** | Darker, more contrast and vignette |\n| **Quiet** | Cool, low-key |\n| **Muted** | Flatter / less saturation |\n| **Amateur** | Uneven WB, stronger grain and vignette |\n| **Cool day** | Cool / cyan lean |\n| **Warm evening** | Amber / warm lean |\n| **Bright open** | High exposure, lifted shadows and highlights |\n| **iPhone** | Modern phone-style: shadow lift, soft highlights, skin-safe color |\n| **Nikon Z7 II** | Neutral-cool, firmer mid contrast, clean texture |\n| **Canon R5** | Mild warm, skin-friendly, soft highlight roll-off |\n\n---\n\n## Quick tips\n\n- Start with a **style**, set **strength** ~0.7–0.9, then nudge one or two sliders.\n- All zeros + strength anything → image unchanged.\n- **Shadows** opens blacks; it does **not** add a white fog.\n- For a softer result without changing the preset, lower **strength** first.\n- Pair with **LC Image Split** or **LC Image Compare** if you want a fixed before/after.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
-      ],
-      "widgets_values_named": {
-        "text": "# LC Photo Style 📷\n\nStandalone **camera / phone finish** look. Pick a **style**, then tweak the sliders.  \nMost controls use **0 = no change**. **Strength** blends with the original image.\n\nNot a lens tool — color, tone, texture, vignette, and grain only.\n\n---\n\n## Widgets\n\n| Widget | What it does |\n|--------|----------------|\n| **style** | Starting preset (fills the sliders). Customize freely after. |\n| **strength** | 0 = original image · 1 = full processed look. |\n| **seed** | Grain seed only (same seed = same grain pattern). |\n| **wb_temperature** | 0 = no change. − cooler · + warmer. |\n| **wb_tint** | 0 = no change. − green · + magenta. |\n| **exposure** | 0 = no change. Overall brightness (EV-style). |\n| **contrast** | 0 = no change. + punches midtones · − flattens. |\n| **shadows** | 0 = off. Lifts **dark areas only** (no white haze). |\n| **highlights** | 0 = off. Softly compresses bright areas. |\n| **hdr_local** | 0 = off. Mild local tone (opens shadows a bit / softens local contrast). |\n| **vibrance** | 0 = no change. + boosts muted colors · − pulls them down. |\n| **skin_protect** | Limits vibrance on skin hues (only matters when vibrance ≠ 0). |\n| **shadow_cool** | 0 = off. Cool (blue) tint in mid-shadows — skips pure black. |\n| **highlight_warm** | 0 = off. Warm tint in highlights. |\n| **texture** | 0 = no change. Fine detail · − softens. |\n| **clarity** | 0 = no change. Mid-scale local contrast · − softens. |\n| **vignette** | 0 = off. Darkens the corners. |\n| **grain** | 0 = off. Neutral mono grain (stronger in shadows). |\n\n---\n\n## Styles (presets)\n\n| Style | Intent |\n|-------|--------|\n| **Standard** | Balanced default |\n| **Natural** | Soft / restrained |\n| **Dramatic** | Darker, more contrast and vignette |\n| **Quiet** | Cool, low-key |\n| **Muted** | Flatter / less saturation |\n| **Amateur** | Uneven WB, stronger grain and vignette |\n| **Cool day** | Cool / cyan lean |\n| **Warm evening** | Amber / warm lean |\n| **Bright open** | High exposure, lifted shadows and highlights |\n| **iPhone** | Modern phone-style: shadow lift, soft highlights, skin-safe color |\n| **Nikon Z7 II** | Neutral-cool, firmer mid contrast, clean texture |\n| **Canon R5** | Mild warm, skin-friendly, soft highlight roll-off |\n\n---\n\n## Quick tips\n\n- Start with a **style**, set **strength** ~0.7–0.9, then nudge one or two sliders.\n- All zeros + strength anything → image unchanged.\n- **Shadows** opens blacks; it does **not** add a white fog.\n- For a softer result without changing the preset, lower **strength** first.\n- Pair with **LC Image Split** or **LC Image Compare** if you want a fixed before/after.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 83,
       "type": "Label (rgthree)",
       "pos": [
@@ -3603,7 +3574,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 34,
+      "order": 33,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3630,15 +3601,15 @@
       "id": 184,
       "type": "LCShowText",
       "pos": [
-        -11930,
-        -3950
+        -12210,
+        -3570
       ],
       "size": [
         270,
         120
       ],
       "flags": {},
-      "order": 137,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -3673,15 +3644,15 @@
       "id": 181,
       "type": "LCPositive",
       "pos": [
-        -12180,
-        -3300
+        -12460,
+        -2920
       ],
       "size": [
         210,
         90
       ],
       "flags": {},
-      "order": 35,
+      "order": 34,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3727,7 +3698,7 @@
         690
       ],
       "flags": {},
-      "order": 108,
+      "order": 111,
       "mode": 0,
       "inputs": [
         {
@@ -3826,7 +3797,7 @@
         60
       ],
       "flags": {},
-      "order": 36,
+      "order": 35,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3869,7 +3840,7 @@
         690
       ],
       "flags": {},
-      "order": 109,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -3967,7 +3938,7 @@
         490
       ],
       "flags": {},
-      "order": 103,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -4033,7 +4004,7 @@
         540
       ],
       "flags": {},
-      "order": 152,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -4109,7 +4080,7 @@
         580
       ],
       "flags": {},
-      "order": 163,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -4189,7 +4160,7 @@
         490
       ],
       "flags": {},
-      "order": 166,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -4261,7 +4232,7 @@
         520
       ],
       "flags": {},
-      "order": 169,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -4335,7 +4306,7 @@
         470
       ],
       "flags": {},
-      "order": 170,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -4405,7 +4376,7 @@
         490
       ],
       "flags": {},
-      "order": 171,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -4479,7 +4450,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 37,
+      "order": 36,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4522,7 +4493,7 @@
         470
       ],
       "flags": {},
-      "order": 130,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -4598,7 +4569,7 @@
         540
       ],
       "flags": {},
-      "order": 172,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -4674,7 +4645,7 @@
         630
       ],
       "flags": {},
-      "order": 173,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -4758,7 +4729,7 @@
         520
       ],
       "flags": {},
-      "order": 174,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -4832,7 +4803,7 @@
         540
       ],
       "flags": {},
-      "order": 175,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -4908,7 +4879,7 @@
         470
       ],
       "flags": {},
-      "order": 176,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -4978,7 +4949,7 @@
         520
       ],
       "flags": {},
-      "order": 177,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -5052,7 +5023,7 @@
         520
       ],
       "flags": {},
-      "order": 178,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -5126,7 +5097,7 @@
         560
       ],
       "flags": {},
-      "order": 179,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -5204,7 +5175,7 @@
         450
       ],
       "flags": {},
-      "order": 180,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -5272,7 +5243,7 @@
         470
       ],
       "flags": {},
-      "order": 181,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -5342,7 +5313,7 @@
         430
       ],
       "flags": {},
-      "order": 182,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -5402,7 +5373,7 @@
         640
       ],
       "flags": {},
-      "order": 183,
+      "order": 186,
       "mode": 0,
       "inputs": [
         {
@@ -5478,7 +5449,7 @@
         520
       ],
       "flags": {},
-      "order": 184,
+      "order": 187,
       "mode": 0,
       "inputs": [
         {
@@ -5568,7 +5539,7 @@
         230
       ],
       "flags": {},
-      "order": 193,
+      "order": 196,
       "mode": 0,
       "inputs": [
         {
@@ -5631,7 +5602,7 @@
         170
       ],
       "flags": {},
-      "order": 38,
+      "order": 37,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -5664,7 +5635,7 @@
         1050
       ],
       "flags": {},
-      "order": 195,
+      "order": 198,
       "mode": 0,
       "inputs": [
         {
@@ -5707,7 +5678,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 189,
+      "order": 192,
       "mode": 0,
       "inputs": [
         {
@@ -5722,6 +5693,13 @@
           "shape": 7,
           "type": "IMAGE",
           "link": 407
+        },
+        {
+          "label": "image17",
+          "name": "images.image17",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 423
         },
         {
           "label": "image18",
@@ -5750,6 +5728,13 @@
           "shape": 7,
           "type": "IMAGE",
           "link": null
+        },
+        {
+          "label": "image9",
+          "name": "images.image9",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 415
         },
         {
           "label": "image10",
@@ -5801,13 +5786,6 @@
           "link": 422
         },
         {
-          "label": "image17",
-          "name": "images.image17",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 423
-        },
-        {
           "label": "image2",
           "name": "images.image2",
           "shape": 7,
@@ -5855,13 +5833,6 @@
           "shape": 7,
           "type": "IMAGE",
           "link": 414
-        },
-        {
-          "label": "image9",
-          "name": "images.image9",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 415
         }
       ],
       "outputs": [
@@ -5896,7 +5867,7 @@
         450
       ],
       "flags": {},
-      "order": 191,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -5993,69 +5964,18 @@
       "bgcolor": "#324b4b"
     },
     {
-      "id": 284,
-      "type": "LoadImage",
-      "pos": [
-        -7770,
-        -2130
-      ],
-      "size": [
-        300,
-        410
-      ],
-      "flags": {},
-      "order": 39,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            384,
-            386
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "LoadImage",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "Original.jpg",
-        "image"
-      ],
-      "widgets_values_named": {
-        "image": "Original.jpg",
-        "upload": "image"
-      },
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 203,
       "type": "LCShowText",
       "pos": [
-        -12580,
-        -3950
+        -12860,
+        -3570
       ],
       "size": [
         270,
         120
       ],
       "flags": {},
-      "order": 139,
+      "order": 141,
       "mode": 0,
       "inputs": [
         {
@@ -6090,15 +6010,15 @@
       "id": 220,
       "type": "LCNotify",
       "pos": [
-        -11250,
-        -3440
+        -11530,
+        -3060
       ],
       "size": [
         270,
         130
       ],
       "flags": {},
-      "order": 40,
+      "order": 38,
       "mode": 0,
       "inputs": [
         {
@@ -6144,15 +6064,15 @@
       "id": 221,
       "type": "MarkdownNote",
       "pos": [
-        -11250,
-        -3260
+        -11530,
+        -2880
       ],
       "size": [
         330,
         200
       ],
       "flags": {},
-      "order": 41,
+      "order": 39,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6184,7 +6104,7 @@
         90
       ],
       "flags": {},
-      "order": 158,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -6232,7 +6152,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 42,
+      "order": 40,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6265,7 +6185,7 @@
         90
       ],
       "flags": {},
-      "order": 157,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -6311,7 +6231,7 @@
         60
       ],
       "flags": {},
-      "order": 43,
+      "order": 41,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6354,7 +6274,7 @@
         320
       ],
       "flags": {},
-      "order": 44,
+      "order": 42,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6379,15 +6299,15 @@
       "id": 189,
       "type": "MarkdownNote",
       "pos": [
-        -11250,
-        -3760
+        -11530,
+        -3380
       ],
       "size": [
         340,
         270
       ],
       "flags": {},
-      "order": 45,
+      "order": 43,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6419,7 +6339,7 @@
         130
       ],
       "flags": {},
-      "order": 134,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -6485,7 +6405,7 @@
         100
       ],
       "flags": {},
-      "order": 46,
+      "order": 44,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6543,7 +6463,7 @@
         130
       ],
       "flags": {},
-      "order": 136,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -6619,7 +6539,7 @@
         260
       ],
       "flags": {},
-      "order": 155,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -6661,7 +6581,7 @@
         310
       ],
       "flags": {},
-      "order": 156,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -6703,7 +6623,7 @@
         90
       ],
       "flags": {},
-      "order": 154,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -6745,7 +6665,7 @@
         130
       ],
       "flags": {},
-      "order": 47,
+      "order": 45,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6778,7 +6698,7 @@
         200
       ],
       "flags": {},
-      "order": 48,
+      "order": 46,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6823,7 +6743,7 @@
         90
       ],
       "flags": {},
-      "order": 49,
+      "order": 47,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6855,7 +6775,7 @@
         90
       ],
       "flags": {},
-      "order": 50,
+      "order": 48,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6899,7 +6819,7 @@
         160
       ],
       "flags": {},
-      "order": 120,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -6984,7 +6904,7 @@
         90
       ],
       "flags": {},
-      "order": 141,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -7031,7 +6951,7 @@
         90
       ],
       "flags": {},
-      "order": 145,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -7077,7 +6997,7 @@
         90
       ],
       "flags": {},
-      "order": 142,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -7124,7 +7044,7 @@
         90
       ],
       "flags": {},
-      "order": 143,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -7171,7 +7091,7 @@
         90
       ],
       "flags": {},
-      "order": 146,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -7217,7 +7137,7 @@
         90
       ],
       "flags": {},
-      "order": 144,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -7256,8 +7176,8 @@
       "id": 191,
       "type": "LC Bypasser",
       "pos": [
-        -11630,
-        -3950
+        -11910,
+        -3570
       ],
       "size": [
         350,
@@ -7266,7 +7186,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 117,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -7356,15 +7276,15 @@
       "id": 190,
       "type": "MarkdownNote",
       "pos": [
-        -12580,
-        -3720
+        -12860,
+        -3340
       ],
       "size": [
         380,
         350
       ],
       "flags": {},
-      "order": 51,
+      "order": 49,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7388,15 +7308,15 @@
       "id": 202,
       "type": "LCTextReplace",
       "pos": [
-        -12960,
-        -3950
+        -13240,
+        -3570
       ],
       "size": [
         360,
         236
       ],
       "flags": {},
-      "order": 118,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -7522,15 +7442,15 @@
       "id": 178,
       "type": "LCPositive",
       "pos": [
-        -12180,
-        -3720
+        -12460,
+        -3340
       ],
       "size": [
         210,
         90
       ],
       "flags": {},
-      "order": 52,
+      "order": 50,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7570,15 +7490,15 @@
       "id": 225,
       "type": "LCShowText",
       "pos": [
-        -12960,
-        -3060
+        -13240,
+        -2680
       ],
       "size": [
         330,
         120
       ],
       "flags": {},
-      "order": 140,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -7612,15 +7532,15 @@
       "id": 224,
       "type": "LCPositive",
       "pos": [
-        -12960,
-        -3320
+        -13240,
+        -2940
       ],
       "size": [
         340,
         110
       ],
       "flags": {},
-      "order": 53,
+      "order": 51,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7655,15 +7575,15 @@
       "id": 222,
       "type": "LCCivitaiStrip",
       "pos": [
-        -12960,
-        -3160
+        -13240,
+        -2780
       ],
       "size": [
         330,
         60
       ],
       "flags": {},
-      "order": 119,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -7714,7 +7634,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 54,
+      "order": 52,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7751,7 +7671,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 55,
+      "order": 53,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7778,8 +7698,8 @@
       "id": 177,
       "type": "LCJoinStrings",
       "pos": [
-        -12290,
-        -3950
+        -12570,
+        -3570
       ],
       "size": [
         330,
@@ -7788,7 +7708,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 116,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -7851,15 +7771,15 @@
       "id": 188,
       "type": "LC Bypasser Panel",
       "pos": [
-        -11250,
-        -3950
+        -11530,
+        -3570
       ],
       "size": [
         260,
         150
       ],
       "flags": {},
-      "order": 138,
+      "order": 140,
       "mode": 0,
       "inputs": [
         {
@@ -7910,7 +7830,7 @@
         60
       ],
       "flags": {},
-      "order": 56,
+      "order": 54,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7928,7 +7848,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 270,
+        "lc_h": 60
       },
       "widgets_values": [
         false
@@ -7951,7 +7873,7 @@
         80
       ],
       "flags": {},
-      "order": 57,
+      "order": 55,
       "mode": 0,
       "inputs": [
         {
@@ -7982,7 +7904,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 270,
+        "lc_h": 80
       },
       "widgets_values": [
         false
@@ -8005,7 +7929,7 @@
         500
       ],
       "flags": {},
-      "order": 58,
+      "order": 56,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8038,7 +7962,7 @@
         130
       ],
       "flags": {},
-      "order": 59,
+      "order": 57,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8071,7 +7995,7 @@
         90
       ],
       "flags": {},
-      "order": 60,
+      "order": 58,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8116,7 +8040,7 @@
         60
       ],
       "flags": {},
-      "order": 61,
+      "order": 59,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8134,7 +8058,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 270,
+        "lc_h": 60
       },
       "widgets_values": [
         true
@@ -8149,15 +8075,15 @@
       "id": 27,
       "type": "PrimitiveBoolean",
       "pos": [
-        -11930,
-        -3610
+        -12210,
+        -3230
       ],
       "size": [
         270,
         60
       ],
       "flags": {},
-      "order": 62,
+      "order": 60,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8194,15 +8120,15 @@
       "id": 55,
       "type": "LCInvertBoolean",
       "pos": [
-        -11880,
-        -3500
+        -12160,
+        -3120
       ],
       "size": [
         210,
         40
       ],
       "flags": {},
-      "order": 121,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -8239,15 +8165,15 @@
       "id": 192,
       "type": "LC Groups Bypasser",
       "pos": [
-        -11630,
-        -3580
+        -11910,
+        -3200
       ],
       "size": [
         350,
-        762
+        850
       ],
       "flags": {},
-      "order": 147,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -8306,17 +8232,12 @@
           "link": null
         },
         {
-          "name": "Utility Nodes",
-          "type": "BOOLEAN",
-          "link": null
-        },
-        {
           "name": "Index Selectors",
           "type": "BOOLEAN",
           "link": null
         },
         {
-          "name": "🗒️LC Prompt Builder",
+          "name": "Utility Nodes",
           "type": "BOOLEAN",
           "link": null
         },
@@ -8331,7 +8252,22 @@
           "link": null
         },
         {
+          "name": "🗒️LC Prompt Builder",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
           "name": "Skin Beauty ✨",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "LC Photo Style 📷",
+          "type": "BOOLEAN",
+          "link": null
+        },
+        {
+          "name": "LC Lighting Control 🔦",
           "type": "BOOLEAN",
           "link": null
         }
@@ -8424,6 +8360,14 @@
           "id:20": {
             "value": true,
             "originId": null
+          },
+          "id:21": {
+            "value": true,
+            "originId": null
+          },
+          "id:22": {
+            "value": true,
+            "originId": null
           }
         },
         "ue_properties": {
@@ -8436,6 +8380,8 @@
         true,
         true,
         false,
+        true,
+        true,
         true,
         true,
         true,
@@ -8463,12 +8409,14 @@
         "Enable LC Seed Jump 🌱": true,
         "Enable Split Sigmas & Noise": true,
         "Enable 🎨 Post Processing Suite 260811": true,
-        "Enable Utility Nodes": true,
         "Enable Index Selectors": true,
-        "Enable 🗒️LC Prompt Builder": true,
+        "Enable Utility Nodes": true,
         "Enable LC Dimension Resize 📐": true,
         "Enable LC Node Snapshot 📋": true,
-        "Enable Skin Beauty ✨": true
+        "Enable 🗒️LC Prompt Builder": true,
+        "Enable Skin Beauty ✨": true,
+        "Enable LC Photo Style 📷": true,
+        "Enable LC Lighting Control 🔦": true
       },
       "color": "#28281E",
       "bgcolor": "#28281E"
@@ -8477,15 +8425,15 @@
       "id": 223,
       "type": "MarkdownNote",
       "pos": [
-        -12610,
-        -3320
+        -12890,
+        -2940
       ],
       "size": [
         410,
         320
       ],
       "flags": {},
-      "order": 63,
+      "order": 61,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8510,15 +8458,15 @@
       "id": 327,
       "type": "LCWildcard",
       "pos": [
-        -12740,
-        -2720
+        -12970,
+        -2180
       ],
       "size": [
         340,
         110
       ],
       "flags": {},
-      "order": 64,
+      "order": 62,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8557,15 +8505,15 @@
       "id": 340,
       "type": "LCWildcard",
       "pos": [
-        -12740,
-        -2570
+        -12970,
+        -2030
       ],
       "size": [
         340,
         110
       ],
       "flags": {},
-      "order": 65,
+      "order": 63,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8604,8 +8552,8 @@
       "id": 341,
       "type": "LCJoinStrings",
       "pos": [
-        -12570,
-        -2420
+        -12800,
+        -1880
       ],
       "size": [
         330,
@@ -8614,7 +8562,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 122,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -8664,15 +8612,15 @@
       "id": 331,
       "type": "LCSubject",
       "pos": [
-        -12390,
-        -2340
+        -12620,
+        -1800
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 66,
+      "order": 64,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8721,15 +8669,15 @@
       "id": 328,
       "type": "LCSubject",
       "pos": [
-        -12390,
-        -2720
+        -12620,
+        -2180
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 148,
+      "order": 150,
       "mode": 0,
       "inputs": [
         {
@@ -8787,15 +8735,15 @@
       "id": 329,
       "type": "LCCamera",
       "pos": [
-        -12040,
-        -2720
+        -12270,
+        -2180
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 67,
+      "order": 65,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8838,15 +8786,15 @@
       "id": 332,
       "type": "LCLighting",
       "pos": [
-        -12040,
-        -2340
+        -12270,
+        -1800
       ],
       "size": [
         340,
         240
       ],
       "flags": {},
-      "order": 68,
+      "order": 66,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8887,15 +8835,15 @@
       "id": 333,
       "type": "LCStyleSelector",
       "pos": [
-        -12040,
-        -2060
+        -12270,
+        -1520
       ],
       "size": [
         340,
         270
       ],
       "flags": {},
-      "order": 69,
+      "order": 67,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8938,15 +8886,15 @@
       "id": 325,
       "type": "LCSceneBuilder",
       "pos": [
-        -12390,
-        -1960
+        -12620,
+        -1420
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 70,
+      "order": 68,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8991,15 +8939,15 @@
       "id": 326,
       "type": "LCSubjectArray",
       "pos": [
-        -11680,
-        -2720
+        -11910,
+        -2180
       ],
       "size": [
         180,
         170
       ],
       "flags": {},
-      "order": 159,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -9082,15 +9030,15 @@
       "id": 338,
       "type": "LCShowText",
       "pos": [
-        -11320,
-        -2200
+        -11550,
+        -1660
       ],
       "size": [
         350,
         860
       ],
       "flags": {},
-      "order": 168,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -9123,15 +9071,15 @@
       "id": 335,
       "type": "LoadImage",
       "pos": [
-        -12340,
-        -1570
+        -12570,
+        -1030
       ],
       "size": [
         290,
         320
       ],
       "flags": {},
-      "order": 71,
+      "order": 69,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9173,15 +9121,15 @@
       "id": 334,
       "type": "LCColorPalette",
       "pos": [
-        -12040,
-        -1570
+        -12270,
+        -1030
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 123,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -9232,15 +9180,15 @@
       "id": 339,
       "type": "MarkdownNote",
       "pos": [
-        -13020,
-        -2360
+        -13250,
+        -1820
       ],
       "size": [
         610,
         1110
       ],
       "flags": {},
-      "order": 72,
+      "order": 70,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9264,15 +9212,15 @@
       "id": 336,
       "type": "LCPromptAssembler",
       "pos": [
-        -11680,
-        -2500
+        -11910,
+        -1960
       ],
       "size": [
         340,
         360
       ],
       "flags": {},
-      "order": 165,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -9365,15 +9313,15 @@
       "id": 337,
       "type": "LCShowText",
       "pos": [
-        -11320,
-        -2720
+        -11550,
+        -2180
       ],
       "size": [
         350,
         470
       ],
       "flags": {},
-      "order": 167,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -9403,91 +9351,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 282,
-      "type": "LCPhoneLook",
-      "pos": [
-        -7460,
-        -2130
-      ],
-      "size": [
-        270,
-        490
-      ],
-      "flags": {},
-      "order": 110,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 384
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            390
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
-        "Node name for S&R": "LCPhoneLook",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "Dramatic",
-        0.85,
-        416825629545111,
-        "fixed",
-        0.33,
-        0,
-        0.09,
-        0.45,
-        0.08,
-        0.45,
-        0.25,
-        0.15,
-        0.6,
-        0.18,
-        0.1,
-        0.22,
-        0.22,
-        0.28,
-        0.12
-      ],
-      "widgets_values_named": {
-        "style": "Dramatic",
-        "strength": 0.85,
-        "seed": 416825629545111,
-        "control_after_generate": "fixed",
-        "wb_temperature": 0.33,
-        "wb_tint": 0,
-        "exposure": 0.09,
-        "contrast": 0.45,
-        "shadows": 0.08,
-        "highlights": 0.45,
-        "hdr_local": 0.25,
-        "vibrance": 0.15,
-        "skin_protect": 0.6,
-        "shadow_cool": 0.18,
-        "highlight_warm": 0.1,
-        "texture": 0.22,
-        "clarity": 0.22,
-        "vignette": 0.28,
-        "grain": 0.12
-      },
-      "color": "#324B4B",
-      "bgcolor": "#324B4B"
-    },
-    {
       "id": 322,
       "type": "MarkdownNote",
       "pos": [
@@ -9499,7 +9362,7 @@
         170
       ],
       "flags": {},
-      "order": 73,
+      "order": 71,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9532,7 +9395,7 @@
         60
       ],
       "flags": {},
-      "order": 74,
+      "order": 72,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9578,7 +9441,7 @@
         60
       ],
       "flags": {},
-      "order": 75,
+      "order": 73,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9622,7 +9485,7 @@
         130
       ],
       "flags": {},
-      "order": 124,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -9693,7 +9556,7 @@
         100
       ],
       "flags": {},
-      "order": 76,
+      "order": 74,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9752,7 +9615,7 @@
         130
       ],
       "flags": {},
-      "order": 149,
+      "order": 151,
       "mode": 0,
       "inputs": [
         {
@@ -9828,7 +9691,7 @@
         90
       ],
       "flags": {},
-      "order": 161,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -9874,7 +9737,7 @@
         90
       ],
       "flags": {},
-      "order": 160,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -9920,7 +9783,7 @@
         320
       ],
       "flags": {},
-      "order": 77,
+      "order": 75,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9953,7 +9816,7 @@
         350
       ],
       "flags": {},
-      "order": 78,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -10008,7 +9871,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 300,
+        "lc_h": 350
       },
       "widgets_values": [
         40,
@@ -10045,7 +9910,7 @@
         470
       ],
       "flags": {},
-      "order": 79,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -10157,7 +10022,7 @@
         530
       ],
       "flags": {},
-      "order": 80,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -10376,7 +10241,7 @@
         530
       ],
       "flags": {},
-      "order": 81,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -10544,7 +10409,7 @@
         170
       ],
       "flags": {},
-      "order": 82,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -10621,7 +10486,7 @@
         190
       ],
       "flags": {},
-      "order": 83,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -10686,7 +10551,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 300,
+        "lc_h": 190
       },
       "color": "#707070",
       "bgcolor": "#707070"
@@ -10703,7 +10570,7 @@
         270
       ],
       "flags": {},
-      "order": 84,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
@@ -10806,7 +10673,7 @@
         150
       ],
       "flags": {},
-      "order": 85,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -10878,7 +10745,7 @@
         60
       ],
       "flags": {},
-      "order": 86,
+      "order": 84,
       "mode": 0,
       "inputs": [
         {
@@ -10925,7 +10792,7 @@
         90
       ],
       "flags": {},
-      "order": 87,
+      "order": 85,
       "mode": 0,
       "inputs": [
         {
@@ -10974,7 +10841,7 @@
         320
       ],
       "flags": {},
-      "order": 88,
+      "order": 86,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11007,7 +10874,7 @@
         190
       ],
       "flags": {},
-      "order": 89,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -11094,7 +10961,7 @@
         100
       ],
       "flags": {},
-      "order": 90,
+      "order": 88,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11127,7 +10994,7 @@
         330
       ],
       "flags": {},
-      "order": 91,
+      "order": 89,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11170,7 +11037,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 300,
+        "lc_h": 330
       },
       "widgets_values": [
         40,
@@ -11207,7 +11076,7 @@
         420
       ],
       "flags": {},
-      "order": 92,
+      "order": 90,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11260,7 +11129,9 @@
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        }
+        },
+        "lc_w": 300,
+        "lc_h": 420
       },
       "widgets_values": [
         40,
@@ -11293,8 +11164,8 @@
       "id": 285,
       "type": "LCBatchImageComparer",
       "pos": [
-        -7160,
-        -2130
+        -7140,
+        -2080
       ],
       "size": [
         300,
@@ -11303,7 +11174,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 135,
+      "order": 154,
       "mode": 0,
       "inputs": [
         {
@@ -11346,15 +11217,15 @@
       "id": 358,
       "type": "LCShowText",
       "pos": [
-        -13180,
-        -3910
+        -12460,
+        -4190
       ],
       "size": [
         160,
         80
       ],
       "flags": {},
-      "order": 151,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -11373,12 +11244,12 @@
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCShowText",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        },
-        "Node name for S&R": "LCShowText"
+        }
       },
       "color": "#28281E",
       "bgcolor": "#28281E"
@@ -11387,15 +11258,15 @@
       "id": 359,
       "type": "LCCustomComboPanel",
       "pos": [
-        -13600,
-        -3910
+        -12880,
+        -4190
       ],
       "size": [
         270,
         64
       ],
       "flags": {},
-      "order": 129,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -11409,12 +11280,12 @@
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCCustomComboPanel",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        },
-        "Node name for S&R": "LCCustomComboPanel"
+        }
       },
       "widgets_values": [
         "Pears"
@@ -11429,15 +11300,15 @@
       "id": 360,
       "type": "LCIndexSwitch",
       "pos": [
-        -13600,
-        -3790
+        -12880,
+        -4070
       ],
       "size": [
         270,
         130
       ],
       "flags": {},
-      "order": 128,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -11483,14 +11354,16 @@
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCIndexSwitch",
+        "lc_size_w": 270,
+        "lc_size_h": 130,
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "Node name for S&R": "LCIndexSwitch",
-        "lc_size_w": 270,
-        "lc_size_h": 130
+        "lc_w": 270,
+        "lc_h": 130
       },
       "widgets_values": [
         0,
@@ -11507,15 +11380,15 @@
       "id": 361,
       "type": "PrimitiveString",
       "pos": [
-        -13960,
-        -3710
+        -13240,
+        -3990
       ],
       "size": [
         270,
         60
       ],
       "flags": {},
-      "order": 93,
+      "order": 91,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11530,12 +11403,12 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
+        "Node name for S&R": "PrimitiveString",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        },
-        "Node name for S&R": "PrimitiveString"
+        }
       },
       "widgets_values": [
         "cheese"
@@ -11548,15 +11421,15 @@
       "id": 362,
       "type": "PrimitiveString",
       "pos": [
-        -13960,
-        -3610
+        -13240,
+        -3890
       ],
       "size": [
         270,
         60
       ],
       "flags": {},
-      "order": 94,
+      "order": 92,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11571,12 +11444,12 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
+        "Node name for S&R": "PrimitiveString",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        },
-        "Node name for S&R": "PrimitiveString"
+        }
       },
       "widgets_values": [
         "Apples"
@@ -11589,19 +11462,25 @@
       "id": 363,
       "type": "MarkdownNote",
       "pos": [
-        -13600,
-        -3610
+        -12880,
+        -3890
       ],
       "size": [
         300,
         190
       ],
       "flags": {},
-      "order": 95,
+      "order": 93,
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "properties": {},
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
       "widgets_values": [
         "**LC Any index switch\n- controls index entries\n\n**LC Custom Combo**\n- designed so you can name your choices\n- ⚠️ if it has more than the index switch, it will just continue to choose teh bottom selection\n\n**LC Custom Combo Panel**\n- space saver (so you don't have to....subgraph😱)\n- you can collapse the Custom Combo with this "
       ],
@@ -11615,15 +11494,15 @@
       "id": 364,
       "type": "PrimitiveString",
       "pos": [
-        -13960,
-        -3510
+        -13240,
+        -3790
       ],
       "size": [
         270,
         60
       ],
       "flags": {},
-      "order": 96,
+      "order": 94,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11638,12 +11517,12 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.33.0",
+        "Node name for S&R": "PrimitiveString",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
-        },
-        "Node name for S&R": "PrimitiveString"
+        }
       },
       "widgets_values": [
         "Pears"
@@ -11656,15 +11535,15 @@
       "id": 357,
       "type": "LCCustomCombo",
       "pos": [
-        -13960,
-        -3940
+        -13240,
+        -4220
       ],
       "size": [
         270,
-        188
+        194
       ],
       "flags": {},
-      "order": 97,
+      "order": 95,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11691,12 +11570,14 @@
       "properties": {
         "cnr_id": "ComfyUI_LC123_nodes",
         "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCCustomCombo",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.8"
         },
-        "Node name for S&R": "LCCustomCombo"
+        "lc_w": 270,
+        "lc_h": 194
       },
       "widgets_values": [
         3,
@@ -11750,18 +11631,362 @@
       "bgcolor": "#28281E"
     },
     {
+      "id": 284,
+      "type": "LoadImage",
+      "pos": [
+        -7750,
+        -2080
+      ],
+      "size": [
+        300,
+        410
+      ],
+      "flags": {},
+      "order": 96,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            384,
+            386
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Original.jpg",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "Original.jpg",
+        "upload": "image"
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 288,
+      "type": "MarkdownNote",
+      "pos": [
+        -7430,
+        -1530
+      ],
+      "size": [
+        640,
+        460
+      ],
+      "flags": {},
+      "order": 97,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Photo Style 📷",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# LC Photo Style 📷\n\nStandalone **camera / phone finish** look. Pick a **style**, then tweak the sliders.  \nMost controls use **0 = no change**. **Strength** blends with the original image.\n\nNot a lens tool — color, tone, texture, vignette, and grain only.\n\n---\n\n## Widgets\n\n| Widget | What it does |\n|--------|----------------|\n| **style** | Starting preset (fills the sliders). Customize freely after. |\n| **strength** | 0 = original image · 1 = full processed look. |\n| **seed** | Grain seed only (same seed = same grain pattern). |\n| **wb_temperature** | 0 = no change. − cooler · + warmer. |\n| **wb_tint** | 0 = no change. − green · + magenta. |\n| **exposure** | 0 = no change. Overall brightness (EV-style). |\n| **contrast** | 0 = no change. + punches midtones · − flattens. |\n| **shadows** | 0 = off. Lifts **dark areas only** (no white haze). |\n| **highlights** | 0 = off. Softly compresses bright areas. |\n| **hdr_local** | 0 = off. Mild local tone (opens shadows a bit / softens local contrast). |\n| **vibrance** | 0 = no change. + boosts muted colors · − pulls them down. |\n| **skin_protect** | Limits vibrance on skin hues (only matters when vibrance ≠ 0). |\n| **shadow_cool** | 0 = off. Cool (blue) tint in mid-shadows — skips pure black. |\n| **highlight_warm** | 0 = off. Warm tint in highlights. |\n| **texture** | 0 = no change. Fine detail · − softens. |\n| **clarity** | 0 = no change. Mid-scale local contrast · − softens. |\n| **vignette** | 0 = off. Darkens the corners. |\n| **grain** | 0 = off. Neutral mono grain (stronger in shadows). |\n\n---\n\n## Styles (presets)\n\n| Style | Intent |\n|-------|--------|\n| **Standard** | Balanced default |\n| **Natural** | Soft / restrained |\n| **Dramatic** | Darker, more contrast and vignette |\n| **Quiet** | Cool, low-key |\n| **Muted** | Flatter / less saturation |\n| **Amateur** | Uneven WB, stronger grain and vignette |\n| **Cool day** | Cool / cyan lean |\n| **Warm evening** | Amber / warm lean |\n| **Bright open** | High exposure, lifted shadows and highlights |\n| **iPhone** | Modern phone-style: shadow lift, soft highlights, skin-safe color |\n| **Nikon Z7 II** | Neutral-cool, firmer mid contrast, clean texture |\n| **Canon R5** | Mild warm, skin-friendly, soft highlight roll-off |\n\n---\n\n## Quick tips\n\n- Start with a **style**, set **strength** ~0.7–0.9, then nudge one or two sliders.\n- All zeros + strength anything → image unchanged.\n- **Shadows** opens blacks; it does **not** add a white fog.\n- For a softer result without changing the preset, lower **strength** first.\n- Pair with **LC Image Split** or **LC Image Compare** if you want a fixed before/after.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
+      ],
+      "widgets_values_named": {
+        "text": "# LC Photo Style 📷\n\nStandalone **camera / phone finish** look. Pick a **style**, then tweak the sliders.  \nMost controls use **0 = no change**. **Strength** blends with the original image.\n\nNot a lens tool — color, tone, texture, vignette, and grain only.\n\n---\n\n## Widgets\n\n| Widget | What it does |\n|--------|----------------|\n| **style** | Starting preset (fills the sliders). Customize freely after. |\n| **strength** | 0 = original image · 1 = full processed look. |\n| **seed** | Grain seed only (same seed = same grain pattern). |\n| **wb_temperature** | 0 = no change. − cooler · + warmer. |\n| **wb_tint** | 0 = no change. − green · + magenta. |\n| **exposure** | 0 = no change. Overall brightness (EV-style). |\n| **contrast** | 0 = no change. + punches midtones · − flattens. |\n| **shadows** | 0 = off. Lifts **dark areas only** (no white haze). |\n| **highlights** | 0 = off. Softly compresses bright areas. |\n| **hdr_local** | 0 = off. Mild local tone (opens shadows a bit / softens local contrast). |\n| **vibrance** | 0 = no change. + boosts muted colors · − pulls them down. |\n| **skin_protect** | Limits vibrance on skin hues (only matters when vibrance ≠ 0). |\n| **shadow_cool** | 0 = off. Cool (blue) tint in mid-shadows — skips pure black. |\n| **highlight_warm** | 0 = off. Warm tint in highlights. |\n| **texture** | 0 = no change. Fine detail · − softens. |\n| **clarity** | 0 = no change. Mid-scale local contrast · − softens. |\n| **vignette** | 0 = off. Darkens the corners. |\n| **grain** | 0 = off. Neutral mono grain (stronger in shadows). |\n\n---\n\n## Styles (presets)\n\n| Style | Intent |\n|-------|--------|\n| **Standard** | Balanced default |\n| **Natural** | Soft / restrained |\n| **Dramatic** | Darker, more contrast and vignette |\n| **Quiet** | Cool, low-key |\n| **Muted** | Flatter / less saturation |\n| **Amateur** | Uneven WB, stronger grain and vignette |\n| **Cool day** | Cool / cyan lean |\n| **Warm evening** | Amber / warm lean |\n| **Bright open** | High exposure, lifted shadows and highlights |\n| **iPhone** | Modern phone-style: shadow lift, soft highlights, skin-safe color |\n| **Nikon Z7 II** | Neutral-cool, firmer mid contrast, clean texture |\n| **Canon R5** | Mild warm, skin-friendly, soft highlight roll-off |\n\n---\n\n## Quick tips\n\n- Start with a **style**, set **strength** ~0.7–0.9, then nudge one or two sliders.\n- All zeros + strength anything → image unchanged.\n- **Shadows** opens blacks; it does **not** add a white fog.\n- For a softer result without changing the preset, lower **strength** first.\n- Pair with **LC Image Split** or **LC Image Compare** if you want a fixed before/after.\n\n---\n\n**\"True, nothing is. Permitted, everything is\"**  \n_Yoda Auditore · Assassin's Wars_"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 282,
+      "type": "LCPhoneLook",
+      "pos": [
+        -7440,
+        -2080
+      ],
+      "size": [
+        270,
+        490
+      ],
+      "flags": {},
+      "order": 132,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 384
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            390
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "fd939683c1dce88ddd276eaca1576495bc7da942",
+        "Node name for S&R": "LCPhoneLook",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Dramatic",
+        0.85,
+        416825629545111,
+        "fixed",
+        0.33,
+        0,
+        0.09,
+        0.45,
+        0.08,
+        0.45,
+        0.25,
+        0.15,
+        0.6,
+        0.18,
+        0.1,
+        0.22,
+        0.22,
+        0.28,
+        0.12
+      ],
+      "widgets_values_named": {
+        "style": "Dramatic",
+        "strength": 0.85,
+        "seed": 416825629545111,
+        "control_after_generate": "fixed",
+        "wb_temperature": 0.33,
+        "wb_tint": 0,
+        "exposure": 0.09,
+        "contrast": 0.45,
+        "shadows": 0.08,
+        "highlights": 0.45,
+        "hdr_local": 0.25,
+        "vibrance": 0.15,
+        "skin_protect": 0.6,
+        "shadow_cool": 0.18,
+        "highlight_warm": 0.1,
+        "texture": 0.22,
+        "clarity": 0.22,
+        "vignette": 0.28,
+        "grain": 0.12
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 365,
+      "type": "Label (rgthree)",
+      "pos": [
+        -6740,
+        -2110
+      ],
+      "size": [
+        306.3427734375,
+        30
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 98,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Lighting Control 🔦",
+      "properties": {
+        "fontSize": 30,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0,
+        "angle": 0,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 366,
+      "type": "LCRelight",
+      "pos": [
+        -6740,
+        -2040
+      ],
+      "size": [
+        300,
+        820
+      ],
+      "flags": {},
+      "order": 99,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "normal_map",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "depth_map",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "debug_mask",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "lc_w": 300,
+        "lc_h": 820,
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "d33402e478db48a5a39dbaddf284e2102044b513",
+        "Node name for S&R": "LCRelight",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0.25,
+        0.5,
+        0,
+        0.5,
+        0.9,
+        1,
+        1,
+        false,
+        -1,
+        0,
+        0.5,
+        1,
+        0.5,
+        true,
+        0.5,
+        0.3,
+        true,
+        0.45,
+        ""
+      ],
+      "widgets_values_named": {
+        "ambient_light": 0.25,
+        "depth_scale": 0.5,
+        "light1_x": 0,
+        "light1_y": 0.5,
+        "light1_z": 0.9,
+        "light1_intensity": 1,
+        "light1_size": 1,
+        "enable_light_2": false,
+        "light2_x": -1,
+        "light2_y": 0,
+        "light2_z": 0.5,
+        "light2_intensity": 1,
+        "light2_size": 0.5,
+        "cast_shadows": true,
+        "shadow_strength": 0.5,
+        "shadow_softness": 0.3,
+        "mask_enabled": true,
+        "mask_blend": 0.45,
+        "lc_light_stage": ""
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 367,
+      "type": "MarkdownNote",
+      "pos": [
+        -6430,
+        -2040
+      ],
+      "size": [
+        470,
+        400
+      ],
+      "flags": {},
+      "order": 100,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "## See My **LC Lighting Contol** workflow included in this node pack\n\n### Light model\n\n- **XYZ** = beam **aim** (direction). **Z is 0…1 only** (0 = side plane, **1 = front**).\n- **light size** = **cone width**: small = narrow spot, large = flood.\n- **intensity** = key strength · **ambient** = shadow floor (0 = pure key).\n- **depth_scale** = far pixels fall off inside the beam (0 = no depth falloff).\n- **cast_shadows** = screen-space occlusion from depth (localized; not a global grey wash).\n\nDefault launch (new node): ambient **0.25**, light1 **(0, 0.5, 0.9)**, intensity **1**, size **1**, cast shadows **on**, strength **0.5**.\n\n### Light stage (widget under the params)\n\n- **White** handle = light 1 · **Red** = light 2 (when enabled)\n- Drag = **XY** aim\n- **Shift+drag** vertical or **wheel** on handle = **Z** (depth / toward camera)"
+      ],
+      "widgets_values_named": {
+        "text": "## See My **LC Lighting Contol** workflow included in this node pack\n\n### Light model\n\n- **XYZ** = beam **aim** (direction). **Z is 0…1 only** (0 = side plane, **1 = front**).\n- **light size** = **cone width**: small = narrow spot, large = flood.\n- **intensity** = key strength · **ambient** = shadow floor (0 = pure key).\n- **depth_scale** = far pixels fall off inside the beam (0 = no depth falloff).\n- **cast_shadows** = screen-space occlusion from depth (localized; not a global grey wash).\n\nDefault launch (new node): ambient **0.25**, light1 **(0, 0.5, 0.9)**, intensity **1**, size **1**, cast shadows **on**, strength **0.5**.\n\n### Light stage (widget under the params)\n\n- **White** handle = light 1 · **Red** = light 2 (when enabled)\n- Drag = **XY** aim\n- **Shift+drag** vertical or **wheel** on handle = **Z** (depth / toward camera)"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
       "id": 238,
       "type": "MarkdownNote",
       "pos": [
-        -15120,
-        -5540
+        -14500,
+        -5550
       ],
       "size": [
         1070,
         3410
       ],
       "flags": {},
-      "order": 98,
+      "order": 101,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11786,7 +12011,7 @@
       "id": 280,
       "type": "MarkdownNote",
       "pos": [
-        -15120,
+        -14490,
         -2060
       ],
       "size": [
@@ -11794,7 +12019,7 @@
         840
       ],
       "flags": {},
-      "order": 99,
+      "order": 102,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -12838,7 +13063,7 @@
       161,
       0,
       307,
-      14,
+      15,
       "IMAGE"
     ],
     [
@@ -12846,7 +13071,7 @@
       159,
       0,
       307,
-      15,
+      16,
       "IMAGE"
     ],
     [
@@ -12854,7 +13079,7 @@
       156,
       0,
       307,
-      16,
+      17,
       "IMAGE"
     ],
     [
@@ -12862,7 +13087,7 @@
       157,
       0,
       307,
-      17,
+      18,
       "IMAGE"
     ],
     [
@@ -12870,7 +13095,7 @@
       158,
       0,
       307,
-      18,
+      19,
       "IMAGE"
     ],
     [
@@ -12878,7 +13103,7 @@
       160,
       0,
       307,
-      19,
+      20,
       "IMAGE"
     ],
     [
@@ -12886,7 +13111,7 @@
       173,
       0,
       307,
-      20,
+      21,
       "IMAGE"
     ],
     [
@@ -12894,7 +13119,7 @@
       167,
       0,
       307,
-      21,
+      7,
       "IMAGE"
     ],
     [
@@ -12902,7 +13127,7 @@
       162,
       0,
       307,
-      6,
+      8,
       "IMAGE"
     ],
     [
@@ -12910,7 +13135,7 @@
       154,
       0,
       307,
-      7,
+      9,
       "IMAGE"
     ],
     [
@@ -12918,7 +13143,7 @@
       152,
       0,
       307,
-      8,
+      10,
       "IMAGE"
     ],
     [
@@ -12926,7 +13151,7 @@
       151,
       0,
       307,
-      9,
+      11,
       "IMAGE"
     ],
     [
@@ -12934,7 +13159,7 @@
       149,
       0,
       307,
-      10,
+      12,
       "IMAGE"
     ],
     [
@@ -12942,7 +13167,7 @@
       147,
       0,
       307,
-      11,
+      13,
       "IMAGE"
     ],
     [
@@ -12950,7 +13175,7 @@
       171,
       0,
       307,
-      12,
+      14,
       "IMAGE"
     ],
     [
@@ -12958,7 +13183,7 @@
       166,
       0,
       307,
-      13,
+      2,
       "IMAGE"
     ],
     [
@@ -12966,7 +13191,7 @@
       163,
       0,
       307,
-      2,
+      3,
       "IMAGE"
     ],
     [
@@ -12974,7 +13199,7 @@
       155,
       0,
       307,
-      3,
+      4,
       "IMAGE"
     ],
     [
@@ -12982,7 +13207,7 @@
       194,
       0,
       307,
-      4,
+      5,
       "IMAGE"
     ],
     [
@@ -13383,10 +13608,10 @@
       "id": 16,
       "title": "Utility Nodes",
       "bounding": [
-        -12970,
-        -4020,
+        -13250,
+        -3640,
         2070,
-        1150
+        1330
       ],
       "color": "#3f789e",
       "flags": {}
@@ -13395,8 +13620,8 @@
       "id": 19,
       "title": "🗒️LC Prompt Builder",
       "bounding": [
-        -13030,
-        -2790,
+        -13260,
+        -2250,
         2070,
         1570
       ],
@@ -13407,10 +13632,34 @@
       "id": 20,
       "title": "Index Selectors",
       "bounding": [
-        -13970,
-        -4010,
+        -13250,
+        -4290,
         960,
         600
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 21,
+      "title": "LC Photo Style 📷",
+      "bounding": [
+        -7760,
+        -2150,
+        980,
+        1090
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 22,
+      "title": "LC Lighting Control 🔦",
+      "bounding": [
+        -6750,
+        -2150,
+        810,
+        940
       ],
       "color": "#3f789e",
       "flags": {}
@@ -13420,10 +13669,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.11000000000000017,
+      "scale": 0.1,
       "offset": [
-        25706.01919611798,
-        6941.832143610632
+        19319.476658714684,
+        6739.577353470367
       ]
     },
     "links_added_by_ue": [],

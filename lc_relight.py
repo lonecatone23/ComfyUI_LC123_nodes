@@ -87,6 +87,12 @@ def _decode_normals(normal_img: np.ndarray) -> np.ndarray:
 
 
 def _depth_hw(depth_img: np.ndarray) -> np.ndarray:
+    """Return depth HW with 0 = near, 1 = far.
+
+    Depth Anything and many preview maps are often bright = near. After a
+    0–1 stretch we detect that (subject/center brighter than border) and invert
+    so cast shadows and depth falloff use a consistent near/far convention.
+    """
     if depth_img.ndim == 3:
         d = depth_img.mean(axis=-1)
     else:
@@ -97,6 +103,26 @@ def _depth_hw(depth_img: np.ndarray) -> np.ndarray:
         d = (d - dmin) / (dmax - dmin)
     else:
         d = np.zeros_like(d)
+
+    h, w = d.shape
+    if h >= 16 and w >= 16:
+        cy, cx = h // 2, w // 2
+        rh, rw = max(h // 6, 2), max(w // 6, 2)
+        center = float(d[cy - rh : cy + rh, cx - rw : cx + rw].mean())
+        # Border ring
+        b = max(h // 12, 1)
+        border_vals = np.concatenate(
+            [
+                d[:b, :].ravel(),
+                d[-b:, :].ravel(),
+                d[:, :b].ravel(),
+                d[:, -b:].ravel(),
+            ]
+        )
+        border = float(border_vals.mean())
+        # If center is "farther" in the raw encoding, map is bright-near → invert
+        if center > border + 0.04:
+            d = 1.0 - d
     return d
 
 
@@ -160,45 +186,74 @@ def _light_map(
     gamma: float,
 ) -> np.ndarray:
     """
-    Soft point light in a centered frame:
-      x,y,z ∈ [-1, 1]  — (0,0,1) front, (0,1,0) overhead, (0,-1,0) below
+    Spotlight + directional form shading.
 
-    Distance falloff is absolute (no image-wide peak normalize), so:
-      ambient=0 + small size → far depth goes near black; near stays lit.
-    depth_scale stretches surface Z so deep pixels are farther from the light.
+    Widget: +X = from the right of the frame, +Y = from above, Z floored at 0.
+    N·L uses flipped X so estimated/DirectX normal maps match that widget.
+    Cone aim stays in screen space (unflipped).
     """
     h, w = depth.shape
     xs = (np.arange(w, dtype=np.float32) + 0.5) / w * 2.0 - 1.0
     ys = 1.0 - (np.arange(h, dtype=np.float32) + 0.5) / h * 2.0
     xx, yy = np.meshgrid(xs, ys)
-    # Depth 0 near → 1 far. Moderate Z so the subject stays in the beam;
-    # far background still drops when ambient is 0.
-    z_extent = 0.35 + 1.25 * float(depth_scale)
-    sz = -depth.astype(np.float32) * z_extent
-    light = np.array([float(lx), float(ly), float(lz)], dtype=np.float32)
-    vx = light[0] - xx
-    vy = light[1] - yy
-    vz = light[2] - sz
-    dist = np.sqrt(vx * vx + vy * vy + vz * vz + 1e-6)
-    soft = max(float(point_size), 0.05)
-    # 0.05 ≈ tight spot, 0.45 ≈ face coverage, 1.0+ ≈ soft fill
-    eff = 0.08 + soft * 0.55 + (soft * soft) * 0.35
-    # Cubic falloff — sharp outside the beam without zeroing the subject
-    atten = 1.0 / (1.0 + (dist / max(eff, 1e-4)) ** 3)
-    ref = max(float(np.linalg.norm(light)), 0.35)
-    ref_atten = 1.0 / (1.0 + (ref / max(eff, 1e-4)) ** 3)
-    atten = atten / max(ref_atten, 1e-12)
-    atten = np.clip(atten, 0.0, 3.0)
-    dx, dy, dz = vx / dist, vy / dist, vz / dist
+
+    # N·L: flip X for estimated normal maps (R often opposite OpenGL +X).
+    # Screen/cone: widget +X = right of frame, +Y = up.
+    ss = np.array([float(lx), float(ly), max(float(lz), 0.0)], dtype=np.float32)
+    sn = float(np.linalg.norm(ss))
+    if sn < 1e-6:
+        ss = np.array([0.0, 0.0, 1.0], dtype=np.float32)
+        sn = 1.0
+    sx, sy, sz = ss[0] / sn, ss[1] / sn, ss[2] / sn
+    ax, ay, az = -sx, sy, sz
+    ln = float(np.hypot(np.hypot(ax, ay), az)) or 1.0
+    ax, ay, az = ax / ln, ay / ln, az / ln
+
+    soft = float(np.clip(point_size, 0.02, 1.5))
+    cone_r = 0.12 + soft * 1.10 + (soft * soft) * 0.40
+
+    # Cone follows the widget on screen (not the flipped N·L axis)
+    aim_x = sx * 0.22 * min(soft, 1.0)
+    aim_y = sy * 0.22 * min(soft, 1.0)
+    rho = np.sqrt((xx - aim_x) ** 2 + (yy - aim_y) ** 2 + 1e-8)
+
+    # Wider penumbra (less ring-like edge)
+    inner = cone_r * 0.35
+    outer = cone_r * 1.05
+    tcone = np.clip((rho - inner) / max(outer - inner, 1e-4), 0.0, 1.0)
+    # Quintic smoothstep — softer than cubic, fewer visible bands
+    cone = 1.0 - (tcone * tcone * tcone * (tcone * (tcone * 6.0 - 15.0) + 10.0))
+
     ndotl = (
-        normals[..., 0] * dx
-        + normals[..., 1] * dy
-        + normals[..., 2] * dz
+        normals[..., 0] * ax
+        + normals[..., 1] * ay
+        + normals[..., 2] * az
     )
     ndotl = np.clip(ndotl, 0.0, 1.0)
     g = max(float(gamma), 0.05)
-    term = (ndotl ** g) * atten * float(intensity)
+    lambert = ndotl ** g
+
+    ds = float(max(depth_scale, 0.0))
+    d = depth.astype(np.float32)
+    if ds > 1e-6:
+        steep = 0.35 + (1.0 - min(soft / 1.5, 1.0)) * 1.0
+        try:
+            d_near = float(np.quantile(d, 0.05))
+        except Exception:
+            d_near = float(d.min())
+        rel = np.clip(d - d_near, 0.0, 1.0)
+        # Smooth exponential-style falloff (no hard power bands)
+        atten = np.exp(-rel * ds * steep * 2.2)
+        peak = float(np.quantile(atten, 0.95)) if atten.size else 1.0
+        if peak > 1e-6:
+            atten = atten / peak
+        atten = np.clip(atten, 0.0, 1.0)
+    else:
+        atten = np.ones_like(d, dtype=np.float32)
+
+    term = lambert * cone * atten * float(intensity)
     return term.astype(np.float32)
+
 
 
 def _cast_shadow_ss(
@@ -206,43 +261,45 @@ def _cast_shadow_ss(
     lx: float,
     ly: float,
     lz: float,
-    steps: int = 24,
-    max_range: float = 0.40,
-    bias: float = 0.02,
-    thickness: float = 0.08,
+    steps: int = 32,
+    max_range: float = 0.32,
+    bias: float = 0.04,
+    thickness: float = 0.35,
 ) -> np.ndarray:
     """
-    Screen-space ray-march cast shadows from a camera depth map (0=near, 1=far).
+    Contact-style screen-space shadows from a camera depth map (0=near, 1=far).
 
-    From each pixel, step toward the light in image space. If a sample is
-    closer to the camera than the receiver by more than bias (and within a
-    thickness band), treat it as an occluder. Produces head→torso / body→wall
-    style occlusion when depth has separation — not true 3D ray tracing.
-
-    Returns occlusion HW in 0..1 (1 = fully blocked).
+    Tuned to avoid the "grey haze over everything" failure mode of soft DA-V2 depth:
+      - adaptive bias (ignores tiny depth noise)
+      - short march (contact / form blockers, not global darkening)
+      - haze floor stripped so only clear occlusions remain
     """
     h, w = depth.shape
     d = depth.astype(np.float32)
-    steps = int(max(4, min(int(steps), 64)))
-    max_range = float(np.clip(max_range, 0.05, 1.0))
-    bias = float(max(bias, 1e-4))
-    thickness = float(max(thickness, bias))
+    # Normalize depth span so bias is meaningful across maps
+    d_lo = float(np.quantile(d, 0.02))
+    d_hi = float(np.quantile(d, 0.98))
+    span = max(d_hi - d_lo, 1e-4)
+    d_n = np.clip((d - d_lo) / span, 0.0, 1.0)
 
-    # Pixel centers in same centered frame as the light
-    xs = (np.arange(w, dtype=np.float32) + 0.5) / w * 2.0 - 1.0
-    ys = 1.0 - (np.arange(h, dtype=np.float32) + 0.5) / h * 2.0
-    xx, yy = np.meshgrid(xs, ys)
+    steps = int(max(4, min(int(steps), 48)))
+    max_range = float(np.clip(max_range, 0.04, 0.6))
+    # Bias as fraction of depth span — kills noise-driven haze
+    bias_n = max(float(bias), 0.03)
+    thickness_n = max(float(thickness), bias_n * 1.5)
 
-    # Direction toward light in the image plane
-    to_x = float(lx) - xx
-    to_y = float(ly) - yy
-    plane = np.sqrt(to_x * to_x + to_y * to_y + 1e-8)
-    # Pixel-space direction: +X right, +Y overhead → toward top (decreasing row)
-    dir_px = (to_x / plane) * (w * 0.5)
-    dir_py = -(to_y / plane) * (h * 0.5)
-    len_p = np.sqrt(dir_px * dir_px + dir_py * dir_py + 1e-8)
-    upx = dir_px / len_p
-    upy = dir_py / len_p
+    # March TOWARD the light in SCREEN space (widget axes, not N·L flip).
+    # +X = right of frame, +Y = up. Shadows land on the opposite side of the key.
+    axis = np.array([float(lx), float(ly), max(float(lz), 0.0)], dtype=np.float32)
+    an = float(np.linalg.norm(axis)) + 1e-8
+    ax, ay = axis[0] / an, axis[1] / an
+    # If light is almost pure +Z (front), little lateral occlusion signal —
+    # use a tiny default aim so we still get some contact from depth ridges
+    lat = float(np.hypot(ax, ay))
+    if lat < 0.08:
+        ax, ay = 0.0, 0.35  # mild "from above" for frontal key contact
+        lat = 0.35
+    ax, ay = ax / lat, ay / lat
 
     march_px = max_range * float(np.hypot(h, w))
     yy_i, xx_i = np.meshgrid(
@@ -250,27 +307,45 @@ def _cast_shadow_ss(
         np.arange(w, dtype=np.float32),
         indexing="ij",
     )
-    occ = np.zeros((h, w), dtype=np.float32)
-    d0 = d
+    # March TOWARD the light in screen space.
+    # +X = right, +Y = up (row decreases). Prior sign put contact darkening
+    # on the KEY side for side lights — flip lateral so occlusion falls on
+    # the opposite side of the form from the light.
+    step_x = ax * (march_px / steps)
+    step_y = -ay * (march_px / steps)
 
+    occ = np.zeros((h, w), dtype=np.float32)
+    d0 = d_n
+
+    # Accumulate with soft max — discrete max() + few steps caused ring ripples
     for s in range(1, steps + 1):
-        t = s / float(steps)
-        sx = xx_i + upx * march_px * t
-        sy = yy_i + upy * march_px * t
-        valid = (sx >= 0) & (sx <= w - 1) & (sy >= 0) & (sy <= h - 1)
+        sx = xx_i + step_x * float(s)
+        sy = yy_i + step_y * float(s)
+        valid = (sx >= 1) & (sx <= w - 2) & (sy >= 1) & (sy <= h - 2)
+        # Bilinear-ish via weighted neighbors would be ideal; use rounded sample
         si = np.clip(np.rint(sy), 0, h - 1).astype(np.int32)
         sj = np.clip(np.rint(sx), 0, w - 1).astype(np.int32)
-        d_s = d[si, sj]
-        # Sample nearer to camera than receiver → occluder
-        # (head depth << torso depth is a large delta — do not cap it away)
+        d_s = d_n[si, sj]
         delta = d0 - d_s
-        hit = valid & (delta > bias)
-        # Ramp 0→1 over `thickness`, then stay at 1 for larger separations
-        wgt = np.clip((delta - bias) / max(thickness, 1e-4), 0.0, 1.0)
-        wgt = np.where(hit, wgt, 0.0).astype(np.float32)
+        # Smooth distance weight (no sharp step boundaries)
+        u = float(s) / float(steps)
+        dist_fade = (1.0 - u) * (1.0 - u)
+        raw = (delta - bias_n) / max(thickness_n, 1e-4)
+        # Smoothstep on occlusion weight
+        r = np.clip(raw, 0.0, 1.0)
+        r = r * r * (3.0 - 2.0 * r)
+        wgt = r * dist_fade
+        wgt = np.where(valid, wgt, 0.0).astype(np.float32)
+        # Soft blend instead of hard maximum reduces concentric bands
         occ = np.maximum(occ, wgt)
+        occ = occ + 0.15 * wgt * (1.0 - occ)
 
-    return np.clip(occ, 0.0, 1.0).astype(np.float32)
+    floor = 0.10
+    occ = np.clip((occ - floor) / max(1.0 - floor, 1e-4), 0.0, 1.0)
+    # Gentler curve than pure square
+    occ = occ * occ * (3.0 - 2.0 * occ)
+    return occ.astype(np.float32)
+
 
 
 def _apply_light_to_image(
@@ -312,16 +387,6 @@ class LCRelight:
                         "tooltip": "Shadow floor. 0 = pure key only (deep blacks). 0.25 = mild fill.",
                     },
                 ),
-                "gamma": (
-                    "FLOAT",
-                    {
-                        "default": 1.0,
-                        "min": 0.2,
-                        "max": 2.0,
-                        "step": 0.1,
-                        "tooltip": "Highlight falloff. Higher = tighter highlights.",
-                    },
-                ),
                 "depth_scale": (
                     "FLOAT",
                     {
@@ -339,23 +404,23 @@ class LCRelight:
                 ),
                 "light1_y": (
                     "FLOAT",
-                    {"default": -0.85, "min": -1.0, "max": 1.0, "step": 0.05,
+                    {"default": 0.5, "min": -1.0, "max": 1.0, "step": 0.05,
                      "tooltip": "Light 1 Y: -1 below (under-light), 0 midline, +1 overhead."},
                 ),
                 "light1_z": (
                     "FLOAT",
-                    {"default": 0.90, "min": -1.0, "max": 1.0, "step": 0.05,
-                     "tooltip": "Light 1 Z: +1 in front (camera side), 0 plane, -1 behind."},
+                    {"default": 0.90, "min": 0.0, "max": 1.0, "step": 0.05,
+                     "tooltip": "Light 1 Z: 0 = side plane, +1 = front (camera side). Floored at 0."},
                 ),
                 "light1_intensity": (
                     "FLOAT",
-                    {"default": 1.50, "min": 0.0, "max": 2.0, "step": 0.05,
+                    {"default": 1.0, "min": 0.0, "max": 2.0, "step": 0.05,
                      "tooltip": "Light 1 key. Try 2.0 + ambient 0 for hard under/side light like a studio key."},
                 ),
                 "light1_size": (
                     "FLOAT",
-                    {"default": 0.45, "min": 0.05, "max": 2.0, "step": 0.05,
-                     "tooltip": "Light 1 softness / size. Smaller = harder shadow edge."},
+                    {"default": 1.0, "min": 0.05, "max": 2.0, "step": 0.05,
+                     "tooltip": "Light 1 cone width: small = spot, large = flood."},
                 ),
                 "enable_light_2": (
                     "BOOLEAN",
@@ -363,38 +428,38 @@ class LCRelight:
                 ),
                 "light2_x": (
                     "FLOAT",
-                    {"default": 0.55, "min": -1.0, "max": 1.0, "step": 0.05,
+                    {"default": -1.0, "min": -1.0, "max": 1.0, "step": 0.05,
                      "tooltip": "Light 2 X: -1 left … +1 right."},
                 ),
                 "light2_y": (
                     "FLOAT",
-                    {"default": 0.15, "min": -1.0, "max": 1.0, "step": 0.05,
+                    {"default": 0.0, "min": -1.0, "max": 1.0, "step": 0.05,
                      "tooltip": "Light 2 Y: -1 below … +1 overhead."},
                 ),
                 "light2_z": (
                     "FLOAT",
-                    {"default": 0.45, "min": -1.0, "max": 1.0, "step": 0.05,
-                     "tooltip": "Light 2 Z: +1 front … -1 back."},
+                    {"default": 0.5, "min": 0.0, "max": 1.0, "step": 0.05,
+                     "tooltip": "Light 2 Z: 0…+1 front. Floored at 0."},
                 ),
                 "light2_intensity": (
                     "FLOAT",
-                    {"default": 0.55, "min": 0.0, "max": 2.0, "step": 0.05, "tooltip": "Light 2 brightness."},
+                    {"default": 1.0, "min": 0.0, "max": 2.0, "step": 0.05, "tooltip": "Light 2 brightness."},
                 ),
                 "light2_size": (
                     "FLOAT",
-                    {"default": 0.45, "min": 0.05, "max": 2.0, "step": 0.05, "tooltip": "Light 2 softness / size."},
+                    {"default": 0.5, "min": 0.05, "max": 2.0, "step": 0.05, "tooltip": "Light 2 cone width."},
                 ),
                 "cast_shadows": (
                     "BOOLEAN",
                     {
-                        "default": False,
-                        "tooltip": "Screen-space cast shadows from depth. Leave OFF until form lighting looks right.",
+                        "default": True,
+                        "tooltip": "Screen-space cast shadows from depth.",
                     },
                 ),
                 "shadow_strength": (
                     "FLOAT",
                     {
-                        "default": 0.55,
+                        "default": 0.5,
                         "min": 0.0,
                         "max": 1.0,
                         "step": 0.05,
@@ -404,7 +469,7 @@ class LCRelight:
                 "shadow_softness": (
                     "FLOAT",
                     {
-                        "default": 0.40,
+                        "default": 0.3,
                         "min": 0.0,
                         "max": 1.0,
                         "step": 0.05,
@@ -444,7 +509,7 @@ class LCRelight:
     FUNCTION = "relight"
     CATEGORY = "LC123/image"
     DESCRIPTION = (
-        "Directional highlight/shadow relight from normal + depth maps. "
+        "Spotlight relight: XYZ aims the beam (0,0,1 = front); light size = cone width (spot → flood). "
         "Optional screen-space cast shadows from depth. Optional mask → virtual-dome normals."
     )
 
@@ -454,7 +519,6 @@ class LCRelight:
         normal_map,
         depth_map,
         ambient_light,
-        gamma,
         depth_scale,
         light1_x,
         light1_y,
@@ -473,6 +537,7 @@ class LCRelight:
         mask_enabled,
         mask_blend,
         mask=None,
+        **_ignored,
     ):
         imgs = _image_np(image)
         norms_in = _image_np(normal_map)
@@ -489,6 +554,7 @@ class LCRelight:
         norms_in = batch_map(norms_in)
         depths_in = batch_map(depths_in)
         masks = _mask_np(mask, h, w) if mask is not None else None
+        gamma = 1.0  # fixed; widget removed
 
         out_imgs = []
         out_masks = []
@@ -500,27 +566,42 @@ class LCRelight:
             normals = _decode_normals(n_img)
             depth = _depth_hw(d_img)
 
-            L_real = _light_map(
-                normals, depth,
-                light1_x, light1_y, light1_z,
-                light1_intensity, light1_size,
-                depth_scale, gamma,
-            )
-            if enable_light_2:
-                L_real = L_real + _light_map(
-                    normals, depth,
-                    light2_x, light2_y, light2_z,
-                    light2_intensity, light2_size,
-                    depth_scale, gamma,
+            L = np.zeros((h, w), dtype=np.float32)
+
+            def add_light(lx, ly, lz, intensity, size, nrm):
+                if float(intensity) <= 1e-6:
+                    return
+                term = _light_map(
+                    nrm, depth, lx, ly, lz, intensity, size, depth_scale, gamma
                 )
+                if cast_shadows and float(shadow_strength) > 1e-6:
+                    occ = _cast_shadow_ss(depth, lx, ly, lz)
+                    soft_r = int(round(max(0.0, float(shadow_softness)) * 3.0))
+                    if soft_r > 0:
+                        occ = np.clip(_box_blur(occ, soft_r), 0.0, 1.0)
+                    s = float(np.clip(shadow_strength, 0.0, 1.0))
+                    term = term * (1.0 - s * occ)
+                return term
+
+            t1 = add_light(
+                light1_x, light1_y, light1_z,
+                light1_intensity, light1_size, normals,
+            )
+            if t1 is not None:
+                L = L + t1
+            if enable_light_2:
+                t2 = add_light(
+                    light2_x, light2_y, light2_z,
+                    light2_intensity, light2_size, normals,
+                )
+                if t2 is not None:
+                    L = L + t2
 
             feather = np.zeros((h, w), dtype=np.float32)
-            L = L_real
             if masks is not None and mask_enabled:
                 m = masks[i if i < masks.shape[0] else 0]
                 if m.shape[0] != h or m.shape[1] != w:
                     m = _resize_map(m, h, w)[..., 0] if m.ndim == 2 else _resize_map(m[..., None], h, w)[..., 0]
-                # Fixed mild dome softness (was a separate widget)
                 vnorm, feather = _virtual_normals_from_mask(m, 0.45)
                 if feather.shape != (h, w):
                     feather = _resize_map(feather, h, w)[..., 0]
@@ -528,38 +609,23 @@ class LCRelight:
                     vnorm = _resize_map(vnorm, h, w)
                     lens = np.linalg.norm(vnorm, axis=-1, keepdims=True)
                     vnorm = vnorm / np.maximum(lens, 1e-6)
-                L_virt = _light_map(
-                    vnorm, depth,
+                Lv = np.zeros((h, w), dtype=np.float32)
+                tv1 = add_light(
                     light1_x, light1_y, light1_z,
-                    light1_intensity, light1_size,
-                    depth_scale, gamma,
+                    light1_intensity, light1_size, vnorm,
                 )
+                if tv1 is not None:
+                    Lv = Lv + tv1
                 if enable_light_2:
-                    L_virt = L_virt + _light_map(
-                        vnorm, depth,
+                    tv2 = add_light(
                         light2_x, light2_y, light2_z,
-                        light2_intensity, light2_size,
-                        depth_scale, gamma,
+                        light2_intensity, light2_size, vnorm,
                     )
+                    if tv2 is not None:
+                        Lv = Lv + tv2
                 mb = float(mask_blend)
                 mix = feather * mb
-                L = L_real * (1.0 - mix) + L_virt * mix
-
-            # Screen-space cast shadows (range/bias baked to solid defaults)
-            if cast_shadows and float(shadow_strength) > 1e-6:
-                occ = _cast_shadow_ss(
-                    depth,
-                    light1_x, light1_y, light1_z,
-                    steps=24,
-                    max_range=0.40,
-                    bias=0.02,
-                    thickness=0.12,
-                )
-                soft_r = int(max(0, min(h, w) * 0.02 * float(shadow_softness) * 8))
-                if soft_r > 0:
-                    occ = _box_blur(occ, soft_r)
-                    occ = np.clip(occ, 0.0, 1.0)
-                L = L * (1.0 - float(shadow_strength) * occ)
+                L = L * (1.0 - mix) + Lv * mix
 
             relit = _apply_light_to_image(rgb, L, ambient_light)
             out_imgs.append(relit)

@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.15.0"
+version = "1.15.1"
 description = "ComfyUI LC123 Nodes by lonecatone23 — LC Lighting Control (per-light shadows, correct XY aim), custom combo + index switch, prompt builder, sampler configure, image FX, Skin Beauty, Photo Style, pipes, notify."
 readme = "README.md"
 requires-python = ">=3.10"

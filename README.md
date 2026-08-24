@@ -6,7 +6,13 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.15.0
+- **Version:** 1.15.1
+
+## What’s new in 1.15.1
+
+| Area | Changes |
+|------|---------|
+| **LC Lighting Control** | Confirmed build: per-light N·L + screen-space shadows (`_one_light`). Widget **+X = from the right**, **+Y = from above**. Intensity 0 on a light adds **no** light and **no** shadows. Dummy `lc_light_stage` widget removed. |
 
 ## What’s new in 1.15.0
 

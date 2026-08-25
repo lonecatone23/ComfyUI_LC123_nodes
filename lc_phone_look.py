@@ -236,7 +236,6 @@ PRESETS: Dict[str, dict] = {
     },
 }
 
-PRESETS["Custom"] = None
 PRESET_NAMES = list(PRESETS.keys())
 
 

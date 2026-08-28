@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.15.2 · **89 nodes**
+- **Version:** 1.16.0 · **92 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -147,6 +147,7 @@ Subjects + Scene + Camera + Lighting + Style + Palette
 | **LC Aspect Ratio Pipe Out** | Unpacks aspect pipe → image, mask, width, height, latent, batch, resolution. |
 | **LC Get Image 📐** | Megapixels, width, height, batch, aspect, longer-side resolution. |
 | **LC Dimension Resize 📐** | One value, add / sub / mul / div both sides; rounded outs. |
+| **LC Image-Mask Resize 📐** | Image + mask only (no latent / batch). **match_aspect_ratio** keeps the input ratio on the longer settings side. **upscale_by:** none / multiplier (0.25) / megapixels (0.01). |
 | **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock. |
 | **LC Image Compare 🔎** | Batch A/B, one slider per pair. |
 | **LC Image Split 🖼️** | Saveable A\|B wipe (**slider only**). Output is the baked split. |
@@ -200,6 +201,8 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Reference Latent** | Up to 8 optional ref latents → conditioning. Empty = pass-through. |
 | **LC Denoise 💉** | Latent inject: `noise_std = 1 − denoise`. |
 | **LC Pipe (in/edit)** / **Pipe Out** / **Detail Pipe Out** | Bundle / unpack models, clips, VAEs, prompts, seed, steps… |
+| **LC MiniMax H3 Pipe** | Pack / edit H3 refs. Top: **fl2va_model**, **fl2va_clip**, **ref2va_model**, **ref2va_clip**, video_vae, audio_vae, width, height, length, frame_rate, then ref_image_0… / ref_video_0… (fixed sockets, no autogrow). Pipe in accepts an H3 pipe (full merge) **or** Aspect Ratio Simplifier / LC Pipe (**width + height only**). |
+| **LC MiniMax H3 Pipe Out** | Same sockets out. `ref_image_0` = `<Picture 1>` = MiniMax `ref_image_0`. |
 | **Prompt to Conditioning** / **+ Zero** | String → conditioning. |
 | **Positive / Negative** | Prompt boxes (green / red). |
 
@@ -235,7 +238,7 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **🌱LC Seed** | Seed with seed_mode (fixed / randomize / increment / decrement). |
 | **LC Slider** | On-node slider (min/max/step/decimals in settings). |
 | **LC Node Snapshot 📋** | Read another node’s widgets → value / dump / JSON. |
-| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run. |
+| **LC Notify 🔊** | Play a sound from `assets/sounds/` on run. Mode: always / on empty queue / **never**. ▶ preview still works when silent. |
 | **LC Bypasser** / **Groups Bypasser** / **Bypasser Panel** | Remote bypass. |
 | **LC Stop 🛑** | Pause until button. |
 | **LC VRAM Cache Clear** | Clear VRAM / cache; pass-through. |
@@ -288,6 +291,7 @@ Workflow → Open, or drag onto the canvas.
 - **Prompt Builder:** `prompt` → CLIP; `json` → regional builders only.
 - **Reference Latent:** all slots empty = pass-through (bypasser-safe).
 - **Denoise 💉:** same denoise number as the sampler; 1.0 = no inject.
+- **H3 pipe:** Aspect Ratio Simplifier pipe → H3 **pipe** socket copies size only. Length / fps still need their own wires. MiniMax prompt tags are 1-based (`ref_image_0` = `<Picture 1>`).
 - **Notify:** drop audio into `assets/sounds/`, restart once.
 
 ---

@@ -14,6 +14,8 @@ const COLOR_TYPES = new Set([
   "LCPipeEdit",
   "LCDetailPipeOut",
   "LCAspectRatioPipe",
+  "LCMiniMaxH3Pipe",
+  "LCMiniMaxH3PipeOut",
   "LCSamplerConfigure",
   "LCSamplerConfigurePipeOut",
   "LCSamplerConfigurePipe",

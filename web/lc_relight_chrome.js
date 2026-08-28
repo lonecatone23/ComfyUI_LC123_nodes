@@ -7,13 +7,8 @@ import { app } from "../../scripts/app.js";
 
 const COLOR = "#324B4B";
 const TYPE = "LCRelight";
-/** Match LCSkinBeauty / image FX via lc_image_preview.js */
-const IMAGE_W = 300;
-const PAD = 16; // same PAD as lc_image_preview.js — equal inset all sides
-/** Stage fills node content width minus PAD*2 (300 - 32 = 268) */
-const STAGE_CSS = IMAGE_W - PAD * 2;
-/** Grid inset inside the stage canvas — equal on all 4 sides */
-const MARGIN = PAD;
+const STAGE_CSS = 268; // square stage px inside the DOM widget
+const MARGIN = 14;
 const HANDLE_HIT = 14;
 
 function wval(node, name, fallback) {
@@ -38,8 +33,8 @@ function clamp(v, a, b) {
 }
 
 function radiusForZ(z, base) {
-  const t = Math.max(0, Math.min(1, Number(z)));
-  return base * (0.55 + 0.55 * t);
+  const t = (Number(z) + 1) * 0.5;
+  return base * (0.4 + 0.75 * t);
 }
 
 function installStage(node) {
@@ -48,7 +43,7 @@ function installStage(node) {
 
   const wrap = document.createElement("div");
   wrap.style.cssText =
-    "width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;box-sizing:border-box;";
+    "width:100%;display:flex;flex-direction:column;align-items:center;padding:4px 0 2px 0;box-sizing:border-box;";
 
   const canvas = document.createElement("canvas");
   canvas.width = STAGE_CSS * 2; // retina
@@ -59,11 +54,11 @@ function installStage(node) {
   const hint = document.createElement("div");
   hint.textContent = "adjust z for depth  ·  shift-drag or wheel";
   hint.style.cssText =
-    "font-size:10px;color:rgba(255,255,255,0.4);margin-top:8px;margin-bottom:0;user-select:none;text-align:center;";
+    "font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;user-select:none;";
   wrap.appendChild(hint);
 
   const widget = node.addDOMWidget("lc_light_stage", "LC_LIGHT_STAGE", wrap, {
-    getMinHeight: () => STAGE_CSS + PAD + 18, // stage + gap + hint
+    getMinHeight: () => STAGE_CSS + 28,
     hideOnZoom: false,
   });
   // Don’t serialize DOM chrome
@@ -143,7 +138,7 @@ function installStage(node) {
   }
 
   function setZ(which, z) {
-    z = Math.round(clamp(z, 0, 1) * 20) / 20;
+    z = Math.round(clamp(z, -1, 1) * 20) / 20;
     setWval(node, which === "1" ? "light1_z" : "light2_z", z);
   }
 
@@ -303,88 +298,10 @@ function installStage(node) {
   return widget;
 }
 
-
-function sizeImageNode(node) {
-  if (node._lcUserSized || node.properties?.lc_w) {
-    const w = node.properties?.lc_w;
-    const h = node.properties?.lc_h;
-    if (w && h && node.size) {
-      node.size[0] = w;
-      node.size[1] = h;
-    }
-    return;
-  }
-  if (!node.size) node.size = [IMAGE_W, 400];
-  node.size[0] = IMAGE_W;
-  try {
-    node.setSize?.([IMAGE_W, Math.max(node.size[1] || 400, 200)]);
-  } catch (_) {}
-  const enforce = () => {
-    if (node._lcUserSized) return;
-    if (!node.size) node.size = [IMAGE_W, 400];
-    if ((node.size[0] || 0) !== IMAGE_W) {
-      node.size[0] = IMAGE_W;
-      try {
-        node.setSize?.([IMAGE_W, node.size[1]]);
-      } catch (_) {}
-      node.setDirtyCanvas?.(true, true);
-    }
-  };
-  setTimeout(enforce, 0);
-  setTimeout(enforce, 50);
-  setTimeout(enforce, 250);
-}
-
-function hookSizeRetention(node) {
-  if (node._lcRelightSizeHooked) return;
-  node._lcRelightSizeHooked = true;
-  const prev = node.onResize;
-  node.onResize = function () {
-    const r = prev?.apply(this, arguments);
-    if (!this.properties) this.properties = {};
-    if (this.size) {
-      this.properties.lc_w = this.size[0];
-      this.properties.lc_h = this.size[1];
-    }
-    this._lcUserSized = true;
-    return r;
-  };
-  const prevCfg = node.onConfigure;
-  node.onConfigure = function (data) {
-    const r = prevCfg?.apply(this, arguments);
-    if (data?.size) {
-      if (!this.properties) this.properties = {};
-      this.properties.lc_w = data.size[0];
-      this.properties.lc_h = data.size[1];
-      this._lcUserSized = true;
-    }
-    return r;
-  };
-}
-
 app.registerExtension({
   name: "LC123.RelightChrome",
   async beforeRegisterNodeDef(nodeType, nodeData) {
     if (nodeData?.name !== TYPE) return;
-
-    // Lock minimum width to IMAGE_W (same as lc_image_preview Skin Beauty family)
-    const origCompute = nodeType.prototype.computeSize;
-    nodeType.prototype.computeSize = function (out) {
-      const size = origCompute?.apply(this, arguments) || [IMAGE_W, 200];
-      if (!this._lcUserSized) {
-        size[0] = Math.max(IMAGE_W, size[0] || IMAGE_W);
-      } else if (this.properties?.lc_w) {
-        size[0] = this.properties.lc_w;
-        if (this.properties.lc_h) size[1] = this.properties.lc_h;
-      }
-      if (out) {
-        out[0] = size[0];
-        out[1] = size[1];
-        return out;
-      }
-      return size;
-    };
-
     const onCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
@@ -392,12 +309,8 @@ app.registerExtension({
         this.color = COLOR;
         this.bgcolor = COLOR;
       } catch (_) {}
-      hookSizeRetention(this);
-      sizeImageNode(this);
-      queueMicrotask(() => {
-        installStage(this);
-        sizeImageNode(this);
-      });
+      // Stage after widgets exist
+      queueMicrotask(() => installStage(this));
       return r;
     };
   },
@@ -407,11 +320,6 @@ app.registerExtension({
       node.color = COLOR;
       node.bgcolor = COLOR;
     } catch (_) {}
-    hookSizeRetention(node);
-    sizeImageNode(node);
-    queueMicrotask(() => {
-      installStage(node);
-      sizeImageNode(node);
-    });
+    queueMicrotask(() => installStage(node));
   },
 });

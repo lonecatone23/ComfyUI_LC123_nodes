@@ -49,10 +49,10 @@ class LCNotify:
         return {
             "required": {
                 "mode": (
-                    ["always", "on empty queue"],
+                    ["always", "on empty queue", "never"],
                     {
                         "default": "always",
-                        "tooltip": "always = every run. on empty queue = only when the queue is empty afterward.",
+                        "tooltip": "always = every run. on empty queue = only when the queue is empty afterward. never = silent (▶ preview still works).",
                     },
                 ),
                 "volume": (
@@ -91,7 +91,7 @@ class LCNotify:
     DESCRIPTION = (
         "Play a sound from assets/sounds when the node runs. "
         "▶ on the node previews the selected file. "
-        "Mode: always or on empty queue."
+        "Mode: always, on empty queue, or never."
     )
 
     @classmethod

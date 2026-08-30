@@ -21,6 +21,7 @@ const NODE_CLASSES = new Set([
   "LCBloom",
   "LCImageDenoise",
   "LCColorMatch",
+  "LCToneMatch",
   "LCFilmStockBW",
   "LCFilmStockColor",
   "LCImageDesaturate",
@@ -143,14 +144,20 @@ function widgetsHeight(node) {
   return y;
 }
 
+function slotsHeight(node) {
+  const n = (node.inputs || []).filter((i) => i && i.type !== "hidden").length;
+  return TITLE + n * 22;
+}
+
 function defaultHeight(node) {
   const innerW = DEFAULT_W - PAD * 2;
   const imgH = Math.round(innerW * (5 / 4));
-  return widgetsHeight(node) + PAD + imgH + PAD;
+  const top = Math.max(widgetsHeight(node), slotsHeight(node));
+  return top + PAD + imgH + PAD;
 }
 
 function contentTop(node) {
-  return widgetsHeight(node) + PAD;
+  return Math.max(widgetsHeight(node), slotsHeight(node)) + PAD;
 }
 
 /**

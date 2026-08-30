@@ -1195,6 +1195,9 @@ class LCColorMatch(PreviewImage):
                     "step": 0.05,
                     "tooltip": "Hold original skin hue and cap skin chroma gain after match (0=off, 1=full). Lightness still follows the match.",
                 }),
+                "mask": ("MASK", {
+                    "tooltip": "White = apply match. Black = keep image. Leave empty for full frame (old graphs unchanged).",
+                }),
             },
         }
 
@@ -1204,10 +1207,11 @@ class LCColorMatch(PreviewImage):
     CATEGORY = "LC123/image"
     OUTPUT_NODE = True
     DESCRIPTION = (
-        "Match colors to a reference (AdaIN / mean-std). Optional skin_protect holds face hue. No reference = bypass. On-node preview + wipe."
+        "Match colors to a reference (AdaIN / mean-std). Optional skin_protect holds face hue. "
+        "Optional mask: white = match, black = keep image. No reference = bypass. On-node preview + wipe."
     )
 
-    def run(self, image, method="adain", strength=1.0, reference=None, skin_protect=0.5):
+    def run(self, image, method="adain", strength=1.0, reference=None, skin_protect=0.5, mask=None):
         if reference is None:
             out = _preview(self, image, image)
             out["ui"]["lc_bypass"] = ["1"]
@@ -1247,9 +1251,147 @@ class LCColorMatch(PreviewImage):
                 matched = apply_skin_protect(original, matched, skin_protect)
                 out.append(blend(original, matched, strength))
 
-        return _preview(self, np_to_tensor(out), image)
+        result = np_to_tensor(out)
+        if mask is not None:
+            nchw = result[..., :3].movedim(-1, 1)
+            m = _mask_to_nchw(mask, nchw)
+            if m is not None:
+                src = image[..., :3].movedim(-1, 1)
+                if src.shape[-2:] != nchw.shape[-2:]:
+                    src = F.interpolate(src, size=nchw.shape[-2:], mode="bilinear", align_corners=False)
+                if src.shape[0] != nchw.shape[0]:
+                    src = src[:1].expand(nchw.shape[0], -1, -1, -1)
+                nchw = nchw * m + src * (1.0 - m)
+                result = nchw.clamp(0.0, 1.0).movedim(1, -1)
+        return _preview(self, result, image)
 
 
+# ---------------------------------------------------------------------------
+# LC Tone Match — frequency lock (H3 Detail Tone Lock + mask / skin)
+# ---------------------------------------------------------------------------
+def _gaussian_blur_nchw(image: torch.Tensor, radius: int) -> torch.Tensor:
+    height, width = image.shape[-2:]
+    radius = int(max(1, min(int(radius), max(1, height - 1), max(1, width - 1))))
+    positions = torch.arange(-radius, radius + 1, device=image.device, dtype=image.dtype)
+    sigma = max(1.0, radius / 3.0)
+    kernel = torch.exp(-(positions * positions) / (2.0 * sigma * sigma))
+    kernel = kernel / kernel.sum()
+    channels = image.shape[1]
+    horizontal = kernel.view(1, 1, 1, -1).expand(channels, 1, 1, -1)
+    vertical = kernel.view(1, 1, -1, 1).expand(channels, 1, -1, 1)
+    padding_mode = "reflect" if height > radius and width > radius else "replicate"
+    blurred = F.conv2d(
+        F.pad(image, (radius, radius, 0, 0), mode=padding_mode),
+        horizontal,
+        groups=channels,
+    )
+    return F.conv2d(
+        F.pad(blurred, (0, 0, radius, radius), mode=padding_mode),
+        vertical,
+        groups=channels,
+    )
+
+
+def _mask_to_nchw(mask, like_nchw: torch.Tensor) -> torch.Tensor:
+    """MASK → NCHW 0..1, resized to like_nchw spatial, batch-matched."""
+    if mask is None:
+        return None
+    m = mask
+    if m.ndim == 2:
+        m = m.unsqueeze(0)
+    if m.ndim == 4:
+        m = m.mean(dim=-1) if m.shape[-1] in (1, 3, 4) else m[:, 0]
+    m = m.float()
+    if m.shape[0] == 1 and like_nchw.shape[0] > 1:
+        m = m.expand(like_nchw.shape[0], -1, -1)
+    elif m.shape[0] != like_nchw.shape[0]:
+        m = m[:1].expand(like_nchw.shape[0], -1, -1)
+    if m.shape[-2:] != like_nchw.shape[-2:]:
+        m = F.interpolate(
+            m.unsqueeze(1), size=like_nchw.shape[-2:], mode="bilinear", align_corners=False
+        ).squeeze(1)
+    return m.unsqueeze(1).clamp(0.0, 1.0)
+
+
+class LCToneMatch(PreviewImage):
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "image": ("IMAGE", {
+                    "tooltip": "The refined / generated image (Krea2, Klein, Qwen, etc.). High-frequency is taken from here.",
+                }),
+                "reference": ("IMAGE", {
+                    "tooltip": "Original / H3 still. Authority for size, broad lighting, and color.",
+                }),
+                "tone_match": ("FLOAT", {
+                    "default": 0.85, "min": 0.0, "max": 1.0, "step": 0.05,
+                    "tooltip": "How hard to restore source low-frequency lighting/color. 0 = off, 1 = full lock.",
+                }),
+                "refinement_strength": ("FLOAT", {
+                    "default": 0.55, "min": 0.0, "max": 1.0, "step": 0.05,
+                    "tooltip": "How much of the tone-locked refine is mixed over the source. Lower = less identity drift.",
+                }),
+                "detail_radius": ("INT", {
+                    "default": 32, "min": 2, "max": 64, "step": 2,
+                    "tooltip": "Blur radius splitting broad tone from fine detail. ~32 for 1–2 MP.",
+                }),
+                "skin_protect": ("FLOAT", {
+                    "default": 0.5, "min": 0.0, "max": 1.0, "step": 0.05,
+                    "tooltip": "Hold reference skin hue after the lock (0 = off). Same idea as Color Match.",
+                }),
+            },
+            "optional": {
+                "mask": ("MASK", {
+                    "tooltip": "White = apply lock. Black = keep image as-is (use for a new head / edited region).",
+                }),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("image",)
+    FUNCTION = "run"
+    CATEGORY = "LC123/image"
+    OUTPUT_NODE = True
+    DESCRIPTION = (
+        "Frequency tone lock: reference keeps broad lighting/color, image keeps micro-detail. "
+        "Optional mask (white = lock, black = keep image). skin_protect holds reference face hue. "
+        "Same job as H3 Detail Tone Lock, for any two images. On-node preview + wipe vs reference."
+    )
+
+    def run(self, image, reference, tone_match, refinement_strength, detail_radius, skin_protect=0.5, mask=None):
+        source = reference[..., :3].movedim(-1, 1)
+        refined = image[..., :3].movedim(-1, 1)
+        if refined.shape[0] == 1 and source.shape[0] > 1:
+            refined = refined.expand(source.shape[0], -1, -1, -1)
+        elif source.shape[0] != refined.shape[0]:
+            refined = refined[:1].expand(source.shape[0], -1, -1, -1)
+        if source.shape[-2:] != refined.shape[-2:]:
+            refined = F.interpolate(refined, size=source.shape[-2:], mode="bicubic", align_corners=False)
+
+        source_low = _gaussian_blur_nchw(source, int(detail_radius))
+        refined_low = _gaussian_blur_nchw(refined, int(detail_radius))
+        tone_locked = refined + float(tone_match) * (source_low - refined_low)
+        mixed = source + float(refinement_strength) * (tone_locked - source)
+
+        m = _mask_to_nchw(mask, source)
+        if m is not None:
+            mixed = mixed * m + refined * (1.0 - m)
+
+        out = mixed.clamp(0.0, 1.0).movedim(1, -1)
+        src_hwc = source.clamp(0.0, 1.0).movedim(1, -1)
+
+        sk = float(skin_protect)
+        if sk > 1e-4:
+            src_np = tensor_to_np(src_hwc)
+            out_np = tensor_to_np(out)
+            protected = [
+                apply_skin_protect(src_np[min(i, len(src_np) - 1)], frame, sk)
+                for i, frame in enumerate(out_np)
+            ]
+            out = np_to_tensor(protected)
+
+        return _preview(self, out, reference)
 
 
 # ---------------------------------------------------------------------------
@@ -1622,6 +1764,7 @@ NODE_CLASS_MAPPINGS = {
     "LCBloom": LCBloom,
     "LCImageDenoise": LCImageDenoise,
     "LCColorMatch": LCColorMatch,
+    "LCToneMatch": LCToneMatch,
     "LCFilmStockBW": LCFilmStockBW,
     "LCFilmStockColor": LCFilmStockColor,
     "LCLensProfile": LCLensProfile,
@@ -1642,6 +1785,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LCBloom": "LC Bloom",
     "LCImageDenoise": "LC Image Denoise",
     "LCColorMatch": "LC Color Match 🎨",
+    "LCToneMatch": "LC Tone Match",
     "LCFilmStockBW": "LC Film Stock (B&W)",
     "LCFilmStockColor": "LC Film Stock (Color)",
     "LCLensProfile": "LC Lens Profile",

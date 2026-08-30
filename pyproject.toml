@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.16.0"
-description = "ComfyUI LC123 Nodes by lonecatone23 — MiniMax H3 pipe, Image-Mask Resize, LC Lighting Control, Photo Style (v6), Skin Beauty, Sharpen Pro, prompt builder, sampler configure, image FX, pipes, notify."
+version = "1.17.0"
+description = "ComfyUI LC123 Nodes by lonecatone23 — Tone Match, Color Match mask, MiniMax H3 pipe, Image-Mask Resize, LC Lighting Control, Photo Style (v6), Skin Beauty, Sharpen Pro, prompt builder, sampler configure, image FX, pipes, notify."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -13,7 +13,7 @@ keywords = [
   "skin-beauty", "photo-style", "image-split", "performance", "boolean-switch",
   "prompt-builder", "wildcard", "krea2", "ideogram", "reference-latent", "denoise",
   "relight", "lighting", "normal-map", "depth", "combo", "index-switch",
-  "minimax", "h3", "resize",
+  "minimax", "h3", "resize", "tone-match", "color-match",
 ]
 
 [project.urls]

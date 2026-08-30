@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.16.0 · **92 nodes**
+- **Version:** 1.17.0 · **93 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -178,7 +178,8 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Bloom** | Soft glow. |
 | **LC Chromatic Aberration** | RGB fringe. |
 | **LC Image Denoise** | Detail-preserving denoise. |
-| **LC Color Match 🎨** | Match a reference; skin-protect aware. |
+| **LC Color Match 🎨** | Match a reference (AdaIN / mean-std); **skin_protect**. Optional **mask**: white = match, black = keep image. No mask = full frame (old graphs unchanged). |
+| **LC Tone Match** | Frequency lock: **image** = detail (Krea2 / Klein / Qwen), **reference** = lighting/color/size. **tone_match** + **refinement_strength** + **detail_radius**. Optional **mask** (white = lock, black = keep image). Wipe vs reference. |
 | **LC Image Desaturate** | Desaturate. |
 | **LC Skin Beauty ✨** / **LC Photo Style 📷** | See above. |
 | **LC Apply LUT** | `.cube` from **`ComfyUI/models/luts/`**. Samples copy from `assets/luts/` on load, never overwrite. |
@@ -292,6 +293,8 @@ Workflow → Open, or drag onto the canvas.
 - **Reference Latent:** all slots empty = pass-through (bypasser-safe).
 - **Denoise 💉:** same denoise number as the sampler; 1.0 = no inject.
 - **H3 pipe:** Aspect Ratio Simplifier pipe → H3 **pipe** socket copies size only. Length / fps still need their own wires. MiniMax prompt tags are 1-based (`ref_image_0` = `<Picture 1>`).
+- **Tone Match:** same crop only. Head-swap → mask off the new head (black). Not a color-match substitute.
+- **Color Match mask:** white = regrade, black = original pixels. Optional; unconnected = old behavior.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
 
 ---
@@ -299,10 +302,12 @@ Workflow → Open, or drag onto the canvas.
 ## Install
 
 ```text
-ComfyUI/custom_nodes/ComfyUI_LC123_nodes/
+ComfyUI/custom_nodes/ComfyUI_LC123_nodes/__init__.py
 ```
 
-Restart ComfyUI. Optional workflows in `workflows/`.
+`__init__.py` must sit **directly** in that folder — not in `ComfyUI_LC123_nodes/ComfyUI_LC123_nodes/`. If you unzip a pack zip *inside* an existing clone, move the inner files up one level.
+
+Restart ComfyUI. Console should print `[LC123] total 93 nodes`. Optional workflows in `workflows/`.
 
 **Requirements:** ComfyUI’s Python env (`torch`, `numpy`). No extra pip packages. Depth Anything / SAM / remBG for lighting & masks are separate installs.
 

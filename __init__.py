@@ -5,6 +5,17 @@ https://github.com/lonecatone23
 https://ko-fi.com/lonecatone
 """
 
+import os as _os
+
+_PACK_DIR = _os.path.dirname(_os.path.abspath(__file__))
+print(f"[LC123] loading from {_PACK_DIR}")
+_nested = _os.path.join(_PACK_DIR, "ComfyUI_LC123_nodes", "__init__.py")
+if _os.path.isfile(_nested):
+    print(
+        "[LC123] WARNING: nested pack folder detected. "
+        f"{_nested} will be ignored. Unzip so __init__.py sits in {_PACK_DIR}"
+    )
+
 # Sample LUTs: assets/luts → models/luts (no overwrite)
 try:
     from . import lc_lut_install  # noqa: F401
@@ -98,8 +109,6 @@ _load("lc_easy_folder")
 
 WEB_DIRECTORY = "./web"
 
-print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")
-
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
 
 # LC Wildcard
@@ -146,3 +155,5 @@ try:
     NODE_DISPLAY_NAME_MAPPINGS.update(_LC_RELIGHT_DISP)
 except Exception as _e:
     print(f"[LC123] lc_relight load skipped: {_e}")
+
+print(f"[LC123] total {len(NODE_CLASS_MAPPINGS)} nodes: {sorted(NODE_CLASS_MAPPINGS.keys())}")

@@ -2,6 +2,7 @@
  * 🌱LC Seed — utility color, strip auto control_after_generate, sync base_seed after run.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const COLOR = "#28281E";
 const WIDTH = 270;
@@ -19,8 +20,7 @@ function stripAutoSeedControl(node) {
 
 function applyChrome(node) {
   try {
-    node.color = COLOR;
-    node.bgcolor = COLOR;
+    lcApplyLaunchColor(node, COLOR);
   } catch (_) {}
   if (!node.size) node.size = [WIDTH, 90];
   if (node.size[0] < WIDTH) node.size[0] = WIDTH;

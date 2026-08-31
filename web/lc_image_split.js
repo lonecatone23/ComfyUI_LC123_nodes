@@ -5,6 +5,7 @@
  */
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPE = "LCImageSplit";
 const COLOR = "#324B4B";
@@ -215,8 +216,7 @@ app.registerExtension({
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
       try {
-        this.color = COLOR;
-        this.bgcolor = COLOR;
+        lcApplyLaunchColor(this, COLOR);
         // Always launch at standard image-node size (widgets + 4:5 preview)
         this.size = defaultSize(this);
       } catch (_) {
@@ -242,8 +242,7 @@ app.registerExtension({
   nodeCreated(node) {
     if (node.comfyClass !== TYPE && node.type !== TYPE) return;
     try {
-      node.color = COLOR;
-      node.bgcolor = COLOR;
+      lcApplyLaunchColor(node, COLOR);
       if (!node.size || node.size[0] < MIN_W || (node.size[1] || 0) < 200) {
         node.size = defaultSize(node);
       }

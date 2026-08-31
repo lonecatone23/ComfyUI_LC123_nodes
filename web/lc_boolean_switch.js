@@ -2,16 +2,14 @@
  * LC Boolean Switch / Flip / Value — utility color; size retained after manual resize
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPES = new Set(["LCBooleanSwitch", "LCBooleanFlip", "LCBooleanValue"]);
 const COLOR = "#28281E";
 const WIDTH = 270;
 
 function style(node) {
-  try {
-    node.color = COLOR;
-    node.bgcolor = COLOR;
-  } catch (_) {}
+  lcApplyLaunchColor(node, COLOR);
 }
 
 function defaultSizeOnce(node) {

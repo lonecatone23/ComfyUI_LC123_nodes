@@ -6,6 +6,7 @@
 
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_CLASSES = new Set([
   "LCImageAdjust",
@@ -1066,8 +1067,7 @@ app.registerExtension({
     const onCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       if (onCreated) onCreated.apply(this, arguments);
-      this.color = "#324B4B";
-      this.bgcolor = "#324B4B";
+      lcApplyLaunchColor(this, "#324B4B");
       this._lcBypass = false;
       this.comfyClass = name;
 

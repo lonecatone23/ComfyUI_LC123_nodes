@@ -4,6 +4,7 @@
  */
 
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPE = "LCImageMaskResize";
 const COLOR = "#324B4B";
@@ -14,10 +15,7 @@ function widgetByName(node, name) {
 }
 
 function paint(node) {
-  try {
-    node.color = COLOR;
-    node.bgcolor = COLOR;
-  } catch (_) {}
+  lcApplyLaunchColor(node, COLOR);
 }
 
 function sizeLaunch(node) {

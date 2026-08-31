@@ -12,6 +12,7 @@
 
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_TYPE = "LCBatchImageComparer";
 const SELECTOR_HEIGHT = 30;
@@ -395,8 +396,7 @@ app.registerExtension({
         nodeType.prototype.onNodeCreated = function () {
             if (onNodeCreated) onNodeCreated.apply(this, arguments);
             if (this.flags) this.flags.pinned = false;
-            this.color = "#325A5A";
-            this.bgcolor = "#325A5A";
+            lcApplyLaunchColor(this, "#325A5A");
             this.lcComparer = new LCBatchImageComparer(this);
         };
     },

@@ -4,6 +4,7 @@
  */
 import { app } from "../../scripts/app.js";
 import { ComfyWidgets } from "../../scripts/widgets.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPE = "LCShowText";
 const COLOR = "#28281E";
@@ -11,10 +12,7 @@ const DEFAULT_W = 270;
 const DEFAULT_H = 120;
 
 function applyColor(node) {
-  try {
-    node.bgcolor = COLOR;
-    node.color = COLOR;
-  } catch (_) {}
+  lcApplyLaunchColor(node, COLOR);
 }
 
 function ensureDisplayWidget(node) {

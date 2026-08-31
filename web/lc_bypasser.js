@@ -8,6 +8,7 @@
  */
 
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const HUB_TYPE = "LC Bypasser";
 const GROUPS_TYPE = "LC Groups Bypasser";
@@ -169,8 +170,7 @@ app.registerExtension({
         this.addInput("", "*");
         this.addInput("enable", "BOOLEAN");
         this.addOutput("OPT_CONNECTION", "*");
-        this.color = "#28281E";
-        this.bgcolor = "#28281E";
+        lcApplyLaunchColor(this, "#28281E");
         this.size = [270, 50];
         this._lcTimer = null;
         this.description = LCBypasser.desc || this.description;
@@ -472,8 +472,7 @@ app.registerExtension({
         this.properties = this.properties || {};
         this.addInput("hub", "*");
         this.addOutput("OPT_CONNECTION", "*");
-        this.color = "#28281E";
-        this.bgcolor = "#28281E";
+        lcApplyLaunchColor(this, "#28281E");
         this.size = [260, 48];
         this._lcTimer = null;
         this._lcKind = null; // "node" | "group"

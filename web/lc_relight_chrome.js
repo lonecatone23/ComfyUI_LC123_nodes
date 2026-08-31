@@ -4,6 +4,7 @@
  * Drag = XY.  Shift+drag vertical (or wheel over handle) = Z depth.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const COLOR = "#324B4B";
 const TYPE = "LCRelight";
@@ -306,8 +307,7 @@ app.registerExtension({
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
       try {
-        this.color = COLOR;
-        this.bgcolor = COLOR;
+      lcApplyLaunchColor(this, COLOR);
       } catch (_) {}
       // Stage after widgets exist
       queueMicrotask(() => installStage(this));
@@ -317,8 +317,7 @@ app.registerExtension({
   nodeCreated(node) {
     if ((node.comfyClass || node.type) !== TYPE) return;
     try {
-      node.color = COLOR;
-      node.bgcolor = COLOR;
+    lcApplyLaunchColor(node, COLOR);
     } catch (_) {}
     queueMicrotask(() => installStage(node));
   },

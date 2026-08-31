@@ -2,6 +2,7 @@
  * LC Sharpen Pro — preset fills sliders; any manual slider change → Custom.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPE = "LCClarity";
 
@@ -115,7 +116,7 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
-      try { this.bgcolor = "#324B4B"; this.color = "#324B4B"; } catch (_) {}
+      try { lcApplyLaunchColor(this, "#324B4B"); } catch (_) {}
       return r;
     };
   },

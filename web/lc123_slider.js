@@ -1,5 +1,6 @@
 // LC Slider — full DOM face (decimals + INT/FLOAT label work under Nodes 2.0)
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_NAMES = new Set(["LCSlider"]);
 const HIDE = new Set(["value", "min", "max", "step", "decimals", "snap"]);
@@ -375,8 +376,7 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       onNodeCreated?.apply(this, arguments);
-      this.color = "#28281E";
-      this.bgcolor = "#28281E";
+      lcApplyLaunchColor(this, "#28281E");
 
       requestAnimationFrame(() => boot(this));
       setTimeout(() => boot(this), 0);

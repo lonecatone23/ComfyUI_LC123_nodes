@@ -3,6 +3,7 @@
  */
 
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_CLASS = "LCBoolean";
 
@@ -97,8 +98,7 @@ app.registerExtension({
     const onCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
-      this.color = "#28281E";
-      this.bgcolor = "#28281E";
+      lcApplyLaunchColor(this, "#28281E");
       for (const w of this.widgets || []) {
         if (w.name === "value") {
           w.computeSize = () => [0, -4];

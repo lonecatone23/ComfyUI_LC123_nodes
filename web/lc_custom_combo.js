@@ -3,6 +3,7 @@
  * Panel stays in sync with hub (options + choice)
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const HUB = "LCCustomCombo";
 const PANEL = "LCCustomComboPanel";
@@ -124,15 +125,7 @@ function makeChoiceCombo(node) {
 }
 
 function applyDefaultColorOnce(node) {
-  if (node._lcColorApplied) return;
-  node._lcColorApplied = true;
-  // Only set if user/Comfy has not already assigned a custom color
-  if (!node.color || node.color === "" || node.color === "#333" || node.color === "#353535") {
-    try {
-      node.color = COLOR;
-      node.bgcolor = COLOR;
-    } catch (_) {}
-  }
+  lcApplyLaunchColor(node, COLOR);
 }
 
 function hookHub(node) {

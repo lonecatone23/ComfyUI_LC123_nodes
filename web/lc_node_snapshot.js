@@ -3,6 +3,7 @@
  * source link (preferred) OR target title / id → read that node's widgets.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const TYPE = "LCNodeSnapshot";
 
@@ -425,8 +426,7 @@ app.registerExtension({
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
       try {
-        this.bgcolor = "#28281E";
-        this.color = "#28281E";
+        lcApplyLaunchColor(this, "#28281E");
       } catch (_) {}
       trimNodeSize(this);
       hidePayloadWidgets(this);

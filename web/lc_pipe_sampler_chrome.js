@@ -5,6 +5,7 @@
  * Sampler width default 300 on first create only — manual size is retained.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const COLOR = "#707070";
 const SAMPLER_WIDTH = 300;
@@ -32,10 +33,7 @@ const SAMPLER_TYPES = new Set([
 ]);
 
 function paint(node) {
-  try {
-    node.color = COLOR;
-    node.bgcolor = COLOR;
-  } catch (_) {}
+  lcApplyLaunchColor(node, COLOR);
 }
 
 function rememberSize(node) {

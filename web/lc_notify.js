@@ -4,6 +4,7 @@
 
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_CLASS = "LCNotify";
 
@@ -38,8 +39,7 @@ app.registerExtension({
     const origCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = origCreated?.apply(this, arguments);
-      this.color = "#649632";
-      this.bgcolor = "#649632";
+      lcApplyLaunchColor(this, "#649632");
 
       if (!(this.widgets || []).some((w) => w.name === "▶ preview")) {
         this.addWidget("button", "▶ preview", null, () => {

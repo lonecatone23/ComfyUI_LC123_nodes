@@ -2,6 +2,7 @@
  * LC Photo Style — style preset loads all sliders (Skin Beauty pattern).
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const PRESETS = {
   Standard: {
@@ -120,10 +121,7 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
-      try {
-        this.bgcolor = "#324B4B";
-        this.color = "#324B4B";
-      } catch (_) {}
+      lcApplyLaunchColor(this, "#324B4B");
       return r;
     };
   },

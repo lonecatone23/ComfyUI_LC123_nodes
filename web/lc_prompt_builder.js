@@ -2,6 +2,7 @@
  * LC Prompt Builder — chrome + live composed prompt preview (fits node)
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 import { LC_PROMPT_DATA as D } from "./lc_prompt_builder_data.js";
 
 const PROMPT_TYPES = new Set([
@@ -28,15 +29,12 @@ const WIDTH = 340;
 const PREVIEW_H = 88; // fixed textarea height inside node
 
 function style(node, colorOrPair) {
-  try {
-    if (colorOrPair && typeof colorOrPair === "object") {
-      node.color = colorOrPair.color;
-      node.bgcolor = colorOrPair.bgcolor ?? colorOrPair.color;
-    } else if (colorOrPair) {
-      node.color = colorOrPair;
-      node.bgcolor = colorOrPair;
-    }
-  } catch (_) {}
+  if (!node || !colorOrPair) return;
+  if (colorOrPair && typeof colorOrPair === "object") {
+    lcApplyLaunchColor(node, colorOrPair.color, colorOrPair.bgcolor ?? colorOrPair.color);
+  } else {
+    lcApplyLaunchColor(node, colorOrPair);
+  }
 }
 
 function colorFor(type) {

@@ -2,6 +2,7 @@
  * LC Any Index Switch — dynamic slots; manual size retained.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_CLASS = "LCIndexSwitch";
 const MAX = 20;
@@ -141,8 +142,7 @@ app.registerExtension({
     const onCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
-      this.color = COLOR;
-      this.bgcolor = COLOR;
+      lcApplyLaunchColor(this, COLOR);
       this._lcLockedType = null;
       if (!restoreSize(this)) {
         this._lcUserSized = false;

@@ -4,6 +4,7 @@
  * - Sigma / basic scheduler nodes → #1c6d6d
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const DENOISE = {
   types: new Set(["LCDenoise"]),
@@ -20,10 +21,7 @@ const SIGMA = {
 };
 
 function paint(node, color) {
-  try {
-    node.color = color;
-    node.bgcolor = color;
-  } catch (_) {}
+  lcApplyLaunchColor(node, color);
 }
 
 function apply(node) {

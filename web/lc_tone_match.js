@@ -2,6 +2,7 @@
  * LC Tone Match — same color + launch size as LC Color Match / image FX.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const COLOR = "#324B4B";
 const DEFAULT_W = 300;
@@ -29,8 +30,7 @@ function defaultHeight(node) {
 }
 
 function paint(node) {
-  node.color = COLOR;
-  node.bgcolor = COLOR;
+  lcApplyLaunchColor(node, COLOR);
   const h = Math.max(node.size?.[1] || 0, defaultHeight(node), 470);
   node.size = [Math.max(node.size?.[0] || 0, DEFAULT_W), h];
 }

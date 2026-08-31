@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.17.0 · **93 nodes**
+- **Version:** 1.18.0 · **93 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -244,7 +244,7 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Stop 🛑** | Pause until button. |
 | **LC VRAM Cache Clear** | Clear VRAM / cache; pass-through. |
 
-Manual node sizes stick across reload (auto-fit only on first create or when `inputcount` changes).
+Manual node sizes stick across reload (auto-fit only on first create or when `inputcount` changes). **Node colors** you set in Comfy also stick; pack chrome is applied only on first drop.
 
 ---
 
@@ -307,7 +307,7 @@ ComfyUI/custom_nodes/ComfyUI_LC123_nodes/__init__.py
 
 `__init__.py` must sit **directly** in that folder — not in `ComfyUI_LC123_nodes/ComfyUI_LC123_nodes/`. If you unzip a pack zip *inside* an existing clone, move the inner files up one level.
 
-Restart ComfyUI. Console should print `[LC123] total 93 nodes`. Optional workflows in `workflows/`.
+Restart ComfyUI. Console should print `[LC123] total 93 nodes`. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
 
 **Requirements:** ComfyUI’s Python env (`torch`, `numpy`). No extra pip packages. Depth Anything / SAM / remBG for lighting & masks are separate installs.
 

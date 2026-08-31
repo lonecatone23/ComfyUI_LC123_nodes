@@ -3,6 +3,7 @@
  * Manual node size is remembered (properties.lc_w / lc_h) and not overwritten.
  */
 import { app } from "../../scripts/app.js";
+import { lcApplyLaunchColor } from "./lc_color.js";
 
 const NODE_CLASS = "LCAnySwitch";
 const MAX_INPUTS = 20;
@@ -220,8 +221,7 @@ app.registerExtension({
     nodeType.prototype.onNodeCreated = function () {
       const r = onCreated?.apply(this, arguments);
       try {
-        this.color = COLOR;
-        this.bgcolor = COLOR;
+        lcApplyLaunchColor(this, COLOR);
       } catch (_) {}
       this._lcLockedType = null;
       ensureUeBlock(this);

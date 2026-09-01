@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.18.0 · **93 nodes**
+- **Version:** 1.19.0 · **93 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -240,7 +240,7 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Slider** | On-node slider (min/max/step/decimals in settings). |
 | **LC Node Snapshot 📋** | Read another node’s widgets → value / dump / JSON. |
 | **LC Notify 🔊** | Play a sound from `assets/sounds/` on run. Mode: always / on empty queue / **never**. ▶ preview still works when silent. |
-| **LC Bypasser** / **Groups Bypasser** / **Bypasser Panel** | Remote bypass. |
+| **LC Bypasser** / **LC Mute** / **Groups Bypasser** / **Bypasser Panel** | Remote **bypass** (pass-through) or **mute** (never run). Same toggles, boolean lock, collapse. Panel `hub` accepts all three. |
 | **LC Stop 🛑** | Pause until button. |
 | **LC VRAM Cache Clear** | Clear VRAM / cache; pass-through. |
 

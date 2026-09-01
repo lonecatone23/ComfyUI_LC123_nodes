@@ -1,20 +1,25 @@
 /**
- * LC Bypasser + LC Bypasser Panel
+ * LC Bypasser + LC Mute + LC Bypasser Panel
  * --------------------------------
- * LC Bypasser — original: * + enable sockets AND toggle widgets (fully collapsible).
- * LC Bypasser Panel — widgets-only remote control; hub input links to:
- *   - LC Bypasser        → per-node enable toggles
- *   - LC Groups Bypasser → per-group enable toggles
+ * LC Bypasser — * + enable sockets AND toggle widgets. Off = bypass (pass-through).
+ * LC Mute     — identical, Off = mute (never run).
+ * LC Bypasser Panel — widgets-only remote for Bypasser, Mute, or Groups Bypasser.
  */
 
 import { app } from "../../scripts/app.js";
 import { lcApplyLaunchColor } from "./lc_color.js";
 
 const HUB_TYPE = "LC Bypasser";
+const MUTE_TYPE = "LC Mute";
 const GROUPS_TYPE = "LC Groups Bypasser";
 const PANEL_TYPE = "LC Bypasser Panel";
 const MODE_ALWAYS = 0;
+const MODE_NEVER = 2; // Comfy mute
 const MODE_BYPASS = 4;
+
+function isNodeHub(type) {
+  return type === HUB_TYPE || type === MUTE_TYPE;
+}
 
 function changeMode(node, mode) {
   if (!node || node.mode === mode) return;
@@ -137,7 +142,7 @@ function groupsHubTargets(hub) {
 
 function resolveHub(node, graph) {
   if (!node) return null;
-  if (node.type === HUB_TYPE || node.type === GROUPS_TYPE) return node;
+  if (isNodeHub(node.type) || node.type === GROUPS_TYPE) return node;
   return null;
 }
 
@@ -147,8 +152,10 @@ app.registerExtension({
   registerCustomNodes() {
     // ═══════════ LC Bypasser (classic: sockets + widgets) ═══════════
     class LCBypasser extends LGraphNode {
-      constructor() {
-        super(HUB_TYPE);
+      constructor(title, offMode, offMenu) {
+        super(title || HUB_TYPE);
+        this._lcOffMode = offMode ?? MODE_BYPASS;
+        this._lcOffMenu = offMenu || "Bypass all";
         this.isVirtualNode = true;
         this.serialize_widgets = true;
         this.properties = this.properties || {};
@@ -308,7 +315,7 @@ app.registerExtension({
             if (this.widgets[p]?.value && !this.widgets[p]._lcLocked) {
               this.widgets[p].value = false;
               const o = getLinkedOrigin(graph, this.inputs[p * 2]);
-              if (o) changeMode(o, MODE_BYPASS);
+              if (o) changeMode(o, this._lcOffMode ?? MODE_BYPASS);
             }
           }
         }
@@ -322,7 +329,7 @@ app.registerExtension({
             return;
           }
         }
-        changeMode(origin, value ? MODE_ALWAYS : MODE_BYPASS);
+        changeMode(origin, value ? MODE_ALWAYS : this._lcOffMode ?? MODE_BYPASS);
         this.setDirtyCanvas?.(true, true);
       }
 
@@ -387,7 +394,7 @@ app.registerExtension({
             const bv = resolveBoolean(graph, e);
             if (bv !== null) enabled = bv;
           }
-          changeMode(origin, enabled ? MODE_ALWAYS : MODE_BYPASS);
+          changeMode(origin, enabled ? MODE_ALWAYS : this._lcOffMode ?? MODE_BYPASS);
           if (this.widgets?.[p]) {
             this.widgets[p].value = enabled;
             setWidgetLocked(this.widgets[p], driven);
@@ -413,7 +420,7 @@ app.registerExtension({
             },
           },
           {
-            content: "Bypass all",
+            content: this._lcOffMenu || "Bypass all",
             callback: () => {
               for (let i = 0; i < (this.widgets || []).length; i++) {
                 if (this.widgets[i]._lcLocked) continue;
@@ -462,6 +469,25 @@ app.registerExtension({
       values: ["default", "max one", "always one"],
     };
     LiteGraph.registerNodeType(HUB_TYPE, LCBypasser);
+
+    class LCMute extends LCBypasser {
+      constructor() {
+        super(MUTE_TYPE, MODE_NEVER, "Mute all");
+        this.description = LCMute.desc || this.description;
+      }
+    }
+    LCMute.title = MUTE_TYPE;
+    LCMute.type = MUTE_TYPE;
+    LCMute.category = "LC123/utils";
+    LCMute.comfyClass = MUTE_TYPE;
+    LCMute.collapsable = true;
+    LCMute.desc = `Mute linked nodes from one place.\n\nIdentical to LC Bypasser, except Off = mute (never run) instead of bypass (pass-through).\n\n• * inputs — connect any output from the node you want to control.\n• enable (BOOLEAN, optional) — when wired, drives that slot: true = run, false = mute. The matching toggle shows 🔒 and is locked to this signal.\n• Enable toggles — yes = node active, no = node muted. Right-click: Enable all / Mute all / Toggle all.\n• Restriction (right-click) — default | max one | always one.\n• OPT_CONNECTION — optional link to LC Bypasser Panel for a widgets-only remote.\nSlot labels update when you rename the linked node. Fully collapsible.`;
+    LCMute.description = LCMute.desc;
+    LCMute["@toggleRestriction"] = {
+      type: "combo",
+      values: ["default", "max one", "always one"],
+    };
+    LiteGraph.registerNodeType(MUTE_TYPE, LCMute);
 
     // ═══════════ LC Bypasser Panel (widgets only, both hubs) ═══════════
     class LCBypasserPanel extends LGraphNode {
@@ -515,7 +541,7 @@ app.registerExtension({
       getTargets() {
         const hub = this.getHub();
         if (!hub) return [];
-        if (hub.type === HUB_TYPE) {
+        if (isNodeHub(hub.type)) {
           this._lcKind = "node";
           return nodeHubTargets(hub, app.graph);
         }
@@ -680,7 +706,8 @@ app.registerExtension({
       _applyOne(item, enabled) {
         if (!item) return;
         if (item.kind === "node" && item.origin) {
-          changeMode(item.origin, enabled ? MODE_ALWAYS : MODE_BYPASS);
+          const off = this.getHub()?._lcOffMode ?? MODE_BYPASS;
+          changeMode(item.origin, enabled ? MODE_ALWAYS : off);
         } else if (item.kind === "group") {
           const hub = this.getHub();
           // Groups bypasser owns applyModes for groups
@@ -735,7 +762,7 @@ app.registerExtension({
             },
           },
           {
-            content: "Bypass all",
+            content: this.getHub()?._lcOffMenu || "Bypass all",
             callback: () => {
               for (let i = 0; i < (this.widgets || []).length; i++) {
                 if (this.widgets[i]._lcLocked) continue;
@@ -765,12 +792,12 @@ app.registerExtension({
     LCBypasserPanel.category = "LC123/utils";
     LCBypasserPanel.comfyClass = PANEL_TYPE;
     LCBypasserPanel.collapsable = true;
-    LCBypasserPanel.desc = `Widgets-only remote for LC Bypasser or LC Groups Bypasser.\n\n• hub — connect OPT_CONNECTION from LC Bypasser or LC Groups Bypasser.\n• Toggles mirror the hub (switches only).\n• Toggle restriction (default / max one / always one) is set on the hub, not this panel.\n• If the hub has an enable BOOLEAN wired for that slot, the panel toggle is 🔒 locked to it.\n• Right-click: Enable all / Bypass all / Toggle all.\nCollapse the hub to hide sockets; keep this panel open for controls.`;
+    LCBypasserPanel.desc = `Widgets-only remote for LC Bypasser, LC Mute, or LC Groups Bypasser.\n\n• hub — connect OPT_CONNECTION from LC Bypasser, LC Mute, or LC Groups Bypasser.\n• Toggles mirror the hub (switches only).\n• Toggle restriction (default / max one / always one) is set on the hub, not this panel.\n• If the hub has an enable BOOLEAN wired for that slot, the panel toggle is 🔒 locked to it.\n• Right-click: Enable all / Bypass all (or Mute all) / Toggle all.\nCollapse the hub to hide sockets; keep this panel open for controls.`;
     LCBypasserPanel.description = LCBypasserPanel.desc;
     LiteGraph.registerNodeType(PANEL_TYPE, LCBypasserPanel);
 
     console.log(
-      `[LC123.Bypasser] registered "${HUB_TYPE}" + "${PANEL_TYPE}" (panel also supports Groups)`
+      `[LC123.Bypasser] registered "${HUB_TYPE}" + "${MUTE_TYPE}" + "${PANEL_TYPE}" (panel also supports Groups)`
     );
   },
 
@@ -779,7 +806,7 @@ app.registerExtension({
       const graph = app.graph;
       if (!graph?._nodes) return;
       for (const n of graph._nodes) {
-        if (n.type === HUB_TYPE) {
+        if (isNodeHub(n.type)) {
           try {
             n.refreshSlotNames?.();
             n.applyModes?.();

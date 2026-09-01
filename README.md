@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.19.1 · **93 nodes**
+- **Version:** 1.20.0 · **94 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -148,7 +148,7 @@ Subjects + Scene + Camera + Lighting + Style + Palette
 | **LC Get Image 📐** | Megapixels, width, height, batch, aspect, longer-side resolution. |
 | **LC Dimension Resize 📐** | One value, add / sub / mul / div both sides; rounded outs. |
 | **LC Image-Mask Resize 📐** | Image + mask only (no latent / batch). **match_aspect_ratio** keeps the input ratio on the longer settings side. **upscale_by:** none / multiplier (0.25) / megapixels (0.01). |
-| **LC Image Crop 🖼️🔪** | Interactive crop with aspect lock. |
+| **LC Batch Image 🖼️** | Autogrow IMAGE slots → one batch. Muted / empty sockets are skipped. Different sizes follow the first live image. |
 | **LC Image Compare 🔎** | Batch A/B, one slider per pair. |
 | **LC Image Split 🖼️** | Saveable A\|B wipe (**slider only**). Output is the baked split. |
 | **LC Image Grid 🖼️** | Contact sheet (columns, gap, pad, outline). |
@@ -296,6 +296,7 @@ Workflow → Open, or drag onto the canvas.
 - **Tone Match:** same crop only. Head-swap → mask off the new head (black). Not a color-match substitute.
 - **Color Match mask:** white = regrade, black = original pixels. Optional; unconnected = old behavior.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
+- **Batch Image:** autogrow; muted/empty slots skipped. Node height follows slot count.
 - **Bypass vs mute:** Bypasser = pass-through (mode 4). Mute = never run (mode 2). Panel `hub` works with Bypasser, Mute, and Groups Bypasser. Keep `web/lc_color.js` — other chrome files import it.
 
 ---
@@ -308,7 +309,7 @@ ComfyUI/custom_nodes/ComfyUI_LC123_nodes/__init__.py
 
 `__init__.py` must sit **directly** in that folder — not in `ComfyUI_LC123_nodes/ComfyUI_LC123_nodes/`. If you unzip a pack zip *inside* an existing clone, move the inner files up one level.
 
-Restart ComfyUI. Console should print `[LC123] total 93 nodes`. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
+Restart ComfyUI. Console should print `[LC123] total 94 nodes`. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
 
 **Requirements:** ComfyUI’s Python env (`torch`, `numpy`). No extra pip packages. Depth Anything / SAM / remBG for lighting & masks are separate installs.
 

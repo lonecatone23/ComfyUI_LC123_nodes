@@ -163,11 +163,15 @@ app.registerExtension({
   registerCustomNodes() {
     // ═══════════ LC Bypasser (classic: sockets + widgets) ═══════════
     class LCBypasser extends LGraphNode {
-      constructor() {
-        // LiteGraph always does `new Class(title)` — ignore that arg.
-        super();
-        this._lcOffMode = this.constructor.lcOffMode ?? MODE_BYPASS;
-        this._lcOffMenu = this.constructor.lcOffMenu || "Bypass all";
+      constructor(...args) {
+        const fallback = new.target.title || HUB_TYPE;
+        const title =
+          typeof args[0] === "string" && args[0].trim() && args[0] !== "Unnamed"
+            ? args[0]
+            : fallback;
+        super(title);
+        this._lcOffMode = new.target.lcOffMode ?? MODE_BYPASS;
+        this._lcOffMenu = new.target.lcOffMenu || "Bypass all";
         this.isVirtualNode = true;
         this.serialize_widgets = true;
         this.properties = this.properties || {};
@@ -196,9 +200,15 @@ app.registerExtension({
       }
 
       onNodeCreated() {
+        if (!this.title || /^unnamed$/i.test(String(this.title))) {
+          this.title = this.constructor.title || HUB_TYPE;
+        }
         this.scheduleStabilize(30);
       }
       onConfigure() {
+        if (!this.title || /^unnamed$/i.test(String(this.title))) {
+          this.title = this.constructor.title || HUB_TYPE;
+        }
         this.scheduleStabilize(80);
         this.scheduleStabilize(300);
       }

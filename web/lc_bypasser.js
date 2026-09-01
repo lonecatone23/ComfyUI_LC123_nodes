@@ -7,7 +7,18 @@
  */
 
 import { app } from "../../scripts/app.js";
-import { lcApplyLaunchColor } from "./lc_color.js";
+
+function lcApplyLaunchColor(node, color, bgcolor) {
+  if (!node) return;
+  const c = String(node.color || "").trim().toLowerCase();
+  const stock = !c || c === "undefined" || c === "null" ||
+    ["#333", "#333333", "#353535", "#232", "#223", "#222", "#222222"].includes(c);
+  if (!stock) return;
+  try {
+    node.color = color;
+    node.bgcolor = bgcolor || color;
+  } catch (_) {}
+}
 
 const HUB_TYPE = "LC Bypasser";
 const MUTE_TYPE = "LC Mute";
@@ -152,10 +163,11 @@ app.registerExtension({
   registerCustomNodes() {
     // ═══════════ LC Bypasser (classic: sockets + widgets) ═══════════
     class LCBypasser extends LGraphNode {
-      constructor(title, offMode, offMenu) {
-        super(title || HUB_TYPE);
-        this._lcOffMode = offMode ?? MODE_BYPASS;
-        this._lcOffMenu = offMenu || "Bypass all";
+      constructor() {
+        // LiteGraph always does `new Class(title)` — ignore that arg.
+        super();
+        this._lcOffMode = this.constructor.lcOffMode ?? MODE_BYPASS;
+        this._lcOffMenu = this.constructor.lcOffMenu || "Bypass all";
         this.isVirtualNode = true;
         this.serialize_widgets = true;
         this.properties = this.properties || {};
@@ -462,6 +474,8 @@ app.registerExtension({
     LCBypasser.category = "LC123/utils";
     LCBypasser.comfyClass = HUB_TYPE;
     LCBypasser.collapsable = true;
+    LCBypasser.lcOffMode = MODE_BYPASS;
+    LCBypasser.lcOffMenu = "Bypass all";
     LCBypasser.desc = `Bypass linked nodes from one place.\n\n• * inputs — connect any output from the node you want to control.\n• enable (BOOLEAN, optional) — when wired, drives that slot: true = run, false = bypass. The matching toggle shows 🔒 and is locked to this signal.\n• Enable toggles — yes = node active (mode always), no = node bypassed. Right-click: Enable all / Bypass all / Toggle all.\n• Restriction (right-click) — default | max one | always one.\n• OPT_CONNECTION — optional link to LC Bypasser Panel for a widgets-only remote.\nSlot labels update when you rename the linked node. Fully collapsible.`;
     LCBypasser.description = LCBypasser.desc;
     LCBypasser["@toggleRestriction"] = {
@@ -472,7 +486,7 @@ app.registerExtension({
 
     class LCMute extends LCBypasser {
       constructor() {
-        super(MUTE_TYPE, MODE_NEVER, "Mute all");
+        super();
         this.description = LCMute.desc || this.description;
       }
     }
@@ -481,6 +495,8 @@ app.registerExtension({
     LCMute.category = "LC123/utils";
     LCMute.comfyClass = MUTE_TYPE;
     LCMute.collapsable = true;
+    LCMute.lcOffMode = MODE_NEVER;
+    LCMute.lcOffMenu = "Mute all";
     LCMute.desc = `Mute linked nodes from one place.\n\nIdentical to LC Bypasser, except Off = mute (never run) instead of bypass (pass-through).\n\n• * inputs — connect any output from the node you want to control.\n• enable (BOOLEAN, optional) — when wired, drives that slot: true = run, false = mute. The matching toggle shows 🔒 and is locked to this signal.\n• Enable toggles — yes = node active, no = node muted. Right-click: Enable all / Mute all / Toggle all.\n• Restriction (right-click) — default | max one | always one.\n• OPT_CONNECTION — optional link to LC Bypasser Panel for a widgets-only remote.\nSlot labels update when you rename the linked node. Fully collapsible.`;
     LCMute.description = LCMute.desc;
     LCMute["@toggleRestriction"] = {

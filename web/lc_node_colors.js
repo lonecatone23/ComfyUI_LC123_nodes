@@ -61,7 +61,9 @@ const COLORS = {
     LCPromptToConditioningZero: { color: "#28281E", bgcolor: "#28281E", size: [270, 60] },
     LCSlider: { color: "#28281E", bgcolor: "#28281E" },
     "LC Bypasser": { color: "#28281E", bgcolor: "#28281E" },
+    "LC Mute": { color: "#28281E", bgcolor: "#28281E" },
     "LC Groups Bypasser": { color: "#28281E", bgcolor: "#28281E" },
+    "LC Bypasser Panel": { color: "#28281E", bgcolor: "#28281E" },
 
 };
 

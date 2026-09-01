@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.19.0"
-description = "ComfyUI LC123 Nodes by lonecatone23 — LC Mute, Tone Match, Color Match mask, node color persist, MiniMax H3 pipe, Image-Mask Resize, LC Lighting Control, Photo Style (v6), Skin Beauty, Sharpen Pro, prompt builder, sampler configure, image FX, pipes, notify."
+version = "1.19.1"
+description = "ComfyUI LC123 Nodes by lonecatone23 — LC Mute, bypasser load fix, Tone Match, Color Match mask, MiniMax H3 pipe, Image-Mask Resize, LC Lighting Control, Photo Style (v6), Skin Beauty, Sharpen Pro, prompt builder, sampler configure, image FX, pipes, notify."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

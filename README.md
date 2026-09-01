@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.19.0 · **93 nodes**
+- **Version:** 1.19.1 · **93 nodes**
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -296,6 +296,7 @@ Workflow → Open, or drag onto the canvas.
 - **Tone Match:** same crop only. Head-swap → mask off the new head (black). Not a color-match substitute.
 - **Color Match mask:** white = regrade, black = original pixels. Optional; unconnected = old behavior.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
+- **Bypass vs mute:** Bypasser = pass-through (mode 4). Mute = never run (mode 2). Panel `hub` works with Bypasser, Mute, and Groups Bypasser. Keep `web/lc_color.js` — other chrome files import it.
 
 ---
 

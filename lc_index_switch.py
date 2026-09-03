@@ -1,5 +1,8 @@
 """
 LC Any Index Switch — index widget (convert to input to wire) + any-type slots.
+
+INPUT_IS_LIST / OUTPUT_IS_LIST so Comfy does not zip every wired slot to the
+longest connected list. Output length follows the selected slot only.
 """
 
 from __future__ import annotations
@@ -11,6 +14,14 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
+
+
+def _first(value, default=None):
+    if value is None:
+        return default
+    if isinstance(value, (list, tuple)):
+        return value[0] if value else default
+    return value
 
 
 class LCIndexSwitch:
@@ -46,12 +57,27 @@ class LCIndexSwitch:
     RETURN_NAMES = ("*",)
     FUNCTION = "switch"
     CATEGORY = "LC123/utils"
-    DESCRIPTION = "Pass through input at index. Convert index widget to input to wire from LC Custom Combo."
+    DESCRIPTION = (
+        "Pass through the input at index. Other wired slots are ignored and "
+        "do not change the output length. Convert index widget to input to "
+        "wire from LC Custom Combo."
+    )
+    # Do not let Comfy map this node over every list input (that made
+    # output length = longest connected prompt list).
+    INPUT_IS_LIST = True
+    OUTPUT_IS_LIST = (True,)
 
-    def switch(self, index: int, inputcount: int = 2, **kwargs):
-        n = max(2, min(20, int(inputcount)))
-        idx = max(0, min(n - 1, int(index)))
-        return (kwargs.get(f"any_{idx + 1:02d}"),)
+    def switch(self, index, inputcount=2, **kwargs):
+        n = int(_first(inputcount, 2) or 2)
+        n = max(2, min(20, n))
+        idx = int(_first(index, 0) or 0)
+        idx = max(0, min(n - 1, idx))
+        val = kwargs.get(f"any_{idx + 1:02d}")
+        if val is None:
+            return ([],)
+        if not isinstance(val, list):
+            return ([val],)
+        return (val,)
 
 
 NODE_CLASS_MAPPINGS = {"LCIndexSwitch": LCIndexSwitch}

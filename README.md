@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.20.0 · **94 nodes**
+- **Version:** 1.24.0 · **100 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -209,12 +209,14 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 
 ---
 
-## 📁 Save paths & text
+## 📁 Save paths, image & metadata
 
 | Node | What it does |
 |------|----------------|
-| **LC Easy Folder 📂** | `filename_prefix` for native Save Image. |
+| **LC Easy Folder 📂** | Combined prefix for native Save Image, or wire into LC Save Image `filename_prefix`. |
 | **LC Advanced Folder 📂** | Split filename + path. |
+| **LC Save Metadata 🏷️** | Optional **LC_PIPE in** (no pipe out). Pipe fills prompts, seed, steps (`total_steps`), CFG (`cfg_1`), sampler, scheduler, size, denoise. Widgets override when set (seed `-1`, steps/cfg `0` = use pipe). **models** = `Model 1, Model 2`. **civitai_air** = primary AIR or Civitai URL. Written as `civitaiResources` JSON. |
+| **LC Save Image 💾** | `filename` + `path` under Comfy output. PNG embeds workflow + `parameters` + `civitaiResources` + AutoV2 hashes. JPEG/WebP: short comment only. **hash files** from live loaders. Skips muted (2) / bypassed (4) and LoRAs with `on: false`. Re-drop old Save Image nodes after widget changes. |
 | **📝 LC Save Text** | Write text; sanitizes illegal path characters. |
 | **LC Join Strings 🔗** | Join N strings; empty slots skip the delimiter; `\n` allowed. |
 | **LC Show Text 🔤** | Display text on the node. |
@@ -235,14 +237,22 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Boolean** / **Invert Boolean** | Coerce to true/false. |
 | **LC Boolean Switch** / **Flip** / **Value** | Pick / emit booleans. |
 | **LC Int Compare** / **LC Float Compare** | Largest or smallest of two. |
+| **LC Any Empty Bool** | Autogrow `any_*`. Only plugged wires count. True if any plugged source is empty, muted, or bypassed. |
+| **LC Any Empty Int** | Same multi-socket test; returns `empty` / `not_empty` integers. |
+| **LC Any Empty Float** | Same multi-socket test; returns `empty` / `not_empty` floats (2 decimal places). |
+| **LC Int Split** | `total` → `a` + `b`. `split_point` is a fraction **0–1**. |
 | **LC Seed Jump 🌱** | One seed + jump → six stepped seeds. |
 | **🌱LC Seed** | Seed with seed_mode (fixed / randomize / increment / decrement). |
 | **LC Slider** | On-node slider (min/max/step/decimals in settings). |
 | **LC Node Snapshot 📋** | Read another node’s widgets → value / dump / JSON. |
 | **LC Notify 🔊** | Play a sound from `assets/sounds/` on run. Mode: always / on empty queue / **never**. ▶ preview still works when silent. |
-| **LC Bypasser** / **LC Mute** / **Groups Bypasser** / **Bypasser Panel** | Remote **bypass** (pass-through) or **mute** (never run). Same toggles, boolean lock, collapse. Panel `hub` accepts all three. |
+| **LC Bypasser** / **LC Mute** / **Groups Bypasser** / **Bypasser Panel** | Remote **bypass** (pass-through) or **mute** (never run). Same toggles, boolean lock, collapse. Panel `hub` accepts all three. Constructor: string title only; off-mode is class `lcOffMode`. |
 | **LC Stop 🛑** | Pause until button. |
 | **LC VRAM Cache Clear** | Clear VRAM / cache; pass-through. |
+
+Canvas note: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
+
+**Size rule:** `computeSize` returns the **minimum** only. `this.size` may grow and shrink to that min. Do not return a saved `lc_h` from `computeSize`. Keep `web/lc_color.js`.
 
 Manual node sizes stick across reload (auto-fit only on first create or when `inputcount` changes). **Node colors** you set in Comfy also stick; pack chrome is applied only on first drop.
 
@@ -261,8 +271,20 @@ Manual node sizes stick across reload (auto-fit only on first create or when `in
 
 | File | Description |
 |------|-------------|
+| [`workflows/LC Node examples.json`](workflows/LC%20Node%20examples.json) | Tour of utility / image / prompt nodes (**updated**) |
 | [`workflows/LC Lighting Control (BETA).json`](workflows/LC%20Lighting%20Control%20(BETA).json) | Image → normals / depth / mask → Lighting Control |
-| [`workflows/LC Node examples.json`](workflows/LC%20Node%20examples.json) | Tour of utility / image / prompt nodes |
+| [`workflows/LC Skin Beauty.json`](workflows/LC%20Skin%20Beauty.json) | Skin Beauty with optional mask |
+| [`workflows/LC Skin Beauty basic (no deps).json`](workflows/LC%20Skin%20Beauty%20basic%20(no%20deps).json) | Skin Beauty only |
+| [`workflows/Photo style test.json`](workflows/Photo%20style%20test.json) | Photo Style |
+| [`workflows/Sharpen Pro test v2.json`](workflows/Sharpen%20Pro%20test%20v2.json) | Sharpen Pro |
+| [`workflows/Lonecats Prompt Builder .json`](workflows/Lonecats%20Prompt%20Builder%20.json) | Prompt Builder stack |
+| [`workflows/LC Dual sigma workflow example.json`](workflows/LC%20Dual%20sigma%20workflow%20example.json) | Split sigma |
+| [`workflows/LC Dual Sigma Advanced workflow example.json`](workflows/LC%20Dual%20Sigma%20Advanced%20workflow%20example.json) | Advanced split sigmas |
+| [`workflows/Aspect_Ratio_Simplifier example.json`](workflows/Aspect_Ratio_Simplifier%20example.json) | Aspect Ratio Simplifier |
+| [`workflows/Anima Regional Conditioning WF.json`](workflows/Anima%20Regional%20Conditioning%20WF.json) | Anima regional |
+| [`workflows/Anima Inline Regional Canvas workflow.json`](workflows/Anima%20Inline%20Regional%20Canvas%20workflow.json) | Anima inline canvas |
+| [`workflows/Krea2 Inline Regional Canvas Example.json`](workflows/Krea2%20Inline%20Regional%20Canvas%20Example.json) | Krea2 inline canvas |
+| [`workflows/Post processing LC nodes v4.json`](workflows/Post%20processing%20LC%20nodes%20v4.json) | Image FX suite |
 
 Workflow → Open, or drag onto the canvas.
 
@@ -292,10 +314,13 @@ Workflow → Open, or drag onto the canvas.
 - **Prompt Builder:** `prompt` → CLIP; `json` → regional builders only.
 - **Reference Latent:** all slots empty = pass-through (bypasser-safe).
 - **Denoise 💉:** same denoise number as the sampler; 1.0 = no inject.
-- **H3 pipe:** Aspect Ratio Simplifier pipe → H3 **pipe** socket copies size only. Length / fps still need their own wires. MiniMax prompt tags are 1-based (`ref_image_0` = `<Picture 1>`).
+- **H3 pipe:** Aspect Ratio Simplifier pipe → H3 **pipe** socket copies size only. Length / fps still need their own wires. The pipe **forwards wires only** (no extra generation). MiniMax prompt tags are 1-based: `<Picture N>` = `ref_image_{N-1}` (`<Picture 1>` = `ref_image_0`). Native MiniMax **Ref2V** requires `ref_video` ≥ **5 frames**.
 - **Tone Match:** same crop only. Head-swap → mask off the new head (black). Not a color-match substitute.
 - **Color Match mask:** white = regrade, black = original pixels. Optional; unconnected = old behavior.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
+- **Save Image:** `path` + `filename`. Metadata node optional. PNG embeds workflow + parameters. Leave **hash files** on so Civitai can list resources (it matches AutoV2 hashes, not names). First hash per file is slow; a `.sha256` sidecar is cached beside the model. JPEG/WebP will not carry full Comfy JSON. Seed on the metadata node is a plain INT (`seed_value`) — no randomize control.
+- **Any Empty:** only plugged sockets; mute/bypass on the source = empty.
+- **Int Split:** `split_point` is 0–1 only.
 - **Batch Image:** autogrow; muted/empty slots skipped. Node height follows slot count.
 - **Bypass vs mute:** Bypasser = pass-through (mode 4). Mute = never run (mode 2). Panel `hub` works with Bypasser, Mute, and Groups Bypasser. Keep `web/lc_color.js` — other chrome files import it.
 
@@ -309,7 +334,7 @@ ComfyUI/custom_nodes/ComfyUI_LC123_nodes/__init__.py
 
 `__init__.py` must sit **directly** in that folder — not in `ComfyUI_LC123_nodes/ComfyUI_LC123_nodes/`. If you unzip a pack zip *inside* an existing clone, move the inner files up one level.
 
-Restart ComfyUI. Console should print `[LC123] total 94 nodes`. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
+Restart ComfyUI. Console should print the LC123 load line (~100 Python mappings). There is **no LC Math** node — use Comfy Math Expression. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
 
 **Requirements:** ComfyUI’s Python env (`torch`, `numpy`). No extra pip packages. Depth Anything / SAM / remBG for lighting & masks are separate installs.
 

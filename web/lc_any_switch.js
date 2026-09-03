@@ -193,22 +193,11 @@ app.registerExtension({
 
     const origCompute = nodeType.prototype.computeSize;
     nodeType.prototype.computeSize = function (out) {
-      // Honor saved user size when present
-      if (this._lcUserSized && this.properties?.lc_w && this.properties?.lc_h) {
-        const size = [this.properties.lc_w, this.properties.lc_h];
-        if (out) {
-          out[0] = size[0];
-          out[1] = size[1];
-          return out;
-        }
-        return size;
-      }
+      // Minimum for current slots. User this.size may be larger and can shrink to this.
       const slots = (this.inputs || []).length || MIN_INPUTS;
       const widgets = (this.widgets || []).filter((w) => w && w.type !== "hidden").length;
       const h = Math.max(60, 34 + widgets * 26 + slots * 22 + 10);
-      const size = origCompute?.apply(this, arguments) || [DEFAULT_WIDTH, h];
-      size[0] = Math.max(DEFAULT_WIDTH, size[0] || DEFAULT_WIDTH);
-      size[1] = h;
+      const size = [DEFAULT_WIDTH, h];
       if (out) {
         out[0] = size[0];
         out[1] = size[1];

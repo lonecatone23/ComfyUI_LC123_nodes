@@ -163,13 +163,15 @@ app.registerExtension({
   registerCustomNodes() {
     // ═══════════ LC Bypasser (classic: sockets + widgets) ═══════════
     class LCBypasser extends LGraphNode {
-      constructor(...args) {
+      // String title only — never super() with no args (LiteGraph titles that "Unnamed").
+      // Off-mode lives on the class (lcOffMode), not constructor arguments.
+      constructor(title) {
         const fallback = new.target.title || HUB_TYPE;
-        const title =
-          typeof args[0] === "string" && args[0].trim() && args[0] !== "Unnamed"
-            ? args[0]
+        const t =
+          typeof title === "string" && title.trim() && title !== "Unnamed"
+            ? title
             : fallback;
-        super(title);
+        super(t);
         this._lcOffMode = new.target.lcOffMode ?? MODE_BYPASS;
         this._lcOffMenu = new.target.lcOffMenu || "Bypass all";
         this.isVirtualNode = true;
@@ -495,8 +497,12 @@ app.registerExtension({
     LiteGraph.registerNodeType(HUB_TYPE, LCBypasser);
 
     class LCMute extends LCBypasser {
-      constructor() {
-        super();
+      constructor(title) {
+        const t =
+          typeof title === "string" && title.trim() && title !== "Unnamed"
+            ? title
+            : MUTE_TYPE;
+        super(t);
         this.description = LCMute.desc || this.description;
       }
     }
@@ -517,8 +523,12 @@ app.registerExtension({
 
     // ═══════════ LC Bypasser Panel (widgets only, both hubs) ═══════════
     class LCBypasserPanel extends LGraphNode {
-      constructor() {
-        super(PANEL_TYPE);
+      constructor(title) {
+        const t =
+          typeof title === "string" && title.trim() && title !== "Unnamed"
+            ? title
+            : PANEL_TYPE;
+        super(t);
         this.isVirtualNode = true;
         this.serialize_widgets = true;
         this.properties = this.properties || {};

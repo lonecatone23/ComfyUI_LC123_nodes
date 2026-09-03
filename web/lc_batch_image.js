@@ -1,6 +1,7 @@
 /**
  * LC Batch Image — autogrow IMAGE slots. Keep one empty socket.
- * Manual size remembered (lc_w / lc_h).
+ * computeSize returns the minimum only. this.size may grow and shrink to that min.
+ * Height hugs the last socket. Launch width 270; shrink min ~180.
  */
 import { app } from "../../scripts/app.js";
 import { lcApplyLaunchColor } from "./lc_color.js";
@@ -8,16 +9,35 @@ import { lcApplyLaunchColor } from "./lc_color.js";
 const NODE_CLASS = "LCBatchImage";
 const MAX_INPUTS = 20;
 const MIN_INPUTS = 2;
-const DEFAULT_WIDTH = 270;
+const LAUNCH_WIDTH = 270;
+const MIN_WIDTH = 180;
 const COLOR = "#324B4B";
 
 function inputName(i) {
   return `image_${String(i).padStart(2, "0")}`;
 }
 
-function applySize(node, w, h) {
-  w = Math.max(DEFAULT_WIDTH, w || DEFAULT_WIDTH);
-  h = Math.max(56, h || 56);
+function slotHeight() {
+  return (typeof LiteGraph !== "undefined" && LiteGraph.NODE_SLOT_HEIGHT) || 20;
+}
+
+function titleHeight() {
+  return (typeof LiteGraph !== "undefined" && LiteGraph.NODE_TITLE_HEIGHT) || 30;
+}
+
+/** Minimum box that still shows every socket — hugs the last one. */
+function desiredHeight(slots) {
+  const n = Math.max(slots || 0, MIN_INPUTS);
+  return titleHeight() + n * slotHeight() + 6;
+}
+
+function slotCount(node) {
+  return (node.inputs || []).filter((i) => i && String(i.name || "").startsWith("image_")).length;
+}
+
+function setSize(node, w, h) {
+  w = Math.max(MIN_WIDTH, w || MIN_WIDTH);
+  h = Math.max(desiredHeight(MIN_INPUTS), h || desiredHeight(MIN_INPUTS));
   if (typeof node.setSize === "function") node.setSize([w, h]);
   else if (node.size) {
     node.size[0] = w;
@@ -25,46 +45,6 @@ function applySize(node, w, h) {
   } else {
     node.size = [w, h];
   }
-  if (!node.properties) node.properties = {};
-  node.properties.lc_w = w;
-  node.properties.lc_h = h;
-}
-
-function slotCount(node) {
-  return (node.inputs || []).filter((i) => i && String(i.name || "").startsWith("image_")).length;
-}
-
-function rememberSize(node) {
-  if (!node.properties) node.properties = {};
-  if (node.size) {
-    node.properties.lc_w = node.size[0];
-    node.properties.lc_h = Math.max(node.size[1] || 0, desiredHeight(slotCount(node)));
-  }
-  node._lcUserSized = true;
-}
-
-function restoreSize(node) {
-  const w = node.properties?.lc_w;
-  const h = node.properties?.lc_h;
-  const needH = desiredHeight(slotCount(node) || MIN_INPUTS);
-  if (w) {
-    applySize(node, w, Math.max(h || 0, needH));
-    node._lcUserSized = true;
-    return true;
-  }
-  return false;
-}
-
-function desiredHeight(slots) {
-  return Math.max(56, 34 + Math.max(slots, MIN_INPUTS) * 24 + 16);
-}
-
-function fitSize(node) {
-  const n = slotCount(node) || MIN_INPUTS;
-  const needH = desiredHeight(n);
-  const w = Math.max(DEFAULT_WIDTH, node.size?.[0] || DEFAULT_WIDTH, node.properties?.lc_w || 0);
-  const h = Math.max(needH, node._lcUserSized ? (node.size?.[1] || 0) : 0);
-  applySize(node, w, h);
 }
 
 function countFilled(node) {
@@ -75,7 +55,14 @@ function countFilled(node) {
   return n;
 }
 
-function syncInputs(node, { fit = false } = {}) {
+function hugHeight(node) {
+  const n = slotCount(node) || MIN_INPUTS;
+  const minH = desiredHeight(n);
+  const w = Math.max(MIN_WIDTH, node.size?.[0] || LAUNCH_WIDTH);
+  setSize(node, w, minH);
+}
+
+function syncInputs(node) {
   if (!node.inputs) node.inputs = [];
   const byName = new Map();
   const keepOther = [];
@@ -110,7 +97,7 @@ function syncInputs(node, { fit = false } = {}) {
     }
   }
   node.inputs = next;
-  fitSize(node);
+  hugHeight(node);
   node.setDirtyCanvas?.(true, true);
 }
 
@@ -123,10 +110,10 @@ app.registerExtension({
     const origCompute = nodeType.prototype.computeSize;
     nodeType.prototype.computeSize = function (out) {
       const slots = slotCount(this) || MIN_INPUTS;
+      const minW = MIN_WIDTH;
       const minH = desiredHeight(slots);
-      const w = Math.max(DEFAULT_WIDTH, this.properties?.lc_w || this.size?.[0] || DEFAULT_WIDTH);
-      const h = Math.max(minH, this.properties?.lc_h || 0);
-      const size = [w, h];
+      // Minimum only — never feed saved lc_h back or the node cannot shrink.
+      const size = [minW, minH];
       if (out) {
         out[0] = size[0];
         out[1] = size[1];
@@ -141,32 +128,32 @@ app.registerExtension({
       try {
         lcApplyLaunchColor(this, COLOR);
       } catch (_) {}
+      if (!this.size) this.size = [LAUNCH_WIDTH, desiredHeight(MIN_INPUTS)];
+      else this.size[0] = Math.max(MIN_WIDTH, this.size[0] || LAUNCH_WIDTH);
+      if (!this.size[0] || this.size[0] < LAUNCH_WIDTH) this.size[0] = LAUNCH_WIDTH;
       syncInputs(this);
       const prevResize = this.onResize;
-      this.onResize = function () {
-        const out = prevResize?.apply(this, arguments);
-        rememberSize(this);
-        return out;
+      this.onResize = function (size) {
+        if (size) {
+          if (size[0] < MIN_WIDTH) size[0] = MIN_WIDTH;
+          const minH = desiredHeight(slotCount(this) || MIN_INPUTS);
+          if (size[1] < minH) size[1] = minH;
+        }
+        return prevResize?.apply(this, arguments);
       };
-      setTimeout(() => {
-        syncInputs(this);
-        restoreSize(this);
-      }, 0);
+      setTimeout(() => syncInputs(this), 0);
       return r;
     };
 
     const onConfigure = nodeType.prototype.onConfigure;
     nodeType.prototype.onConfigure = function (data) {
       const r = onConfigure?.apply(this, arguments);
-      if (data?.size) {
-        if (!this.properties) this.properties = {};
-        this.properties.lc_w = data.size[0];
-        this.properties.lc_h = data.size[1];
-        this._lcUserSized = true;
-      }
       setTimeout(() => {
         syncInputs(this);
-        restoreSize(this);
+        if (data?.size?.[0]) {
+          const w = Math.max(MIN_WIDTH, data.size[0]);
+          setSize(this, w, desiredHeight(slotCount(this) || MIN_INPUTS));
+        }
       }, 20);
       return r;
     };

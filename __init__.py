@@ -107,6 +107,9 @@ _load("lc_vram_cache_clear")
 _load("lc_stop")
 _load("lc_advanced_folder")
 _load("lc_easy_folder")
+_load("lc_save_image")
+_load("lc_any_empty")
+_load("lc_int_split")
 
 WEB_DIRECTORY = "./web"
 

@@ -1,8 +1,8 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 375,
-  "last_link_id": 476,
+  "last_node_id": 390,
+  "last_link_id": 500,
   "nodes": [
     {
       "id": 107,
@@ -18,7 +18,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 115,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -68,7 +68,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 118,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -693,7 +693,7 @@
         130
       ],
       "flags": {},
-      "order": 113,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -746,7 +746,7 @@
         250
       ],
       "flags": {},
-      "order": 112,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -829,7 +829,7 @@
         50
       ],
       "flags": {},
-      "order": 140,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -978,7 +978,7 @@
         280
       ],
       "flags": {},
-      "order": 168,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -1042,7 +1042,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 110,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -1099,7 +1099,7 @@
         30
       ],
       "flags": {},
-      "order": 122,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -1148,7 +1148,7 @@
         50
       ],
       "flags": {},
-      "order": 123,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -1318,7 +1318,7 @@
         90
       ],
       "flags": {},
-      "order": 114,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -1426,7 +1426,7 @@
         60
       ],
       "flags": {},
-      "order": 121,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -1485,7 +1485,7 @@
         50
       ],
       "flags": {},
-      "order": 120,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -1655,7 +1655,7 @@
         340
       ],
       "flags": {},
-      "order": 108,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -1713,7 +1713,7 @@
         520
       ],
       "flags": {},
-      "order": 109,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -2034,7 +2034,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 194,
+      "order": 203,
       "mode": 0,
       "inputs": [
         {
@@ -2127,7 +2127,7 @@
         640
       ],
       "flags": {},
-      "order": 197,
+      "order": 206,
       "mode": 0,
       "inputs": [
         {
@@ -2175,7 +2175,7 @@
         120
       ],
       "flags": {},
-      "order": 116,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -2300,7 +2300,7 @@
         450
       ],
       "flags": {},
-      "order": 117,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -2424,7 +2424,7 @@
         400
       ],
       "flags": {},
-      "order": 142,
+      "order": 151,
       "mode": 0,
       "inputs": [
         {
@@ -2654,8 +2654,8 @@
         -4450
       ],
       "size": [
-        733.70361328125,
-        75
+        740,
+        80
       ],
       "flags": {
         "allow_interaction": true
@@ -2839,7 +2839,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 201,
+      "order": 210,
       "mode": 0,
       "inputs": [
         {
@@ -3322,7 +3322,7 @@
         140
       ],
       "flags": {},
-      "order": 106,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -3399,7 +3399,7 @@
         130
       ],
       "flags": {},
-      "order": 199,
+      "order": 208,
       "mode": 0,
       "inputs": [
         {
@@ -3465,7 +3465,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 143,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -3523,7 +3523,7 @@
         420
       ],
       "flags": {},
-      "order": 144,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -3588,7 +3588,7 @@
         640
       ],
       "flags": {},
-      "order": 170,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -3668,7 +3668,7 @@
         390
       ],
       "flags": {},
-      "order": 173,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -3705,38 +3705,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 279,
-      "type": "MarkdownNote",
-      "pos": [
-        -9140,
-        -1500
-      ],
-      "size": [
-        620,
-        700
-      ],
-      "flags": {},
-      "order": 34,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
-      ],
-      "widgets_values_named": {
-        "text": "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 270,
       "type": "LoadImage",
       "pos": [
@@ -3748,7 +3716,7 @@
         320
       ],
       "flags": {},
-      "order": 35,
+      "order": 34,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3803,13 +3771,13 @@
         -6010
       ],
       "size": [
-        2570.9228515625,
+        2580,
         250
       ],
       "flags": {
         "allow_interaction": true
       },
-      "order": 36,
+      "order": 35,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -3840,56 +3808,6 @@
       "bgcolor": "#fff0"
     },
     {
-      "id": 184,
-      "type": "LCShowText",
-      "pos": [
-        -12210,
-        -3570
-      ],
-      "size": [
-        270,
-        120
-      ],
-      "flags": {},
-      "order": 145,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 243
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
-        "Node name for S&R": "LCShowText",
-        "enableTabs": false,
-        "tabWidth": 65,
-        "tabXOffset": 10,
-        "hasSecondTab": false,
-        "secondTabText": "Send Back",
-        "secondTabOffset": 80,
-        "secondTabWidth": 65,
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_show_text": "Hello!\nHow\nare\nyou?"
-      },
-      "color": "#28281E",
-      "bgcolor": "#28281E"
-    },
-    {
       "id": 181,
       "type": "LCPositive",
       "pos": [
@@ -3901,7 +3819,7 @@
         90
       ],
       "flags": {},
-      "order": 37,
+      "order": 36,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3954,7 +3872,7 @@
         740
       ],
       "flags": {},
-      "order": 119,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -4060,7 +3978,7 @@
         740
       ],
       "flags": {},
-      "order": 105,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -4165,7 +4083,7 @@
         560
       ],
       "flags": {},
-      "order": 169,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -4181,7 +4099,7 @@
           "links": [
             199,
             265,
-            408
+            492
           ]
         }
       ],
@@ -4248,7 +4166,7 @@
         600
       ],
       "flags": {},
-      "order": 172,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -4264,7 +4182,7 @@
           "links": [
             196,
             266,
-            409
+            493
           ]
         }
       ],
@@ -4335,7 +4253,7 @@
         540
       ],
       "flags": {},
-      "order": 178,
+      "order": 187,
       "mode": 0,
       "inputs": [
         {
@@ -4351,7 +4269,7 @@
           "links": [
             198,
             268,
-            411
+            495
           ]
         }
       ],
@@ -4416,7 +4334,7 @@
         490
       ],
       "flags": {},
-      "order": 179,
+      "order": 188,
       "mode": 0,
       "inputs": [
         {
@@ -4431,8 +4349,7 @@
           "type": "IMAGE",
           "links": [
             200,
-            269,
-            412
+            269
           ]
         }
       ],
@@ -4493,7 +4410,7 @@
         560
       ],
       "flags": {},
-      "order": 181,
+      "order": 190,
       "mode": 0,
       "inputs": [
         {
@@ -4509,7 +4426,7 @@
           "links": [
             227,
             271,
-            414
+            484
           ]
         }
       ],
@@ -4576,7 +4493,7 @@
         540
       ],
       "flags": {},
-      "order": 183,
+      "order": 192,
       "mode": 0,
       "inputs": [
         {
@@ -4592,7 +4509,7 @@
           "links": [
             194,
             273,
-            416
+            486
           ]
         }
       ],
@@ -4657,7 +4574,7 @@
         490
       ],
       "flags": {},
-      "order": 185,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -4673,7 +4590,7 @@
           "links": [
             190,
             275,
-            418
+            488
           ]
         }
       ],
@@ -4734,7 +4651,7 @@
         540
       ],
       "flags": {},
-      "order": 186,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -4750,7 +4667,7 @@
           "links": [
             188,
             276,
-            419
+            489
           ]
         }
       ],
@@ -4815,7 +4732,7 @@
         540
       ],
       "flags": {},
-      "order": 187,
+      "order": 196,
       "mode": 0,
       "inputs": [
         {
@@ -4830,8 +4747,7 @@
           "type": "IMAGE",
           "links": [
             186,
-            277,
-            420
+            277
           ]
         }
       ],
@@ -4896,7 +4812,7 @@
         560
       ],
       "flags": {},
-      "order": 193,
+      "order": 202,
       "mode": 0,
       "inputs": [
         {
@@ -4921,7 +4837,7 @@
             288,
             290,
             291,
-            426
+            483
           ]
         }
       ],
@@ -4993,7 +4909,7 @@
         230
       ],
       "flags": {},
-      "order": 202,
+      "order": 211,
       "mode": 0,
       "inputs": [
         {
@@ -5063,7 +4979,7 @@
         170
       ],
       "flags": {},
-      "order": 38,
+      "order": 37,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -5096,7 +5012,7 @@
         1050
       ],
       "flags": {},
-      "order": 204,
+      "order": 213,
       "mode": 0,
       "inputs": [
         {
@@ -5133,204 +5049,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 307,
-      "type": "BatchImagesNode",
-      "pos": [
-        -6460,
-        -4320
-      ],
-      "size": [
-        180,
-        470
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 198,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "image0",
-          "name": "images.image0",
-          "type": "IMAGE",
-          "link": 406
-        },
-        {
-          "label": "image1",
-          "name": "images.image1",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 407
-        },
-        {
-          "label": "image14",
-          "name": "images.image14",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 420
-        },
-        {
-          "label": "image15",
-          "name": "images.image15",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 421
-        },
-        {
-          "label": "image16",
-          "name": "images.image16",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 422
-        },
-        {
-          "label": "image17",
-          "name": "images.image17",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 423
-        },
-        {
-          "label": "image18",
-          "name": "images.image18",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 424
-        },
-        {
-          "label": "image19",
-          "name": "images.image19",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 425
-        },
-        {
-          "label": "image20",
-          "name": "images.image20",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 426
-        },
-        {
-          "label": "image21",
-          "name": "images.image21",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": null
-        },
-        {
-          "label": "image6",
-          "name": "images.image6",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 412
-        },
-        {
-          "label": "image7",
-          "name": "images.image7",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 413
-        },
-        {
-          "label": "image8",
-          "name": "images.image8",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 414
-        },
-        {
-          "label": "image9",
-          "name": "images.image9",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 415
-        },
-        {
-          "label": "image10",
-          "name": "images.image10",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 416
-        },
-        {
-          "label": "image11",
-          "name": "images.image11",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 417
-        },
-        {
-          "label": "image12",
-          "name": "images.image12",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 418
-        },
-        {
-          "label": "image13",
-          "name": "images.image13",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 419
-        },
-        {
-          "label": "image2",
-          "name": "images.image2",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 408
-        },
-        {
-          "label": "image3",
-          "name": "images.image3",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 409
-        },
-        {
-          "label": "image4",
-          "name": "images.image4",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 410
-        },
-        {
-          "label": "image5",
-          "name": "images.image5",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 411
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            428
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "BatchImagesNode",
-        "enableTabs": false,
-        "tabWidth": 65,
-        "tabXOffset": 10,
-        "hasSecondTab": false,
-        "secondTabText": "Send Back",
-        "secondTabOffset": 80,
-        "secondTabWidth": 65,
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      }
-    },
-    {
       "id": 308,
       "type": "AspectRatioSimplifier",
       "pos": [
@@ -5342,14 +5060,14 @@
         450
       ],
       "flags": {},
-      "order": 200,
+      "order": 209,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "shape": 7,
           "type": "IMAGE",
-          "link": 428
+          "link": 497
         },
         {
           "name": "mask",
@@ -5457,7 +5175,7 @@
         120
       ],
       "flags": {},
-      "order": 147,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -5507,7 +5225,7 @@
         130
       ],
       "flags": {},
-      "order": 39,
+      "order": 38,
       "mode": 0,
       "inputs": [
         {
@@ -5568,7 +5286,7 @@
         200
       ],
       "flags": {},
-      "order": 40,
+      "order": 39,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -5600,7 +5318,7 @@
         90
       ],
       "flags": {},
-      "order": 165,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -5655,7 +5373,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 41,
+      "order": 40,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -5688,7 +5406,7 @@
         90
       ],
       "flags": {},
-      "order": 164,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -5741,7 +5459,7 @@
         320
       ],
       "flags": {},
-      "order": 42,
+      "order": 41,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -5763,38 +5481,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 189,
-      "type": "MarkdownNote",
-      "pos": [
-        -11530,
-        -3380
-      ],
-      "size": [
-        340,
-        270
-      ],
-      "flags": {},
-      "order": 43,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [],
-      "properties": {
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "## Bypassers\n\n- designed so that several toggles can be controlled by a boolean\n- boolean connection locks the toggle\n\n**LC Groups Bypasser**\n- connect the boolean to the sockets on the node\n\n**LC Bypasser**\n- populates a connection with a boolean connection directly below it.\n\n\n\n**LC Bypasser Panel** \n- allows you to fully collapse the bypass nodes once it is hooked up.\n- work with both **LC Bypasser** and **LC Groups Bypasser**\n\n"
-      ],
-      "widgets_values_named": {
-        "text": "## Bypassers\n\n- designed so that several toggles can be controlled by a boolean\n- boolean connection locks the toggle\n\n**LC Groups Bypasser**\n- connect the boolean to the sockets on the node\n\n**LC Bypasser**\n- populates a connection with a boolean connection directly below it.\n\n\n\n**LC Bypasser Panel** \n- allows you to fully collapse the bypass nodes once it is hooked up.\n- work with both **LC Bypasser** and **LC Groups Bypasser**\n\n"
-      },
-      "color": "#222",
-      "bgcolor": "#000"
-    },
-    {
       "id": 301,
       "type": "LCNodeSnapshot",
       "pos": [
@@ -5806,7 +5492,7 @@
         130
       ],
       "flags": {},
-      "order": 137,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -5879,7 +5565,7 @@
         100
       ],
       "flags": {},
-      "order": 44,
+      "order": 42,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -5944,7 +5630,7 @@
         130
       ],
       "flags": {},
-      "order": 138,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -6027,7 +5713,7 @@
         260
       ],
       "flags": {},
-      "order": 162,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -6076,7 +5762,7 @@
         310
       ],
       "flags": {},
-      "order": 163,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -6125,7 +5811,7 @@
         90
       ],
       "flags": {},
-      "order": 161,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -6174,7 +5860,7 @@
         130
       ],
       "flags": {},
-      "order": 45,
+      "order": 43,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6207,7 +5893,7 @@
         200
       ],
       "flags": {},
-      "order": 46,
+      "order": 44,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6259,7 +5945,7 @@
         90
       ],
       "flags": {},
-      "order": 47,
+      "order": 45,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6291,7 +5977,7 @@
         90
       ],
       "flags": {},
-      "order": 48,
+      "order": 46,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -6342,7 +6028,7 @@
         160
       ],
       "flags": {},
-      "order": 128,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -6434,7 +6120,7 @@
         90
       ],
       "flags": {},
-      "order": 149,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -6488,7 +6174,7 @@
         90
       ],
       "flags": {},
-      "order": 153,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -6541,7 +6227,7 @@
         90
       ],
       "flags": {},
-      "order": 150,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -6595,7 +6281,7 @@
         90
       ],
       "flags": {},
-      "order": 151,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -6649,7 +6335,7 @@
         90
       ],
       "flags": {},
-      "order": 154,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -6702,7 +6388,7 @@
         90
       ],
       "flags": {},
-      "order": 152,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -6758,7 +6444,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 125,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -6856,7 +6542,7 @@
         350
       ],
       "flags": {},
-      "order": 49,
+      "order": 47,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -6888,7 +6574,7 @@
         236
       ],
       "flags": {},
-      "order": 126,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -7029,7 +6715,7 @@
         90
       ],
       "flags": {},
-      "order": 50,
+      "order": 48,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7084,7 +6770,7 @@
         120
       ],
       "flags": {},
-      "order": 148,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -7133,7 +6819,7 @@
         110
       ],
       "flags": {},
-      "order": 51,
+      "order": 49,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7183,7 +6869,7 @@
         60
       ],
       "flags": {},
-      "order": 127,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -7241,7 +6927,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 124,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -7319,7 +7005,7 @@
         150
       ],
       "flags": {},
-      "order": 146,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -7370,7 +7056,7 @@
         60
       ],
       "flags": {},
-      "order": 52,
+      "order": 50,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7420,7 +7106,7 @@
         80
       ],
       "flags": {},
-      "order": 53,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -7483,7 +7169,7 @@
         500
       ],
       "flags": {},
-      "order": 54,
+      "order": 52,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7516,7 +7202,7 @@
         130
       ],
       "flags": {},
-      "order": 55,
+      "order": 53,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -7549,7 +7235,7 @@
         90
       ],
       "flags": {},
-      "order": 56,
+      "order": 54,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7601,7 +7287,7 @@
         60
       ],
       "flags": {},
-      "order": 57,
+      "order": 55,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7651,7 +7337,7 @@
         60
       ],
       "flags": {},
-      "order": 58,
+      "order": 56,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -7703,7 +7389,7 @@
         40
       ],
       "flags": {},
-      "order": 129,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -7755,7 +7441,7 @@
         900
       ],
       "flags": {},
-      "order": 155,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -8026,7 +7712,7 @@
         320
       ],
       "flags": {},
-      "order": 59,
+      "order": 57,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8059,7 +7745,7 @@
         110
       ],
       "flags": {},
-      "order": 60,
+      "order": 58,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8113,7 +7799,7 @@
         110
       ],
       "flags": {},
-      "order": 61,
+      "order": 59,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8169,7 +7855,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 130,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -8234,7 +7920,7 @@
         340
       ],
       "flags": {},
-      "order": 62,
+      "order": 60,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8298,7 +7984,7 @@
         340
       ],
       "flags": {},
-      "order": 156,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -8371,7 +8057,7 @@
         340
       ],
       "flags": {},
-      "order": 63,
+      "order": 61,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8429,7 +8115,7 @@
         240
       ],
       "flags": {},
-      "order": 64,
+      "order": 62,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8485,7 +8171,7 @@
         270
       ],
       "flags": {},
-      "order": 65,
+      "order": 63,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8543,7 +8229,7 @@
         340
       ],
       "flags": {},
-      "order": 66,
+      "order": 64,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8603,7 +8289,7 @@
         170
       ],
       "flags": {},
-      "order": 171,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -8701,7 +8387,7 @@
         860
       ],
       "flags": {},
-      "order": 177,
+      "order": 186,
       "mode": 0,
       "inputs": [
         {
@@ -8749,7 +8435,7 @@
         320
       ],
       "flags": {},
-      "order": 67,
+      "order": 65,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8806,7 +8492,7 @@
         340
       ],
       "flags": {},
-      "order": 131,
+      "order": 140,
       "mode": 0,
       "inputs": [
         {
@@ -8872,7 +8558,7 @@
         1110
       ],
       "flags": {},
-      "order": 68,
+      "order": 66,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -8904,7 +8590,7 @@
         360
       ],
       "flags": {},
-      "order": 174,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -9012,7 +8698,7 @@
         470
       ],
       "flags": {},
-      "order": 176,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -9060,7 +8746,7 @@
         170
       ],
       "flags": {},
-      "order": 69,
+      "order": 67,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9093,7 +8779,7 @@
         130
       ],
       "flags": {},
-      "order": 107,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -9171,7 +8857,7 @@
         100
       ],
       "flags": {},
-      "order": 70,
+      "order": 68,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -9237,7 +8923,7 @@
         130
       ],
       "flags": {},
-      "order": 139,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -9320,7 +9006,7 @@
         90
       ],
       "flags": {},
-      "order": 167,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -9373,7 +9059,7 @@
         90
       ],
       "flags": {},
-      "order": 166,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -9426,7 +9112,7 @@
         320
       ],
       "flags": {},
-      "order": 71,
+      "order": 69,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -9459,7 +9145,7 @@
         350
       ],
       "flags": {},
-      "order": 72,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -9560,7 +9246,7 @@
         470
       ],
       "flags": {},
-      "order": 73,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -9679,7 +9365,7 @@
         530
       ],
       "flags": {},
-      "order": 74,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -9905,7 +9591,7 @@
         530
       ],
       "flags": {},
-      "order": 75,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -10080,7 +9766,7 @@
         170
       ],
       "flags": {},
-      "order": 76,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -10164,7 +9850,7 @@
         190
       ],
       "flags": {},
-      "order": 77,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -10255,7 +9941,7 @@
         270
       ],
       "flags": {},
-      "order": 78,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -10365,7 +10051,7 @@
         150
       ],
       "flags": {},
-      "order": 79,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -10444,7 +10130,7 @@
         60
       ],
       "flags": {},
-      "order": 80,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -10498,7 +10184,7 @@
         90
       ],
       "flags": {},
-      "order": 81,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -10554,7 +10240,7 @@
         320
       ],
       "flags": {},
-      "order": 82,
+      "order": 80,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -10587,7 +10273,7 @@
         190
       ],
       "flags": {},
-      "order": 83,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -10681,7 +10367,7 @@
         100
       ],
       "flags": {},
-      "order": 84,
+      "order": 82,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -10714,7 +10400,7 @@
         330
       ],
       "flags": {},
-      "order": 85,
+      "order": 83,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10803,7 +10489,7 @@
         420
       ],
       "flags": {},
-      "order": 86,
+      "order": 84,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -10906,7 +10592,7 @@
         80
       ],
       "flags": {},
-      "order": 157,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -10954,7 +10640,7 @@
         64
       ],
       "flags": {},
-      "order": 133,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -10992,93 +10678,6 @@
       "bgcolor": "#28281E"
     },
     {
-      "id": 360,
-      "type": "LCIndexSwitch",
-      "pos": [
-        -12880,
-        -4070
-      ],
-      "size": [
-        270,
-        130
-      ],
-      "flags": {},
-      "order": 132,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "index",
-          "name": "index",
-          "type": "INT",
-          "widget": {
-            "name": "index"
-          },
-          "link": 467
-        },
-        {
-          "label": "STRING",
-          "name": "any_01",
-          "shape": 7,
-          "type": "STRING",
-          "link": 468
-        },
-        {
-          "label": "STRING",
-          "name": "any_02",
-          "shape": 7,
-          "type": "STRING",
-          "link": 469
-        },
-        {
-          "label": "STRING",
-          "name": "any_03",
-          "shape": 7,
-          "type": "STRING",
-          "link": 470
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            465
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
-        "Node name for S&R": "LCIndexSwitch",
-        "enableTabs": false,
-        "tabWidth": 65,
-        "tabXOffset": 10,
-        "hasSecondTab": false,
-        "secondTabText": "Send Back",
-        "secondTabOffset": 80,
-        "secondTabWidth": 65,
-        "lc_size_w": 270,
-        "lc_size_h": 130,
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        },
-        "lc_w": 270,
-        "lc_h": 130
-      },
-      "widgets_values": [
-        0,
-        3
-      ],
-      "widgets_values_named": {
-        "index": 0,
-        "inputcount": 3
-      },
-      "color": "#28281E",
-      "bgcolor": "#28281E"
-    },
-    {
       "id": 361,
       "type": "PrimitiveString",
       "pos": [
@@ -11090,7 +10689,7 @@
         60
       ],
       "flags": {},
-      "order": 87,
+      "order": 85,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11138,7 +10737,7 @@
         60
       ],
       "flags": {},
-      "order": 88,
+      "order": 86,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11186,7 +10785,7 @@
         190
       ],
       "flags": {},
-      "order": 89,
+      "order": 87,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11218,7 +10817,7 @@
         60
       ],
       "flags": {},
-      "order": 90,
+      "order": 88,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11266,7 +10865,7 @@
         194
       ],
       "flags": {},
-      "order": 91,
+      "order": 89,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -11372,7 +10971,7 @@
         820
       ],
       "flags": {},
-      "order": 136,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -11460,13 +11059,13 @@
         -1980
       ],
       "size": [
-        306.3427734375,
+        310,
         30
       ],
       "flags": {
         "allow_interaction": true
       },
-      "order": 92,
+      "order": 90,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11508,7 +11107,7 @@
         820
       ],
       "flags": {},
-      "order": 93,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -11621,7 +11220,7 @@
         400
       ],
       "flags": {},
-      "order": 94,
+      "order": 92,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11653,7 +11252,7 @@
         3410
       ],
       "flags": {},
-      "order": 95,
+      "order": 93,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11686,7 +11285,7 @@
         840
       ],
       "flags": {},
-      "order": 96,
+      "order": 94,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -11708,65 +11307,6 @@
       "bgcolor": "#c85533"
     },
     {
-      "id": 370,
-      "type": "LoadImage",
-      "pos": [
-        -7740,
-        -1010
-      ],
-      "size": [
-        300,
-        410
-      ],
-      "flags": {},
-      "order": 97,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            471,
-            473,
-            475
-          ]
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.31.0",
-        "Node name for S&R": "LoadImage",
-        "enableTabs": false,
-        "tabWidth": 65,
-        "tabXOffset": 10,
-        "hasSecondTab": false,
-        "secondTabText": "Send Back",
-        "secondTabOffset": 80,
-        "secondTabWidth": 65,
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "b4a7bfea-f399-442d-b4d7-f13e2102621f.png",
-        "image"
-      ],
-      "widgets_values_named": {
-        "image": "b4a7bfea-f399-442d-b4d7-f13e2102621f.png",
-        "upload": "image"
-      },
-      "color": "#233",
-      "bgcolor": "#355"
-    },
-    {
       "id": 372,
       "type": "LCImageDesaturate",
       "pos": [
@@ -11778,7 +11318,7 @@
         470
       ],
       "flags": {},
-      "order": 135,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -11850,7 +11390,7 @@
         300
       ],
       "flags": {},
-      "order": 134,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -11933,7 +11473,7 @@
         520
       ],
       "flags": {},
-      "order": 111,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -11949,7 +11489,7 @@
           "links": [
             228,
             261,
-            406
+            477
           ]
         }
       ],
@@ -12006,7 +11546,7 @@
         540
       ],
       "flags": {},
-      "order": 141,
+      "order": 150,
       "mode": 0,
       "inputs": [
         {
@@ -12034,7 +11574,7 @@
           "links": [
             201,
             264,
-            407
+            482
           ]
         }
       ],
@@ -12097,7 +11637,7 @@
       "flags": {
         "allow_interaction": true
       },
-      "order": 98,
+      "order": 95,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -12135,13 +11675,13 @@
         -2170
       ],
       "size": [
-        2631.0546875,
+        2640,
         50
       ],
       "flags": {
         "allow_interaction": true
       },
-      "order": 99,
+      "order": 96,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -12183,7 +11723,7 @@
         640
       ],
       "flags": {},
-      "order": 192,
+      "order": 201,
       "mode": 0,
       "inputs": [
         {
@@ -12199,7 +11739,7 @@
           "links": [
             282,
             287,
-            425
+            481
           ]
         }
       ],
@@ -12266,7 +11806,7 @@
         430
       ],
       "flags": {},
-      "order": 191,
+      "order": 200,
       "mode": 0,
       "inputs": [
         {
@@ -12282,7 +11822,7 @@
           "links": [
             195,
             281,
-            424
+            480
           ]
         }
       ],
@@ -12333,7 +11873,7 @@
         490
       ],
       "flags": {},
-      "order": 190,
+      "order": 199,
       "mode": 0,
       "inputs": [
         {
@@ -12349,7 +11889,7 @@
           "links": [
             203,
             280,
-            423
+            479
           ]
         }
       ],
@@ -12410,7 +11950,7 @@
         470
       ],
       "flags": {},
-      "order": 189,
+      "order": 198,
       "mode": 0,
       "inputs": [
         {
@@ -12426,7 +11966,7 @@
           "links": [
             226,
             279,
-            422
+            478
           ]
         }
       ],
@@ -12487,7 +12027,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 100,
+      "order": 97,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -12534,82 +12074,6 @@
       "bgcolor": "#355"
     },
     {
-      "id": 148,
-      "type": "LCGetImage",
-      "pos": [
-        -8240,
-        -2860
-      ],
-      "size": [
-        300,
-        130
-      ],
-      "flags": {},
-      "order": 196,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 290
-        }
-      ],
-      "outputs": [
-        {
-          "name": "megapixels",
-          "type": "FLOAT",
-          "links": [
-            310
-          ]
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "resolution",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "batch",
-          "type": "INT",
-          "links": null
-        },
-        {
-          "name": "aspect ratio",
-          "type": "STRING",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_LC123_nodes",
-        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
-        "Node name for S&R": "LCGetImage",
-        "enableTabs": false,
-        "tabWidth": 65,
-        "tabXOffset": 10,
-        "hasSecondTab": false,
-        "secondTabText": "Send Back",
-        "secondTabOffset": 80,
-        "secondTabWidth": 65,
-        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "color": "#324b4b",
-      "bgcolor": "#324b4b"
-    },
-    {
       "id": 196,
       "type": "LC Bypasser Panel",
       "pos": [
@@ -12621,7 +12085,7 @@
         582
       ],
       "flags": {},
-      "order": 203,
+      "order": 212,
       "mode": 0,
       "inputs": [
         {
@@ -12710,7 +12174,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 195,
+      "order": 204,
       "mode": 0,
       "inputs": [
         {
@@ -12767,7 +12231,7 @@
         540
       ],
       "flags": {},
-      "order": 184,
+      "order": 193,
       "mode": 0,
       "inputs": [
         {
@@ -12783,7 +12247,7 @@
           "links": [
             191,
             274,
-            417
+            487
           ]
         }
       ],
@@ -12850,7 +12314,7 @@
         560
       ],
       "flags": {},
-      "order": 188,
+      "order": 197,
       "mode": 0,
       "inputs": [
         {
@@ -12866,7 +12330,7 @@
           "links": [
             230,
             278,
-            421
+            491
           ]
         }
       ],
@@ -12935,7 +12399,7 @@
         650
       ],
       "flags": {},
-      "order": 182,
+      "order": 191,
       "mode": 0,
       "inputs": [
         {
@@ -12951,7 +12415,7 @@
           "links": [
             202,
             272,
-            415
+            485
           ]
         }
       ],
@@ -13026,7 +12490,7 @@
         520
       ],
       "flags": {},
-      "order": 175,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -13042,7 +12506,7 @@
           "links": [
             197,
             267,
-            410
+            494
           ]
         }
       ],
@@ -13105,7 +12569,7 @@
         410
       ],
       "flags": {},
-      "order": 101,
+      "order": 98,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -13163,7 +12627,7 @@
         360
       ],
       "flags": {},
-      "order": 102,
+      "order": 99,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -13198,7 +12662,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 160,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -13256,7 +12720,7 @@
         560
       ],
       "flags": {},
-      "order": 159,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -13341,7 +12805,7 @@
         1210
       ],
       "flags": {},
-      "order": 103,
+      "order": 100,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -13374,7 +12838,7 @@
         520
       ],
       "flags": {},
-      "order": 180,
+      "order": 189,
       "mode": 0,
       "inputs": [
         {
@@ -13389,8 +12853,7 @@
           "type": "IMAGE",
           "links": [
             232,
-            270,
-            413
+            270
           ]
         }
       ],
@@ -13453,7 +12916,7 @@
         250
       ],
       "flags": {},
-      "order": 104,
+      "order": 101,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -13486,7 +12949,7 @@
         400
       ],
       "flags": {},
-      "order": 158,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -13522,6 +12985,947 @@
       },
       "color": "#222",
       "bgcolor": "#000"
+    },
+    {
+      "id": 370,
+      "type": "LoadImage",
+      "pos": [
+        -7740,
+        -1010
+      ],
+      "size": [
+        300,
+        410
+      ],
+      "flags": {},
+      "order": 102,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            471,
+            473,
+            475
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.31.0",
+        "Node name for S&R": "LoadImage",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Nova_Selfie_run_00043__ins.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "Nova_Selfie_run_00043__ins.png",
+        "upload": "image"
+      },
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 279,
+      "type": "MarkdownNote",
+      "pos": [
+        -9140,
+        -1500
+      ],
+      "size": [
+        620,
+        700
+      ],
+      "flags": {},
+      "order": 103,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
+      ],
+      "widgets_values_named": {
+        "text": "# LC Skin Beauty ✨\n\nMask-aware skin cooling and brightening for ComfyUI (LC123). Works in **CIELAB** under an auto (or external) skin mask so backgrounds and most clothing stay out of the grade.\n\n---\n\n## Highlights\n\n- **Skin-first, not whole-frame bleach** — correction follows a skin probability mask  \n- **Presets that load the sliders** — pick a starting look, then fine-tune what you see  \n- **Eyes & lips protected** — auto mask soft-excludes dark eyes and strong lip red  \n- **Fabric-aware auto mask** — high local pattern variance is suppressed (prints/weaves)  \n- **Highlight & texture controls** — keep specular and pores from going plastic  \n- **Optional external MASK** — best quality when you already have a face/skin matte  \n- **On-node before/after wipe** — same LC image-FX preview style  \n- **Outputs** — graded `image` + `skin_mask` (inspect or reuse downstream)\n\n---\n\n## Features\n\n| Control | What it does |\n|--------|----------------|\n| **preset** | Starting point (Natural, Light, Fresh, Porcelain, Warm keep, Custom). Loads slider values; then sliders are source of truth. |\n| **strength** | How much of the effect to apply (0 = original, 1 = full, &gt;1 = stronger). |\n| **coolness** | Less yellow / cooler skin (LAB b*). |\n| **brightness** | Overall skin lift (whitening), softened on highlights. |\n| **rosy** | Pink/red flush (LAB a*). Negative = less red. |\n| **evenness** | Local color evening under the mask. |\n| **shadow_lift** | Extra lift in dark skin regions. |\n| **smooth** | Mild softening under the mask. |\n| **texture_preserve** | Caps how much smooth can flatten pores. |\n| **saturation** | Skin chroma under the mask (negative = quieter). |\n| **highlight_protect** | Reduce effect on bright specular skin. |\n| **mask_sensitivity** | Auto mask inclusiveness. |\n| **mask_feather** | Softness of mask edges. |\n| **mask** (optional) | External skin matte; blended with auto for precision. |\n\n---\n\n## Getting the most out of it\n\n| Goal | Suggested approach |\n|------|---------------------|\n| **Natural cleanup** | Preset **Natural**, strength **0.7–1.0**. Leave other sliders as loaded. |\n| **Subtle only** | **Light**, strength **0.5–0.8**. |\n| **Clearer / cooler** | **Fresh** or raise **coolness** slightly; keep **highlight_protect** high. |\n| **Strong studio look** | **Porcelain**, strength **≤1.0**; raise **texture_preserve** if it goes plastic. |\n| **Keep warmth** | **Warm keep**, or lower **coolness** and raise **rosy** a little. |\n| **Less eye/lip change** | Already protected in auto mask; if needed, lower **strength** or use an external mask that excludes eyes/mouth. |\n| **Prints still pick up** | Lower **mask_sensitivity**; inspect **skin_mask** output; or feed a real skin **MASK**. |\n| **Hands / body too weak** | Raise **mask_sensitivity** slightly, or paint/segment those areas into **mask**. |\n| **Plastic skin** | Lower **smooth**, raise **texture_preserve**, ease **evenness**. |\n| **Flat highlights** | Raise **highlight_protect**; ease **brightness**. |\n| **Quality check** | Preview **skin_mask** — white = affected, black = left alone. |\n\n---\n\n## Quick workflow\n\n1. Image → **LC Skin Beauty ✨**  \n2. Choose a **preset** (sliders update)  \n3. Queue once; use the **wipe** to compare  \n4. Adjust **strength** first, then one or two sliders  \n5. Optional: view **skin_mask**; optional: wire an external **MASK**  \n\n---\n\n## Honest limits\n\nAuto mask is **color + structure heuristics**, not a person segmenter. Ornate fabrics and warm bokeh can still leak a little. For critical work, pair with **SAM / face-parse / hand mask** on the **mask** input.\n\n---"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 189,
+      "type": "MarkdownNote",
+      "pos": [
+        -11530,
+        -3380
+      ],
+      "size": [
+        340,
+        270
+      ],
+      "flags": {},
+      "order": 104,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "## Bypassers\n\n- designed so that several toggles can be controlled by a boolean\n- boolean connection locks the toggle\n\n**LC Groups Bypasser**\n- connect the boolean to the sockets on the node\n\n**LC Bypasser**\n- populates a connection with a boolean connection directly below it.\n\n**LC Mute**\n- same as bypasser, but mutes the connected nodes\n\n**LC Bypasser Panel** \n- allows you to fully collapse the bypass nodes once it is hooked up.\n- work with both **LC Bypasser** and **LC Groups Bypasser**\n\n"
+      ],
+      "widgets_values_named": {
+        "text": "## Bypassers\n\n- designed so that several toggles can be controlled by a boolean\n- boolean connection locks the toggle\n\n**LC Groups Bypasser**\n- connect the boolean to the sockets on the node\n\n**LC Bypasser**\n- populates a connection with a boolean connection directly below it.\n\n**LC Mute**\n- same as bypasser, but mutes the connected nodes\n\n**LC Bypasser Panel** \n- allows you to fully collapse the bypass nodes once it is hooked up.\n- work with both **LC Bypasser** and **LC Groups Bypasser**\n\n"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 184,
+      "type": "LCShowText",
+      "pos": [
+        -12210,
+        -3570
+      ],
+      "size": [
+        270,
+        120
+      ],
+      "flags": {},
+      "order": 154,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 243
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCShowText",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_show_text": "Hello!\nHow\nare\nyou?"
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 376,
+      "type": "LC Mute",
+      "pos": [
+        -12210,
+        -3390
+      ],
+      "size": [
+        270,
+        70
+      ],
+      "flags": {},
+      "order": 105,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "enable",
+          "type": "BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "toggleRestriction": "default",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 148,
+      "type": "LCGetImage",
+      "pos": [
+        -8240,
+        -2860
+      ],
+      "size": [
+        300,
+        130
+      ],
+      "flags": {},
+      "order": 205,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 290
+        }
+      ],
+      "outputs": [
+        {
+          "name": "megapixels",
+          "type": "FLOAT",
+          "links": [
+            310
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "batch",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "aspect ratio",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "4ac98869e5f9ef0a5382ec86d105271257c09267",
+        "Node name for S&R": "LCGetImage",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "aux_id": "lonecatone23/ComfyUI_LC123_nodes",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#324b4b",
+      "bgcolor": "#324b4b"
+    },
+    {
+      "id": 377,
+      "type": "LCBatchImage",
+      "pos": [
+        -6460,
+        -4320
+      ],
+      "size": [
+        190,
+        416
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 207,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_01",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 477
+        },
+        {
+          "name": "image_02",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 478
+        },
+        {
+          "name": "image_03",
+          "type": "IMAGE",
+          "link": 479
+        },
+        {
+          "name": "image_04",
+          "type": "IMAGE",
+          "link": 480
+        },
+        {
+          "name": "image_05",
+          "type": "IMAGE",
+          "link": 481
+        },
+        {
+          "name": "image_06",
+          "type": "IMAGE",
+          "link": 482
+        },
+        {
+          "name": "image_07",
+          "type": "IMAGE",
+          "link": 483
+        },
+        {
+          "name": "image_08",
+          "type": "IMAGE",
+          "link": 484
+        },
+        {
+          "name": "image_09",
+          "type": "IMAGE",
+          "link": 485
+        },
+        {
+          "name": "image_10",
+          "type": "IMAGE",
+          "link": 486
+        },
+        {
+          "name": "image_11",
+          "type": "IMAGE",
+          "link": 487
+        },
+        {
+          "name": "image_12",
+          "type": "IMAGE",
+          "link": 488
+        },
+        {
+          "name": "image_13",
+          "type": "IMAGE",
+          "link": 489
+        },
+        {
+          "name": "image_14",
+          "type": "IMAGE",
+          "link": 492
+        },
+        {
+          "name": "image_15",
+          "type": "IMAGE",
+          "link": 491
+        },
+        {
+          "name": "image_16",
+          "type": "IMAGE",
+          "link": 493
+        },
+        {
+          "name": "image_17",
+          "type": "IMAGE",
+          "link": 494
+        },
+        {
+          "name": "image_18",
+          "type": "IMAGE",
+          "link": 495
+        },
+        {
+          "name": "image_19",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            497
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCBatchImage",
+        "lc_w": 190,
+        "lc_h": 420,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#324B4B",
+      "bgcolor": "#324B4B"
+    },
+    {
+      "id": 360,
+      "type": "LCIndexSwitch",
+      "pos": [
+        -12880,
+        -4070
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 141,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "index",
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": 467
+        },
+        {
+          "label": "STRING",
+          "name": "any_01",
+          "shape": 7,
+          "type": "STRING",
+          "link": 468
+        },
+        {
+          "label": "STRING",
+          "name": "any_02",
+          "shape": 7,
+          "type": "STRING",
+          "link": 469
+        },
+        {
+          "label": "STRING",
+          "name": "any_03",
+          "shape": 7,
+          "type": "STRING",
+          "link": 470
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            465
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "7c9e412c755d1a6593aefbc753825a3b07a65071",
+        "Node name for S&R": "LCIndexSwitch",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65,
+        "lc_size_w": 270,
+        "lc_size_h": 130,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "lc_w": 270,
+        "lc_h": 130
+      },
+      "widgets_values": [
+        0,
+        3
+      ],
+      "widgets_values_named": {
+        "index": 0,
+        "inputcount": 3
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 383,
+      "type": "LCAnyEmptyInt",
+      "pos": [
+        -12220,
+        -4140
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 106,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "any_01",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "int",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCAnyEmptyInt",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0,
+        1
+      ],
+      "widgets_values_named": {
+        "empty": 0,
+        "not_empty": 1
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 387,
+      "type": "LCAnyEmptyFloat",
+      "pos": [
+        -12210,
+        -3980
+      ],
+      "size": [
+        240,
+        106
+      ],
+      "flags": {},
+      "order": 107,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any_01",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCAnyEmptyFloat",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0,
+        1
+      ],
+      "widgets_values_named": {
+        "empty": 0,
+        "not_empty": 1
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 384,
+      "type": "LCAnyEmptyBool",
+      "pos": [
+        -12210,
+        -3830
+      ],
+      "size": [
+        180,
+        58
+      ],
+      "flags": {},
+      "order": 108,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "any",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "any_01",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "empty",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCAnyEmptyBool",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 385,
+      "type": "LCIntSplit",
+      "pos": [
+        -11960,
+        -3850
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {},
+      "order": 109,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "a",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "b",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "total",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCIntSplit",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        20,
+        0.5
+      ],
+      "widgets_values_named": {
+        "total": 20,
+        "split_point": 0.5
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 386,
+      "type": "MarkdownNote",
+      "pos": [
+        -11930,
+        -4100
+      ],
+      "size": [
+        290,
+        190
+      ],
+      "flags": {},
+      "order": 110,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "anyempty",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "\n\n### Any Empty (Bool / Int)\n- Autogrow `any_*`. Only **plugged** sockets are tested.\n- Source **mute** or **bypass** = empty.\n- True / `empty` int if **any** plugged source is empty or dead.\n- Int and float return custom number depending on their state.\n\n### Int Split\n- `split_point` **0–1.0** only (fraction). `0.5` = half.\n"
+      ],
+      "widgets_values_named": {
+        "text": "\n\n### Any Empty (Bool / Int)\n- Autogrow `any_*`. Only **plugged** sockets are tested.\n- Source **mute** or **bypass** = empty.\n- True / `empty` int if **any** plugged source is empty or dead.\n- Int and float return custom number depending on their state.\n\n### Int Split\n- `split_point` **0–1.0** only (fraction). `0.5` = half.\n"
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 389,
+      "type": "LCSaveImage",
+      "pos": [
+        -10590,
+        -1210
+      ],
+      "size": [
+        280,
+        250
+      ],
+      "flags": {},
+      "order": 111,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "metadata",
+          "shape": 7,
+          "type": "LC_SAVE_META",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "saved_as",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCSaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "LC123",
+        "",
+        "png",
+        95,
+        true,
+        true,
+        true,
+        ""
+      ],
+      "widgets_values_named": {
+        "filename": "LC123",
+        "path": "",
+        "format": "png",
+        "quality": 95,
+        "embed_workflow": true,
+        "embed_civitai": true,
+        "hash_resources": true,
+        "filename_prefix": ""
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 388,
+      "type": "LCSaveImageMetadata",
+      "pos": [
+        -11010,
+        -1210
+      ],
+      "size": [
+        400,
+        430
+      ],
+      "flags": {},
+      "order": 112,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "shape": 7,
+          "type": "LC_PIPE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "metadata",
+          "type": "LC_SAVE_META",
+          "links": null
+        },
+        {
+          "name": "parameters",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "3d7e0de54080f5d9bdd720e0e1b854e33c4f0673",
+        "Node name for S&R": "LCSaveImageMetadata",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "",
+        -1,
+        0,
+        0,
+        "",
+        "",
+        "",
+        "",
+        0,
+        0,
+        0,
+        ""
+      ],
+      "widgets_values_named": {
+        "positive": "",
+        "negative": "",
+        "seed_value": -1,
+        "steps": 0,
+        "cfg": 0,
+        "sampler": "",
+        "scheduler": "",
+        "models": "",
+        "civitai_air": "",
+        "width": 0,
+        "height": 0,
+        "denoise": 0,
+        "extra_params": ""
+      },
+      "color": "#28281E",
+      "bgcolor": "#28281E"
+    },
+    {
+      "id": 390,
+      "type": "MarkdownNote",
+      "pos": [
+        -10580,
+        -920
+      ],
+      "size": [
+        380,
+        290
+      ],
+      "flags": {},
+      "order": 113,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "LC Save Nodes",
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "\n## LC Save Image + Metadata\n\n**Save Metadata** → **Save Image** (`metadata`)\n\n### Save Metadata\n- Optional **pipe** in (LC_PIPE). No pipe out.\n- Pipe fills: prompts, seed, steps (`total_steps`), CFG (`cfg_1`), sampler, scheduler, size, denoise.\n- Widgets override pipe when set (seed `-1`, steps/cfg `0` = use pipe).\n- **models** — one field, comma-separated (`Model 1, Model 2`).\n- **civitai_air** — primary AIR *or* Civitai URL. Written as `civitaiResources` JSON (not a raw `AIR:` line).\n\n### Save Image\n- **filename** + **path** under Comfy output.\n- Optional **filename_prefix** — Easy Folder, if filename is left default.\n- PNG: workflow + `parameters` + `civitaiResources` + hashes.\n- JPEG/WebP: short comment only.\n- **hash files** — AutoV2 from live loaders. Civitai lists resources from hashes, not names.\n"
+      ],
+      "widgets_values_named": {
+        "text": "\n## LC Save Image + Metadata\n\n**Save Metadata** → **Save Image** (`metadata`)\n\n### Save Metadata\n- Optional **pipe** in (LC_PIPE). No pipe out.\n- Pipe fills: prompts, seed, steps (`total_steps`), CFG (`cfg_1`), sampler, scheduler, size, denoise.\n- Widgets override pipe when set (seed `-1`, steps/cfg `0` = use pipe).\n- **models** — one field, comma-separated (`Model 1, Model 2`).\n- **civitai_air** — primary AIR *or* Civitai URL. Written as `civitaiResources` JSON (not a raw `AIR:` line).\n\n### Save Image\n- **filename** + **path** under Comfy output.\n- Optional **filename_prefix** — Easy Folder, if filename is left default.\n- PNG: workflow + `parameters` + `civitaiResources` + hashes.\n- JPEG/WebP: short comment only.\n- **hash files** — AutoV2 from live loaders. Civitai lists resources from hashes, not names.\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
     }
   ],
   "links": [
@@ -14526,182 +14930,6 @@
       "IMAGE"
     ],
     [
-      406,
-      172,
-      0,
-      307,
-      0,
-      "IMAGE"
-    ],
-    [
-      407,
-      168,
-      0,
-      307,
-      1,
-      "IMAGE"
-    ],
-    [
-      408,
-      161,
-      0,
-      307,
-      18,
-      "IMAGE"
-    ],
-    [
-      409,
-      159,
-      0,
-      307,
-      19,
-      "IMAGE"
-    ],
-    [
-      410,
-      156,
-      0,
-      307,
-      20,
-      "IMAGE"
-    ],
-    [
-      411,
-      157,
-      0,
-      307,
-      21,
-      "IMAGE"
-    ],
-    [
-      412,
-      158,
-      0,
-      307,
-      10,
-      "IMAGE"
-    ],
-    [
-      413,
-      160,
-      0,
-      307,
-      11,
-      "IMAGE"
-    ],
-    [
-      414,
-      173,
-      0,
-      307,
-      12,
-      "IMAGE"
-    ],
-    [
-      415,
-      167,
-      0,
-      307,
-      13,
-      "IMAGE"
-    ],
-    [
-      416,
-      162,
-      0,
-      307,
-      14,
-      "IMAGE"
-    ],
-    [
-      417,
-      154,
-      0,
-      307,
-      15,
-      "IMAGE"
-    ],
-    [
-      418,
-      152,
-      0,
-      307,
-      16,
-      "IMAGE"
-    ],
-    [
-      419,
-      151,
-      0,
-      307,
-      17,
-      "IMAGE"
-    ],
-    [
-      420,
-      149,
-      0,
-      307,
-      2,
-      "IMAGE"
-    ],
-    [
-      421,
-      147,
-      0,
-      307,
-      3,
-      "IMAGE"
-    ],
-    [
-      422,
-      171,
-      0,
-      307,
-      4,
-      "IMAGE"
-    ],
-    [
-      423,
-      166,
-      0,
-      307,
-      5,
-      "IMAGE"
-    ],
-    [
-      424,
-      163,
-      0,
-      307,
-      6,
-      "IMAGE"
-    ],
-    [
-      425,
-      155,
-      0,
-      307,
-      7,
-      "IMAGE"
-    ],
-    [
-      426,
-      194,
-      0,
-      307,
-      8,
-      "IMAGE"
-    ],
-    [
-      428,
-      307,
-      0,
-      308,
-      0,
-      "IMAGE"
-    ],
-    [
       429,
       308,
       0,
@@ -14964,6 +15192,158 @@
       373,
       0,
       "MASK"
+    ],
+    [
+      477,
+      172,
+      0,
+      377,
+      0,
+      "IMAGE"
+    ],
+    [
+      478,
+      171,
+      0,
+      377,
+      1,
+      "IMAGE"
+    ],
+    [
+      479,
+      166,
+      0,
+      377,
+      2,
+      "IMAGE"
+    ],
+    [
+      480,
+      163,
+      0,
+      377,
+      3,
+      "IMAGE"
+    ],
+    [
+      481,
+      155,
+      0,
+      377,
+      4,
+      "IMAGE"
+    ],
+    [
+      482,
+      168,
+      0,
+      377,
+      5,
+      "IMAGE"
+    ],
+    [
+      483,
+      194,
+      0,
+      377,
+      6,
+      "IMAGE"
+    ],
+    [
+      484,
+      173,
+      0,
+      377,
+      7,
+      "IMAGE"
+    ],
+    [
+      485,
+      167,
+      0,
+      377,
+      8,
+      "IMAGE"
+    ],
+    [
+      486,
+      162,
+      0,
+      377,
+      9,
+      "IMAGE"
+    ],
+    [
+      487,
+      154,
+      0,
+      377,
+      10,
+      "IMAGE"
+    ],
+    [
+      488,
+      152,
+      0,
+      377,
+      11,
+      "IMAGE"
+    ],
+    [
+      489,
+      151,
+      0,
+      377,
+      12,
+      "IMAGE"
+    ],
+    [
+      491,
+      147,
+      0,
+      377,
+      14,
+      "IMAGE"
+    ],
+    [
+      492,
+      161,
+      0,
+      377,
+      13,
+      "IMAGE"
+    ],
+    [
+      493,
+      159,
+      0,
+      377,
+      15,
+      "IMAGE"
+    ],
+    [
+      494,
+      156,
+      0,
+      377,
+      16,
+      "IMAGE"
+    ],
+    [
+      495,
+      157,
+      0,
+      377,
+      17,
+      "IMAGE"
+    ],
+    [
+      497,
+      377,
+      0,
+      308,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [
@@ -15212,15 +15592,15 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.1,
+      "scale": 0.8954302432552427,
       "offset": [
-        22546.483986170035,
-        7654.869524790437
+        11864.640406956953,
+        1553.1469229581105
       ]
     },
     "links_added_by_ue": [],
     "k2cf_state_id": "k2cf_1785113348833_apxfftyz2ud",
-    "frontendVersion": "1.49.6",
+    "frontendVersion": "1.51.9",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,

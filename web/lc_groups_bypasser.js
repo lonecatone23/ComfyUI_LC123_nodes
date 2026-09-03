@@ -219,8 +219,12 @@ app.registerExtension({
 
   registerCustomNodes() {
     class LCGroupsBypasser extends LGraphNode {
-      constructor() {
-        super(NODE_TYPE);
+      constructor(title) {
+        const t =
+          typeof title === "string" && title.trim() && title !== "Unnamed"
+            ? title
+            : NODE_TYPE;
+        super(t);
         this.isVirtualNode = true;
         this.serialize_widgets = true;
         this.properties = this.properties || {};

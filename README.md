@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.25.0 · **102 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
+- **Version:** 1.25.1 · **102 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -320,7 +320,7 @@ Workflow → Open, or drag onto the canvas.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
 - **Save Image:** `path` + `filename`. Metadata node optional. PNG embeds workflow + parameters. Leave **hash files** on so Civitai can list resources (it matches AutoV2 hashes, not names). First hash per file is slow; a `.sha256` sidecar is cached beside the model. JPEG/WebP will not carry full Comfy JSON. Seed on the metadata node is a plain INT (`seed_value`) — no randomize control.
 - **Index Switch:** output length is the selected slot only — other wired lists are not zipped to the longest.
-- **Sigma Curve:** no MODEL. `from_input` loads a wired SIGMAS after a queue. Custom keeps your sculpt. Re-drop the node after Save to see new files in the combo.
+- **Sigma Curve:** no MODEL. `from_input` loads a wired SIGMAS after a queue. Custom keeps your sculpt. **Save curve** only arms the write — Queue yourself (auto-queue threw “can't find output of null” and wiped `save_name`). Re-drop the node after Save to see new files in the combo.
 - **Sigma Resample:** after the split, on high and/or low. The sampler really runs the new step count. Same as changing density on that band only.
 - **Any Empty:** only plugged sockets; mute/bypass on the source = empty.
 - **Int Split:** `split_point` is 0–1 only.

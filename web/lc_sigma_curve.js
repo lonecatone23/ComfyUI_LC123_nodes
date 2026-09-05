@@ -217,7 +217,6 @@ app.registerExtension({
             if (onExecuted) onExecuted.apply(this, arguments);
             const curveTxt = message && (message.lc_curve || message.curve);
             const stepsTxt = message && message.lc_steps;
-            const curPreset = String(widgetVal(this, "preset", "simple"));
             if (stepsTxt && stepsTxt[0] != null) {
                 const n = Math.max(1, parseInt(stepsTxt[0], 10) || 1);
                 setWidget(this, "total_steps", n);
@@ -225,10 +224,8 @@ app.registerExtension({
             if (curveTxt && curveTxt[0]) {
                 setWidget(this, "curve", String(curveTxt[0]));
             }
-            // Never snap Custom back to a named preset after a run.
-            if (curPreset !== "Custom" && message && message.lc_preset && message.lc_preset[0]) {
-                const p = String(message.lc_preset[0]);
-                if (p && !p.startsWith("─")) setWidget(this, "preset", p);
+            if (message && message.save_curve && message.save_curve[0] === false) {
+                setWidget(this, "save_curve", false);
             }
             this.setDirtyCanvas(true, true);
         };
@@ -304,7 +301,9 @@ app.registerExtension({
                     nameW.value = "custom_curve";
                 }
                 setWidget(self, "save_curve", true);
-                if (app.queuePrompt) app.queuePrompt(0);
+                // Do not queue from this callback — that throws
+                // "can't find output of null" and can wipe save_name.
+                // Next Queue Prompt writes the file.
             });
 
             const curveW = widget(this, "curve");

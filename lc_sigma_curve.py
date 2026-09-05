@@ -549,8 +549,8 @@ class LCSigmaCurve:
         return {
             "ui": {
                 "lc_curve": [text],
-                "lc_preset": [name],
                 "lc_steps": [int(max(len(vals) - 1, 1))],
+                "save_curve": [False],
             },
             "result": (torch.FloatTensor(vals), text),
         }

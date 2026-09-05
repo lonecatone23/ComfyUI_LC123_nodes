@@ -17,6 +17,7 @@ import torch
 
 _PACK = os.path.dirname(os.path.abspath(__file__))
 _CURVE_DIR = os.path.join(_PACK, "assets", "sigma_curves")
+_WEB_CURVE_DIR = os.path.join(_PACK, "web", "sigma_curves")
 
 _BUILTINS = (
     "simple",
@@ -42,6 +43,7 @@ _BUILTINS = (
 
 def _ensure_dir():
     os.makedirs(_CURVE_DIR, exist_ok=True)
+    os.makedirs(_WEB_CURVE_DIR, exist_ok=True)
 
 
 def _sanitize(name: str) -> str:
@@ -52,14 +54,15 @@ def _sanitize(name: str) -> str:
 
 def _list_saved() -> list[str]:
     _ensure_dir()
-    names = []
-    try:
-        for fn in sorted(os.listdir(_CURVE_DIR)):
-            if fn.endswith(".json"):
-                names.append(fn[:-5])
-    except OSError:
-        pass
-    return names
+    names = set()
+    for folder in (_CURVE_DIR, _WEB_CURVE_DIR):
+        try:
+            for fn in os.listdir(folder):
+                if fn.endswith(".json") and fn != "index.json":
+                    names.add(fn[:-5])
+        except OSError:
+            pass
+    return sorted(names)
 
 
 def _preset_choices() -> list[str]:
@@ -283,24 +286,41 @@ def _linear_quadratic(steps, sigma_max, threshold=0.025):
     return [s * sigma_max for s in sched]
 
 
+def _bong_piece(steps_n, slope, pivot, start, end):
+    if steps_n < 1:
+        return [start]
+    smax = ((2 / math.pi) * math.atan(-slope * (0 - pivot)) + 1) / 2
+    smin = ((2 / math.pi) * math.atan(-slope * ((steps_n - 1) - pivot)) + 1) / 2
+    srange = smax - smin or 1.0
+    sscale = start - end
+    return [
+        ((((2 / math.pi) * math.atan(-slope * (x - pivot)) + 1) / 2) - smin) / srange * sscale + end
+        for x in range(steps_n)
+    ]
+
+
 def _bong_tangent(steps, start, end, slope=0.2, pivot_frac=0.6):
-    # RES4LYF-style two-pivot atan curve, scaled to [start, end] then +0.
+    """RES4LYF bong_tangent_scheduler, resampled to steps+1 and ending at 0."""
     if steps < 1:
         return [start, 0.0]
-    pivot = (steps - 1) * pivot_frac
-
-    def tan_row(slope_v, piv):
-        smax = ((2 / math.pi) * math.atan(-slope_v * (0 - piv)) + 1) / 2
-        smin = ((2 / math.pi) * math.atan(-slope_v * ((steps - 1) - piv)) + 1) / 2
-        srange = smax - smin or 1.0
-        sscale = start - end
-        return [
-            ((((2 / math.pi) * math.atan(-slope_v * (x - piv)) + 1) / 2) - smin) / srange * sscale + end
-            for x in range(steps)
-        ]
-
-    sig = tan_row(slope, pivot)
-    return [max(0.0, float(v)) for v in sig] + [0.0]
+    n = steps + 2
+    middle = (float(start) + float(end)) * 0.5
+    pivot_1 = int(n * pivot_frac)
+    pivot_2 = int(n * pivot_frac)
+    midpoint = int((n * pivot_frac + n * pivot_frac) / 2)
+    slope_1 = slope / max(n / 40.0, 1e-6)
+    slope_2 = slope / max(n / 40.0, 1e-6)
+    stage_2_len = max(n - midpoint, 1)
+    stage_1_len = max(n - stage_2_len, 1)
+    tan1 = _bong_piece(stage_1_len, slope_1, pivot_1, start, middle)
+    tan2 = _bong_piece(stage_2_len, slope_2, pivot_2 - stage_1_len, middle, end)
+    raw = tan1[:-1] + tan2 + [0.0]
+    raw = [max(0.0, float(v)) for v in raw]
+    out = lerp_curve(raw, steps)
+    if out:
+        out[0] = float(start)
+        out[-1] = 0.0
+    return out
 
 
 def _scale_shape(shape, steps, sigma_max):
@@ -347,18 +367,31 @@ def _load_saved(name: str) -> list[float] | None:
     return parse_curve(raw)
 
 
+def _write_index():
+    names = _list_saved()
+    for folder in (_CURVE_DIR, _WEB_CURVE_DIR):
+        try:
+            with open(os.path.join(folder, "index.json"), "w", encoding="utf-8") as f:
+                json.dump({"curves": names}, f)
+        except OSError:
+            pass
+
+
 def _save_curve(name: str, vals: list[float], source: str, steps: int) -> str:
     _ensure_dir()
     safe = _sanitize(name)
-    path = os.path.join(_CURVE_DIR, safe + ".json")
     payload = {
         "name": safe,
         "sigmas": format_curve(vals),
         "source_preset": source,
         "steps": int(steps),
     }
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2)
+    path = os.path.join(_CURVE_DIR, safe + ".json")
+    web_path = os.path.join(_WEB_CURVE_DIR, safe + ".json")
+    for dest in (path, web_path):
+        with open(dest, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+    _write_index()
     return path
 
 
@@ -547,11 +580,7 @@ class LCSigmaCurve:
                 print(f"[LC123] sigma curve save failed: {e}")
 
         return {
-            "ui": {
-                "lc_curve": [text],
-                "lc_steps": [int(max(len(vals) - 1, 1))],
-                "save_curve": [False],
-            },
+            "ui": {"curve": [text]},
             "result": (torch.FloatTensor(vals), text),
         }
 

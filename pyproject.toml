@@ -1,6 +1,6 @@
 [project]
 name = "ComfyUI_LC123_nodes"
-version = "1.25.1"
+version = "1.25.2"
 description = "ComfyUI LC123 Nodes by lonecatone23 — Save Image + Metadata, Any Empty Bool/Int/Float, Int Split, LC Batch Image, Tone Match, Color Match mask, MiniMax H3 pipe, Image-Mask Resize, LC Lighting Control, Photo Style, Skin Beauty, Sharpen Pro, prompt builder, sampler configure, Sigma Curve, Sigma Resample, image FX, pipes, notify."
 readme = "README.md"
 requires-python = ">=3.10"

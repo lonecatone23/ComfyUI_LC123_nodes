@@ -110,6 +110,8 @@ _load("lc_easy_folder")
 _load("lc_save_image")
 _load("lc_any_empty")
 _load("lc_int_split")
+_load("lc_change_step_count")
+_load("lc_sigma_curve")
 
 WEB_DIRECTORY = "./web"
 

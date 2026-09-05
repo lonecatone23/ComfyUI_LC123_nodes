@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.24.1 · **100 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
+- **Version:** 1.25.0 · **102 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -197,6 +197,8 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Split Sigma Scheduler** | Split one schedule across two models. |
 | **LC Split Sigmas (Advanced)** | Two sigma curves + models; denoise; fallback to 1 if 2 missing. |
 | **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |
+| **LC Sigma Curve** | No MODEL. `sigma_max` is the fake top (Krea/Flux/WAN = 1.0). Preset list: **from_input** (optional `sigmas` socket, after one queue) · named schedules (`simple`, `karras`, `beta57`, `bong_tangent`, `linear_quadratic`, `kl_optimal`, `ays` / `ays+` / `ays_30` / `gits`, …) · saved files · **Custom**. Drag a knot → Custom; next run does not rebuild over it. `total_steps` on the face (convert to input). **Descending** = falling only. Save → `assets/sigma_curves/`. |
+| **LC Sigma Resample** | Same σ path, new **real** step count. `new_steps = round(old * multiplier) + adder`. Ends stay. Put **after** a split, on the slice you want denser — not before the splitter. (`LCChangeStepCount` is an alias.) |
 | **LC Reference Latent** | Up to 8 optional ref latents → conditioning. Empty = pass-through. |
 | **LC Denoise 💉** | Latent inject: `noise_std = 1 − denoise`. |
 | **LC Pipe (in/edit)** / **Pipe Out** / **Detail Pipe Out** | Bundle / unpack models, clips, VAEs, prompts, seed, steps… |
@@ -269,7 +271,7 @@ Manual node sizes stick across reload (auto-fit only on first create or when `in
 
 | File | Description |
 |------|-------------|
-| [`workflows/LC Node examples.json`](workflows/LC%20Node%20examples.json) | Tour of utility / image / prompt nodes (**updated**) |
+| [`workflows/LC Node examples.json`](workflows/LC%20Node%20examples.json) | Tour of utility / image / prompt / **sigma curve** nodes (**updated**) |
 | [`workflows/LC Lighting Control (BETA).json`](workflows/LC%20Lighting%20Control%20(BETA).json) | Image → normals / depth / mask → Lighting Control |
 | [`workflows/LC Skin Beauty.json`](workflows/LC%20Skin%20Beauty.json) | Skin Beauty with optional mask |
 | [`workflows/LC Skin Beauty basic (no deps).json`](workflows/LC%20Skin%20Beauty%20basic%20(no%20deps).json) | Skin Beauty only |
@@ -318,6 +320,8 @@ Workflow → Open, or drag onto the canvas.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
 - **Save Image:** `path` + `filename`. Metadata node optional. PNG embeds workflow + parameters. Leave **hash files** on so Civitai can list resources (it matches AutoV2 hashes, not names). First hash per file is slow; a `.sha256` sidecar is cached beside the model. JPEG/WebP will not carry full Comfy JSON. Seed on the metadata node is a plain INT (`seed_value`) — no randomize control.
 - **Index Switch:** output length is the selected slot only — other wired lists are not zipped to the longest.
+- **Sigma Curve:** no MODEL. `from_input` loads a wired SIGMAS after a queue. Custom keeps your sculpt. Re-drop the node after Save to see new files in the combo.
+- **Sigma Resample:** after the split, on high and/or low. The sampler really runs the new step count. Same as changing density on that band only.
 - **Any Empty:** only plugged sockets; mute/bypass on the source = empty.
 - **Int Split:** `split_point` is 0–1 only.
 - **Batch Image:** autogrow; muted/empty slots skipped. Node height follows slot count.
@@ -333,7 +337,7 @@ ComfyUI/custom_nodes/ComfyUI_LC123_nodes/__init__.py
 
 `__init__.py` must sit **directly** in that folder — not in `ComfyUI_LC123_nodes/ComfyUI_LC123_nodes/`. If you unzip a pack zip *inside* an existing clone, move the inner files up one level.
 
-Restart ComfyUI. Console should print the LC123 load line (~100 Python mappings). There is **no LC Math** node — use Comfy Math Expression. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
+Restart ComfyUI. Console should print the LC123 load line (~102 Python mappings). There is **no LC Math** node — use Comfy Math Expression. Optional workflows in `workflows/`. Hard-refresh the browser after a `web/` JS update.
 
 **Requirements:** ComfyUI’s Python env (`torch`, `numpy`). No extra pip packages. Depth Anything / SAM / remBG for lighting & masks are separate installs.
 

@@ -1,7 +1,7 @@
 {
   "id": "acd3f8f3-ac79-4037-9846-8d4bfb5b39a9",
   "revision": 0,
-  "last_node_id": 390,
+  "last_node_id": 394,
   "last_link_id": 500,
   "nodes": [
     {
@@ -18,7 +18,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 124,
+      "order": 126,
       "mode": 0,
       "inputs": [
         {
@@ -68,7 +68,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 127,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -693,7 +693,7 @@
         130
       ],
       "flags": {},
-      "order": 122,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -746,7 +746,7 @@
         250
       ],
       "flags": {},
-      "order": 121,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -829,7 +829,7 @@
         50
       ],
       "flags": {},
-      "order": 149,
+      "order": 151,
       "mode": 0,
       "inputs": [
         {
@@ -978,7 +978,7 @@
         280
       ],
       "flags": {},
-      "order": 177,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -1042,7 +1042,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 119,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -1099,7 +1099,7 @@
         30
       ],
       "flags": {},
-      "order": 131,
+      "order": 133,
       "mode": 0,
       "inputs": [
         {
@@ -1148,7 +1148,7 @@
         50
       ],
       "flags": {},
-      "order": 132,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -1318,7 +1318,7 @@
         90
       ],
       "flags": {},
-      "order": 123,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -1426,7 +1426,7 @@
         60
       ],
       "flags": {},
-      "order": 130,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -1485,7 +1485,7 @@
         50
       ],
       "flags": {},
-      "order": 129,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -1655,7 +1655,7 @@
         340
       ],
       "flags": {},
-      "order": 117,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -1713,7 +1713,7 @@
         520
       ],
       "flags": {},
-      "order": 118,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -1918,8 +1918,8 @@
       "id": 179,
       "type": "LCPositive",
       "pos": [
-        -12460,
-        -3200
+        -12480,
+        -3000
       ],
       "size": [
         210,
@@ -1971,8 +1971,8 @@
       "id": 180,
       "type": "LCPositive",
       "pos": [
-        -12460,
-        -3060
+        -12480,
+        -2860
       ],
       "size": [
         210,
@@ -2034,7 +2034,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 203,
+      "order": 205,
       "mode": 0,
       "inputs": [
         {
@@ -2127,7 +2127,7 @@
         640
       ],
       "flags": {},
-      "order": 206,
+      "order": 208,
       "mode": 0,
       "inputs": [
         {
@@ -2175,7 +2175,7 @@
         120
       ],
       "flags": {},
-      "order": 125,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -2300,7 +2300,7 @@
         450
       ],
       "flags": {},
-      "order": 126,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -2424,7 +2424,7 @@
         400
       ],
       "flags": {},
-      "order": 151,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -2518,8 +2518,8 @@
       "id": 204,
       "type": "LCTextRemove",
       "pos": [
-        -13240,
-        -3270
+        -13260,
+        -3070
       ],
       "size": [
         360,
@@ -2654,8 +2654,8 @@
         -4450
       ],
       "size": [
-        740,
-        80
+        733.70361328125,
+        75
       ],
       "flags": {
         "allow_interaction": true
@@ -2839,7 +2839,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 210,
+      "order": 212,
       "mode": 0,
       "inputs": [
         {
@@ -3322,7 +3322,7 @@
         140
       ],
       "flags": {},
-      "order": 115,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -3399,7 +3399,7 @@
         130
       ],
       "flags": {},
-      "order": 208,
+      "order": 210,
       "mode": 0,
       "inputs": [
         {
@@ -3465,7 +3465,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 152,
+      "order": 154,
       "mode": 0,
       "inputs": [
         {
@@ -3523,7 +3523,7 @@
         420
       ],
       "flags": {},
-      "order": 153,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -3588,7 +3588,7 @@
         640
       ],
       "flags": {},
-      "order": 179,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -3668,7 +3668,7 @@
         390
       ],
       "flags": {},
-      "order": 182,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -3771,7 +3771,7 @@
         -6010
       ],
       "size": [
-        2580,
+        2570.9228515625,
         250
       ],
       "flags": {
@@ -3811,8 +3811,8 @@
       "id": 181,
       "type": "LCPositive",
       "pos": [
-        -12460,
-        -2920
+        -12480,
+        -2720
       ],
       "size": [
         210,
@@ -3872,7 +3872,7 @@
         740
       ],
       "flags": {},
-      "order": 128,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -3978,7 +3978,7 @@
         740
       ],
       "flags": {},
-      "order": 114,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -4083,7 +4083,7 @@
         560
       ],
       "flags": {},
-      "order": 178,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -4166,7 +4166,7 @@
         600
       ],
       "flags": {},
-      "order": 181,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -4253,7 +4253,7 @@
         540
       ],
       "flags": {},
-      "order": 187,
+      "order": 189,
       "mode": 0,
       "inputs": [
         {
@@ -4334,7 +4334,7 @@
         490
       ],
       "flags": {},
-      "order": 188,
+      "order": 190,
       "mode": 0,
       "inputs": [
         {
@@ -4410,7 +4410,7 @@
         560
       ],
       "flags": {},
-      "order": 190,
+      "order": 192,
       "mode": 0,
       "inputs": [
         {
@@ -4493,7 +4493,7 @@
         540
       ],
       "flags": {},
-      "order": 192,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -4574,7 +4574,7 @@
         490
       ],
       "flags": {},
-      "order": 194,
+      "order": 196,
       "mode": 0,
       "inputs": [
         {
@@ -4651,7 +4651,7 @@
         540
       ],
       "flags": {},
-      "order": 195,
+      "order": 197,
       "mode": 0,
       "inputs": [
         {
@@ -4732,7 +4732,7 @@
         540
       ],
       "flags": {},
-      "order": 196,
+      "order": 198,
       "mode": 0,
       "inputs": [
         {
@@ -4812,7 +4812,7 @@
         560
       ],
       "flags": {},
-      "order": 202,
+      "order": 204,
       "mode": 0,
       "inputs": [
         {
@@ -4909,7 +4909,7 @@
         230
       ],
       "flags": {},
-      "order": 211,
+      "order": 213,
       "mode": 0,
       "inputs": [
         {
@@ -5012,7 +5012,7 @@
         1050
       ],
       "flags": {},
-      "order": 213,
+      "order": 215,
       "mode": 0,
       "inputs": [
         {
@@ -5060,7 +5060,7 @@
         450
       ],
       "flags": {},
-      "order": 209,
+      "order": 211,
       "mode": 0,
       "inputs": [
         {
@@ -5167,15 +5167,15 @@
       "id": 203,
       "type": "LCShowText",
       "pos": [
-        -12860,
-        -3570
+        -12880,
+        -3370
       ],
       "size": [
         270,
         120
       ],
       "flags": {},
-      "order": 156,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -5217,8 +5217,8 @@
       "id": 220,
       "type": "LCNotify",
       "pos": [
-        -11530,
-        -3060
+        -11550,
+        -2860
       ],
       "size": [
         270,
@@ -5278,8 +5278,8 @@
       "id": 221,
       "type": "MarkdownNote",
       "pos": [
-        -11530,
-        -2880
+        -11550,
+        -2680
       ],
       "size": [
         330,
@@ -5318,7 +5318,7 @@
         90
       ],
       "flags": {},
-      "order": 174,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -5406,7 +5406,7 @@
         90
       ],
       "flags": {},
-      "order": 173,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -5492,7 +5492,7 @@
         130
       ],
       "flags": {},
-      "order": 146,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -5630,7 +5630,7 @@
         130
       ],
       "flags": {},
-      "order": 147,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -5713,7 +5713,7 @@
         260
       ],
       "flags": {},
-      "order": 171,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -5762,7 +5762,7 @@
         310
       ],
       "flags": {},
-      "order": 172,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -5811,7 +5811,7 @@
         90
       ],
       "flags": {},
-      "order": 170,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -6028,7 +6028,7 @@
         160
       ],
       "flags": {},
-      "order": 137,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -6120,7 +6120,7 @@
         90
       ],
       "flags": {},
-      "order": 158,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -6174,7 +6174,7 @@
         90
       ],
       "flags": {},
-      "order": 162,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -6227,7 +6227,7 @@
         90
       ],
       "flags": {},
-      "order": 159,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -6281,7 +6281,7 @@
         90
       ],
       "flags": {},
-      "order": 160,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -6335,7 +6335,7 @@
         90
       ],
       "flags": {},
-      "order": 163,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -6388,7 +6388,7 @@
         90
       ],
       "flags": {},
-      "order": 161,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -6434,8 +6434,8 @@
       "id": 191,
       "type": "LC Bypasser",
       "pos": [
-        -11910,
-        -3570
+        -11930,
+        -3370
       ],
       "size": [
         350,
@@ -6444,7 +6444,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 134,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -6534,8 +6534,8 @@
       "id": 190,
       "type": "MarkdownNote",
       "pos": [
-        -12860,
-        -3340
+        -12880,
+        -3140
       ],
       "size": [
         380,
@@ -6566,15 +6566,15 @@
       "id": 202,
       "type": "LCTextReplace",
       "pos": [
-        -13240,
-        -3570
+        -13260,
+        -3370
       ],
       "size": [
         360,
         236
       ],
       "flags": {},
-      "order": 135,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -6707,8 +6707,8 @@
       "id": 178,
       "type": "LCPositive",
       "pos": [
-        -12460,
-        -3340
+        -12480,
+        -3140
       ],
       "size": [
         210,
@@ -6762,15 +6762,15 @@
       "id": 225,
       "type": "LCShowText",
       "pos": [
-        -13240,
-        -2680
+        -13260,
+        -2480
       ],
       "size": [
         330,
         120
       ],
       "flags": {},
-      "order": 157,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -6811,8 +6811,8 @@
       "id": 224,
       "type": "LCPositive",
       "pos": [
-        -13240,
-        -2940
+        -13260,
+        -2740
       ],
       "size": [
         340,
@@ -6861,15 +6861,15 @@
       "id": 222,
       "type": "LCCivitaiStrip",
       "pos": [
-        -13240,
-        -2780
+        -13260,
+        -2580
       ],
       "size": [
         330,
         60
       ],
       "flags": {},
-      "order": 136,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -6917,8 +6917,8 @@
       "id": 177,
       "type": "LCJoinStrings",
       "pos": [
-        -12570,
-        -3570
+        -12590,
+        -3370
       ],
       "size": [
         330,
@@ -6927,7 +6927,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 133,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -6997,15 +6997,15 @@
       "id": 188,
       "type": "LC Bypasser Panel",
       "pos": [
-        -11530,
-        -3570
+        -11550,
+        -3370
       ],
       "size": [
         260,
         150
       ],
       "flags": {},
-      "order": 155,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -7329,8 +7329,8 @@
       "id": 27,
       "type": "PrimitiveBoolean",
       "pos": [
-        -12210,
-        -3230
+        -12230,
+        -3030
       ],
       "size": [
         270,
@@ -7381,15 +7381,15 @@
       "id": 55,
       "type": "LCInvertBoolean",
       "pos": [
-        -12160,
-        -3120
+        -12180,
+        -2920
       ],
       "size": [
         210,
         40
       ],
       "flags": {},
-      "order": 138,
+      "order": 140,
       "mode": 0,
       "inputs": [
         {
@@ -7433,15 +7433,15 @@
       "id": 192,
       "type": "LC Groups Bypasser",
       "pos": [
-        -11910,
-        -3200
+        -11930,
+        -3000
       ],
       "size": [
         350,
         900
       ],
       "flags": {},
-      "order": 164,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -7704,8 +7704,8 @@
       "id": 223,
       "type": "MarkdownNote",
       "pos": [
-        -12890,
-        -2940
+        -12910,
+        -2740
       ],
       "size": [
         410,
@@ -7737,8 +7737,8 @@
       "id": 327,
       "type": "LCWildcard",
       "pos": [
-        -12970,
-        -2180
+        -12960,
+        -1980
       ],
       "size": [
         340,
@@ -7791,8 +7791,8 @@
       "id": 340,
       "type": "LCWildcard",
       "pos": [
-        -12970,
-        -2030
+        -12960,
+        -1830
       ],
       "size": [
         340,
@@ -7845,8 +7845,8 @@
       "id": 341,
       "type": "LCJoinStrings",
       "pos": [
-        -12800,
-        -1880
+        -12790,
+        -1680
       ],
       "size": [
         330,
@@ -7855,7 +7855,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 139,
+      "order": 141,
       "mode": 0,
       "inputs": [
         {
@@ -7912,8 +7912,8 @@
       "id": 331,
       "type": "LCSubject",
       "pos": [
-        -12620,
-        -1800
+        -12610,
+        -1600
       ],
       "size": [
         340,
@@ -7976,15 +7976,15 @@
       "id": 328,
       "type": "LCSubject",
       "pos": [
-        -12620,
-        -2180
+        -12610,
+        -1980
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 165,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -8049,8 +8049,8 @@
       "id": 329,
       "type": "LCCamera",
       "pos": [
-        -12270,
-        -2180
+        -12260,
+        -1980
       ],
       "size": [
         340,
@@ -8107,8 +8107,8 @@
       "id": 332,
       "type": "LCLighting",
       "pos": [
-        -12270,
-        -1800
+        -12260,
+        -1600
       ],
       "size": [
         340,
@@ -8163,8 +8163,8 @@
       "id": 333,
       "type": "LCStyleSelector",
       "pos": [
-        -12270,
-        -1520
+        -12260,
+        -1320
       ],
       "size": [
         340,
@@ -8221,8 +8221,8 @@
       "id": 325,
       "type": "LCSceneBuilder",
       "pos": [
-        -12620,
-        -1420
+        -12610,
+        -1220
       ],
       "size": [
         340,
@@ -8281,15 +8281,15 @@
       "id": 326,
       "type": "LCSubjectArray",
       "pos": [
-        -11910,
-        -2180
+        -11900,
+        -1980
       ],
       "size": [
         180,
         170
       ],
       "flags": {},
-      "order": 180,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -8379,15 +8379,15 @@
       "id": 338,
       "type": "LCShowText",
       "pos": [
-        -11550,
-        -1660
+        -11540,
+        -1460
       ],
       "size": [
         350,
         860
       ],
       "flags": {},
-      "order": 186,
+      "order": 188,
       "mode": 0,
       "inputs": [
         {
@@ -8427,8 +8427,8 @@
       "id": 335,
       "type": "LoadImage",
       "pos": [
-        -12570,
-        -1030
+        -12560,
+        -830
       ],
       "size": [
         290,
@@ -8484,15 +8484,15 @@
       "id": 334,
       "type": "LCColorPalette",
       "pos": [
-        -12270,
-        -1030
+        -12260,
+        -830
       ],
       "size": [
         340,
         340
       ],
       "flags": {},
-      "order": 140,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -8550,8 +8550,8 @@
       "id": 339,
       "type": "MarkdownNote",
       "pos": [
-        -13250,
-        -1820
+        -13240,
+        -1620
       ],
       "size": [
         610,
@@ -8582,15 +8582,15 @@
       "id": 336,
       "type": "LCPromptAssembler",
       "pos": [
-        -11910,
-        -1960
+        -11900,
+        -1760
       ],
       "size": [
         340,
         360
       ],
       "flags": {},
-      "order": 183,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -8690,15 +8690,15 @@
       "id": 337,
       "type": "LCShowText",
       "pos": [
-        -11550,
-        -2180
+        -11540,
+        -1980
       ],
       "size": [
         350,
         470
       ],
       "flags": {},
-      "order": 185,
+      "order": 187,
       "mode": 0,
       "inputs": [
         {
@@ -8779,7 +8779,7 @@
         130
       ],
       "flags": {},
-      "order": 116,
+      "order": 118,
       "mode": 0,
       "inputs": [
         {
@@ -8923,7 +8923,7 @@
         130
       ],
       "flags": {},
-      "order": 148,
+      "order": 150,
       "mode": 0,
       "inputs": [
         {
@@ -9006,7 +9006,7 @@
         90
       ],
       "flags": {},
-      "order": 176,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -9059,7 +9059,7 @@
         90
       ],
       "flags": {},
-      "order": 175,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -10592,7 +10592,7 @@
         80
       ],
       "flags": {},
-      "order": 166,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -10640,7 +10640,7 @@
         64
       ],
       "flags": {},
-      "order": 142,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -10971,7 +10971,7 @@
         820
       ],
       "flags": {},
-      "order": 143,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -11059,7 +11059,7 @@
         -1980
       ],
       "size": [
-        310,
+        306.3427734375,
         30
       ],
       "flags": {
@@ -11318,7 +11318,7 @@
         470
       ],
       "flags": {},
-      "order": 145,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -11390,7 +11390,7 @@
         300
       ],
       "flags": {},
-      "order": 144,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -11473,7 +11473,7 @@
         520
       ],
       "flags": {},
-      "order": 120,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -11546,7 +11546,7 @@
         540
       ],
       "flags": {},
-      "order": 150,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -11675,7 +11675,7 @@
         -2170
       ],
       "size": [
-        2640,
+        2631.0546875,
         50
       ],
       "flags": {
@@ -11723,7 +11723,7 @@
         640
       ],
       "flags": {},
-      "order": 201,
+      "order": 203,
       "mode": 0,
       "inputs": [
         {
@@ -11806,7 +11806,7 @@
         430
       ],
       "flags": {},
-      "order": 200,
+      "order": 202,
       "mode": 0,
       "inputs": [
         {
@@ -11873,7 +11873,7 @@
         490
       ],
       "flags": {},
-      "order": 199,
+      "order": 201,
       "mode": 0,
       "inputs": [
         {
@@ -11950,7 +11950,7 @@
         470
       ],
       "flags": {},
-      "order": 198,
+      "order": 200,
       "mode": 0,
       "inputs": [
         {
@@ -12085,7 +12085,7 @@
         582
       ],
       "flags": {},
-      "order": 212,
+      "order": 214,
       "mode": 0,
       "inputs": [
         {
@@ -12174,7 +12174,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 204,
+      "order": 206,
       "mode": 0,
       "inputs": [
         {
@@ -12231,7 +12231,7 @@
         540
       ],
       "flags": {},
-      "order": 193,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -12314,7 +12314,7 @@
         560
       ],
       "flags": {},
-      "order": 197,
+      "order": 199,
       "mode": 0,
       "inputs": [
         {
@@ -12399,7 +12399,7 @@
         650
       ],
       "flags": {},
-      "order": 191,
+      "order": 193,
       "mode": 0,
       "inputs": [
         {
@@ -12490,7 +12490,7 @@
         520
       ],
       "flags": {},
-      "order": 184,
+      "order": 186,
       "mode": 0,
       "inputs": [
         {
@@ -12662,7 +12662,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 167,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -12720,7 +12720,7 @@
         560
       ],
       "flags": {},
-      "order": 169,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -12838,7 +12838,7 @@
         520
       ],
       "flags": {},
-      "order": 189,
+      "order": 191,
       "mode": 0,
       "inputs": [
         {
@@ -12949,7 +12949,7 @@
         400
       ],
       "flags": {},
-      "order": 168,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -13081,8 +13081,8 @@
       "id": 189,
       "type": "MarkdownNote",
       "pos": [
-        -11530,
-        -3380
+        -11550,
+        -3180
       ],
       "size": [
         340,
@@ -13113,15 +13113,15 @@
       "id": 184,
       "type": "LCShowText",
       "pos": [
-        -12210,
-        -3570
+        -12230,
+        -3370
       ],
       "size": [
         270,
         120
       ],
       "flags": {},
-      "order": 154,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -13163,8 +13163,8 @@
       "id": 376,
       "type": "LC Mute",
       "pos": [
-        -12210,
-        -3390
+        -12230,
+        -3190
       ],
       "size": [
         270,
@@ -13215,7 +13215,7 @@
         130
       ],
       "flags": {},
-      "order": 205,
+      "order": 207,
       "mode": 0,
       "inputs": [
         {
@@ -13293,7 +13293,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 207,
+      "order": 209,
       "mode": 0,
       "inputs": [
         {
@@ -13430,7 +13430,7 @@
         130
       ],
       "flags": {},
-      "order": 141,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -13467,6 +13467,7 @@
       "outputs": [
         {
           "name": "STRING",
+          "shape": 6,
           "type": "STRING",
           "links": [
             465
@@ -13926,6 +13927,127 @@
       },
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 392,
+      "type": "LCSigmaResample",
+      "pos": [
+        -11520,
+        -4050
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 114,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1eb6d6b520980b93afb047a10c1de0eee02cf67f",
+        "Node name for S&R": "LCSigmaResample"
+      },
+      "widgets_values": [
+        1,
+        0
+      ],
+      "widgets_values_named": {
+        "multiplier": 1,
+        "adder": 0
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
+    },
+    {
+      "id": 394,
+      "type": "LCSigmaCurve",
+      "pos": [
+        -11236.737208607408,
+        -4050.206096083584
+      ],
+      "size": [
+        340,
+        470
+      ],
+      "flags": {},
+      "order": 115,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": null
+        },
+        {
+          "name": "curve",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "cnr_id": "ComfyUI_LC123_nodes",
+        "ver": "1eb6d6b520980b93afb047a10c1de0eee02cf67f",
+        "Node name for S&R": "LCSigmaCurve"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1,
+        0,
+        "smooth",
+        1,
+        true,
+        "",
+        null,
+        "",
+        false,
+        "save"
+      ],
+      "widgets_values_named": {
+        "preset": "simple",
+        "total_steps": 20,
+        "sigma_max": 1,
+        "sigma_min": 0,
+        "edit_mode": "smooth",
+        "smooth_radius": 1,
+        "descending": true,
+        "curve": "",
+        "save_name": "",
+        "save_curve": false,
+        "Save curve": "save"
+      },
+      "color": "#1c6d6d",
+      "bgcolor": "#1c6d6d"
     }
   ],
   "links": [
@@ -15497,8 +15619,8 @@
       "bounding": [
         -11530,
         -4620,
-        590,
-        540
+        650,
+        1060
       ],
       "color": "#3f789e",
       "flags": {}
@@ -15519,8 +15641,8 @@
       "id": 16,
       "title": "Utility Nodes",
       "bounding": [
-        -13250,
-        -3640,
+        -13270,
+        -3440,
         2070,
         1330
       ],
@@ -15531,8 +15653,8 @@
       "id": 19,
       "title": "🗒️LC Prompt Builder",
       "bounding": [
-        -13260,
-        -2250,
+        -13250,
+        -2050,
         2070,
         1570
       ],
@@ -15592,10 +15714,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.8954302432552427,
+      "scale": 0.1771561000000013,
       "offset": [
-        11864.640406956953,
-        1553.1469229581105
+        17691.421156679175,
+        6906.759722120822
       ]
     },
     "links_added_by_ue": [],

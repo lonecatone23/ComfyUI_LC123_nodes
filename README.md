@@ -6,7 +6,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **Civitai:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.25.2 · **102 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
+- **Version:** 1.25.3 · **102 Python nodes** · **4 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel)
 
 > Small tools that remove friction — less wire mess, fewer clicks, clearer workflows.
 
@@ -197,7 +197,7 @@ Hover the node to wipe vs the original. Lighten UI load under **LC123 Performanc
 | **LC Split Sigma Scheduler** | Split one schedule across two models. |
 | **LC Split Sigmas (Advanced)** | Two sigma curves + models; denoise; fallback to 1 if 2 missing. |
 | **LC Basic Scheduler** | Scheduler + steps → sigmas (no denoise). |
-| **LC Sigma Curve** | No MODEL. `sigma_max` is the fake top (Krea/Flux/WAN = 1.0). Preset list: **from_input** · named schedules (`simple`, `karras`, `beta57`, **`bong_tangent`** RES4LYF two-stage, `linear_quadratic`, `kl_optimal`, `ays` / `ays+` / `ays_30` / `gits`, …) · saved files · **Custom**. Drag a knot → Custom. Wired `total_steps` updates the plot after a queue. Graph lives under the widgets and **grows if you stretch the node**. **Save curve** arms the write — Queue yourself. Files go to `assets/sigma_curves/` and `web/sigma_curves/`. |
+| **LC Sigma Curve** | No MODEL. `sigma_max` is the fake top (Krea/Flux/WAN = 1.0). Preset list: **from_input** · named schedules (`simple`, `karras`, `beta57`, **`bong_tangent`** RES4LYF two-stage, `linear_quadratic`, `kl_optimal`, `ays` / `ays+` / `ays_30` / `gits`, …) · saved files · **Custom**. Drag a knot → Custom. Wired `total_steps` updates the plot after a queue. Graph sits under the widgets and grows if you stretch the node. **Save curve** arms the write — Queue yourself. Saves live in **`web/sigma_curves/`** only (served to the UI). |
 | **LC Sigma Resample** | Same σ path, new **real** step count. `new_steps = round(old * multiplier) + adder`. Ends stay. Put **after** a split, on the slice you want denser — not before the splitter. (`LCChangeStepCount` is an alias.) |
 | **LC Reference Latent** | Up to 8 optional ref latents → conditioning. Empty = pass-through. |
 | **LC Denoise 💉** | Latent inject: `noise_std = 1 − denoise`. |
@@ -320,7 +320,7 @@ Workflow → Open, or drag onto the canvas.
 - **Notify:** drop audio into `assets/sounds/`, restart once.
 - **Save Image:** `path` + `filename`. Metadata node optional. PNG embeds workflow + parameters. Leave **hash files** on so Civitai can list resources (it matches AutoV2 hashes, not names). First hash per file is slow; a `.sha256` sidecar is cached beside the model. JPEG/WebP will not carry full Comfy JSON. Seed on the metadata node is a plain INT (`seed_value`) — no randomize control.
 - **Index Switch:** output length is the selected slot only — other wired lists are not zipped to the longest.
-- **Sigma Curve:** no MODEL. `from_input` loads a wired SIGMAS after a queue. Custom keeps your sculpt. **Save curve** arms the write — Queue yourself. Saved names load from `web/sigma_curves/index.json` without wiping **Custom**. `bong_tangent` is the RES4LYF two-stage curve. Stretch the node to grow the plot.
+- **Sigma Curve:** saves only in `web/sigma_curves/`. The combo keeps built-ins + **Custom** and appends saved names (it does not wipe the list). `bong_tangent` is RES4LYF two-stage. Stretch the node to grow the plot. Save curve does not auto-queue.
 - **Sigma Resample:** after the split, on high and/or low. The sampler really runs the new step count. Same as changing density on that band only.
 - **Any Empty:** only plugged sockets; mute/bypass on the source = empty.
 - **Int Split:** `split_point` is 0–1 only.

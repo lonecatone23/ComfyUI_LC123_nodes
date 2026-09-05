@@ -325,6 +325,8 @@ app.registerExtension({
                     const nameW = widget(self, "save_name");
                     if (nameW && !String(nameW.value || "").trim()) nameW.value = "custom_curve";
                     setWidget(self, "save_curve", true);
+                    const nm = nameW ? String(nameW.value).trim() : "";
+                    if (nm && typeof setPresetList === "function") setPresetList([nm]);
                 });
                 if (btn) btn.serialize = false;
             }
@@ -341,15 +343,27 @@ app.registerExtension({
                 "ddim_uniform", "beta", "beta57", "beta_1_1", "linear_quadratic",
                 "kl_optimal", "bong_tangent", "gits", "ays", "ays+", "ays_30", "ays_30+",
             ];
+            function existingSaved() {
+                const cur = (presetCombo && presetCombo.options && presetCombo.options.values) || [];
+                return cur.filter((n) => n && n !== "Custom" && n !== "from_input" && !String(n).startsWith("─") && !BUILTINS.has(String(n)));
+            }
             function setPresetList(savedNames) {
                 if (!presetCombo || !presetCombo.options) return;
-                const saved = (savedNames || []).filter((n) => n && n !== "index" && n !== "Custom" && n !== "from_input");
+                const extra = {};
+                existingSaved().forEach((n) => { extra[n] = true; });
+                (savedNames || []).forEach((n) => {
+                    if (n && n !== "index" && n !== "Custom" && n !== "from_input") extra[n] = true;
+                });
+                const saved = Object.keys(extra).sort();
                 const vals = builtinOrder.slice();
                 if (saved.length) vals.push("────────", ...saved);
                 vals.push("────────", "Custom");
                 presetCombo.options.values = vals;
+                try {
+                    const spec = nodeRef.constructor.nodeData.input.required.preset;
+                    if (Array.isArray(spec)) spec[0] = vals;
+                } catch (e) { /* ignore */ }
             }
-            setPresetList([]);
             (async () => {
                 for (const url of tryUrls) {
                     try {

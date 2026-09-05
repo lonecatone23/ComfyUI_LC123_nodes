@@ -16,8 +16,8 @@ import re
 import torch
 
 _PACK = os.path.dirname(os.path.abspath(__file__))
-_CURVE_DIR = os.path.join(_PACK, "assets", "sigma_curves")
-_WEB_CURVE_DIR = os.path.join(_PACK, "web", "sigma_curves")
+_CURVE_DIR = os.path.join(_PACK, "web", "sigma_curves")
+_WEB_CURVE_DIR = _CURVE_DIR
 
 _BUILTINS = (
     "simple",
@@ -43,7 +43,6 @@ _BUILTINS = (
 
 def _ensure_dir():
     os.makedirs(_CURVE_DIR, exist_ok=True)
-    os.makedirs(_WEB_CURVE_DIR, exist_ok=True)
 
 
 def _sanitize(name: str) -> str:
@@ -355,16 +354,19 @@ _GITS_SHAPE = (
 
 
 def _load_saved(name: str) -> list[float] | None:
-    path = os.path.join(_CURVE_DIR, _sanitize(name) + ".json")
-    if not os.path.isfile(path):
-        return None
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    except (OSError, json.JSONDecodeError):
-        return None
-    raw = data.get("sigmas", data)
-    return parse_curve(raw)
+    want = (_sanitize(name) + ".json").lower()
+    for folder in (_WEB_CURVE_DIR, _CURVE_DIR):
+        try:
+            for fn in os.listdir(folder):
+                if fn.lower() == want:
+                    path = os.path.join(folder, fn)
+                    with open(path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    raw = data.get("sigmas", data)
+                    return parse_curve(raw)
+        except (OSError, json.JSONDecodeError):
+            continue
+    return None
 
 
 def _write_index():

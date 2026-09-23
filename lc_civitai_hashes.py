@@ -16,6 +16,8 @@ from urllib.parse import parse_qs, urlparse
 
 import folder_paths
 
+from .lc_lora_metadata import parse_lc_lora_rows
+
 _FILE_EXT = re.compile(r"\.(safetensors|sft|gguf|ckpt|pt|bin|pth)$", re.I)
 _LORA_TAG = re.compile(r"<lora:([^:>]+)(?::[^>]+)?>", re.I)
 
@@ -186,13 +188,15 @@ def _lora_enabled(entry) -> bool:
         return False
     if "enabled" in entry and not entry.get("enabled"):
         return False
-    for k in ("strength", "strength_model", "strength_clip"):
-        if k in entry:
-            try:
-                if float(entry.get(k) or 0) == 0.0:
-                    return False
-            except (TypeError, ValueError):
-                pass
+    if 'strength' in entry:
+        weights = [entry['strength'], entry.get('strengthTwo') if entry.get('strengthTwo') is not None else entry['strength']]
+    else:
+        weights = [entry[k] for k in ('strength_model', 'strength_clip') if k in entry]
+    try:
+        if weights and all(float(v) == 0.0 for v in weights):
+            return False
+    except (TypeError, ValueError):
+        pass
     return True
 
 
@@ -273,6 +277,19 @@ def _collect_from_prompt(prompt, skip_ids=None) -> list[tuple[str, str | None]]:
         class_type = str(node.get("class_type") or node.get("type") or "")
         hint_node = _hint_from_class(class_type)
         inputs = node.get("inputs") if isinstance(node.get("inputs"), dict) else {}
+        if class_type == 'LCLoraLoader':
+            widgets = node.get('widgets_values')
+            values = [inputs.get('lora_rows')]
+            if isinstance(widgets, dict):
+                values.append(widgets.get('lora_rows'))
+            elif isinstance(widgets, (list, tuple)):
+                values.extend(widgets)
+            for value in values:
+                for row in parse_lc_lora_rows(value):
+                    name = row.get('lora')
+                    if row.get('on') and row['strength'] != 0.0 and isinstance(name, str):
+                        add(name, 'loras')
+            continue
         for key, val in inputs.items():
             take_value(val, _hint_for_key(key) or hint_node)
         widgets = node.get("widgets_values")

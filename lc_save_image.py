@@ -22,6 +22,7 @@ import folder_paths
 
 from .lc_pipe_io import PIPE_TYPE
 from .lc_civitai_hashes import collect_hashes, format_hash_fields, civitai_resources_payload
+from .lc_lora_metadata import collect_lora_metadata, append_lora_tags
 
 
 META_TYPE = "LC_SAVE_META"
@@ -70,7 +71,14 @@ def _join_path(*parts: str) -> str:
     return "/".join(chunks)
 
 
-def _build_parameters(meta: dict, width: int, height: int, hash_bits=None) -> str:
+def _build_parameters(
+    meta: dict,
+    width: int,
+    height: int,
+    hash_bits=None,
+    source_width: int | None = None,
+    source_height: int | None = None,
+) -> str:
     positive = _txt(meta.get("positive"))
     negative = _txt(meta.get("negative"))
     steps = meta.get("steps")
@@ -109,6 +117,11 @@ def _build_parameters(meta: dict, width: int, height: int, hash_bits=None) -> st
         except (TypeError, ValueError):
             bits.append(f"Seed: {seed}")
     bits.append(f"Size: {int(width)}x{int(height)}")
+    if (
+        source_width and source_height
+        and (int(source_width) != int(width) or int(source_height) != int(height))
+    ):
+        bits.append(f"Source size: {int(source_width)}x{int(source_height)}")
     if models:
         bits.append(f"Model: {models}")
     if denoise not in (None, "", 0, 0.0, "0"):
@@ -478,6 +491,7 @@ class LCSaveImage:
             "hidden": {
                 "prompt": "PROMPT",
                 "extra_pnginfo": "EXTRA_PNGINFO",
+                "unique_id": "UNIQUE_ID",
             },
         }
 
@@ -505,6 +519,7 @@ class LCSaveImage:
         filename_prefix="",
         prompt=None,
         extra_pnginfo=None,
+        unique_id=None,
     ):
         fmt = str(format or "png").lower().strip()
         if fmt in ("jpg", "jpeg"):
@@ -518,6 +533,9 @@ class LCSaveImage:
         quality = int(max(1, min(100, quality)))
 
         meta = _as_meta(metadata)
+        lora_metadata = collect_lora_metadata(prompt, unique_id)
+        if embed_civitai:
+            meta['positive'] = append_lora_tags(_txt(meta.get('positive')), lora_metadata)
         prefix = _txt(filename_prefix)
         stem = _txt(filename) or "LC123"
         folder = _txt(path)
@@ -559,7 +577,16 @@ class LCSaveImage:
                     print(f"[LC123] resource hash skip: {e}")
                     hash_bits = None
             if embed_civitai:
-                params = _build_parameters(meta, width, height, hash_bits)
+                meta_width = int(meta.get("width") or 0)
+                meta_height = int(meta.get("height") or 0)
+                params = _build_parameters(
+                    meta,
+                    width,
+                    height,
+                    hash_bits,
+                    meta_width if meta_width > 0 else None,
+                    meta_height if meta_height > 0 else None,
+                )
 
             fname = f"{file_stem}_{counter:05d}.{ext}"
             dest = os.path.join(full_dir, fname)
@@ -582,6 +609,8 @@ class LCSaveImage:
                             info.add_text(k, json.dumps(v) if not isinstance(v, str) else v)
                 if params:
                     info.add_text("parameters", params)
+                if embed_civitai:
+                    info.add_text("lora_metadata", json.dumps(lora_metadata, ensure_ascii=False))
                 air = _txt(meta.get("civitai_air"))
                 resources = civitai_resources_payload(air)
                 if resources:

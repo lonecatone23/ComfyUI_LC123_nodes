@@ -205,6 +205,7 @@ app.registerExtension({
         lcApplyLaunchColor(this, "#28281E");
         this.size = [270, 50];
         this._lcTimer = null;
+        this._lcStabilizing = false;
         this.description = LCBypasser.desc || this.description;
       }
 
@@ -242,10 +243,12 @@ app.registerExtension({
         return size;
       }
       scheduleStabilize(ms = 20) {
+        this._lcStabilizing = true;
         clearTimeout(this._lcTimer);
         this._lcTimer = setTimeout(() => {
           try {
             this.stabilize();
+            this._lcStabilizing = false;
             this.applyModes();
           } catch (e) {
             console.warn("[LC Bypasser] stabilize", e);
@@ -419,6 +422,7 @@ app.registerExtension({
       }
 
       applyModes() {
+        if (this._lcStabilizing) return;
         const graph = this.graph ?? app.graph;
         if (!graph) return;
         const pairCount = Math.floor((this.inputs?.length || 0) / 2);

@@ -16,6 +16,9 @@ from urllib.parse import parse_qs, urlparse
 
 import folder_paths
 
+from .lc_lora_metadata import parse_lc_lora_rows, _image_ancestors, _resolve as _resolve_input
+from .lc_lora_weights import row_strengths
+
 _FILE_EXT = re.compile(r"\.(safetensors|sft|gguf|ckpt|pt|bin|pth)$", re.I)
 _LORA_TAG = re.compile(r"<lora:([^:>]+)(?::[^>]+)?>", re.I)
 
@@ -190,17 +193,16 @@ def _lora_enabled(entry) -> bool:
         return False
     if "enabled" in entry and not entry.get("enabled"):
         return False
-    present = [k for k in ("strength", "strength_model", "strength_clip") if k in entry]
-    if not present:
-        return True
-    for k in present:
-        try:
-            if float(entry.get(k) or 0) != 0.0:
-                return True
-        except (TypeError, ValueError):
-            # unreadable strength: assume it applies
-            return True
-    return False
+    if 'strength' in entry:
+        weights = [entry['strength'], entry.get('strengthTwo') if entry.get('strengthTwo') is not None else entry['strength']]
+    else:
+        weights = [entry[k] for k in ('strength_model', 'strength_clip') if k in entry]
+    try:
+        if weights and all(float(v) == 0.0 for v in weights):
+            return False
+    except (TypeError, ValueError):
+        pass
+    return True
 
 
 def _hint_from_class(class_type: str) -> str | None:
@@ -280,8 +282,28 @@ def _collect_from_prompt(prompt, skip_ids=None) -> list[tuple[str, str | None]]:
         class_type = str(node.get("class_type") or node.get("type") or "")
         hint_node = _hint_from_class(class_type)
         inputs = node.get("inputs") if isinstance(node.get("inputs"), dict) else {}
+        if class_type in ('LCLoraLoader', 'LCGroupLoraLoader', 'LCGroupLoraLoaderStack'):
+            widgets = node.get('widgets_values')
+            values = [inputs.get('lora_rows')]
+            if isinstance(widgets, dict):
+                values.append(widgets.get('lora_rows'))
+            elif isinstance(widgets, (list, tuple)):
+                values.extend(widgets)
+            for value in values:
+                for row in parse_lc_lora_rows(value):
+                    name = row.get('lora')
+                    weights = row_strengths(row) if class_type != 'LCLoraLoader' else (row['strength'],)
+                    if row.get('on') and any(weight != 0.0 for weight in weights) and isinstance(name, str):
+                        add(name, 'loras')
+            continue
+        if not _lora_enabled(inputs):
+            continue
         for key, val in inputs.items():
-            take_value(val, _hint_for_key(key) or hint_node)
+            if key in ('text', 'prompt', 'positive', 'negative', 'positive_prompt', 'negative_prompt'):
+                continue
+            hint = _hint_for_key(key) or hint_node
+            if hint is not None:
+                take_value(_resolve_input(val, prompt), hint)
         widgets = node.get("widgets_values")
         if isinstance(widgets, (list, tuple)):
             for val in widgets:
@@ -292,7 +314,7 @@ def _collect_from_prompt(prompt, skip_ids=None) -> list[tuple[str, str | None]]:
     return found
 
 
-def collect_hashes(prompt=None, extra_pnginfo=None) -> dict:
+def collect_hashes(prompt=None, extra_pnginfo=None, save_node_id=None, *, lora_metadata=None, excluded_lora_paths=()) -> dict:
     """
     Return {
       'model': [(name, autov2), ...],
@@ -330,7 +352,13 @@ def collect_hashes(prompt=None, extra_pnginfo=None) -> dict:
             if n.get("mode") in (2, 4):
                 skip_ids.add(str(n.get("id", "")))
 
-    candidates = _collect_from_prompt(prompt, skip_ids)
+    # A save node only describes its image ancestry, never unrelated canvas branches.
+    # Without a known save root, retain the standalone helper's legacy scan.
+    scope = _image_ancestors(prompt or {}, save_node_id) if save_node_id is not None else None
+    if save_node_id is not None and scope is None:
+        scope = set()
+    scoped_prompt = prompt if scope is None else {k: v for k, v in (prompt or {}).items() if str(k) in scope}
+    candidates = _collect_from_prompt(scoped_prompt, skip_ids)
     if isinstance(wf, dict) and isinstance(wf.get("nodes"), list):
         # only workflow nodes that actually run (their id is in the prompt);
         # nodes cut off from any output are not in the prompt
@@ -341,7 +369,7 @@ def collect_hashes(prompt=None, extra_pnginfo=None) -> dict:
                 continue
             if n.get("mode") in (2, 4):
                 continue
-            if run_ids is not None and str(n.get("id", i)) not in run_ids:
+            if (scope is not None and str(n.get("id", i)) not in scope) or (run_ids is not None and str(n.get("id", i)) not in run_ids):
                 continue
             fake_prompt[str(n.get("id", i))] = {
                 "class_type": n.get("type"),
@@ -350,39 +378,47 @@ def collect_hashes(prompt=None, extra_pnginfo=None) -> dict:
             }
         candidates.extend(_collect_from_prompt(fake_prompt, skip_ids))
 
+    active_loras = None
+    if lora_metadata is not None:
+        active_loras = {row['filename'] for row in lora_metadata.get('loras', [])
+                        if row['scope'] == 'image_upstream' and row['nonzero_or_unresolved']}
+        candidates.extend((name, 'loras') for name in sorted(active_loras))
+    excluded = {os.path.normcase(os.path.abspath(path)) for path in excluded_lora_paths}
     seen_path = set()
+    seen_hash = set()
     for name, hint in candidates:
         path, kind = _resolve(name, hint)
         if not path or path in seen_path:
+            continue
+        if kind == 'lora' and (os.path.normcase(os.path.abspath(path)) in excluded
+                               or (active_loras is not None and name not in active_loras)):
             continue
         seen_path.add(path)
         digest = autov2(path)
         if not digest:
             continue
         kind = kind or "model"
+        identity = ("model" if kind == "unet" else kind, digest)
+        if identity in seen_hash:
+            continue
+        seen_hash.add(identity)
         label = os.path.splitext(os.path.basename(path))[0]
         buckets.setdefault(kind, []).append((label, digest))
-        if kind == "model":
-            hashes_json.setdefault("model", digest)
-            # extra models get model:Name
-            if "model" in hashes_json and hashes_json["model"] != digest:
+        if kind in ("model", "unet"):
+            if "model" not in hashes_json:
+                hashes_json["model"] = digest
+                buckets['primary_model'] = label
+            elif hashes_json['model'] != digest:
                 hashes_json[f"model:{label}"] = digest
         elif kind == "lora":
             hashes_json[f"lora:{label}"] = digest
         elif kind == "clip":
             hashes_json[f"clip:{label}"] = digest
-        elif kind == "unet":
-            # A UNETLoader ("Load Diffusion Model") IS the base model on a diffusion-only
-            # architecture (Krea2, Flux, ...) -- it just never resolves via the classic
-            # single-file "checkpoints" folder that sets kind=="model" above. Without this,
-            # a UNET-loaded base model never got the bare "model" key CivitAI's parser
-            # actually keys the primary resource off, only "unet:Name" -- CivitAI never had
-            # a way to auto-link it. Same pattern as the vae branch just below.
-            hashes_json.setdefault("model", digest)
-            hashes_json[f"unet:{label}"] = digest
         elif kind == "vae":
-            hashes_json.setdefault("vae", digest)
-            hashes_json[f"vae:{label}"] = digest
+            if "vae" not in hashes_json:
+                hashes_json['vae'] = digest
+            elif hashes_json['vae'] != digest:
+                hashes_json[f"vae:{label}"] = digest
         elif kind == "embed":
             hashes_json[f"embed:{label}"] = digest
         else:
@@ -475,14 +511,74 @@ def civitai_resources_payload(air: str) -> list:
     return [item]
 
 
+# Identity is cached only while both the model file and its sidecar are unchanged.
+_LORA_RESOURCE_CACHE = {}
+
+
+def _lora_version(path):
+    for sidecar in (os.path.splitext(path)[0] + '.civitai.info', path + '.civitai.info'):
+        try:
+            model_stat, info_stat = os.stat(path), os.stat(sidecar)
+            signature = (model_stat.st_size, model_stat.st_mtime_ns, info_stat.st_size, info_stat.st_mtime_ns)
+            cached = _LORA_RESOURCE_CACHE.get((path, sidecar))
+            if cached and cached[0] == signature:
+                return cached[1]
+            with open(sidecar, encoding='utf-8-sig') as stream:
+                info = json.load(stream)
+            if not isinstance(info, dict) or str(info.get('model', {}).get('type', '')).lower() not in ('lora', 'locon'):
+                continue
+            version_id = _positive_int(info.get('id'))
+            model_id = _positive_int(info.get('modelId'))
+            if not version_id or not model_id:
+                continue
+            digest = hashlib.sha256()
+            with open(path, 'rb') as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                    digest.update(chunk)
+            sha = digest.hexdigest().lower()
+            if not any(isinstance(f, dict) and str((f.get('hashes') or {}).get('SHA256', '')).lower() == sha
+                       for f in info.get('files', [])):
+                continue
+            result = {'type': 'lora', 'modelId': model_id, 'modelVersionId': version_id}
+            _LORA_RESOURCE_CACHE[(path, sidecar)] = (signature, result)
+            return result
+        except (OSError, ValueError, TypeError, AttributeError):
+            continue
+    return None
+
+
+def lora_resources_payload(metadata, resolved_paths=None):
+    """Offline, hash-verified Civitai version identities for this image's active LoRAs."""
+    resources = {}
+    for row in metadata.get('loras', []):
+        if row['scope'] != 'image_upstream' or not row['nonzero_or_unresolved']:
+            continue
+        path, kind = _resolve(row['filename'], 'loras')
+        if not path or kind != 'lora':
+            continue
+        identity = _lora_version(path)
+        if identity is not None:
+            if resolved_paths is not None:
+                resolved_paths.add(path)
+            key = (identity['type'], identity['modelVersionId'])
+            item = dict(identity)
+            if row['strength_model'] is not None:
+                item['weight'] = row['strength_model']
+            if key not in resources:
+                resources[key] = item
+            elif resources[key].get('weight') != item.get('weight'):
+                # One scalar cannot represent repeated applications with different weights.
+                # Keep the version identity; per-slot strengths remain in lora_metadata.
+                resources[key].pop('weight', None)
+    return list(resources.values())
+
+
 def format_hash_fields(buckets: dict) -> tuple[str, str, str, str]:
     """
     Model hash, VAE hash, Lora hashes, and Hashes JSON line fragments.
     Empty strings when nothing found.
     """
-    models = buckets.get("model") or []
-    unets = buckets.get("unet") or []
-    primary = models[0][1] if models else (unets[0][1] if unets else "")
+    primary = (buckets.get("hashes_json") or {}).get("model", "")
     model_hash = f"Model hash: {primary}" if primary else ""
 
     # Classic A1111/CivitAI field, same status as "Model hash:" -- never emitted before,

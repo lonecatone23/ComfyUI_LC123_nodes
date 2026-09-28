@@ -205,7 +205,7 @@ app.registerExtension({
       type: "boolean",
       defaultValue: true,
       tooltip:
-        "Show the ℹ info button on each row of LC LoRA Loader. Reads trigger words from the LoRA file's own metadata, no network call. Turn off to declutter the rows.",
+        "Show the ℹ info button on LoRA loader rows. The original loader reads local trigger words; LC Group LoRA Loader shows .civitai.info previews and trigger words. Turn off to declutter the rows.",
       category: ["LC123 Settings ⚙️", "Performance", "LoRA loader info button"],
       onChange: dirty,
     },

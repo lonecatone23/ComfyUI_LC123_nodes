@@ -21,7 +21,8 @@ from PIL.PngImagePlugin import PngInfo
 import folder_paths
 
 from .lc_pipe_io import PIPE_TYPE
-from .lc_civitai_hashes import collect_hashes, format_hash_fields, civitai_resources_payload
+from .lc_civitai_hashes import collect_hashes, format_hash_fields, civitai_resources_payload, lora_resources_payload
+from .lc_lora_metadata import collect_lora_metadata, _image_ancestors
 
 
 META_TYPE = "LC_SAVE_META"
@@ -109,7 +110,13 @@ def _join_path(*parts: str) -> str:
     return "/".join(chunks)
 
 
-def _build_parameters(meta: dict, width: int, height: int, hash_bits=None) -> str:
+def _build_parameters(
+    meta: dict,
+    width: int,
+    height: int,
+    hash_bits=None,
+    resources=None,
+) -> str:
     positive = _txt(meta.get("positive"))
     negative = _txt(meta.get("negative"))
     steps = meta.get("steps")
@@ -155,16 +162,17 @@ def _build_parameters(meta: dict, width: int, height: int, hash_bits=None) -> st
             bits.append(f"Denoising strength: {float(denoise):g}")
         except (TypeError, ValueError):
             pass
-    if air:
+    if resources is None:
         resources = civitai_resources_payload(air)
-        if resources:
-            bits.append("Civitai resources: " + json.dumps(resources, separators=(",", ":")))
+    if resources:
+        bits.append("Civitai resources: " + json.dumps(resources, separators=(",", ":")))
     if extra:
         bits.append(extra.lstrip(", "))
     if hash_bits:
         for piece in hash_bits:
             if piece:
                 bits.append(piece)
+    bits.append("Version: ComfyUI")
     if bits:
         lines.append(", ".join(bits))
     return "\n".join(lines).strip()
@@ -286,7 +294,7 @@ class LCSaveImageMetadata:
                         "default": 0,
                         "min": 0,
                         "max": 65536,
-                        "tooltip": "0 = use pipe width (save node still writes the real pixel size).",
+                        "tooltip": "Original generation width. 0 = use pipe width.",
                     },
                 ),
                 "height": (
@@ -295,7 +303,7 @@ class LCSaveImageMetadata:
                         "default": 0,
                         "min": 0,
                         "max": 65536,
-                        "tooltip": "0 = use pipe height.",
+                        "tooltip": "Original generation height. 0 = use pipe height.",
                     },
                 ),
                 "denoise": (
@@ -517,6 +525,8 @@ class LCSaveImage:
             "hidden": {
                 "prompt": "PROMPT",
                 "extra_pnginfo": "EXTRA_PNGINFO",
+                "unique_id": "UNIQUE_ID",
+                "execution_list": "EXECUTION_LIST",
             },
         }
 
@@ -544,6 +554,8 @@ class LCSaveImage:
         filename_prefix="",
         prompt=None,
         extra_pnginfo=None,
+        unique_id=None,
+        execution_list=None,
     ):
         fmt = str(format or "png").lower().strip()
         if fmt in ("jpg", "jpeg"):
@@ -557,6 +569,19 @@ class LCSaveImage:
         quality = int(max(1, min(100, quality)))
 
         meta = _as_meta(metadata)
+        unresolved = []
+        scope = _image_ancestors(prompt or {}, unique_id, execution_list, unresolved)
+        scoped_prompt = {k: v for k, v in (prompt or {}).items() if scope is not None and str(k) in scope}
+        lora_metadata = collect_lora_metadata(prompt, unique_id, execution_list)
+        lora_metadata['loras'] = [r for r in lora_metadata['loras']
+                                  if r['scope'] == 'image_upstream' and r['nonzero_or_unresolved']]
+        if unresolved:
+            print(f"[LC123] Metadata: unresolved switch branches {', '.join(unresolved)}; candidate resources omitted.")
+        resources = []
+        resolved_loras = set()
+        if embed_civitai:
+            resources = civitai_resources_payload(_txt(meta.get('civitai_air')))
+            resources.extend(lora_resources_payload(lora_metadata, resolved_loras))
         prefix = _fill_tokens(_txt(filename_prefix), meta)
         stem = _fill_tokens(_txt(filename), meta) or "LC123"
         folder = _fill_tokens(_txt(path), meta)
@@ -590,8 +615,11 @@ class LCSaveImage:
         buckets = None
         if hash_resources:
             try:
-                buckets = collect_hashes(prompt, extra_pnginfo)
+                buckets = collect_hashes(scoped_prompt, None, lora_metadata=lora_metadata,
+                                         excluded_lora_paths=resolved_loras)
                 hash_bits = format_hash_fields(buckets)
+                if buckets.get('primary_model'):
+                    meta['models'] = buckets['primary_model']
             except Exception as e:
                 print(f"[LC123] resource hash skip: {e}")
                 buckets = None
@@ -602,7 +630,15 @@ class LCSaveImage:
             width, height = pil.size
             params = ""
             if embed_civitai:
-                params = _build_parameters(meta, width, height, hash_bits)
+                meta_width = int(meta.get("width") or 0)
+                meta_height = int(meta.get("height") or 0)
+                params = _build_parameters(
+                    meta,
+                    meta_width if meta_width > 0 and meta_height > 0 else width,
+                    meta_height if meta_width > 0 and meta_height > 0 else height,
+                    hash_bits,
+                    resources=resources,
+                )
 
             fname = f"{file_stem}_{counter:05d}.{ext}"
             dest = os.path.join(full_dir, fname)
@@ -620,16 +656,24 @@ class LCSaveImage:
                         info.add_text("prompt", json.dumps(prompt))
                     if extra_pnginfo is not None:
                         for k, v in extra_pnginfo.items():
-                            if v is None:
+                            if v is None or k in {"parameters", "hashes", "civitaiResources", "civitai_air", "lora_metadata", "metadata_warnings", "prompt"}:
                                 continue
                             info.add_text(k, json.dumps(v) if not isinstance(v, str) else v)
                 if params:
                     info.add_text("parameters", params)
+                if embed_civitai:
+                    details = [{'node_id': r['node_id'], 'slot': r['slot'], 'filename': r['filename'],
+                                'strength_model': r['strength_model'], 'strength_clip': r['strength_clip']}
+                               for r in lora_metadata['loras']]
+                    if details:
+                        info.add_text("lora_metadata", json.dumps({'loras': details}, ensure_ascii=False))
+                    if unresolved:
+                        info.add_text("metadata_warnings", json.dumps({'unresolved_switches': unresolved}))
                 air = _txt(meta.get("civitai_air"))
-                resources = civitai_resources_payload(air)
                 if resources:
                     info.add_text("civitaiResources", json.dumps(resources))
-                    info.add_text("civitai_air", air)
+                    if air:
+                        info.add_text("civitai_air", air)
                 if buckets and buckets.get("hashes_json"):
                     info.add_text("hashes", json.dumps(buckets["hashes_json"]))
                 save_kwargs["pnginfo"] = info

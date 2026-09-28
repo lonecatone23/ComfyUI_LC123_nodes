@@ -1,0 +1,56 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: '17 20 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/sync-upstream.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'RocketM/ComfyUI_LC123_nodes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fast-forward upstream-sync to upstream main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: python
+        run: |
+          import json
+          import os
+          import urllib.request
+
+          def api(path, method='GET', payload=None):
+              data = None if payload is None else json.dumps(payload).encode()
+              request = urllib.request.Request(
+                  'https://api.github.com/' + path,
+                  data=data,
+                  method=method,
+                  headers={
+                      'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                      'Accept': 'application/vnd.github+json',
+                      'Content-Type': 'application/json',
+                      'User-Agent': 'lc123-upstream-sync',
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return json.load(response)
+
+          source = api('repos/lonecatone23/ComfyUI_LC123_nodes/git/ref/heads/main')['object']['sha']
+          repo = 'repos/RocketM/ComfyUI_LC123_nodes'
+          current = api(repo + '/git/ref/heads/upstream-sync')['object']['sha']
+          if current != source:
+              api(repo + '/git/refs/heads/upstream-sync', 'PATCH', {'sha': source, 'force': False})
+              print('Synced upstream-sync to ' + source)
+          else:
+              print('Already synchronized at ' + source)

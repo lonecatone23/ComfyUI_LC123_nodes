@@ -163,13 +163,15 @@ function hubControl(g) {
   const map = new Map();
   for (const hub of allNodes(g)) {
     if (!HUBS.has(hub.type)) continue;
-    if (hub._lcHubReady === false) continue;
+    if (hub._lcHubReady === false || hub._lcStabilizing) continue;
     const pairs = Math.floor((hub.inputs?.length || 0) / 2);
     for (let p = 0; p < pairs; p++) {
       const o = originOf(g, hub.inputs[p * 2]);
       if (!o || map.has(o.id)) continue;
       const w = hub.widgets?.[p];
-      const on = !w || w.value !== false;
+      // A missing widget must not enable the relay during hub reconstruction.
+      if (!w) { map.set(o.id, null); continue; }
+      const on = w.value !== false;
       map.set(o.id, on ? LIVE : hub.type === "LC Mute" || hub._lcOffMode === MUTE ? MUTE : BYPASS);
     }
   }

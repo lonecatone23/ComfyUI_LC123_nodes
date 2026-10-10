@@ -1,7 +1,7 @@
 /**
  * LC Looks: picking a look fills that node's sliders from lc_looks.json. Moving one of those sliders
- * switches the node to Custom. Nothing ever changes a node on its own: saved workflows load exactly as saved,
- * and a node set to Custom is never touched.
+ * switches the node to Custom. A saved workflow set to a look gets that look's current values when it loads,
+ * so retuned looks reach old workflows; a node set to Custom is never touched.
  */
 import { app } from "../../scripts/app.js";
 
@@ -85,5 +85,14 @@ app.registerExtension({
     const type = node.comfyClass || node.type;
     const table = LOOKS?.nodes?.[type];
     if (table) hook(node, table);
+  },
+  async loadedGraphNode(node) {
+    await ready;
+    const type = node.comfyClass || node.type;
+    const table = LOOKS?.nodes?.[type];
+    if (!table) return;
+    hook(node, table);
+    const look = wget(node, "look")?.value;
+    if (look && look !== "Custom") applyLook(node, table, look);
   },
 });

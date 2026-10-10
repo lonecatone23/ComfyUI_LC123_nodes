@@ -271,11 +271,11 @@ class LCClarity(PreviewImage):
                     },
                 ),
                 "clarity": ("FLOAT", {
-                    "default": 0.30, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.20, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Large-scale local contrast (punch, depth). 0 = off.",
                 }),
                 "sharpen": ("FLOAT", {
-                    "default": 0.35, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.30, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Capture sharpening. Undoes the softness measured in the picture (deconvolution) instead of drawing outlines, so an upscaled 4K image is not over-sharpened. 0 = off.",
                 }),
                 "strength": ("FLOAT", {
@@ -283,15 +283,15 @@ class LCClarity(PreviewImage):
                     "tooltip": "Mix with the original. 0 = original, 1 = full effect.",
                 }),
                 "halo": ("FLOAT", {
-                    "default": 0.60, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.70, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Halo control. 1 = edges can not overshoot their neighbours (no bright/dark rims). 0 = allow punchy overshoot.",
                 }),
                 "skin_protect": ("FLOAT", {
-                    "default": 0.50, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.60, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Less sharpening, texture and clarity on skin, and pores can not be dug into pits. Eyes, lashes and lips still get sharpened. 0 = off (use 0 for anime and lineart).",
                 }),
                 "radius": ("FLOAT", {
-                    "default": 0.35, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.30, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Detail size. Low = fine lines and hair. High = softer images and broader structure. Scales with resolution.",
                 }),
                 "blend_mode": (
@@ -307,7 +307,7 @@ class LCClarity(PreviewImage):
                     "tooltip": "Less effect in bright areas. 0 = full effect.",
                 }),
                 "texture": ("FLOAT", {
-                    "default": 0.25, "min": 0.0, "max": 1.0, "step": 0.01,
+                    "default": 0.15, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Mid-size detail: pores, fabric, fur, pencil hatching. 0 = off.",
                 }),
             }
@@ -425,16 +425,16 @@ class LCClarity(PreviewImage):
         self,
         image,
         preset="Natural",
-        clarity=0.30,
-        sharpen=0.35,
-        strength=1.0,
-        halo=0.60,
-        skin_protect=0.50,
-        radius=0.35,
+        clarity=0.20,
+        sharpen=0.30,
+        strength=0.7,
+        halo=0.70,
+        skin_protect=0.60,
+        radius=0.30,
         blend_mode="Soft Light",
         shadow_protect=0.25,
         highlight_protect=0.25,
-        texture=0.25,
+        texture=0.15,
     ):
         cl = float(max(0.0, min(1.0, clarity)))
         sh = float(max(0.0, min(1.0, sharpen)))

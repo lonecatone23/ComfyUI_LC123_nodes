@@ -8,9 +8,9 @@ const TYPE = "LCClarity";
 
 const PRESETS = {
   // Realism: capture sharpening, a little texture
-  Natural: { clarity: 0.3, sharpen: 0.35, strength: 0.7, halo: 0.6, skin_protect: 0.5, radius: 0.35, blend_mode: "Soft Light", shadow_protect: 0.25, highlight_protect: 0.25, texture: 0.25 },
-  Subtle: { clarity: 0.15, sharpen: 0.25, strength: 0.7, halo: 0.7, skin_protect: 0.5, radius: 0.35, blend_mode: "Soft Light", shadow_protect: 0.25, highlight_protect: 0.25, texture: 0.1 },
-  Portrait: { clarity: 0.2, sharpen: 0.3, strength: 0.7, halo: 0.7, skin_protect: 0.8, radius: 0.4, blend_mode: "Soft Light", shadow_protect: 0.35, highlight_protect: 0.35, texture: 0.1 },
+  Natural: { clarity: 0.2, sharpen: 0.3, strength: 0.7, halo: 0.7, skin_protect: 0.6, radius: 0.3, blend_mode: "Soft Light", shadow_protect: 0.25, highlight_protect: 0.25, texture: 0.15 },
+  Subtle: { clarity: 0.1, sharpen: 0.2, strength: 0.6, halo: 0.8, skin_protect: 0.7, radius: 0.3, blend_mode: "Soft Light", shadow_protect: 0.3, highlight_protect: 0.3, texture: 0.05 },
+  Portrait: { clarity: 0.1, sharpen: 0.2, strength: 0.6, halo: 0.8, skin_protect: 1.0, radius: 0.35, blend_mode: "Soft Light", shadow_protect: 0.35, highlight_protect: 0.35, texture: 0.0 },
   // Hard surfaces and fabric
   Product: { clarity: 0.4, sharpen: 0.5, strength: 0.7, halo: 0.55, skin_protect: 0.1, radius: 0.3, blend_mode: "Soft Light", shadow_protect: 0.2, highlight_protect: 0.2, texture: 0.35 },
   Landscape: { clarity: 0.5, sharpen: 0.45, strength: 0.7, halo: 0.5, skin_protect: 0.1, radius: 0.45, blend_mode: "Overlay", shadow_protect: 0.15, highlight_protect: 0.2, texture: 0.45 },
@@ -102,5 +102,12 @@ app.registerExtension({
   nodeCreated(node) {
     if (node.comfyClass !== TYPE && node.type !== TYPE) return;
     hook(node);
+  },
+  // a saved workflow set to a preset gets that preset's current values; only Custom keeps what was saved
+  loadedGraphNode(node) {
+    if (node.comfyClass !== TYPE && node.type !== TYPE) return;
+    hook(node);
+    const preset = widgetByName(node, "preset")?.value;
+    if (preset && preset !== "Custom") applyPreset(node, preset);
   },
 });

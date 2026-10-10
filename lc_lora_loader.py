@@ -87,6 +87,7 @@ class LCLoraLoader:
             if not path:
                 # a saved row can outlive the file it points at (renamed/deleted lora); skip it rather than
                 # failing the whole graph, same as the referenced LoRA-file-missing case in the stock loader
+                print(f"[LC LoRA Loader] LoRA not found, row skipped: {name} (renamed or deleted? pick it again)")
                 continue
 
             lora, lora_metadata = _cached_lora(prev, used, path)

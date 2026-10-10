@@ -140,6 +140,7 @@ class LCApplyLoraStack:
             if not path:
                 # a saved stack can outlive the file it points at (renamed/deleted lora) -- skip it rather
                 # than failing the whole graph, same as LC LoRA Loader
+                print(f"[LC LoRA Loader Stack] LoRA not found, row skipped: {name} (renamed or deleted? pick it again)")
                 continue
 
             lora, lora_metadata = _cached_lora(prev, used, path)

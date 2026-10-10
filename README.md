@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.49.16 · **144 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.49.17 · **144 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 
@@ -430,6 +430,18 @@ Works on brightness only, so colors never shift, in three stages:
 - Flat areas are left alone based on the noise in each image, so anime fills and gradients stay clean.
 - **Presets:** Natural, Subtle, Portrait, Product, Landscape, Crisp, plus **Lineart**, **Anime sharp** and **Illustration**. Touch a slider and it flips to **Custom**.
 - 💡 Line art, anime and illustration: keep **skin_protect** at 0 (the art presets already do).
+- Upscaled 4K no longer gets pores dug into craters: the sharpening follows the softness measured in the picture instead of guessing from its size, and **skin_protect** now covers sharpening too.
+
+**Updated settings:** Natural, Subtle and Portrait retuned for upscaled and detailed images (1.49.17). Old → new:
+
+| Preset | clarity | sharpen | strength | halo | skin_protect | radius | texture |
+|---|---|---|---|---|---|---|---|
+| Natural | 0.3 → **0.2** | 0.35 → **0.3** | 0.7 | 0.6 → **0.7** | 0.5 → **0.6** | 0.35 → **0.3** | 0.25 → **0.15** |
+| Subtle | 0.15 → **0.1** | 0.25 → **0.2** | 0.7 → **0.6** | 0.7 → **0.8** | 0.5 → **0.7** | 0.35 → **0.3** | 0.1 → **0.05** |
+| Portrait | 0.2 → **0.1** | 0.3 → **0.2** | 0.7 → **0.6** | 0.7 → **0.8** | 0.8 → **1.0** | 0.4 → **0.35** | 0.1 → **0** |
+
+- Subtle also moved shadow / highlight protect from 0.25 to 0.3.
+- A saved workflow set to a preset picks up the new values when it loads. **Custom** keeps your own numbers. The looks on LC Depth FX, Bloom, Lens Profile, Vignette, Film Stock and Film Grain work the same way.
 
 **LC Depth FX 🌫️ + Looks 🎞️**
 

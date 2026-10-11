@@ -553,7 +553,7 @@ Hover any of these to wipe against the original. Heavy graph? See **Performance*
 | **LC Image Compare 🔎** | Batch A/B with one slider per pair |
 | **LC Image Split 🖼️** | Saveable A\|B wipe. The output is the baked split |
 | **LC Image Grid 🖼️** | Contact sheet: columns, gap, pad, outline |
-| **LC Last Image Holder** | Holds the last image so you can clear it without a re-run |
+| **LC Last Image Holder** | Holds the last image so you can clear it without a re-run. **Hold until seed change** (wire the seed socket) keeps the first image of a seed to compare tweaks against, and takes a new one when the seed changes |
 | **LC Dynamic Overlay** | Overlays B on A. Outputs the blended image |
 | **LC Image Pass** / **LC Mask Pass** | Identity pass. `enable` off (widget or a wired BOOLEAN) blocks the output, so optional sockets downstream see nothing |
 | **LC Watermark 💧** | Image watermark with size, opacity and drag-to-place. Transparent PNG: wire Load Image's MASK to **watermark_mask** |

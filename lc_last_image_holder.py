@@ -9,6 +9,8 @@ Standalone node that holds and displays the last generated image.
 - Clear via API route (no full workflow re-run)
 - Guards against double-execution in a single queue so the hold
   survives when a comparer (or any downstream) is connected
+- "hold until seed change" keeps the image of the current seed (seed socket)
+  and stores a new one when the seed changes
 """
 
 import os
@@ -69,7 +71,29 @@ def _load_held(path):
         return None
 
 
+def _seed_path(path):
+    return path[:-4] + ".seed"
+
+
+def _read_seed(path):
+    try:
+        with open(_seed_path(path), encoding="utf-8") as f:
+            return f.read().strip()
+    except OSError:
+        return None
+
+
+def _write_seed(path, seed):
+    with open(_seed_path(path), "w", encoding="utf-8") as f:
+        f.write(str(seed))
+
+
 def _delete_held(path):
+    if os.path.isfile(_seed_path(path)):
+        try:
+            os.remove(_seed_path(path))
+        except OSError:
+            pass
     if os.path.isfile(path):
         try:
             os.remove(path)
@@ -114,14 +138,17 @@ class LCLastImageHolder(PreviewImage):
         return {
             "required": {
                 "mode": (
-                    ["hold previous generation", "hold until cleared"],
+                    ["hold previous generation", "hold until cleared", "hold until seed change"],
                     {
                         "default": "hold previous generation",
                         "tooltip": (
                             "hold previous generation: every generation outputs the previous "
                             "image, then stores the current one.\n"
                             "hold until cleared: stores the first image and freezes "
-                            "until you press Clear."
+                            "until you press Clear.\n"
+                            "hold until seed change: keeps the image from the current seed "
+                            "(wire the seed socket) and stores a new one when the seed changes. "
+                            "Tweak settings on one seed and compare against its first image."
                         ),
                     },
                 ),
@@ -134,6 +161,16 @@ class LCLastImageHolder(PreviewImage):
                             "Optional. Current generation to store. "
                             "The node keeps and displays the held image even when this "
                             "input is disconnected or empty."
+                        ),
+                    },
+                ),
+                "seed": (
+                    "INT",
+                    {
+                        "forceInput": True,
+                        "tooltip": (
+                            "For hold until seed change: wire the same seed your sampler uses. "
+                            "A new seed replaces the held image."
                         ),
                     },
                 ),
@@ -162,6 +199,7 @@ class LCLastImageHolder(PreviewImage):
         self,
         mode="hold previous generation",
         new_image=None,
+        seed=None,
         unique_id="0",
         prompt=None,
         extra_pnginfo=None,
@@ -185,6 +223,16 @@ class LCLastImageHolder(PreviewImage):
                 _tensor_to_pil(new_image).save(path)
                 if prompt_key is not None:
                     _last_write_prompt[uid] = prompt_key
+
+            elif mode == "hold until seed change":
+                if seed is None:
+                    print("[LC Last Image Holder] hold until seed change: no seed wired, holding until cleared")
+                if not has_stored or (seed is not None and _read_seed(path) != str(seed)):
+                    _tensor_to_pil(new_image).save(path)
+                    _write_seed(path, "" if seed is None else seed)
+                    previous = None
+                    if prompt_key is not None:
+                        _last_write_prompt[uid] = prompt_key
 
             elif mode == "hold until cleared":
                 if not has_stored:

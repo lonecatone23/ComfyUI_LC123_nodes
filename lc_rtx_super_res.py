@@ -62,8 +62,8 @@ class LCRTXSuperResolution:
 
     def run(self, image, mode, quality, scale, megapixels, strength, mask=None):
         if not lc_rtx.available():
-            raise RuntimeError("[LC RTX Super Resolution] Needs an NVIDIA RTX card and the nvidia-vfx package "
-                               "(python -m pip install nvidia-vfx with ComfyUI's Python).")
+            raise RuntimeError("[LC RTX Super Resolution] Needs an NVIDIA RTX card and the nvidia-vfx package. Install it in a "
+                               f"terminal, then restart ComfyUI: {install_command()}")
         b, h, w, c = image.shape
         same = mode in ("denoise", "deblur")
         if same:
@@ -92,10 +92,16 @@ NODE_CLASS_MAPPINGS = {"LCRTXSuperResolution": LCRTXSuperResolution}
 NODE_DISPLAY_NAME_MAPPINGS = {"LCRTXSuperResolution": "LC RTX Super Resolution ⚡"}
 
 
-# ---------------------------------------------------------------- RTX support: status and a one-click install
-# nvidia-vfx (NVIDIA's VFX SDK bindings, about 800 MB) is the one dependency. The node face asks before installing,
-# runs pip with ComfyUI's own Python, and says to restart ComfyUI afterwards (the SDK loads at start-up).
-_INSTALL = {"running": False, "done": False, "ok": False, "log": ""}
+# ---------------------------------------------------------------- RTX support: status and the install command
+# nvidia-vfx (NVIDIA's VFX SDK bindings, about 800 MB) is the one dependency. Nothing installs from inside ComfyUI
+# (the Comfy Registry does not allow runtime pip installs): the node face hands over the pip command for ComfyUI's
+# own Python to run in a terminal, then a restart (the SDK loads at start-up).
+
+
+def install_command():
+    import sys
+
+    return f'"{sys.executable or "python"}" -m pip install nvidia-vfx'
 
 
 def rtx_status():
@@ -110,41 +116,15 @@ def rtx_status():
         works = lc_rtx.available()
     except Exception:
         works = False
-    return {"installed": bool(version), "version": version, "works": works, "install": dict(_INSTALL)}
-
-
-def _pip_install():
-    import subprocess
-    import sys
-
-    _INSTALL.update(running=True, done=False, ok=False, log="")
-    try:
-        p = subprocess.Popen([sys.executable, "-m", "pip", "install", "nvidia-vfx"], stdout=subprocess.PIPE,
-                             stderr=subprocess.STDOUT, text=True)
-        for line in p.stdout:
-            _INSTALL["log"] = (_INSTALL["log"] + line)[-4000:]
-            print(f"[LC RTX] {line.rstrip()}")
-        _INSTALL["ok"] = p.wait() == 0
-    except Exception as e:
-        _INSTALL["log"] += f"\n{e}"
-    finally:
-        _INSTALL.update(running=False, done=True)
+    return {"installed": bool(version), "version": version, "works": works, "command": install_command()}
 
 
 try:
-    import threading
-
     from aiohttp import web
     from server import PromptServer
 
     @PromptServer.instance.routes.get("/lc123/rtx/status")
     async def _rtx_status(_request):
         return web.json_response(rtx_status())
-
-    @PromptServer.instance.routes.post("/lc123/rtx/install")
-    async def _rtx_install(_request):
-        if not _INSTALL["running"]:
-            threading.Thread(target=_pip_install, daemon=True).start()
-        return web.json_response({"started": True})
 except Exception as e:  # no server (tests)
     print(f"[LC123] RTX routes not registered: {e}")

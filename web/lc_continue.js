@@ -20,6 +20,16 @@ let pending = false; // a hold stopped the last run
 let force = false;
 const seen = new Set(); // hold stamps already counted
 
+// A plain copy of a prompt. Not structuredClone: other packs and some frontends leave proxies or class objects in the
+// prompt, structuredClone throws on those ("could not be cloned"), and that stopped every queue (issue #19).
+function copy(o) {
+  try {
+    return JSON.parse(JSON.stringify(o));
+  } catch (_) {
+    return null;
+  }
+}
+
 /** The widget's own randomize / increment control (or a Primitive node's, when one feeds the input), not on fixed. */
 function moved(node, name) {
   const ws = node?.widgets || [];
@@ -34,8 +44,8 @@ function moved(node, name) {
 }
 
 function continued(output) {
-  const out = structuredClone(output);
-  if (!last) return out;
+  const out = copy(output);
+  if (!out || !last) return out || output;
   for (const [id, n] of Object.entries(out)) {
     const prev = last[id];
     if (!prev || prev.class_type !== n.class_type) continue;
@@ -62,18 +72,23 @@ app.registerExtension({
     api.__lcContinue = true;
     const queuePrompt = api.queuePrompt;
     api.queuePrompt = async function (number, data, ...rest) {
-      if ((pending || force) && data?.output) {
-        const wf = data.workflow;
-        data = {
-          ...data,
-          output: continued(data.output),
-          workflow: wf ? { ...wf, extra: { ...(wf.extra || {}), lc_continue: true } } : wf,
-        };
-        console.log("[LC Continue] continuing the stopped run with its seeds");
+      // Continue never blocks a queue: if anything here fails, the prompt goes through as it came
+      try {
+        if ((pending || force) && data?.output) {
+          const wf = data.workflow;
+          data = {
+            ...data,
+            output: continued(data.output),
+            workflow: wf ? { ...wf, extra: { ...(wf.extra || {}), lc_continue: true } } : wf,
+          };
+          console.log("[LC Continue] continuing the stopped run with its seeds");
+        }
+        if (data?.output) last = copy(data.output);
+      } catch (e) {
+        console.warn("[LC Continue] skipped:", e);
       }
       pending = false;
       force = false;
-      if (data?.output) last = structuredClone(data.output);
       return queuePrompt.call(this, number, data, ...rest);
     };
     api.addEventListener("executed", (e) => {

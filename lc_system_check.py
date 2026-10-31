@@ -1,7 +1,7 @@
 """
 System & Model Optimization Report, server side.
 
-GET /lc123/syscheck/run runs lc_system_probe (hardware, software, small live GPU tests, pack pre-flight checks),
+POST /lc123/syscheck/run runs lc_system_probe (hardware, software, small live GPU tests, pack pre-flight checks),
 saves the result as user/LC123/system_profile.json for the LC Optimizer node, and returns it with its findings.
 GET /lc123/syscheck/profile returns the last saved profile. Nothing is installed or changed.
 """
@@ -69,7 +69,7 @@ try:
     from aiohttp import web
     from server import PromptServer
 
-    @PromptServer.instance.routes.get("/lc123/syscheck/run")
+    @PromptServer.instance.routes.post("/lc123/syscheck/run")
     async def _lc123_syscheck_run(request):
         import asyncio
 

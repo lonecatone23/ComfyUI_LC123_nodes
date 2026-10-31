@@ -407,7 +407,7 @@ function openWindow(opts = {}) {
     let prof = null;
     let failed = null;
     try {
-      const r = await api.fetchApi("/lc123/syscheck/run");
+      const r = await api.fetchApi("/lc123/syscheck/run", { method: "POST" });
       prof = await r.json();
       if (prof?.error) failed = prof.error;
     } catch (e) {

@@ -749,10 +749,18 @@ def download_author(role, value):
     if not hf:
         raise FileNotFoundError(f"[LC Optimizer] {file or 'The author file'} is not on disk and only downloads from a Hugging Face "
                                 f"link. Get it here: {link or '(no link given)'}")
+    name = os.path.basename(hf[1])
+    known = shipped(name) is not None or any(v["file"] == name for p in profiles().values() for v in variants(p, role))
+    if not (known or hf[0].lower().startswith("lonecatone23/")):
+        raise FileNotFoundError(f"[LC Optimizer] {name} comes from huggingface.co/{hf[0]}, which LC Model Optimizer doesn't download "
+                                f"from. Get it here and put it in your models folder: {link}")
+    if not name.lower().endswith((".safetensors", ".gguf")):
+        raise FileNotFoundError(f"[LC Optimizer] {name} isn't a .safetensors or .gguf model file: not downloaded.")
     folder = ROLE_FOLDERS[role][0]
     target = folder_paths.get_folder_paths(folder)[0]
     os.makedirs(target, exist_ok=True)
-    name = os.path.basename(hf[1])
+    if os.path.exists(os.path.join(target, name)):
+        return folder, name
     with _DL_LOCK:
         print(f"[LC Optimizer] The workflow's author picked {name}: downloading from https://huggingface.co/{hf[0]} ...")
         _stream(hf[0], hf[1], os.path.join(target, name), name)

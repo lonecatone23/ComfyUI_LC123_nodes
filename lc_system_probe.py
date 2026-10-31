@@ -1,7 +1,7 @@
 """
 System & Model Optimization Report probe: what this machine has, and what actually works on it.
 
-Used by the System & Model Optimization Report button (GET /lc123/syscheck/run) and saved as user/LC123/system_profile.json for the
+Used by the System & Model Optimization Report button (POST /lc123/syscheck/run) and saved as user/LC123/system_profile.json for the
 LC Optimizer node. It also runs on its own, without ComfyUI:  python lc_system_probe.py [out.json]
 Nothing is installed or changed. The live GPU tests are small (a few hundred MB, a few seconds).
 """

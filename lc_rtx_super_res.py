@@ -101,7 +101,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {"LCRTXSuperResolution": "LC RTX Super Resolution â
 def install_command():
     import sys
 
-    return f'"{sys.executable or "python"}" -m pip install nvidia-vfx'
+    portable = "python_embeded" in (sys.executable or "").replace("\\", "/").lower()
+    return ("python_embeded\\python.exe" if portable else "python") + " -m pip install nvidia-vfx"
 
 
 def rtx_status():

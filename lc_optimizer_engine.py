@@ -238,6 +238,67 @@ def find_on_disk(filename, folders):
     return None
 
 
+_HASHES = {}  # path|mtime|size -> sha256, so a renamed copy is only hashed once per session
+
+
+def _sha256(path):
+    import hashlib
+
+    st = os.stat(path)
+    key = f"{path}|{st.st_mtime}|{st.st_size}"
+    if key not in _HASHES:
+        h = hashlib.sha256()
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(16 << 20), b""):
+                h.update(chunk)
+        _HASHES[key] = h.hexdigest()
+    return _HASHES[key]
+
+
+def _hf_meta(repo, path):
+    """(size in bytes, sha256) of a Hugging Face file, read from its headers. (None, None) when offline."""
+    try:
+        from huggingface_hub import get_hf_file_metadata, hf_hub_url
+
+        meta = get_hf_file_metadata(hf_hub_url(repo, path))
+        sha = str(meta.etag or "").strip('"').lower()
+        return meta.size, (sha if re.fullmatch(r"[0-9a-f]{64}", sha) else None)
+    except Exception:
+        return None, None
+
+
+def locate(filename, folders, repo=None, path=None, sha=None):
+    """find_on_disk, then a renamed copy: a file of exactly the same size whose sha256 matches. (folder, name) or None."""
+    hit = find_on_disk(filename, folders)
+    if hit or not repo:
+        return hit
+    try:
+        size, etag = _hf_meta(repo, path or _repo_path(repo, filename))
+    except Exception:
+        return None
+    sha = (sha or etag or "").lower()
+    if not size or not sha:
+        return None
+    for folder in folders:
+        for n in _list(folder):
+            p = full_path(folder, n)
+            try:
+                if not p or os.path.getsize(p) != size or _sha256(p) != sha:
+                    continue
+            except OSError:
+                continue
+            print(f"[LC Optimizer] {filename} is on disk as {n} (the same file under another name): using it.")
+            return folder, n
+    return None
+
+
+def ask_download(filename, gb=None):
+    """Nothing downloads unless the user picks it: stop and say what to pick."""
+    size = f" ({gb} GB)" if gb else ""
+    return FileNotFoundError(f"[LC Optimizer] {filename}{size} isn't on disk. Nothing downloads on its own: open the picker and choose "
+                             f"⬇ Download: {filename}, or pick a file you have.")
+
+
 def full_path(folder, name):
     p = folder_paths.get_full_path(folder, name)
     if p:
@@ -524,7 +585,7 @@ def _stream(repo, path_in_repo, dest, label):
 def download(variant):
     """Download a profile file into the root of its ComfyUI model folder. Returns (folder, name)."""
     folder = FOLDER_BY_LOADER.get(variant["loader"], "diffusion_models")
-    hit = find_on_disk(variant["file"], [folder])
+    hit = locate(variant["file"], [folder], variant.get("repo"))
     if hit:
         return hit
     target = folder_paths.get_folder_paths(folder)[0]
@@ -588,6 +649,9 @@ def download_shipped(entry, value, folder="diffusion_models"):
     dest = os.path.join(root, value.replace("\\", "/"))
     if os.path.exists(dest):
         return folder, value
+    hit = locate(entry["file"], [folder], entry["repo"], entry["path"], entry.get("sha256"))
+    if hit:
+        return hit
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     with _DL_LOCK:
         print(f"[LC Optimizer] The workflow uses {entry['family']} ({os.path.basename(dest)}, {entry['gb']} GB): downloading from "
@@ -679,6 +743,7 @@ def author_target(role, value):
 
 def download_author(role, value):
     file, link, hf, hit = author_target(role, value)
+    hit = hit or (locate(os.path.basename(file), ROLE_FOLDERS[role], hf[0], hf[1]) if hf and file else None)
     if hit:
         return hit
     if not hf:
@@ -863,18 +928,24 @@ def resolve(profile_id, role, value, goal):
     """Widget value -> (folder, name, variant or None). Downloads when needed. None for 'None' / From checkpoint."""
     if value in (NONE, FROM_CKPT, "", None):
         return None
-    if is_pick(value):
+    if is_pick(value):  # saved in the workflow, so on disk only: a download is always the user's own ⬇ pick
         if value.startswith(AUTHOR):
-            folder, name = download_author(role, value)
-            return folder, name, None
+            file, link, hf, hit = author_target(role, value)
+            hit = hit or (locate(os.path.basename(file), ROLE_FOLDERS[role], hf[0], hf[1]) if hf and file else None)
+            if hit:
+                return hit[0], hit[1], None
+            if not hf:
+                raise FileNotFoundError(f"[LC Optimizer] {file or 'The author file'} is not on disk. Get it here: {link or '(no link given)'}")
+            raise FileNotFoundError(f"[LC Optimizer] {file}, the workflow author's pick, isn't on disk. Nothing downloads on its own: "
+                                    f"open the picker and click it (★⬇) to download it, or pick a file you have.")
         got = release_pick(profile_id, value[2:], goal) if role == "model" else None
         if not got:
             raise FileNotFoundError(f"[LC Optimizer] {value[2:]} is not a release for this base model. Pick another file.")
         entry, hit = got
+        hit = hit or locate(entry["file"], ROLE_FOLDERS["model"], entry["repo"], entry["path"], entry.get("sha256"))
         if hit:
             return hit[0], hit[1], None
-        folder, name = download_shipped(entry, f"{entry['family']}/{entry['file']}", entry.get("folder", "diffusion_models"))
-        return folder, name, None
+        raise ask_download(entry["file"], entry.get("gb"))
     prof = profiles().get(profile_id)
     vs = variants(prof, role) if prof else []
     if value == RECOMMENDED:
@@ -886,6 +957,9 @@ def resolve(profile_id, role, value, goal):
         if is_custom(profile_id):
             raise FileNotFoundError(f"[LC Optimizer] Custom: downloads are {UNSUPPORTED}. Pick a file you have for the {role}.")
         fname = value[len(DOWNLOAD):]
+        if " | " in fname:  # the workflow author's file: "file | link"
+            folder, name = download_author(role, AUTHOR + fname)
+            return folder, name, None
         v = next((x for x in vs if x["file"] == fname), None)
         if v is None:
             for other in profiles().values():  # the base model changed after picking: still find it
@@ -895,7 +969,7 @@ def resolve(profile_id, role, value, goal):
         if v is None:
             entry = shipped(fname) if role == "model" else None
             if entry:  # one of Lonecat's models, offered as a featured download
-                hit = find_on_disk(entry["file"], ROLE_FOLDERS[role])
+                hit = locate(entry["file"], ROLE_FOLDERS[role], entry["repo"], entry["path"], entry.get("sha256"))
                 if hit:
                     return hit[0], hit[1], None
                 folder, name = download_shipped(entry, f"{entry['family']}/{entry['file']}", entry.get("folder", "diffusion_models"))
@@ -907,12 +981,19 @@ def resolve(profile_id, role, value, goal):
                 v = next((x for x in vs if x["file"] == os.path.basename(value.replace("\\", "/"))), None)
                 return folder, value, v
         entry = shipped(value) if role == "model" else None
-        if entry:
-            folder, name = download_shipped(entry, value, entry.get("folder", "diffusion_models"))  # checkpoints (SDXL family) go to checkpoints
-            return folder, name, None
+        if entry:  # one of Lonecat's models saved in the workflow: a renamed copy counts, a download is the user's pick
+            hit = locate(entry["file"], ROLE_FOLDERS[role], entry["repo"], entry["path"], entry.get("sha256"))
+            if hit:
+                return hit[0], hit[1], None
+            raise ask_download(entry["file"], entry.get("gb"))
         raise FileNotFoundError(f"[LC Optimizer] {value} was not found in the {'/'.join(ROLE_FOLDERS[role])} folders.")
     folder = FOLDER_BY_LOADER.get(v["loader"], ROLE_FOLDERS[role][0])
-    hit = find_on_disk(v["file"], [folder]) or download(v)
+    if value.startswith(DOWNLOAD):
+        hit = download(v)
+    else:  # ★ Recommended: on disk only
+        hit = locate(v["file"], [folder], v.get("repo"))
+        if not hit:
+            raise ask_download(v["file"], v.get("gb"))
     return hit[0], hit[1], v
 
 
@@ -1438,10 +1519,10 @@ def plan(profile_id, goal, picks, manual=None):
             if is_pick(value):
                 if value.startswith(AUTHOR):
                     file, link, hf, hit = author_target(role, value)
-                    row.update(label=os.path.basename(file) or "the author's file", state="disk" if hit else ("download" if hf else "missing"))
+                    row.update(label=os.path.basename(file) or "the author's file", state="disk" if hit else ("pick" if hf else "missing"))
                     if not hit:
                         out["hints"].append(("ℹ️", f"The workflow's author picked {os.path.basename(file) or 'this file'}: "
-                                                   + (f"it downloads from huggingface.co/{hf[0]} on the first run." if hf else f"get it at {link or '(no link given)'}.")))
+                                                   + (f"pick it in the picker to download it from huggingface.co/{hf[0]}." if hf else f"get it at {link or '(no link given)'}.")))
                 else:
                     got = release_pick(profile_id, value[2:], goal) if role == "model" else None
                     if not got:
@@ -1450,9 +1531,9 @@ def plan(profile_id, goal, picks, manual=None):
                         out["files"].append(row)
                         continue
                     entry, hit = got
-                    row.update(label=entry["file"], gb=entry.get("gb"), state="disk" if hit else "download")
+                    row.update(label=entry["file"], gb=entry.get("gb"), state="disk" if hit else "pick")
                     if not hit:
-                        out["hints"].append(("ℹ️", f"{entry['family']} downloads from huggingface.co/{entry['repo']} on the first run."))
+                        out["hints"].append(("ℹ️", f"{entry['family']} isn't on disk: pick it in the picker to download it from huggingface.co/{entry['repo']}."))
                 if hit:
                     paths[role] = full_path(*hit)
                     ckpt = ckpt or (role == "model" and hit[0] == "checkpoints")
@@ -1478,7 +1559,8 @@ def plan(profile_id, goal, picks, manual=None):
                     continue
                 folder = FOLDER_BY_LOADER.get(v["loader"], ROLE_FOLDERS[role][0])
                 hit = find_on_disk(v["file"], [folder])
-                row.update(label=v.get("display") or v["file"], gb=v.get("gb"), state="disk" if hit else "download")
+                row.update(label=v.get("display") or v["file"], gb=v.get("gb"),
+                           state="disk" if hit else ("download" if value.startswith(DOWNLOAD) else "pick"))
                 ckpt = ckpt or (role == "model" and folder == "checkpoints")  # also before it is downloaded
                 if hit:
                     paths[role] = full_path(*hit)
@@ -1491,8 +1573,9 @@ def plan(profile_id, goal, picks, manual=None):
                 row.update(label=os.path.basename(value.replace("\\", "/")), state="disk" if folder else "missing")
                 entry = shipped(value) if (role == "model" and not folder) else None
                 if entry:
-                    row.update(state="download", gb=entry["gb"])
-                    out["hints"].append(("ℹ️", f"This workflow uses {entry['family']}: it downloads from huggingface.co/{entry['repo']} on the first run."))
+                    row.update(state="pick", gb=entry["gb"])
+                    out["hints"].append(("ℹ️", f"This workflow uses {entry['family']}, which isn't on disk: pick ⬇ Download: {entry['file']} "
+                                               f"to get it from huggingface.co/{entry['repo']}."))
                     if prof and entry.get("profile") and entry["profile"] != profile_id:
                         out["hints"].append(("⚠️", f"{entry['family']} is a {profiles().get(entry['profile'], {}).get('name', entry['profile'])} model: set the base model to match."))
                 if folder:

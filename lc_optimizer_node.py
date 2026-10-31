@@ -56,7 +56,7 @@ DESC_IMAGE = (
     "This node analyzes your machine and loads the model, text encoder and VAE that suit YOUR card, with the speed-ups "
     "that actually work on it (Sage, Comfy Kitchen, etc.).\n"
     "Run the report with the button below, or from the LC123 settings.\n"
-    "Missing a file? Pick a ⬇ entry and it downloads on the first run.\n"
+    "Missing a file? Pick a ⬇ entry and it downloads on the first run. Nothing else ever downloads on its own.\n"
     "Finetunes work too. Pick your own file and it still gets the speed-ups, plus a ⚠️ if the text encoder or VAE doesn't match.\n"
     "Any other model: set the base model to Custom and pick your own files (and the text encoder type). The speed-ups "
     "still apply; recommendations, estimates and checks show as unsupported.\n"
@@ -69,7 +69,7 @@ DESC_VIDEO = (
     "This node analyzes your machine and loads the model, text encoder, video and audio VAE and latent upscaler that suit "
     "YOUR card, with the speed-ups that actually work on it (Sage, Comfy Kitchen, etc.).\n"
     "Run the report with the button below, or from the LC123 settings.\n"
-    "Missing a file? Pick a ⬇ entry and it downloads on the first run.\n"
+    "Missing a file? Pick a ⬇ entry and it downloads on the first run. Nothing else ever downloads on its own.\n"
     "Finetunes work too. Pick your own file and it still gets the speed-ups, plus a ⚠️ if the text encoder or VAE doesn't match.\n"
     "Any other model: set the base model to Custom and pick your own files (and the text encoder type). The speed-ups "
     "still apply; recommendations, estimates and checks show as unsupported.\n"
@@ -205,7 +205,7 @@ class _LCOptimizerBase:
         model, applied = E.apply_speedups(model, pl["speedups"])
         model_2 = None
         if self.PIPE and pid == "ideogram4":
-            model_2 = self._ideogram_uncond(got["model"])
+            model_2 = self._ideogram_uncond(got["model"], str(picks["model"]).startswith(E.DOWNLOAD))
             if model_2 is not None:
                 model_2, _ = E.apply_speedups(model_2, pl["speedups"])
                 loaded.append(("model_2", "Ideogram 4 unconditional"))
@@ -214,15 +214,17 @@ class _LCOptimizerBase:
         ui = {"lc_optimizer": [json.dumps(pl, default=str)], "lc_optimizer_swap": [json.dumps(swap)]}
         return {"ui": ui, "result": self._outputs(model, clip, vae, model_2, extra, text)}
 
-    def _ideogram_uncond(self, got_model):
+    def _ideogram_uncond(self, got_model, may_download=False):
         folder, name, v = got_model
         base = name.replace("\\", "/").split("/")[-1]
         if "unconditional" in base or not base.startswith("ideogram4_"):
             return None
         uname = base.replace("ideogram4_", "ideogram4_unconditional_", 1)
         hit = E.find_on_disk(uname, [folder])
-        if not hit and v:
+        if not hit and v and may_download:  # its partner file comes along only with the user's own ⬇ pick
             hit = E.download(dict(v, file=uname))
+        if not hit:
+            print(f"[LC Optimizer] {uname} isn't on disk: pick ⬇ Download for the model to get it, running without it.")
         return E.load_model(hit[0], hit[1])[0] if hit else None
 
     def _outputs(self, model, clip, vae, model_2, extra, text):

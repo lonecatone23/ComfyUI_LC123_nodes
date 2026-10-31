@@ -28,12 +28,12 @@ const FILE_WIDGETS = [
 const MANUAL = ["attention", "fp16_accumulation", "step_cache", "torch_compile", "qwen21_cache", "spectrum", "veda"];
 const LEGEND = {
   picker: "★ recommended for this machine · ⬇ downloads on the first run · 📦 from the checkpoint",
-  file: "✅ on disk · ⬇️ downloads on the first run · 📦 from the checkpoint · ⚠️ not found",
+  file: "✅ on disk · ⬇️ downloads on the first run (you picked it) · ★⬇ not on disk: pick it to download · 📦 from the checkpoint · ⚠️ not found",
   speed: "✅ on (will apply, then applied) · ➖ off or not available here",
   hint: "⚠️ check this (it still loads) · 💡 tip · ℹ️ info",
 };
 const tip = (detail, legend) => esc(detail ? `${detail}\n\n${legend}` : legend);
-const ICON = { disk: "✅", download: "⬇️", ckpt: "📦", missing: "⚠️", on: "✅", off: "➖", na: "➖", unsupported: "➖" };
+const ICON = { disk: "✅", download: "⬇️", pick: "★⬇", ckpt: "📦", missing: "⚠️", on: "✅", off: "➖", na: "➖", unsupported: "➖" };
 const CUSTOM = "Custom";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -173,10 +173,10 @@ async function showPicker(node, widget, role, anchor) {
     if (!path.length) {
       const rec = data.recommended;
       const ckptPart = role !== "model" && node._lcOptPlan?.checkpoint;
-      row(`<span>★</span><span style="flex:1"><b>Recommended</b><br><span style="color:#8a95a5">${rec ? esc(rec.file) + (rec.on_disk ? " · on disk" : ` · downloads ${rec.gb ?? "?"} GB`) + (rec.source === "default" ? " · Comfy default" : "") : (ckptPart ? "blank: the checkpoint's own" : data.unsupported ? "unsupported for Custom: pick a file" : "nothing for this part")}</span></span>`, () => pick(REC), { current: widget.value === REC });
-      for (const p of data.picks || []) row(`<span>★</span><span style="flex:1"><b>${esc(p.label)}</b><br><span style="color:#8a95a5">${esc(p.file)}${p.on_disk ? " · on disk" : ` · downloads ${p.gb ?? "?"} GB`}</span></span>`, () => pick(p.value), { current: widget.value === p.value });
+      row(`<span>${rec && !rec.on_disk ? "★⬇" : "★"}</span><span style="flex:1"><b>Recommended</b><br><span style="color:#8a95a5">${rec ? esc(rec.file) + (rec.on_disk ? " · on disk" : ` · downloads ${rec.gb ?? "?"} GB`) + (rec.source === "default" ? " · Comfy default" : "") : (ckptPart ? "blank: the checkpoint's own" : data.unsupported ? "unsupported for Custom: pick a file" : "nothing for this part")}</span></span>`, () => pick(rec && !rec.on_disk ? DL + rec.file : REC), { current: widget.value === REC });
+      for (const p of data.picks || []) row(`<span>${p.on_disk ? "★" : "★⬇"}</span><span style="flex:1"><b>${esc(p.label)}</b><br><span style="color:#8a95a5">${esc(p.file)}${p.on_disk ? " · on disk" : ` · downloads ${p.gb ?? "?"} GB`}</span></span>`, () => pick(p.on_disk ? p.value : DL + p.file), { current: widget.value === p.value });
       const au = authorPick(role);
-      if (au) row(`<span>★</span><span style="flex:1"><b>${esc(au.file)}</b><br><span style="color:#8a95a5">picked by this workflow's author${au.hf ? "" : " · get it from the author's link"}</span></span>`, () => pick(au.value), { current: widget.value === au.value });
+      if (au) row(`<span>★</span><span style="flex:1"><b>${esc(au.file)}</b><br><span style="color:#8a95a5">picked by this workflow's author${au.hf ? " · downloads if missing" : " · get it from the author's link"}</span></span>`, () => pick(au.hf ? `${DL}${au.file} | ${au.url}` : au.value), { current: widget.value === au.value });
       for (const x of extras) row(`<span>${x === CKPT ? "📦" : "∅"}</span><span>${x}</span>`, () => pick(x), { current: widget.value === x });
       if ((data.downloads || []).length) row(`<span>📁</span><span style="flex:1">⬇ Download</span><span style="color:#8a95a5">${data.downloads.length}</span>`, () => { path = ["__dl"]; render(); });
       const onDisk = (data.groups || []).reduce((k, g) => k + g.versions.reduce((j, v) => j + v.files.length, 0), 0) || known.size;
@@ -200,8 +200,9 @@ async function showPicker(node, widget, role, anchor) {
 function display(v, planFile) {
   if (v === REC && planFile?.state === "unsupported") return "unsupported: pick a file";
   if (v === REC && planFile?.state === "ckpt") return ""; // blank: the checkpoint's own text encoder / VAE
-  if (v === REC) return `★ ${planFile?.label ? baseName(planFile.label) : "Recommended"}`;
-  if (isPick(v)) return `★ ${planFile?.label ? baseName(planFile.label) : v.startsWith(AUTHOR) ? v.slice(AUTHOR.length).split(" | ")[0] : v.slice(2)}`;
+  const star = planFile?.state === "pick" ? "★⬇" : "★"; // not on disk: it downloads only when you pick its ⬇
+  if (v === REC) return `${star} ${planFile?.label ? baseName(planFile.label) : "Recommended"}`;
+  if (isPick(v)) return `${star} ${planFile?.label ? baseName(planFile.label) : v.startsWith(AUTHOR) ? v.slice(AUTHOR.length).split(" | ")[0] : v.slice(2)}`;
   if (typeof v === "string" && v.startsWith(DL)) return `⬇ ${baseName(planFile?.label || v.slice(DL.length))}`;
   if (v === CKPT) return "📦 From checkpoint";
   return baseName(v ?? "");
@@ -238,7 +239,7 @@ function renderFace(node) {
       <div style="color:#dfe5ec;margin-top:2px">${pl.custom ? "Without it, the speed-ups can't be matched to your card." : "Without it, you get Comfy's default files and speed-ups that aren't matched to your card."} Click <b>Run or Open Report</b> below (about 10 seconds).</div></div>`);
   }
   for (const x of pl.files || []) {
-    const what = x.state === "download" ? `downloads ${x.gb ?? "?"} GB` : x.state === "disk" ? "on disk" : x.state === "ckpt" ? "" : x.state === "unsupported" ? "" : "not found";
+    const what = x.state === "download" ? `downloads ${x.gb ?? "?"} GB` : x.state === "pick" ? `not on disk · pick ⬇ (${x.gb ?? "?"} GB)` : x.state === "disk" ? "on disk" : x.state === "ckpt" ? "" : x.state === "unsupported" ? "" : "not found";
     lines.push(`<div style="display:flex;gap:6px" title="${tip(baseName(x.label), LEGEND.file)}"><span>${ICON[x.state] || "•"}</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(baseName(x.label))}</span><span style="color:#8a95a5;white-space:nowrap">${what}</span></div>`);
   }
   for (const s of pl.speedups || []) {

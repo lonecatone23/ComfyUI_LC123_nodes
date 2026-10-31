@@ -327,5 +327,12 @@ try:
         pl = await asyncio.get_running_loop().run_in_executor(None, lambda: E.plan(pid, body.get("goal", "Optimal"), body.get("picks") or {}, manual))
         return web.json_response(json.loads(json.dumps(pl, default=str)))
 
+    # read the headers of new model files once ComfyUI has started, so the first model picker opens fast
+    import threading as _threading
+
+    _warm = _threading.Timer(45, E.warm_class_cache)
+    _warm.daemon = True  # never holds up closing ComfyUI
+    _warm.start()
+
 except Exception:
     pass

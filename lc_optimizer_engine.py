@@ -178,8 +178,14 @@ def _list(folder):
         except Exception:
             pass
     elif folder in ("diffusion_models", "text_encoders"):  # no GGUF pack: list the .gguf files ourselves
+        seen = set()  # a junction pointing back up the tree would loop forever
         for root in folder_paths.get_folder_paths(folder):
-            for dp, _, fs in os.walk(root, followlinks=True):
+            for dp, ds, fs in os.walk(root, followlinks=True):
+                real = os.path.normcase(os.path.realpath(dp))
+                if real in seen:
+                    ds[:] = []
+                    continue
+                seen.add(real)
                 for f in fs:
                     if f.lower().endswith(".gguf"):
                         rel = os.path.relpath(os.path.join(dp, f), root)
@@ -727,20 +733,99 @@ def _family_version(name, entry=None):
     return fam, ver
 
 
-_CLASS_CACHE = {}
+# the format tags a release's files differ by: Animosity_Krea2_V2.0_nvfp4 is the same release as ..._V2.0_bf16
+_FORMAT_TAIL = re.compile(r"[_\-\s.]+(bf16|fp16|fp32|fp8(?:[_\-]?(?:scaled|e4m3fn|e5m2|mixed))?|int8(?:[_\-]?convrot)?|nvfp4|mxfp8|mxfp4|"
+                          r"w4a8|q\d(?:_k)?(?:_[msl0-9])*|gguf|scaled|convrot)$", re.I)
+_SIBLINGS = None
+
+
+def _release_key(name):
+    stem = os.path.splitext(os.path.basename(str(name).replace("\\", "/")))[0].lower()
+    while True:
+        cut = _FORMAT_TAIL.sub("", stem)
+        if cut == stem:
+            return stem
+        stem = cut
+
+
+def _sibling(name):
+    """The shipped entry of the same release in another format (a file made locally, or not published)."""
+    global _SIBLINGS
+    if _SIBLINGS is None:
+        shipped("")  # loads _SHIPPED
+        _SIBLINGS = {}
+        for n, m in (_SHIPPED or {}).items():
+            _SIBLINGS.setdefault(_release_key(n), m)
+    return _SIBLINGS.get(_release_key(name))
+
+
+# model class per file header, kept on disk (user/LC123) so the first picker after a restart doesn't read every
+# header again: path|mtime|size -> class name (None = not a model ComfyUI detects)
+_CLASS_CACHE = None
+_CLASS_LOCK = threading.Lock()
+_CLASS_DIRTY = False
+
+
+def _class_cache_path():
+    return os.path.join(folder_paths.get_user_directory(), "LC123", "optimizer_model_classes.json")
+
+
+def _class_cache():
+    global _CLASS_CACHE
+    if _CLASS_CACHE is None:
+        try:
+            with open(_class_cache_path(), encoding="utf-8") as f:
+                _CLASS_CACHE = json.load(f)
+        except Exception:
+            _CLASS_CACHE = {}
+    return _CLASS_CACHE
+
+
+def _save_class_cache():
+    global _CLASS_DIRTY
+    if not _CLASS_DIRTY:
+        return
+    try:
+        path = _class_cache_path()
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with _CLASS_LOCK:
+            data = dict(_class_cache())
+            _CLASS_DIRTY = False
+        with open(path + ".tmp", "w", encoding="utf-8") as f:
+            json.dump(data, f)
+        os.replace(path + ".tmp", path)
+    except Exception as e:
+        print(f"[LC Optimizer] could not save the model class cache: {e}")
 
 
 def _class_of(folder, name):
+    global _CLASS_DIRTY
     p = full_path(folder, name)
     if not p or p.lower().endswith(".gguf"):
         return None
     try:
-        key = (p, os.path.getmtime(p))
+        st = os.stat(p)
     except OSError:
         return None
-    if key not in _CLASS_CACHE:
-        _CLASS_CACHE[key] = model_class(p)
-    return _CLASS_CACHE[key]
+    key = f"{p}|{st.st_mtime}|{st.st_size}"
+    cache = _class_cache()
+    if key not in cache:
+        cls = model_class(p)
+        with _CLASS_LOCK:
+            cache[key] = cls
+            _CLASS_DIRTY = True
+    return cache[key]
+
+
+def warm_class_cache():
+    """Read the headers of every diffusion model not in the cache yet (run in the background after startup)."""
+    try:
+        for folder, name in local_files("model"):
+            if folder == "diffusion_models":
+                _class_of(folder, name)
+        _save_class_cache()
+    except Exception as e:
+        print(f"[LC Optimizer] model class warm-up: {e}")
 
 
 def on_disk_groups(profile_id, role):
@@ -754,7 +839,7 @@ def on_disk_groups(profile_id, role):
     tree = {}
     for folder, name in local_files(role):
         base = os.path.basename(name.replace("\\", "/"))
-        entry = shipped(base)
+        entry = shipped(base) or _sibling(base)
         own = own_profile(base)
         if base.lower() in official:
             fam, ver = prof["name"] + " (official)", ""
@@ -767,6 +852,7 @@ def on_disk_groups(profile_id, role):
         else:
             continue
         tree.setdefault(fam, {}).setdefault(ver, []).append(name)
+    _save_class_cache()
     return [{"family": f, "versions": [{"version": v, "files": sorted(fs, key=lambda n: os.path.basename(n).lower())}
                                        for v, fs in sorted(vs.items(), key=lambda x: x[0], reverse=True)]}
             for f, vs in sorted(tree.items(), key=lambda x: (not x[0].endswith(" (official)"), x[0].lower()))]  # the base model's own files first

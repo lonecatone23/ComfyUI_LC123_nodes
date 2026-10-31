@@ -334,6 +334,7 @@ A multi-row LoRA loader modeled on rgthree's Power Lora Loader, rebuilt to fix t
 - **ℹ Info:** trigger words from the LoRA file's own metadata, no network call.
 - A LoRA you moved to another subfolder still loads: it finds the one file with that name (the console says where). Rows that are off, at 0, or point at a file that's gone are skipped instead of failing the whole graph.
 - Real HTML in one widget, so it works the same in classic and Nodes 2.0, and copy/paste never resets it.
+- **Anima LoRAs saved with Diffusers names** (`transformer_blocks.0.attn1.to_q`, from Diffusers / PEFT trainers) load too, in this loader and in ComfyUI's own LoRA loaders: LC123 teaches ComfyUI those names. Name table after HaDeS Anima Suite (MIT).
 
 ![LC LoRA Loader strength control and Info popover](assets/readme/lc_lora_loader_strength_and_info.png)
 
@@ -665,7 +666,7 @@ Full directions: [`LC_Prompt_Builder_Note.md`](LC_Prompt_Builder_Note.md)
 | **LC MiniMax H3 Pipe V2** | Everything above plus `prompt`, `total_steps`, `cfg`, `sampler_name`, `scheduler`. Feed a V1 pipe in to upgrade it |
 | **LC Image Ref Pipe In** / **Out** | Up to 16 reference images on one wire. Sockets grow as you fill them, same as Text Encode Qwen Image 2.1 |
 | **Prompt to Conditioning** / **+ Zero** | A string into conditioning |
-| **LC Weighted Prompt ⚖️** | A prompt box with a weight per word. Click a word (shift-click a second one for a phrase) and move the slider: above 1 the word gets more say (bold green, **cat:1.5**), below 1 less (red), below 0 it is taken out. Type in the box, or wire a prompt into **prompt** and edit it right there. **block** decides which one is used: **on change** (the box takes the incoming prompt when it changes, your edit holds until then), **always** (your box holds, and a new incoming prompt stops the run there: edit, then **Run** carries on with the same seeds), **never** (the incoming prompt always comes through). **Krea 2:** run the model through it (the weights work inside the model) and wire its **prompt** output into your encoder. Works with the plain, Image Reference Edit and Identity Edit encoders and with ControlNet. **SDXL / Pony / Illustrious:** clip only, the weights go in as (word:1.5). **strength** scales every weight. Drag the node taller and the box grows |
+| **LC Weighted Prompt ⚖️** | A prompt box with a weight per word. Click a word (shift-click a second one for a phrase) and move the slider: above 1 the word gets more say (bold green, **cat:1.5**), below 1 less (red), below 0 it is taken out. Type in the box, or wire a prompt into **prompt** and edit it right there. **block** decides which one is used: **on change** (the box takes the incoming prompt when it changes, your edit holds until then), **always** (your box holds, and a new incoming prompt stops the run there: edit, then **Run** carries on with the same seeds), **never** (the incoming prompt always comes through). **Krea 2:** run the model through it (the weights work inside the model) and wire its **prompt** output into your encoder. Works with the plain, Image Reference Edit and Identity Edit encoders and with ControlNet. **MOSS Image:** the same, model through it, its conditioning into the sampler (a real negative stays untouched). **SDXL / Pony / Illustrious:** clip only, the weights go in as (word:1.5). **strength** scales every weight. Drag the node taller and the box grows |
 | **Prompt / LC Negative** | Pre-colored prompt boxes. **Prompt** (was LC Positive) is a plain prompt box for any text |
 
 - 💡 **H3 prompt tags are 1-based:** `<Picture 1>` = `ref_image_0`. Native MiniMax **Ref2V** needs `ref_video` to be at least **5 frames**.
@@ -780,17 +781,10 @@ Details: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
 | [`workflows/LC123 Examples - Models, Sampling & Sigmas.json`](workflows/LC123%20Examples%20-%20Models%2C%20Sampling%20%26%20Sigmas.json) | Model Optimizer, LoRAs, conditioning, Sampler Configure, sigmas, Speed Boost and Detail Daemon |
 | [`workflows/LC123 Examples - Image Tools & Post Processing.json`](workflows/LC123%20Examples%20-%20Image%20Tools%20%26%20Post%20Processing.json) | Size and crop, batch and compare, color, film and lens, skin, light and depth, photo looks |
 | [`workflows/LC123 Examples - Pipes & Prompt Builders.json`](workflows/LC123%20Examples%20-%20Pipes%20%26%20Prompt%20Builders.json) | The LC pipes, the prompt builder and the regional canvases |
-| [`workflows/LC Skin Beauty.json`](workflows/LC%20Skin%20Beauty.json) | Skin Beauty with an optional mask |
-| [`workflows/LC Skin Beauty basic (no deps).json`](workflows/LC%20Skin%20Beauty%20basic%20(no%20deps).json) | Skin Beauty on its own |
 | [`workflows/LC Dual sigma workflow example.json`](workflows/LC%20Dual%20sigma%20workflow%20example.json) | Split sigma |
 | [`workflows/LC Dual Sigma Advanced workflow example.json`](workflows/LC%20Dual%20Sigma%20Advanced%20workflow%20example.json) | Advanced split sigmas |
 | [`workflows/LC Better Sigmas V2.0.json`](workflows/LC%20Better%20Sigmas%20V2.0.json) | LC Sigmas + LC Detail Daemon against a plain euler / simple baseline, with I2I and LC Vision prompt assist |
-| [`workflows/Anima Inline Regional Canvas workflow.json`](workflows/Anima%20Inline%20Regional%20Canvas%20workflow.json) | Anima inline canvas |
-| [`workflows/Krea2 Inline Regional Canvas Example.json`](workflows/Krea2%20Inline%20Regional%20Canvas%20Example.json) | Krea2 inline canvas |
 | [`workflows/MOSS Regional BBOX Prompt Module v1.1.json`](workflows/MOSS%20Regional%20BBOX%20Prompt%20Module%20v1.1.json) | MOSS Image with regional boxes: **LC Bounding Boxes** (two chained) into **LC MOSS Layout Prompt**, plain KSampler (Speed Boost does not work on MOSS). Saves the picture and a boxes-next-to-result sheet |
-| [`workflows/LC Lighting Control (BETA).json`](workflows/LC%20Lighting%20Control%20%28BETA%29.json) | The original Lighting Control (V1) with overlays |
-| [`workflows/Lonecat's Photo style Node.json`](workflows/Lonecat%27s%20Photo%20style%20Node.json) | Photo style |
-| [`workflows/Photo style test edit.json`](workflows/Photo%20style%20test%20edit.json) | Photo style test sheet, edit version |
 
 Workflow > Open, or just drag it onto the canvas.
 

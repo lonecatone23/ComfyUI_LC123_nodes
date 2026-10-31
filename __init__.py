@@ -47,6 +47,7 @@ def _load(module_name: str) -> None:
 _load("aspect_ratio")
 _load("lc_pack_versions")
 _load("lc_fast_cancel")
+_load("lc_anima_lora_keys")  # Diffusers-named Anima LoRAs load in every LoRA loader
 _load("lc_free_text_encoder")
 _load("slider")
 _load("lc_size_pad")

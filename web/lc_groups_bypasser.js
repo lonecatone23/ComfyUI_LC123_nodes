@@ -212,28 +212,30 @@ function nodesInGroup(graph, group) {
     group.recomputeInsideNodes?.();
   } catch (_) {}
 
-  if (Array.isArray(group._nodes) && group._nodes.length) {
-    return group._nodes.filter((n) => n && n.type !== NODE_TYPE);
-  }
-  if (Array.isArray(group.nodes) && group.nodes.length) {
-    return group.nodes.filter((n) => n && n.type !== NODE_TYPE);
-  }
-  // an empty list is not trusted: the frontend's member check uses each node's drawn box, which nodes that were
-  // never on screen do not have yet (V27's prompt group came back empty right after load), so fall back to the area
-
+  const listed = (Array.isArray(group._nodes) && group._nodes.length ? group._nodes
+    : Array.isArray(group.nodes) ? group.nodes : []).filter((n) => n && n.type !== NODE_TYPE);
+  // the frontend's member check uses each node's drawn box, which nodes that were never on screen do not have yet
+  // (V27's prompt group came back empty right after load; nodes added off screen were left out even when the list
+  // wasn't empty), so nodes whose centre sits in the group's area count too
   const { x, y, w, h } = groupBounds(group);
-  const result = [];
-  for (const node of graph._nodes || []) {
-    if (!node || node.type === NODE_TYPE) continue;
-    const nx = node.pos?.[0] ?? 0;
-    const ny = node.pos?.[1] ?? 0;
-    const nw = node.size?.[0] ?? 0;
-    const nh = node.size?.[1] ?? 0;
-    if (nx + nw > x && nx < x + w && ny + nh > y && ny < y + h) {
-      result.push(node);
+  const result = new Set(listed);
+  if (!listed.length) {
+    for (const node of graph._nodes || []) {
+      if (!node || node.type === NODE_TYPE) continue;
+      const nx = node.pos?.[0] ?? 0;
+      const ny = node.pos?.[1] ?? 0;
+      const nw = node.size?.[0] ?? 0;
+      const nh = node.size?.[1] ?? 0;
+      if (nx + nw > x && nx < x + w && ny + nh > y && ny < y + h) result.add(node);
     }
   }
-  return result;
+  for (const node of graph._nodes || []) {
+    if (!node || node.type === NODE_TYPE || result.has(node)) continue;
+    const cx = (node.pos?.[0] ?? 0) + (node.flags?.collapsed ? 40 : (node.size?.[0] ?? 0) / 2);
+    const cy = (node.pos?.[1] ?? 0) + (node.flags?.collapsed ? -10 : (node.size?.[1] ?? 0) / 2);
+    if (cx > x && cx < x + w && cy > y && cy < y + h) result.add(node);
+  }
+  return [...result];
 }
 
 // live Groups Bypassers, so the timers cost nothing in a workflow without one

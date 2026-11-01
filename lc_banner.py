@@ -59,22 +59,32 @@ GAP = 3  # columns between the logo and the text
 
 
 def _color_ok(stream):
-    """Colors on, like other packs' banners: every terminal ComfyUI runs in today shows them (and ComfyUI's log
-    catcher hides whether it is one anyway). NO_COLOR or LC_BANNER_COLOR=0 turns them off."""
+    """Colors wherever the terminal already shows them: Linux / Mac, Windows Terminal, a Windows console that
+    something else has switched to escape-code mode, or a log viewer (not a console). Only a plain Windows console
+    with escape codes off gets the plain block logo. Nothing is changed, only read. NO_COLOR or LC_BANNER_COLOR=0
+    turns colors off."""
     if os.environ.get("NO_COLOR") or os.environ.get("LC_BANNER_COLOR", "").strip() == "0":
         return False
-    if os.name == "nt":  # switch the Windows console to escape-code mode
-        try:
-            import ctypes
+    if os.name != "nt" or os.environ.get("WT_SESSION"):
+        return True
+    try:
+        import ctypes
 
-            k = ctypes.windll.kernel32
-            h = k.GetStdHandle(-11)
-            mode = ctypes.c_uint32()
-            if k.GetConsoleMode(h, ctypes.byref(mode)):
-                k.SetConsoleMode(h, mode.value | 0x0004)
-        except Exception:
-            pass
-    return True
+        k = ctypes.windll.kernel32
+        mode = ctypes.c_uint32()
+        if not k.GetConsoleMode(k.GetStdHandle(-11), ctypes.byref(mode)):
+            return True  # not a console: ComfyUI Desktop or another log viewer
+        return bool(mode.value & 0x0004)  # escape-code mode already on
+    except Exception:
+        return False
+
+
+def _sgr(*codes):
+    """One escape sequence from its numbers: _sgr(38, 2, r, g, b) sets the text color."""
+    return _ESC + ";".join(str(c) for c in codes) + "m"
+
+
+RESET = _sgr(0)
 
 
 def _rgb(hexs):
@@ -93,11 +103,11 @@ def _logo_lines(color):
                 a = (t is not None) + (b is not None)
                 cells.append(" ▄▀█"[(b is not None) + 2 * (t is not None)] if a else " ")
             elif t and b:
-                cells.append(f"{_ESC}38;2;{t[0]};{t[1]};{t[2]};48;2;{b[0]};{b[1]};{b[2]}m▀{_ESC}0m")
+                cells.append(_sgr(38, 2, *t, 48, 2, *b) + "▀" + RESET)
             elif t:
-                cells.append(f"{_ESC}38;2;{t[0]};{t[1]};{t[2]}m▀{_ESC}0m")
+                cells.append(_sgr(38, 2, *t) + "▀" + RESET)
             elif b:
-                cells.append(f"{_ESC}38;2;{b[0]};{b[1]};{b[2]}m▄{_ESC}0m")
+                cells.append(_sgr(38, 2, *b) + "▄" + RESET)
             else:
                 cells.append(" ")
         out.append("".join(cells))
@@ -107,8 +117,8 @@ def _logo_lines(color):
 def paint(text, rgb, color, bold=False, italic=False):
     if not color or not text:
         return text
-    style = ("1;" if bold else "") + ("3;" if italic else "")
-    return f"{_ESC}{style}38;2;{rgb[0]};{rgb[1]};{rgb[2]}m{text}{_ESC}0m"
+    style = ([1] if bold else []) + ([3] if italic else [])
+    return _sgr(*style, 38, 2, *rgb) + text + RESET
 
 
 def pack_line(name, version, count, color, failed=0):

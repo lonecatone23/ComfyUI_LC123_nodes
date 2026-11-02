@@ -32,7 +32,7 @@
      "default": true
     },
     {
-     "file": "fibo2_edit_turbo_w6a8_convrot.safetensors",
+     "file": "fibo2_edit_turbo-w6a8_convrot.safetensors",
      "format": "w6a8_convrot",
      "gb": 7.46,
      "bits": 6,
@@ -40,7 +40,7 @@
      "loader": "UNETLoader",
      "community": true,
      "also": [
-      "fibo2_edit_turbo-w6a8_convrot.safetensors"
+      "fibo2_edit_turbo_w6a8_convrot.safetensors"
      ]
     },
     {

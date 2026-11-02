@@ -38,13 +38,16 @@
      "loader": "UNETLoader"
     },
     {
-     "file": "z_image_turbo_fp8_e4m3fn.safetensors",
+     "file": "z-image-turbo-fp8-e4m3fn.safetensors",
      "format": "fp8_e4m3fn",
-     "gb": 5.73,
+     "gb": 6.15,
      "bits": 8,
      "repo": "T5B/Z-Image-Turbo-FP8",
      "loader": "UNETLoader",
-     "community": true
+     "community": true,
+     "also": [
+      "z_image_turbo_fp8_e4m3fn.safetensors"
+     ]
     },
     {
      "file": "z-image-turbo-Q8_0.gguf",
@@ -67,7 +70,7 @@
     {
      "file": "z-image-turbo-Q5_K_M.gguf",
      "format": "gguf_q5_k_m",
-     "gb": 5.19,
+     "gb": 4.62,
      "bits": 5,
      "repo": "unsloth/Z-Image-Turbo-GGUF",
      "loader": "UnetLoaderGGUF",
@@ -76,7 +79,7 @@
     {
      "file": "z-image-turbo-Q4_K_M.gguf",
      "format": "gguf_q4_k_m",
-     "gb": 4.68,
+     "gb": 3.85,
      "bits": 4,
      "repo": "unsloth/Z-Image-Turbo-GGUF",
      "loader": "UnetLoaderGGUF",
@@ -85,7 +88,7 @@
     {
      "file": "z-image-turbo-Q3_K_M.gguf",
      "format": "gguf_q3_k_m",
-     "gb": 3.9,
+     "gb": 2.7,
      "bits": 3,
      "repo": "unsloth/Z-Image-Turbo-GGUF",
      "loader": "UnetLoaderGGUF",
@@ -94,7 +97,7 @@
     {
      "file": "z-image-turbo-Q2_K.gguf",
      "format": "gguf_q2_k",
-     "gb": 3.39,
+     "gb": 2.31,
      "bits": 2,
      "repo": "unsloth/Z-Image-Turbo-GGUF",
      "loader": "UnetLoaderGGUF",

@@ -390,7 +390,8 @@ def choices(profile_id, role, goal):
             known.add(hit[1])
         elif not v.get("unconfirmed"):
             out["downloads"].append({"value": DOWNLOAD + v["file"], "file": v.get("display") or v["file"], "gb": v.get("gb"), "format": v.get("format"),
-                                     "community": bool(v.get("community")), "gated": v["repo"].startswith(("black-forest-labs",))})
+                                     "community": bool(v.get("community")),
+                                     "gated": bool(v.get("gated")) or v["repo"].startswith(("black-forest-labs",))})
     if role == "model":  # Lonecat's featured models, after the base model's own files
         for m in shipped_all():
             if m.get("featured") and m.get("profile") == profile_id and not find_on_disk(m["file"], ROLE_FOLDERS[role]):
@@ -574,6 +575,9 @@ def _stream(repo, path_in_repo, dest, label):
                 if pct >= 0 and pct // 10 != shown:
                     shown = pct // 10
                     print(f"[LC Optimizer] {label}: {pct}% of {total / 1024 ** 3:.1f} GB (cancel the run to stop)")
+        # a dropped connection ends the read early: never keep a cut-off file under the real name
+        if total and done != total:
+            raise IOError(f"download cut short ({done / 1e9:.2f} of {total / 1e9:.2f} GB): run again to retry")
         os.replace(part, dest)
     except BaseException as e:
         try:
@@ -974,10 +978,11 @@ def resolve(profile_id, role, value, goal):
         if " | " in fname:  # the workflow author's file: "file | link"
             folder, name = download_author(role, AUTHOR + fname)
             return folder, name, None
-        v = next((x for x in vs if x["file"] == fname), None)
+        named = lambda x: x["file"] == fname or fname in x.get("also", [])  # a file renamed upstream keeps its old name
+        v = next((x for x in vs if named(x)), None)
         if v is None:
             for other in profiles().values():  # the base model changed after picking: still find it
-                v = next((x for x in variants(other, role) if x["file"] == fname), None)
+                v = next((x for x in variants(other, role) if named(x)), None)
                 if v:
                     break
         if v is None:
@@ -994,6 +999,12 @@ def resolve(profile_id, role, value, goal):
             if value in _list(folder):
                 v = next((x for x in vs if x["file"] == os.path.basename(value.replace("\\", "/"))), None)
                 return folder, value, v
+        base = os.path.basename(value.replace("\\", "/"))
+        v = next((x for x in vs if x["file"] == base or base in x.get("also", [])), None)
+        if v:  # a profile file saved under its other name (renamed upstream): the copy on disk under either name
+            hit = find_on_disk(v["file"], ROLE_FOLDERS[role])
+            if hit:
+                return hit[0], hit[1], v
         entry = shipped(value) if role == "model" else None
         if entry:  # one of Lonecat's models saved in the workflow: a renamed copy counts, a download is the user's pick
             hit = locate(entry["file"], ROLE_FOLDERS[role], entry["repo"], entry["path"], entry.get("sha256"))

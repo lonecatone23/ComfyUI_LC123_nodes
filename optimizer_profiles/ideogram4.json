@@ -17,7 +17,7 @@
     {
      "file": "ideogram4_fp8_scaled.safetensors",
      "format": "fp8_scaled",
-     "gb": 17.29,
+     "gb": 9.28,
      "bits": 8,
      "repo": "Comfy-Org/Ideogram-4",
      "loader": "UNETLoader x2",
@@ -27,7 +27,7 @@
     {
      "file": "ideogram4_int8_convrot.safetensors",
      "format": "int8_convrot",
-     "gb": 17.84,
+     "gb": 9.58,
      "bits": 8,
      "repo": "Comfy-Org/Ideogram-4",
      "loader": "UNETLoader x2",
@@ -36,7 +36,7 @@
     {
      "file": "ideogram4_nvfp4_mixed.safetensors",
      "format": "nvfp4",
-     "gb": 10.23,
+     "gb": 5.49,
      "bits": 4,
      "repo": "Comfy-Org/Ideogram-4",
      "loader": "UNETLoader x2",

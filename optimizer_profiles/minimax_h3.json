@@ -65,7 +65,8 @@
           "repo": "coolthor/MiniMax-H3-pruned-NVFP4",
           "loader": "UNETLoader",
           "pruned": true,
-          "community": true
+          "community": true,
+          "gated": true
         },
         {
           "file": "minimax_h3_ref2va_pruned_w4a8_mixed.safetensors",

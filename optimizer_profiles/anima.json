@@ -38,15 +38,6 @@
      "community": true
     },
     {
-     "file": "anima-base-v1.0-nvfp4mixed.safetensors",
-     "format": "nvfp4",
-     "gb": 2.01,
-     "bits": 4,
-     "repo": "Bedovyy/Anima-FP8",
-     "loader": "UNETLoader",
-     "community": true
-    },
-    {
      "file": "anima-base-v1.0-Q8_0.gguf",
      "format": "gguf_q8_0",
      "gb": 2.09,
@@ -125,7 +116,7 @@
     {
      "file": "qwen_image_vae.safetensors",
      "format": "bf16",
-     "gb": 0.23,
+     "gb": 0.25,
      "bits": 16,
      "repo": "circlestone-labs/Anima",
      "loader": "VAELoader",

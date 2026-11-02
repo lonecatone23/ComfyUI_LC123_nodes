@@ -47,58 +47,76 @@
      "loader": "UNETLoader"
     },
     {
-     "file": "ltx-2.5-22b-distilled-Q8_0.gguf",
+     "file": "ltx-2.5-22b-distilled-transformer-Q8_0.gguf",
      "format": "gguf_q8_0",
-     "gb": 21.98,
+     "gb": 23.6,
      "bits": 8,
      "repo": "vantagewithai/LTX-2.5-GGUF",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "ltx-2.5-22b-distilled-Q8_0.gguf"
+     ]
     },
     {
-     "file": "ltx-2.5-22b-distilled-Q6_K.gguf",
+     "file": "ltx-2.5-22b-distilled-transformer-Q6_K.gguf",
      "format": "gguf_q6_k",
-     "gb": 17.34,
+     "gb": 18.62,
      "bits": 6,
      "repo": "vantagewithai/LTX-2.5-GGUF",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "ltx-2.5-22b-distilled-Q6_K.gguf"
+     ]
     },
     {
-     "file": "ltx-2.5-22b-distilled-Q5_K_M.gguf",
+     "file": "ltx-2.5-22b-distilled-transformer-Q5_K_M.gguf",
      "format": "gguf_q5_k_m",
-     "gb": 16.88,
+     "gb": 18.12,
      "bits": 5,
      "repo": "vantagewithai/LTX-2.5-GGUF",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "ltx-2.5-22b-distilled-Q5_K_M.gguf"
+     ]
     },
     {
-     "file": "ltx-2.5-22b-distilled-Q4_K_M.gguf",
+     "file": "ltx-2.5-22b-distilled-transformer-Q4_K_M.gguf",
      "format": "gguf_q4_k_m",
-     "gb": 14.61,
+     "gb": 15.69,
      "bits": 4,
      "repo": "vantagewithai/LTX-2.5-GGUF",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "ltx-2.5-22b-distilled-Q4_K_M.gguf"
+     ]
     },
     {
-     "file": "ltx-2.5-22b-distilled-Q3_K_M.gguf",
+     "file": "ltx-2.5-22b-distilled-transformer-Q3_K_M.gguf",
      "format": "gguf_q3_k_m",
-     "gb": 12.03,
+     "gb": 12.92,
      "bits": 3,
      "repo": "vantagewithai/LTX-2.5-GGUF",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "ltx-2.5-22b-distilled-Q3_K_M.gguf"
+     ]
     },
     {
-     "file": "LTX-2.5-distilled-Q2_K.gguf",
+     "file": "LTX-2.5-Distilled-Q2_K.gguf",
      "format": "gguf_q2_k",
-     "gb": 8.22,
+     "gb": 8.83,
      "bits": 2,
      "repo": "realrebelai/LTX-2.5_GGUFs",
      "loader": "UnetLoaderGGUF",
-     "community": true
+     "community": true,
+     "also": [
+      "LTX-2.5-distilled-Q2_K.gguf"
+     ]
     }
    ]
   },
@@ -141,7 +159,8 @@
      "repo": "elix3r/gemma4-12b-with-proj-ltx-2.5-GGUF",
      "loader": "CLIPLoaderGGUF",
      "community": true,
-     "unconfirmed": "Gemma 4 is not on ComfyUI-GGUF's text encoder list"
+     "unconfirmed": "Gemma 4 is not on ComfyUI-GGUF's text encoder list",
+     "gated": true
     }
    ]
   },
@@ -168,13 +187,16 @@
      "always": true
     },
     {
-     "file": "ltx-2.5-spatial-upscaler-x2.safetensors",
+     "file": "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
      "format": "bf16",
-     "gb": 0.93,
+     "gb": 1.0,
      "bits": 16,
      "repo": "Lightricks/LTX-2.5",
      "loader": "LatentUpscaleModelLoader",
-     "always": true
+     "always": true,
+     "also": [
+      "ltx-2.5-spatial-upscaler-x2.safetensors"
+     ]
     }
    ]
   }

@@ -15,32 +15,41 @@
    "role": "diffusion",
    "variants": [
     {
-     "file": "flux3_image_klein_sd_bf16.safetensors",
+     "file": "flux3-image-klein-bf16.safetensors",
      "format": "bf16",
      "gb": 11.1,
      "bits": 16,
      "repo": "black-forest-labs/flux-3-image-klein-comfy",
      "loader": "UNETLoader",
-     "note": "gated"
+     "note": "gated",
+     "also": [
+      "flux3_image_klein_sd_bf16.safetensors"
+     ]
     },
     {
-     "file": "flux3_image_klein_sd_int8_convrot.safetensors",
+     "file": "flux3-image-klein-int8-convrot.safetensors",
      "format": "int8_convrot",
      "gb": 5.83,
      "bits": 8,
      "repo": "black-forest-labs/flux-3-image-klein-comfy",
      "loader": "UNETLoader",
      "default": true,
-     "note": "gated"
+     "note": "gated",
+     "also": [
+      "flux3_image_klein_sd_int8_convrot.safetensors"
+     ]
     },
     {
-     "file": "flux3_image_klein_sd_nvfp4.safetensors",
+     "file": "flux3-image-klein-nvfp4.safetensors",
      "format": "nvfp4",
      "gb": 5.28,
      "bits": 4,
      "repo": "black-forest-labs/flux-3-image-klein-comfy",
      "loader": "UNETLoader",
-     "note": "gated"
+     "note": "gated",
+     "also": [
+      "flux3_image_klein_sd_nvfp4.safetensors"
+     ]
     },
     {
      "file": "flux-3-image-klein-Q8_0.gguf",

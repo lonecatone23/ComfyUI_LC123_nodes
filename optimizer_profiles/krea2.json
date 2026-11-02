@@ -149,7 +149,7 @@
     {
      "file": "qwen_image_vae.safetensors",
      "format": "bf16",
-     "gb": 0.23,
+     "gb": 0.25,
      "bits": 16,
      "repo": "Comfy-Org/Krea-2",
      "loader": "VAELoader",

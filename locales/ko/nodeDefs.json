@@ -3763,5 +3763,126 @@
         "tooltip": "옅은 그레인의 seed."
       }
     }
+  },
+  "LegendEffects": {
+    "description": "Legend Effects, Legendaer에게 바치는 오마주: VHS TV, Pixelation, Digital Glitch, Night Vision, Blueprint, Frosted Glass, Gameboy, Edge-Preserving Blur, Morphology, Quantize를 노드 하나에. 룩을 고르고 strength를 조절한 뒤, 노드의 wipe를 드래그해 비교하세요.",
+    "inputs": {
+      "effect": {
+        "tooltip": "룩. 아래에는 그 룩의 설정만 표시됩니다."
+      },
+      "strength": {
+        "tooltip": "효과 쪽으로 블렌딩합니다. 1 = 전체 룩, 0 = 원본 이미지."
+      },
+      "vhs_curve": {
+        "tooltip": "옛날 TV 화면이 볼록한 정도. 0 = 평평함, 1 = 원래 룩."
+      },
+      "vhs_rgb_shift": {
+        "tooltip": "빨강과 파랑을 옆으로 벌리는 양(폭에 대한 비율)."
+      },
+      "vhs_scanlines": {
+        "tooltip": "주사선의 진하기."
+      },
+      "vhs_vignette": {
+        "tooltip": "곡면 화면의 가장자리가 어두워지는 정도. 0 = 없음."
+      },
+      "pixel_blocks": {
+        "tooltip": "가로 블록 수. 낮을수록 투박해집니다."
+      },
+      "glitch_tear": {
+        "tooltip": "글리치된 줄이 옆으로 밀리는 거리(폭에 대한 비율)."
+      },
+      "glitch_rows": {
+        "tooltip": "화면을 가로 띠 몇 개로 나눌지."
+      },
+      "glitch_rgb_split": {
+        "tooltip": "글리치된 줄에서 빨강과 파랑이 갈라지는 정도."
+      },
+      "glitch_share": {
+        "tooltip": "글리치되는 줄의 비율. 0.2 = 다섯 줄에 한 줄 정도."
+      },
+      "glitch_pattern": {
+        "tooltip": "다른 글리치 줄 조합. 0 = 원래 패턴."
+      },
+      "nv_tint": {
+        "tooltip": "형광 색(hex)."
+      },
+      "nv_scanlines": {
+        "tooltip": "주사선의 진하기."
+      },
+      "nv_vignette": {
+        "tooltip": "고글 가장자리가 어두워지는 정도. 0 = 없음."
+      },
+      "bp_background": {
+        "tooltip": "종이 색(hex). 클래식 청사진 파랑."
+      },
+      "bp_lines": {
+        "tooltip": "선 색(hex)."
+      },
+      "bp_edges": {
+        "tooltip": "가장자리가 선으로 바뀌는 강도. 높을수록 디테일이 더 그려집니다."
+      },
+      "bp_grid": {
+        "tooltip": "가로 그리드 칸 수. 0 = 그리드 없음."
+      },
+      "frost_amount": {
+        "tooltip": "젖빛 유리의 두께(폭에 대한 비율)."
+      },
+      "frost_pattern": {
+        "tooltip": "다른 젖빛 무늬. 0 = 원래 무늬."
+      },
+      "gb_pixels": {
+        "tooltip": "가로 픽셀 수. 원래 Game Boy 화면은 160."
+      },
+      "gb_gaps": {
+        "tooltip": "픽셀 사이 LCD 틈의 어두움. 0 = 틈 없음."
+      },
+      "blur_radius": {
+        "tooltip": "블러 크기(픽셀, 최대 20). 클수록 느려집니다."
+      },
+      "blur_edges": {
+        "tooltip": "선명하게 남길 가장자리의 강도. 낮음 = 부드러운 영역만 블러, 높음 = 거의 전부 블러."
+      },
+      "blur_step": {
+        "tooltip": "속도를 위해 픽셀을 건너뜁니다. 1 = 모든 픽셀(최고), 2 이상 = 더 빠르지만 거칠어집니다."
+      },
+      "morph_operation": {
+        "tooltip": "erode는 밝은 영역을 줄이고, dilate는 넓히고, open / close는 작은 점을 지우고, gradient는 윤곽만 남깁니다."
+      },
+      "morph_kernel": {
+        "tooltip": "작업에 쓰는 모양의 크기(픽셀)."
+      },
+      "quant_colors": {
+        "tooltip": "남길 색 수. 낮으면 포스터 같은 룩이 됩니다."
+      },
+      "quant_dither": {
+        "tooltip": "남은 색을 섞는 방식: none = 평평한 면, floyd-steinberg = 고운 노이즈, bayer = 규칙적인 패턴."
+      }
+    }
+  },
+  "LCAnimaBoxPrompt": {
+    "description": "Anima용 영역 프롬프트: LC Bounding Boxes에서 박스를 그리고 각 박스에 무엇이 들어갈지 쓰면 이 노드가 그 자리에 배치합니다. 각 박스는 일반 프롬프트처럼 쓰세요(완전한 문장이 가장 잘 됩니다). 메인 프롬프트는 장면을 설명합니다. Sen-sou의 Anima Regional Conditioning 팩이 필요하며, Regional LLLite 패치는 처음 사용할 때 다운로드됩니다.",
+    "inputs": {
+      "model": {
+        "tooltip": "Anima 모델. 출력을 샘플러에 연결하세요."
+      },
+      "clip": {
+        "tooltip": "Anima의 텍스트 인코더: 각 박스의 프롬프트를 이것으로 인코딩합니다."
+      },
+      "elements": {
+        "tooltip": "LC Bounding Boxes의 박스. 각 박스의 설명이 그 프롬프트가 됩니다."
+      },
+      "placement": {
+        "tooltip": "박스가 위치를 유지하는 강도(Regional LLLite). 테스트에서 1.0이 가장 좋았습니다. 피사체가 박스를 가득 채우는 클로즈업이 되면 낮추세요."
+      },
+      "isolation": {
+        "tooltip": "각 박스가 독립을 유지하는 정도. 테스트에서 0.2가 가장 좋았습니다. 높이면 피사체 뒤에 평평한 색 패널이 생기고, 낮추면 박스 프롬프트가 흐트러집니다."
+      },
+      "box_prefix": {
+        "tooltip": "모든 박스 프롬프트 앞에 붙습니다(예: 스타일). masterpiece, best quality 같은 품질 태그는 넣지 마세요: Anima에서는 그림이 NSFW 쪽으로 기웁니다."
+      },
+      "scene": {
+        "tooltip": "메인 프롬프트의 conditioning: 박스 주변의 장면. 연결하지 않으면 샘플러 자체의 프롬프트를 씁니다."
+      }
+    }
   }
 }

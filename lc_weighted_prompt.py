@@ -18,7 +18,7 @@ edit, identity edit) ends with the prompt and the same template ending, so the n
 emphasis follows capitan01R's Krea2T-Enhancer (MIT); emphasis on the logits and removal on the value is the split
 Kijai's Krea2 Prompt Weight uses. Only the positive (cond) rows are touched, so a negative prompt is unaffected.
 
-SDXL / Illustrious / Pony and other CLIP models: the same weights written as ComfyUI's own (phrase:weight).
+Anima, SDXL / Illustrious / Pony and other CLIP models: the same weights written as ComfyUI's own (phrase:weight).
 
 The weights live in the hidden `weights` STRING widget as JSON: [{"text": "fur-lined hood", "w": 1.5}, ...],
 matched to the prompt by words (any case), so a new prompt keeps the weights of every phrase still in it.
@@ -288,7 +288,7 @@ class LCWeightedPrompt:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "clip": ("CLIP", {"tooltip": "The text encoder (Krea 2, MOSS Image, SDXL, Illustrious, Pony ...)."}),
+                "clip": ("CLIP", {"tooltip": "The text encoder (Krea 2, MOSS Image, Anima, SDXL, Illustrious, Pony ...)."}),
                 "text": ("STRING", {"multiline": True, "default": "", "tooltip": "The prompt. Its words show below, ready to weight."}),
                 "strength": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 3.0, "step": 0.05,
                                        "tooltip": "How strongly every weight acts. Lower it if a weighted word starts to break the picture up."}),
@@ -319,7 +319,7 @@ class LCWeightedPrompt:
     FUNCTION = "encode"
     CATEGORY = "LC123/conditioning"
     DESCRIPTION = ("A text encoder with a weight per word: click a word, move its slider. Green = more, red = less, "
-                   "below 0 = taken out. Works on Krea 2 and MOSS Image (inside the model) and on CLIP models (SDXL, Illustrious, Pony).")
+                   "below 0 = taken out. Works on Krea 2 and MOSS Image (inside the model) and on Anima and CLIP models (SDXL, Illustrious, Pony).")
 
     def encode(self, clip, text, strength, weights, model=None, edit_conditioning=None, block="on change", last_in="",
                prompt=None):

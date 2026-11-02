@@ -3763,5 +3763,126 @@
         "tooltip": "かすかなグレイン用の seed。"
       }
     }
+  },
+  "LegendEffects": {
+    "description": "Legend Effects、Legendaer へのオマージュ:VHS TV、Pixelation、Digital Glitch、Night Vision、Blueprint、Frosted Glass、Gameboy、Edge-Preserving Blur、Morphology、Quantize を 1 つのノードに。ルックを選び、strength を調整し、ノード上のワイプをドラッグして比較します。",
+    "inputs": {
+      "effect": {
+        "tooltip": "ルック。下にはそのルックの設定だけが表示されます。"
+      },
+      "strength": {
+        "tooltip": "エフェクトへのブレンド。1 = フルのルック、0 = 元の画像。"
+      },
+      "vhs_curve": {
+        "tooltip": "古いテレビ画面のふくらみ。0 = 平ら、1 = 元のルック。"
+      },
+      "vhs_rgb_shift": {
+        "tooltip": "赤と青を横にずらす量(幅に対する割合)。"
+      },
+      "vhs_scanlines": {
+        "tooltip": "走査線の濃さ。"
+      },
+      "vhs_vignette": {
+        "tooltip": "曲面画面の端がどれだけ暗くなるか。0 = なし。"
+      },
+      "pixel_blocks": {
+        "tooltip": "横に並ぶブロックの数。少ないほど粗くなります。"
+      },
+      "glitch_tear": {
+        "tooltip": "グリッチした行が横にずれる量(幅に対する割合)。"
+      },
+      "glitch_rows": {
+        "tooltip": "画面を横に何本の帯に分けるか。"
+      },
+      "glitch_rgb_split": {
+        "tooltip": "グリッチした行で赤と青が分かれる量。"
+      },
+      "glitch_share": {
+        "tooltip": "グリッチする行の割合。0.2 = 約 5 行に 1 行。"
+      },
+      "glitch_pattern": {
+        "tooltip": "別のグリッチ行の組み合わせ。0 = 元のパターン。"
+      },
+      "nv_tint": {
+        "tooltip": "蛍光体の色(hex)。"
+      },
+      "nv_scanlines": {
+        "tooltip": "走査線の濃さ。"
+      },
+      "nv_vignette": {
+        "tooltip": "ゴーグルの周囲の暗さ。0 = なし。"
+      },
+      "bp_background": {
+        "tooltip": "紙の色(hex)。定番の青写真ブルー。"
+      },
+      "bp_lines": {
+        "tooltip": "線の色(hex)。"
+      },
+      "bp_edges": {
+        "tooltip": "エッジが線になる強さ。高いほど細部まで描かれます。"
+      },
+      "bp_grid": {
+        "tooltip": "横方向のグリッドのマス数。0 = グリッドなし。"
+      },
+      "frost_amount": {
+        "tooltip": "すりガラスの厚さ(幅に対する割合)。"
+      },
+      "frost_pattern": {
+        "tooltip": "別のすりガラス模様。0 = 元の模様。"
+      },
+      "gb_pixels": {
+        "tooltip": "横のピクセル数。元の Game Boy の画面は 160。"
+      },
+      "gb_gaps": {
+        "tooltip": "ピクセル間の LCD のすき間の暗さ。0 = すき間なし。"
+      },
+      "blur_radius": {
+        "tooltip": "ぼかしの大きさ(ピクセル、最大 20)。大きいほど遅くなります。"
+      },
+      "blur_edges": {
+        "tooltip": "シャープなまま残すエッジの強さ。低い = 柔らかい部分だけぼかす、高い = ほぼ全体をぼかす。"
+      },
+      "blur_step": {
+        "tooltip": "速度のためにピクセルを飛ばします。1 = 全ピクセル(最高)、2 以上 = 速いが粗くなります。"
+      },
+      "morph_operation": {
+        "tooltip": "erode は明るい部分を縮め、dilate は広げ、open / close は小さな点を消し、gradient は輪郭だけを残します。"
+      },
+      "morph_kernel": {
+        "tooltip": "処理に使う形の大きさ(ピクセル)。"
+      },
+      "quant_colors": {
+        "tooltip": "残す色の数。少ないとポスター風になります。"
+      },
+      "quant_dither": {
+        "tooltip": "残った色の混ぜ方:none = ベタ塗り、floyd-steinberg = 細かいノイズ、bayer = 規則的なパターン。"
+      }
+    }
+  },
+  "LCAnimaBoxPrompt": {
+    "description": "Anima のリージョナルプロンプト:LC Bounding Boxes でボックスを描き、それぞれに何を入れるか書くと、このノードがそこに配置します。各ボックスは普通のプロンプトのように書きます(完全な文が一番効きます)。メインのプロンプトはシーンを書きます。Sen-sou の Anima Regional Conditioning パックが必要です。Regional LLLite パッチは初回使用時にダウンロードされます。",
+    "inputs": {
+      "model": {
+        "tooltip": "Anima モデル。出力をサンプラーにつなぎます。"
+      },
+      "clip": {
+        "tooltip": "Anima のテキストエンコーダー:各ボックスのプロンプトをこれでエンコードします。"
+      },
+      "elements": {
+        "tooltip": "LC Bounding Boxes のボックス。各ボックスの説明がそのプロンプトになります。"
+      },
+      "placement": {
+        "tooltip": "ボックスが位置を保つ強さ(Regional LLLite)。テストでは 1.0 が最適。被写体がボックスいっぱいのクローズアップになる場合は下げます。"
+      },
+      "isolation": {
+        "tooltip": "各ボックスが独立を保つ度合い。テストでは 0.2 が最適。高いと被写体の後ろに平坦な色のパネルが出て、低いとボックスのプロンプトがずれます。"
+      },
+      "box_prefix": {
+        "tooltip": "各ボックスのプロンプトの前に付けます(スタイルなど)。masterpiece, best quality のような品質タグは入れないでください:Anima では画面が NSFW 寄りになります。"
+      },
+      "scene": {
+        "tooltip": "メインプロンプトの conditioning:ボックスの周りのシーン。未接続ならサンプラー自身のプロンプトを使います。"
+      }
+    }
   }
 }

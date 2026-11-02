@@ -65,6 +65,15 @@ function tuckText(node) {
   w.computeLayoutSize = () => ({ minHeight: 0, maxHeight: 0, minWidth: 0 });
   const el = w.element || w.inputEl;
   if (el?.style) el.style.display = "none";
+  // the frontend's wrapper around the hidden box keeps a full-height, clickable frame that covers whatever sits
+  // below the node (a note there could not be selected or dragged): let clicks pass through it
+  el?.classList?.add("lc-wp-tucked");
+  if (!document.getElementById("lc-wp-tucked-style")) {
+    const st = document.createElement("style");
+    st.id = "lc-wp-tucked-style";
+    st.textContent = ".dom-widget:has(.lc-wp-tucked){pointer-events:none!important}";
+    document.head.appendChild(st);
+  }
   Object.defineProperty(w, "y", {
     // below the slider and hint rows, at the top of the word box
     get: () => (widget(node, "lc_weighted_prompt_face")?.y ?? 0) + ROW_H + (node.__lcPW?.hintRow.offsetHeight || 22) + 6,
@@ -584,7 +593,7 @@ app.registerExtension({
     const onNodeCreated = nodeType.prototype.onNodeCreated;
     nodeType.prototype.onNodeCreated = function () {
       const r = onNodeCreated?.apply(this, arguments);
-      lcApplyLaunchColor(this, "#28281E");
+      lcApplyLaunchColor(this, "#232", "#353"); // LiteGraph's stock green
       hideWidget(widget(this, "weights"));
       hideWidget(widget(this, "last_in"));
       hookBlock(this);

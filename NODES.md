@@ -26,6 +26,7 @@ Registered class IDs: 153 (152 in search, 1 deprecated but still loads in old wo
 - `LCReferenceLatent`: LC Reference Latent
 - `LCPromptToConditioning`: Prompt to Conditioning
 - `LCWeightedPrompt`: LC Weighted Prompt ⚖️
+- `LCAnimaBoxPrompt`: LC Anima Box Prompt 🔲
 
 ## LC123/image (49)
 
@@ -68,6 +69,7 @@ Registered class IDs: 153 (152 in search, 1 deprecated but still loads in old wo
 - `LCLightingControlV2`: LC Lighting Control V2 🔦
 - `LCRelight`: LC Lighting Control 🔦 (deprecated)
 - `LCPhoneFilters`: LC Phone Filters 📱
+- `LegendEffects`: Legend Effects 🪄
 - `LCPhoneLook`: LC Photo Style 📷
 - `LCPreviewImage`: LC Preview Image 🖼️
 - `LCPreviewMask`: LC Preview Mask 🎭

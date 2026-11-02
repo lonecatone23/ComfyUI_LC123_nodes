@@ -3763,5 +3763,126 @@
         "tooltip": "淡颗粒的 seed。"
       }
     }
+  },
+  "LegendEffects": {
+    "description": "Legend Effects,向 Legendaer 致敬:VHS TV、Pixelation、Digital Glitch、Night Vision、Blueprint、Frosted Glass、Gameboy、Edge-Preserving Blur、Morphology 和 Quantize 合在一个节点里。选一个效果,调节 strength,拖动节点上的 wipe 来对比。",
+    "inputs": {
+      "effect": {
+        "tooltip": "效果。下面只显示它自己的设置。"
+      },
+      "strength": {
+        "tooltip": "向效果混合。1 = 完整效果,0 = 原图。"
+      },
+      "vhs_curve": {
+        "tooltip": "老电视屏幕的弧度。0 = 平面,1 = 原本的效果。"
+      },
+      "vhs_rgb_shift": {
+        "tooltip": "红色和蓝色向两侧错开(占宽度的比例)。"
+      },
+      "vhs_scanlines": {
+        "tooltip": "扫描线的深浅。"
+      },
+      "vhs_vignette": {
+        "tooltip": "弧形屏幕向边缘变暗的程度。0 = 不变暗。"
+      },
+      "pixel_blocks": {
+        "tooltip": "横向有多少个方块。越小越粗糙。"
+      },
+      "glitch_tear": {
+        "tooltip": "故障行向侧面滑动的距离(占宽度的比例)。"
+      },
+      "glitch_rows": {
+        "tooltip": "画面被切成多少条横带。"
+      },
+      "glitch_rgb_split": {
+        "tooltip": "故障行上红色和蓝色分开的程度。"
+      },
+      "glitch_share": {
+        "tooltip": "出现故障的行所占比例。0.2 = 大约五行中一行。"
+      },
+      "glitch_pattern": {
+        "tooltip": "换一组故障行。0 = 原本的样式。"
+      },
+      "nv_tint": {
+        "tooltip": "荧光颜色(hex)。"
+      },
+      "nv_scanlines": {
+        "tooltip": "扫描线的深浅。"
+      },
+      "nv_vignette": {
+        "tooltip": "夜视镜四周变暗的程度。0 = 不变暗。"
+      },
+      "bp_background": {
+        "tooltip": "纸张颜色(hex)。经典的蓝图蓝。"
+      },
+      "bp_lines": {
+        "tooltip": "线条颜色(hex)。"
+      },
+      "bp_edges": {
+        "tooltip": "边缘变成线条的强度。越高画出的细节越多。"
+      },
+      "bp_grid": {
+        "tooltip": "横向的网格格数。0 = 无网格。"
+      },
+      "frost_amount": {
+        "tooltip": "磨砂玻璃的厚度(占宽度的比例)。"
+      },
+      "frost_pattern": {
+        "tooltip": "换一种磨砂纹理。0 = 原本的样式。"
+      },
+      "gb_pixels": {
+        "tooltip": "横向像素数。原版 Game Boy 屏幕是 160。"
+      },
+      "gb_gaps": {
+        "tooltip": "像素之间 LCD 缝隙的深浅。0 = 没有缝隙。"
+      },
+      "blur_radius": {
+        "tooltip": "模糊大小,单位像素(最多 20)。越大越慢。"
+      },
+      "blur_edges": {
+        "tooltip": "边缘要多强才保持清晰。低 = 只模糊柔和区域,高 = 几乎全部模糊。"
+      },
+      "blur_step": {
+        "tooltip": "跳过像素以加快速度。1 = 每个像素(最好),2 以上 = 更快但更粗糙。"
+      },
+      "morph_operation": {
+        "tooltip": "erode 缩小亮区,dilate 扩大亮区,open / close 清除小斑点,gradient 只保留轮廓。"
+      },
+      "morph_kernel": {
+        "tooltip": "处理所用形状的大小,单位像素。"
+      },
+      "quant_colors": {
+        "tooltip": "保留多少种颜色。数值低时呈海报效果。"
+      },
+      "quant_dither": {
+        "tooltip": "剩余颜色的混合方式:none = 平涂色块,floyd-steinberg = 细腻噪点,bayer = 规则图案。"
+      }
+    }
+  },
+  "LCAnimaBoxPrompt": {
+    "description": "Anima 的区域提示词:在 LC Bounding Boxes 里画框,写下每个框里放什么,这个节点就把它放到那里。每个框像普通提示词一样写(完整的句子效果最好)。主提示词描述场景。需要 Sen-sou 的 Anima Regional Conditioning 节点包;Regional LLLite 补丁会在第一次使用时下载。",
+    "inputs": {
+      "model": {
+        "tooltip": "Anima 模型。把输出接到采样器。"
+      },
+      "clip": {
+        "tooltip": "Anima 的文本编码器:每个框的提示词都用它编码。"
+      },
+      "elements": {
+        "tooltip": "来自 LC Bounding Boxes 的框。每个框的描述就是它的提示词。"
+      },
+      "placement": {
+        "tooltip": "框固定位置的力度(Regional LLLite)。测试中 1.0 最好。如果主体变成填满整个框的特写,就调低。"
+      },
+      "isolation": {
+        "tooltip": "每个框保持独立的程度。测试中 0.2 最好。更高会在主体后面出现平涂色块,更低会让框的提示词偏移。"
+      },
+      "box_prefix": {
+        "tooltip": "加在每个框提示词前面(例如一种风格)。不要加 masterpiece, best quality 这类质量标签:在 Anima 上它们会把画面推向 NSFW。"
+      },
+      "scene": {
+        "tooltip": "主提示词的 conditioning:框周围的场景。不接时使用采样器自己的提示词。"
+      }
+    }
   }
 }

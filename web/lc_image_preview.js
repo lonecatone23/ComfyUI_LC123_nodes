@@ -39,6 +39,7 @@ const NODE_CLASSES = new Set([
   "LCSkinMaster",
   "LCPhoneLook",
   "LCPhoneFilters",
+  "LegendEffects",
   "LCDirectionalBlur",
 ]);
 
@@ -218,7 +219,8 @@ function widgetsHeight(node) {
 }
 
 function slotsHeight(node) {
-  const n = (node.inputs || []).filter((i) => i && i.type !== "hidden").length;
+  // a widget's own input socket (new frontends give every widget one) sits on the widget's row, not a row of its own
+  const n = (node.inputs || []).filter((i) => i && i.type !== "hidden" && !i.widget).length;
   return TITLE + n * 22;
 }
 

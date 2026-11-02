@@ -410,27 +410,33 @@ _SIG_CACHE = {}
 
 
 def _header_shapes(path):
-    key = (path, os.path.getmtime(path))
+    """(shapes, dtypes) from a model file's header, or None. A file that can't be read (a half download, a Git LFS
+    pointer saved as .safetensors, another format renamed) is skipped, so it never breaks the model picker."""
+    try:
+        key = (path, os.path.getmtime(path))
+    except OSError:
+        return None
     if key in _SIG_CACHE:
         return _SIG_CACHE[key]
-    if path.lower().endswith(".gguf"):
-        try:
+    got = None
+    try:
+        if path.lower().endswith(".gguf"):
             import gguf  # ships with ComfyUI-GGUF
-        except Exception:
-            _SIG_CACHE[key] = None
-            return None
-        r = gguf.GGUFReader(path)
-        shapes = {t.name: list(reversed([int(x) for x in t.shape])) for t in r.tensors}
-        dtypes = {}
-    else:
-        with open(path, "rb") as f:
-            n = struct.unpack("<Q", f.read(8))[0]
-            h = json.loads(f.read(n))
-        h.pop("__metadata__", None)
-        shapes = {k: v["shape"] for k, v in h.items()}
-        dtypes = {k: v["dtype"] for k, v in h.items()}
-    _SIG_CACHE[key] = (shapes, dtypes)
-    return _SIG_CACHE[key]
+
+            r = gguf.GGUFReader(path)
+            got = ({t.name: list(reversed([int(x) for x in t.shape])) for t in r.tensors}, {})
+        else:
+            with open(path, "rb") as f:
+                n = struct.unpack("<Q", f.read(8))[0]
+                if n <= 0 or n > min(os.path.getsize(path) - 8, 512 << 20):
+                    raise ValueError(f"header size {n} doesn't fit the file")
+                h = json.loads(f.read(n))
+            h.pop("__metadata__", None)
+            got = ({k: v["shape"] for k, v in h.items()}, {k: v["dtype"] for k, v in h.items()})
+    except Exception as e:
+        print(f"[LC Optimizer] skipped {os.path.basename(path)}: not a readable model file ({e})")
+    _SIG_CACHE[key] = got
+    return got
 
 
 def te_signature(path):

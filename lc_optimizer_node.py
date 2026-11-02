@@ -308,7 +308,11 @@ try:
         import asyncio
 
         # reads model file headers to find finetunes of this base model: off the event loop
-        res = await asyncio.get_running_loop().run_in_executor(None, E.choices, pid, q.get("role", "model"), q.get("goal", "Optimal"))
+        try:
+            res = await asyncio.get_running_loop().run_in_executor(None, E.choices, pid, q.get("role", "model"), q.get("goal", "Optimal"))
+        except Exception as e:  # the picker reads JSON: an error page would show as a JSON SyntaxError
+            print(f"[LC Optimizer] model picker: {e}")
+            return web.json_response({"error": f"Could not list the model files: {e}"})
         return web.json_response(res)
 
     @PromptServer.instance.routes.post("/lc123/optimizer_node/plan")

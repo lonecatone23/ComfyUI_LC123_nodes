@@ -6,7 +6,8 @@
  * that one. A weighted word reads "cat:1.5": bold green above 1, red below. ✕ (or back to 1) clears it.
  *
  * The weights live in the hidden `weights` STRING widget as JSON [{text, w}], matched to the prompt by words, so
- * a new prompt keeps the weight of every phrase still in it. The words come from the text box (or, when a link feeds
+ * a new prompt keeps the weight of every phrase still in it and drops the rest. 📋 copies the prompt, ✎ edits it.
+ * The words come from the text box (or, when a link feeds
  * the box, from what it got on the last run: Python sends back `lc_prompt`).
  */
 import { app } from "../../scripts/app.js";
@@ -49,8 +50,42 @@ function setWeights(node, rows) {
 const linked = (node, name) => node.inputs?.find((i) => i.name === name)?.link != null;
 /** The box is fed from outside: the prompt socket, or (older wiring) a link into the box itself. */
 const textLinked = (node) => linked(node, "prompt") || linked(node, "text");
-/** The box can't be edited: a link straight into it, or the prompt socket with Block on never. */
-const locked = (node) => linked(node, "text") || (linked(node, "prompt") && widget(node, "block")?.value === "never");
+/** The box can't be edited: a link straight into it. (Block on never: ✎ switches Block to on change first.) */
+const locked = (node) => linked(node, "text");
+const passThrough = (node) => linked(node, "prompt") && widget(node, "block")?.value === "never";
+
+/**
+ * Weights for phrases no longer in the prompt are dropped when the prompt changes: kept, they came back days later on
+ * a new prompt that happened to use the word (2026-11-02, test words lit up on a new picture).
+ */
+function pruneTo(node, text) {
+  const face = node.__lcPW;
+  const t = String(text || "");
+  if (!t.trim() || (face && face.seen === t)) return;
+  if (face) face.seen = t;
+  const rows = getWeights(node);
+  const hit = new Set(wordRows(tokens(t), rows));
+  const keep = rows.filter((r, k) => hit.has(k));
+  if (keep.length !== rows.length) {
+    const w = widget(node, "weights");
+    if (w) w.value = JSON.stringify(keep.map((r) => ({ text: r.text, w: Math.round(r.w * 100) / 100 })));
+  }
+}
+
+/** Copy text to the clipboard (the canvas eats Ctrl+C on the node). */
+async function copyText(s) {
+  try {
+    await navigator.clipboard.writeText(s);
+    return true;
+  } catch (_) {
+    const ta = Object.assign(document.createElement("textarea"), { value: s });
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    ta.remove();
+    return ok;
+  }
+}
 
 /**
  * The text box stays linkable but takes no room, and reports the word box's height as its own: its link socket is
@@ -186,12 +221,16 @@ function ensureFace(node) {
   editBtn.textContent = "✎";
   editBtn.title = "Edit the prompt (or double-click it)";
   editBtn.style.cssText = "flex:0 0 22px;width:22px;height:20px;line-height:18px;padding:0;background:#2a2a2a;color:#9cf;border:1px solid #444;border-radius:4px;cursor:pointer;";
+  const copyBtn = document.createElement("button");
+  copyBtn.textContent = "📋";
+  copyBtn.title = "Copy the prompt";
+  copyBtn.style.cssText = "flex:0 0 22px;width:22px;height:20px;line-height:18px;padding:0;background:#2a2a2a;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:11px;";
   // Block always stopped the run on a new incoming prompt: this puts that prompt in the box
   const useBtn = document.createElement("button");
   useBtn.textContent = "Use new";
   useBtn.title = "Put the new incoming prompt in the box (your weights stay on the words still in it)";
   useBtn.style.cssText = "display:none;flex:0 0 auto;height:20px;line-height:18px;padding:0 6px;background:#2a2a2a;color:#fc6;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:11px;";
-  hintRow.append(hint, useBtn, editBtn);
+  hintRow.append(hint, useBtn, copyBtn, editBtn);
   const rowsHost = document.createElement("div");
   rowsHost.style.cssText = "display:flex;flex-direction:column;";
   wrap.append(rowsHost, hintRow, words, editor);
@@ -201,8 +240,17 @@ function ensureFace(node) {
   });
   dom.serializeValue = () => undefined;
   Object.defineProperty(dom, "width", { get: () => undefined, set: () => {}, configurable: true });
-  node.__lcPW = { wrap, words, editor, hintRow, hint, editBtn, useBtn, rowsHost, height: 60, anchor: null, sel: "", editing: false };
+  node.__lcPW = { wrap, words, editor, hintRow, hint, editBtn, copyBtn, useBtn, rowsHost, height: 60, anchor: null, sel: "", editing: false };
   useBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+  copyBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+  copyBtn.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const face = node.__lcPW;
+    const s = face.editing ? face.editor.value : promptText(node);
+    const ok = await copyText(s);
+    copyBtn.textContent = ok ? "✓" : "✕";
+    setTimeout(() => (copyBtn.textContent = "📋"), 900);
+  });
   useBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const t = widget(node, "text");
@@ -252,7 +300,14 @@ function ensureFace(node) {
 
 function startEdit(node) {
   const face = node.__lcPW;
-  if (!face || face.editing || locked(node)) return; // fed straight in (or Block: never): edited where it comes from
+  if (!face || face.editing || locked(node)) return; // fed straight into the box: edited where it comes from
+  if (passThrough(node)) {
+    // Block: never puts every incoming prompt over the box, so an edit would be gone on the next run. Editing
+    // means keeping it: on change holds the edit until a different prompt comes in
+    const b = widget(node, "block");
+    b.value = "on change";
+    b.callback?.(b.value);
+  }
   face.editing = true;
   face.editor.value = promptText(node);
   face.words.style.display = "none";
@@ -452,6 +507,7 @@ function render(node) {
 function renderWords(node) {
   const face = ensureFace(node);
   const text = promptText(node);
+  pruneTo(node, text);
   const rows = getWeights(node);
   const toks = tokens(text);
   const hit = wordRows(toks, rows);
@@ -493,6 +549,9 @@ function renderWords(node) {
     face.words.style.color = "#ddd";
   }
   face.editBtn.style.display = locked(node) ? "none" : "";
+  face.editBtn.title = passThrough(node) ? "Edit the prompt: sets Block to on change, so your edit holds until a new prompt comes in"
+    : "Edit the prompt (or double-click it)";
+  face.copyBtn.style.display = text.trim() ? "" : "none";
   const held = node.__lcHoldIn != null && !face.editing;
   face.useBtn.style.display = held ? "" : "none";
   face.hint.style.color = held ? "#fc6" : "#888";

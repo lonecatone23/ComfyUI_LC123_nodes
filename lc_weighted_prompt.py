@@ -21,7 +21,8 @@ Kijai's Krea2 Prompt Weight uses. Only the positive (cond) rows are touched, so 
 Anima, SDXL / Illustrious / Pony and other CLIP models: the same weights written as ComfyUI's own (phrase:weight).
 
 The weights live in the hidden `weights` STRING widget as JSON: [{"text": "fur-lined hood", "w": 1.5}, ...],
-matched to the prompt by words (any case), so a new prompt keeps the weights of every phrase still in it.
+matched to the prompt by words (any case), so a new prompt keeps the weights of every phrase still in it; the face
+drops the weights of phrases that left (kept, they came back on a later prompt that happened to use the word).
 """
 
 from __future__ import annotations
@@ -303,7 +304,8 @@ class LCWeightedPrompt:
                                         "tooltip": "With the prompt socket wired. on change: the box takes the incoming prompt "
                                                    "when it changes, your edit holds until then. always: the box holds, and "
                                                    "a new incoming prompt stops the run here: edit, then Run carries on "
-                                                   "with the same seeds. never: the incoming prompt always comes through."}),
+                                                   "with the same seeds. never: the incoming prompt always comes through "
+                                                   "(✎ switches to on change, so an edit holds)."}),
                 "last_in": ("STRING", {"default": "", "tooltip": "The incoming prompt of the last run (set on the node)."}),
                 "prompt": ("STRING", {"forceInput": True, "tooltip": "Optional: a prompt from another node. It lands in the "
                                                                     "box, where you can edit and weight it (see block)."}),

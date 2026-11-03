@@ -271,7 +271,8 @@ BITS_TO_LPIPS = {32: 0.0, 16: 0.0, 8: 0.02, 6: 0.03, 5: 0.04, 4: 0.07, 3: 0.18, 
 GOALS = {"Quality": None, "Optimal": 0.05, "Fast": 0.10}  # the most distance from bf16 each goal accepts (frame sheets: under ~0.05 looks the same)
 STEPS = {"minimax_h3": 8, "minimax_h3_fl2va": 8, "krea2": 8, "ltx25": 11, "anima": 30, "z_image_turbo": 8, "qwen_image_21": 25, "flux2_klein_9b": 20, "flux2_klein_9b_distilled": 4, "flux3_klein": 16, "fibo2_edit_turbo": 8, "flux3_klein_base": 50, "ideogram4": 20, "ltx23": 11,
          "krea2_raw": 52, "sdxl": 30, "illustrious": 28, "pony": 25}
-LOADER_NEEDS = {"UnetLoaderGGUF": "needs the ComfyUI-GGUF pack", "CLIPLoaderGGUF": "needs the ComfyUI-GGUF pack"}
+LOADER_NEEDS = {"UnetLoaderGGUF": "needs a current ComfyUI-GGUF pack (update it if a newer model such as Flux 3 Klein will not load)",
+                "CLIPLoaderGGUF": "needs a current ComfyUI-GGUF pack"}
 
 
 def _class(fmt):

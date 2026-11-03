@@ -543,9 +543,42 @@ def _repo_path(repo, filename):
     raise FileNotFoundError(f"[LC Optimizer] {filename} is not in https://huggingface.co/{repo}")
 
 
+def _hf_token():
+    """The Hugging Face token: the HF_TOKEN / HUGGING_FACE_HUB_TOKEN setting, else the one `huggingface-cli login` saved."""
+    for key in ("HF_TOKEN", "HUGGING_FACE_HUB_TOKEN"):
+        token = os.environ.get(key, "").strip()
+        if token:
+            return token
+    home = os.path.expanduser("~")
+    cache = os.environ.get("HF_HOME") or os.path.join(home, ".cache", "huggingface")
+    for path in (os.path.join(cache, "token"), os.path.join(home, ".huggingface", "token")):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                token = f.read().strip()
+        except OSError:
+            continue
+        if token:
+            return token
+    return ""
+
+
+def _gated_message(repo, code, had_token):
+    """What to do about a 401 / 403 from a gated repo, in the order it has to be done."""
+    page = f"https://huggingface.co/{repo}"
+    if code == 403 or had_token:
+        return (f"[LC Optimizer] Hugging Face says no to {repo} ({code}). It is a gated model: open {page} while logged in and accept "
+                "its license, then run again. If you did already, the token may lack read access: make a new Read token at "
+                "https://huggingface.co/settings/tokens.")
+    return (f"[LC Optimizer] {repo} is a gated model and Hugging Face needs a login (401). Accept its license at {page}, make a Read token at "
+            "https://huggingface.co/settings/tokens, then either set it as the HF_TOKEN environment variable or run "
+            "`huggingface-cli login`, restart ComfyUI and run again. Or pick a file you already have in the dropdown.")
+
+
 def _stream(repo, path_in_repo, dest, label):
     """Download one file in chunks to dest, checking ComfyUI's cancel button between chunks: cancelling stops the
     download and deletes the partial file. Uses the Hugging Face login when there is one (gated repos)."""
+    import urllib.error
+    import urllib.parse
     import urllib.request
 
     import comfy.model_management as mm
@@ -557,11 +590,25 @@ def _stream(repo, path_in_repo, dest, label):
         headers = build_hf_headers()
     except Exception:
         pass
+    token = _hf_token()
+    if token and not any(k.lower() == "authorization" for k in headers):
+        headers["Authorization"] = f"Bearer {token}"
+    had_token = any(k.lower() == "authorization" for k in headers)
+
+    class _LoginStaysHome(urllib.request.HTTPRedirectHandler):
+        """The file itself sits on a CDN host: the login goes to huggingface.co only (a signed CDN link refuses a second one)."""
+
+        def redirect_request(self, req, fp, code, msg, hdrs, newurl):
+            new = super().redirect_request(req, fp, code, msg, hdrs, newurl)
+            if new is not None and urllib.parse.urlparse(newurl).netloc != urllib.parse.urlparse(req.full_url).netloc:
+                new.remove_header("Authorization")
+            return new
+
     url = f"https://huggingface.co/{repo}/resolve/main/{path_in_repo}"
     part = dest + ".part"
     req = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(req, timeout=60) as r, open(part, "wb") as out:
+        with urllib.request.build_opener(_LoginStaysHome).open(req, timeout=60) as r, open(part, "wb") as out:
             total = int(r.headers.get("Content-Length") or 0)
             done, shown = 0, -1
             while True:
@@ -586,9 +633,8 @@ def _stream(repo, path_in_repo, dest, label):
             pass
         if isinstance(e, mm.InterruptProcessingException):
             print(f"[LC Optimizer] {label}: download stopped, nothing kept.")
-        elif "401" in str(e) or "403" in str(e):
-            raise RuntimeError(f"[LC Optimizer] {repo} is gated: accept its license on https://huggingface.co/{repo} and log in "
-                               "with `huggingface-cli login`, or pick another file.") from e
+        elif isinstance(e, urllib.error.HTTPError) and e.code in (401, 403):
+            raise RuntimeError(_gated_message(repo, e.code, had_token)) from e
         raise
 
 
@@ -1102,7 +1148,10 @@ def load_model(folder, name):
                 return _call("UnetLoaderGGUF", unet_name=name)[0], None, None, "GGUF"
             except Exception as e:
                 if "LoaderGGUF" not in nodes.NODE_CLASS_MAPPINGS:
-                    raise
+                    raise RuntimeError(f"[LC Optimizer] ComfyUI-GGUF could not load {name} ({e}). The pack is most likely too old for this "
+                                       "model's architecture (Flux 3 Klein needs a current one): update ComfyUI-GGUF in ComfyUI-Manager and "
+                                       "restart ComfyUI. If it still fails, pick the int8 or bf16 file: ComfyUI's own loader reads those, and "
+                                       "they were faster than GGUF on every card tested.") from e
                 print(f"[LC Optimizer] ComfyUI-GGUF could not load {name} ({e}); trying the calcuis gguf pack.")
         if "LoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
             return _call("LoaderGGUF", gguf_name=name)[0], None, None, "GGUF (calcuis)"

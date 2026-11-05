@@ -37,6 +37,26 @@ def _nvvfx():
     return nvvfx, quality
 
 
+# One loaded RTX VSR effect per (device, quality, output size), reused and never closed: closing one hung the
+# whole node on an RTX 5060 laptop (drivers 610 and 621), and reuse also skips the ~1.5 s load on every call.
+_EFFECTS = {}
+
+
+def _effect(nv, level, key):
+    effect = _EFFECTS.get(key)
+    if effect is None:
+        index, _, ow, oh = key
+        try:
+            ctx = nv.VideoSuperRes(quality=level, device=index)
+        except TypeError:
+            ctx = nv.VideoSuperRes(level)
+        effect = ctx.__enter__()
+        effect.output_width, effect.output_height = ow, oh
+        effect.load()
+        _EFFECTS[key] = effect
+    return effect
+
+
 def available() -> bool:
     nv, _ = _nvvfx()
     return nv is not None and comfy.model_management.get_torch_device().type == "cuda"
@@ -88,24 +108,24 @@ def rtx_resize(samples: torch.Tensor, width: int, height: int, quality: str = "U
         if strict:
             raise ValueError(f"[LC RTX] This nvidia-vfx version has no {quality} mode. Update nvidia-vfx.")
         quality = "ULTRA"
+    key = (index, quality, ow, oh)
     try:
-        level = levels[quality]
-        try:
-            ctx = nv.VideoSuperRes(quality=level, device=index)
-        except TypeError:
-            ctx = nv.VideoSuperRes(level)
-        with torch.cuda.device(device), ctx as effect:
-            effect.output_width, effect.output_height = ow, oh
-            effect.load()
+        with torch.cuda.device(device):
+            effect = _effect(nv, levels[quality], key)
             pbar = comfy.utils.ProgressBar(b) if b > 1 else None
             for k in range(b):
                 comfy.model_management.throw_exception_if_processing_interrupted()  # Cancel works between frames
-                out[k] = finish(torch.from_dlpack(effect.run(frame(k)).image).clone())
+                # keep the input alive until RTX is done with it: a temporary freed mid-run hung 8 GB laptops
+                x = frame(k)
+                res = effect.run(x)
+                out[k] = finish(torch.from_dlpack(res.image).clone())
+                del res, x
                 if pbar is not None:
                     pbar.update(1)
     except comfy.model_management.InterruptProcessingException:
         raise
     except Exception as e:
+        _EFFECTS.pop(key, None)
         if strict:
             raise RuntimeError(f"[LC RTX] RTX Video Super Resolution failed: {e}") from e
         _warn("run", f"RTX upscale failed ({e}). Using lanczos.")

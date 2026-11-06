@@ -863,6 +863,38 @@ def installed_packs():
     return {label: folder in names for label, folder in wanted.items()}
 
 
+def pack_alternatives():
+    """Other packs that cover what the KJNodes / GGUF tips are for, so those tips stay quiet:
+    GGUF: calcuis's gguf pack (the LC Optimizer loads GGUF files through its LoaderGGUF too).
+    KJNodes (memory and speed, e.g. Sage attention): Distorch Memory Manager, Polyhedron LoRA Stack."""
+    alt = {"GGUF": [], "KJNodes": []}
+    try:
+        import nodes
+
+        m = nodes.NODE_CLASS_MAPPINGS
+        if "LoaderGGUF" in m:
+            alt["GGUF"].append("gguf (calcuis)")
+    except Exception:
+        pass
+    try:
+        import folder_paths
+
+        names = set()
+        for d in folder_paths.get_folder_paths("custom_nodes"):
+            try:
+                names |= {n.lower() for n in os.listdir(d) if os.path.isdir(os.path.join(d, n))}
+            except Exception:
+                pass
+    except Exception:
+        names = set()
+    if not alt["GGUF"] and "gguf" in names:
+        alt["GGUF"].append("gguf (calcuis)")
+    for folder, label in (("comfyui-distorchmemorymanager", "Distorch Memory Manager"), ("comfyui-polyhedronlorastack", "Polyhedron LoRA Stack")):
+        if folder in names:
+            alt["KJNodes"].append(label)
+    return alt
+
+
 def h3_preflights(torch):
     """H3-Optimizations' own checks, one per sparse attention backend, reported word for word."""
     if "h3_optimizations" not in sys.modules:  # the pack registers itself under this name when ComfyUI loads it
@@ -907,6 +939,7 @@ def probe(run_gpu_tests=True):
     prof["comfy"] = comfy_info()
     prof["disks"] = disk_info(model_dirs())
     prof["packs"] = installed_packs()
+    prof["pack_alternatives"] = pack_alternatives()
     prof["tests"] = live_tests(torch) if run_gpu_tests else {}
     prof["kitchen"] = kitchen_info()
     prof["llama_cpp"] = llama_cpp_info()
@@ -1071,7 +1104,7 @@ def findings(p):
             if v.get("ok") is False:
                 add("packs", -1, f"H3 {k}", v["detail"])
     for label, have in (p.get("packs") or {}).items():
-        if not have and label in ("KJNodes", "GGUF"):
+        if not have and label in ("KJNodes", "GGUF") and not (p.get("pack_alternatives") or {}).get(label):
             add("packs", 1, f"{label} not installed", "KJNodes holds most of the memory and speed nodes." if label == "KJNodes" else "GGUF lets smaller cards run big models as quantized files.")
     return F
 

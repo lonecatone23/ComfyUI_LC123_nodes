@@ -54,9 +54,10 @@ class LCSizePad:
             },
         }
 
-    RETURN_TYPES = ("INT", "INT", "STRING")
-    RETURN_NAMES = ("width", "height", "info")
-    OUTPUT_TOOLTIPS = ("Width, snapped for the model.", "Height, snapped for the model.", "e.g. 1344 x 768 · 1.03 MP · Krea 2")
+    RETURN_TYPES = ("INT", "INT", "STRING", "FLOAT")
+    RETURN_NAMES = ("width", "height", "info", "megapixels")
+    OUTPUT_TOOLTIPS = ("Width, snapped for the model.", "Height, snapped for the model.", "e.g. 1344 x 768 · 1.03 MP · Krea 2",
+                       "The snapped size in megapixels (width x height / 1,000,000), e.g. 1.03.")
     FUNCTION = "run"
     CATEGORY = "LC123/utils"
     DESCRIPTION = ("A 2D slider for width x height: drag the frame's corner, pick a model preset (MiniMax H3, Krea 2, SDXL, LTX, "
@@ -65,7 +66,8 @@ class LCSizePad:
 
     def run(self, model, aspect, megapixels, width, height):
         w, h = fit(width, height, model)
-        return (w, h, f"{w} x {h} · {w * h / 1e6:.2f} MP · {model}")
+        mp = round(w * h / 1e6, 2)
+        return (w, h, f"{w} x {h} · {mp:.2f} MP · {model}", mp)
 
 
 NODE_CLASS_MAPPINGS = {"LCSizePad": LCSizePad}

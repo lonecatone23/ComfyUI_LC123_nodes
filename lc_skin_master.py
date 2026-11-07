@@ -592,7 +592,7 @@ class LCSkinMaster(PreviewImage):
     def INPUT_TYPES(cls):
         req = {
             "image": ("IMAGE",),
-            "preset": ([CUSTOM, *PRESETS], {"default": "Natural", "tooltip": "Natural: grit out, blemishes evened, a touch "
+            "preset": ([CUSTOM, *PRESETS], {"default": "Real Skin Restore", "tooltip": "Natural: grit out, blemishes evened, a touch "
                        "cooler, pores and character kept. Clean Even Tone, Soft Beauty, Editorial Detail (close-ups), Real Skin "
                        "Restore (plastic skin), Mature Skin (age kept), Weathered (lines deepened), Body Skin, Sun-Kissed "
                        "(freckles). Moving a slider switches to Custom."}),
@@ -622,7 +622,7 @@ class LCSkinMaster(PreviewImage):
                    "each done once on one face-aware skin map. Presets from a light clean-up to plastic-skin restore, weathered and "
                    "sun-kissed. Outputs the skin_mask for other nodes. On-node before/after wipe.")
 
-    def run(self, image, preset="Natural", seed=0, mask=None, delicate_skin=True, skin_match=1.0, **sliders):
+    def run(self, image, preset="Real Skin Restore", seed=0, mask=None, delicate_skin=True, skin_match=1.0, **sliders):
         s = dict(PRESETS[preset]) if preset in PRESETS else {k: float(sliders.get(k, v)) for k, v in DEFAULTS.items()}
         if preset in PRESETS:
             s["strength"] = float(sliders.get("strength", 1.0))  # strength is always the node's own

@@ -121,8 +121,28 @@ function clearBackground(node) {
   st.size = null;
 }
 
-/** The picture upstream, shown before a run: a Load Image's file right away; any other node (Aspect Ratio
- * Simplifier, etc.) once it has shown a picture. A bypassed or muted source means no picture. */
+/** The first picture up the chain from `src`: a node that has shown one, or a Load Image's file. Walks through nodes
+ * that pass a picture on (crop, aspect ratio, bypassed ones) and through pipes (Pipe Out -> the image put in the pipe,
+ * with Get / Set in between), so pipe workflows show their picture before a run. A muted node stops the walk. */
+function findPicture(src, depth = 0, seen = new Set()) {
+  if (!src || src.mode === 2 || depth > 16 || seen.has(src.id)) return null;
+  seen.add(src.id);
+  const shown = src.imgs?.[0]?.src;
+  if (shown) return { url: shown };
+  if (/LoadImage/i.test(src.type || "")) {
+    const v = (src.widgets || []).find((w) => w.name === "image")?.value;
+    return typeof v === "string" && v ? { file: v } : null;
+  }
+  const img = src.inputs?.find((i) => i.link != null && (i.type === "IMAGE" || i.name === "image" || i.name === "images"));
+  if (img) {
+    const got = findPicture(realSource(src, img.name), depth + 1, seen);
+    if (got) return got;
+  }
+  return src.inputs?.some((i) => i.name === "pipe" && i.link != null) ? findPicture(realSource(src, "pipe"), depth + 1, seen) : null;
+}
+
+/** The picture upstream, shown before a run: a Load Image's file right away; any other node once it has shown a
+ * picture, through pipes and pass-through nodes (findPicture). A bypassed or muted source means no picture. */
 function upstreamPicture(node) {
   const slot = node.inputs?.findIndex((i) => i.name === "image");
   if (slot == null || slot < 0 || node.inputs[slot].link == null) return;
@@ -131,12 +151,10 @@ function upstreamPicture(node) {
     clearBackground(node);
     return;
   }
-  const name = src && /LoadImage/i.test(src.type) ? (src.widgets || []).find((w) => w.name === "image")?.value : null;
-  if (!name || typeof name !== "string") {
-    const shown = src?.imgs?.[0]?.src;
-    if (shown) setBackground(node, shown);
-    return;
-  }
+  const found = findPicture(src);
+  if (found?.url) setBackground(node, found.url);
+  const name = found?.file;
+  if (!name) return;
   const m = /^(.*?)[\\/]([^\\/]+)$/.exec(name.replace(/ \[(input|output|temp)\]$/, ""));
   setBackground(node, viewUrl({ filename: m ? m[2] : name.replace(/ \[(input|output|temp)\]$/, ""), subfolder: m ? m[1] : "", type: "input" }));
 }
@@ -291,9 +309,131 @@ function el(tag, css, props = {}) {
 
 const FIELD = "background:#222;color:#ddd;border:1px solid #444;border-radius:4px;padding:2px 4px;font:12px sans-serif;box-sizing:border-box;";
 
+// ---------------------------------------------------------------- ✨ write boxes (needs LC Vision)
+const WRITER_H = 28;
+
+function toast(severity, summary, detail) {
+  const t = app.extensionManager?.toast;
+  if (t?.add) t.add({ severity, summary, detail, life: severity === "error" ? 8000 : 5000 });
+  else if (severity === "error") alert(`${summary}\n${detail || ""}`);
+}
+
+/** The picture on the canvas as a JPEG data URL (longest side 1024), or "" with no picture. */
+function pictureData(node) {
+  const img = node._lcBb.bg;
+  if (!img?.naturalWidth) return "";
+  const s = Math.min(1, 1024 / Math.max(img.naturalWidth, img.naturalHeight));
+  const c = document.createElement("canvas");
+  c.width = Math.round(img.naturalWidth * s);
+  c.height = Math.round(img.naturalHeight * s);
+  c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+  try {
+    return c.toDataURL("image/jpeg", 0.9);
+  } catch {
+    return "";
+  }
+}
+
+/** LC MOSS Layout Prompt fed by this node's elements (through Reroutes): where the scene caption goes. */
+function layoutPromptBelow(node) {
+  const out = node.outputs?.find((o) => o.name === "elements");
+  const seen = new Set();
+  const walk = (links) => {
+    for (const id of links || []) {
+      const l = node.graph?.links?.[id] ?? node.graph?.links?.get?.(id);
+      const t = l && node.graph.getNodeById(l.target_id);
+      if (!t || seen.has(t.id)) continue;
+      seen.add(t.id);
+      if ((t.comfyClass || t.type) === "LCMOSSLayoutPrompt") return t;
+      if (/Reroute/i.test(t.type || "")) {
+        const hit = walk(t.outputs?.[0]?.links);
+        if (hit) return hit;
+      }
+    }
+    return null;
+  };
+  return walk(out?.links);
+}
+
+function putScene(node, scene) {
+  if (!scene) return;
+  const lp = layoutPromptBelow(node);
+  const w = lp && W(lp, "prompt");
+  const wired = lp?.inputs?.find((i) => i.name === "prompt")?.link != null;
+  if (w && !wired && (!String(w.value || "").trim() || confirm("Replace the prompt in LC MOSS Layout Prompt with the scene?"))) {
+    w.value = scene;
+    lp.setDirtyCanvas?.(true, true);
+    return;
+  }
+  navigator.clipboard?.writeText(scene).catch(() => {});
+  toast("info", "Scene copied", scene);
+}
+
+async function writeBoxes(node) {
+  const st = node._lcBb;
+  const wr = st.writer;
+  const idea = wr.idea.value.trim();
+  const picture = pictureData(node);
+  if (!picture && !idea) return toast("warn", "Write boxes", "Write an idea first, or connect a picture.");
+  if (st.boxes.length && !confirm(`Replace the ${st.boxes.length} box${st.boxes.length === 1 ? "" : "es"}?`)) return;
+  const { w, h } = gridSize(node);
+  wr.go.disabled = true;
+  wr.go.textContent = "⏳";
+  try {
+    const r = await api.fetchApi("/lc_vision/boxes/write", {
+      method: "POST",
+      body: JSON.stringify({ model: wr.model.value, idea, picture, width: w, height: h }),
+    });
+    const res = await r.json();
+    if (!r.ok || res.error) throw new Error(res.error || r.statusText);
+    st.boxes = res.boxes || [];
+    st.sel = st.boxes.length ? 0 : null;
+    save(node);
+    draw(node);
+    putScene(node, res.scene);
+    if (res.notes?.length) toast("warn", "Boxes written, some left out", res.notes.join("; "));
+  } catch (e) {
+    toast("error", "Write boxes", String(e.message || e));
+  } finally {
+    wr.go.disabled = false;
+    wr.go.textContent = "✨ boxes";
+  }
+}
+
+function buildWriter(node) {
+  const st = node._lcBb;
+  const row = el("div", "display:none;gap:4px;align-items:center;");
+  const idea = el("input", `${FIELD}flex:1;min-width:0;`, {
+    placeholder: "✨ idea: three women on a beach (with a picture: what to box)",
+    title: "With a picture: LC Vision finds the subjects and boxes them (this note says what to box or change). Without one: it plans the boxes from the idea.",
+    value: node.properties?.lcBoxIdea || "",
+  });
+  const model = el("select", `${FIELD}flex:none;max-width:120px;`, { title: "The LC Vision model that writes the boxes (a vision model sees the picture)" });
+  const go = el("button", `${FIELD}cursor:pointer;flex:none;`, { textContent: "✨ boxes", title: "Write the boxes, names, descriptions and palettes. The scene goes to LC MOSS Layout Prompt." });
+  idea.addEventListener("keydown", (ev) => ev.stopPropagation());
+  idea.oninput = () => { node.properties = { ...(node.properties || {}), lcBoxIdea: idea.value }; };
+  model.onchange = () => { node.properties = { ...(node.properties || {}), lcBoxModel: model.value }; };
+  go.onclick = () => writeBoxes(node);
+  row.append(idea, model, go);
+  st.writer = { row, idea, model, go, on: false };
+  api.fetchApi("/lc_vision/boxes/models").then((r) => (r.ok ? r.json() : null)).then((res) => {
+    if (!res?.models?.length) return;  // no LC Vision, or no model on disk: the row stays hidden
+    const want = node.properties?.lcBoxModel;
+    for (const m of res.models) model.append(el("option", "", { value: m, textContent: m }));
+    model.value = res.models.includes(want) ? want : res.default;
+    row.style.display = "flex";
+    st.writer.on = true;
+    st.ed.root.style.height = `${EDITOR_H - 6 + WRITER_H}px`;
+    node.setSize?.([node.size[0], Math.max(node.size[1], node.computeSize?.()[1] || 0)]);
+    node.setDirtyCanvas?.(true, true);
+  }).catch(() => {});
+  return row;
+}
+
 function buildEditor(node) {
   const st = node._lcBb;
   const ed = el("div", `height:${EDITOR_H - 6}px;display:flex;flex-direction:column;gap:4px;padding:4px 2px;box-sizing:border-box;font:12px sans-serif;color:#ccc;`);
+  ed.append(buildWriter(node));
   const row1 = el("div", "display:flex;gap:4px;align-items:center;");
   const chips = el("div", "display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;flex:1;min-height:20px;");
   const del = el("button", `${FIELD}cursor:pointer;flex:none;`, { textContent: "✕ delete", title: "Delete the selected box (or press Delete)" });
@@ -533,8 +673,8 @@ function attach(node) {
     }
   });
   new ResizeObserver(() => draw(node)).observe(cv);
-  const total = CANVAS_H + EDITOR_H;
-  const dw = node.addDOMWidget("box_canvas", "LC_BOUNDING_BOXES", wrap, { getMinHeight: () => total, getHeight: () => total, serialize: false });
+  const total = () => CANVAS_H + EDITOR_H + (st.writer?.on ? WRITER_H : 0);
+  const dw = node.addDOMWidget("box_canvas", "LC_BOUNDING_BOXES", wrap, { getMinHeight: total, getHeight: total, serialize: false });
   if (dw) dw.serialize = false;
   // the right side Parameters panel writes its own column width onto widgets it lists: always follow the node
   if (dw) Object.defineProperty(dw, "width", { get: () => undefined, set: () => {}, configurable: true });

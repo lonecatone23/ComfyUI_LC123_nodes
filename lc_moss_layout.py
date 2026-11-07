@@ -79,6 +79,9 @@ class LCMOSSLayoutPrompt:
         summary = {"canvas": canvas, "caption": caption}
         items, notes, counts = [], [], {"object": 0, "character": 0, "text": 0}
         for i, e in enumerate(els):
+            if e.get("type") == "text" and not str(e.get("text") or "").strip():
+                notes.append(f"text box {i + 1} has no text to write: left out")  # MOSS would make up words for it
+                continue
             if e.get("type") == "text":
                 label = "text"
             elif e.get("label") == "character":
@@ -92,9 +95,7 @@ class LCMOSSLayoutPrompt:
                 desc = "text" if label == "text" else label
             item = {"label": label, "caption": desc}
             if label == "text":
-                item["text"] = str(e.get("text") or "")
-                if not item["text"]:
-                    notes.append(f"text box {i + 1} has no text to write")
+                item["text"] = str(e.get("text"))
             pal, bad = palette_split(e.get("color_palette") or e.get("palette"))
             bad = list(e.get("palette_left_out") or []) + bad
             if pal:

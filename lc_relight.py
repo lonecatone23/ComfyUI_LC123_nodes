@@ -430,6 +430,7 @@ class LCRelight:
     RETURN_NAMES = ("image", "debug_mask")
     FUNCTION = "relight"
     CATEGORY = "LC123/image"
+    DEPRECATED = True  # hidden from search; saved workflows still load and run
     DESCRIPTION = "Deprecated: use LC Lighting Control V2 🔦. Still works in saved workflows."
 
     def relight(

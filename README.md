@@ -367,7 +367,7 @@ Relight an image after the fact. Feed it a **normal map** + **depth map** (and o
 - **advanced** toggle for the fine controls.
 - Outputs: **image** · **shadow_mask** (white = lit) · **light_layer**.
 
-**LC Lighting Control 🔦** (the original, deprecated: use V2)
+**LC Lighting Control 🔦** (the original, deprecated: hidden from search, old workflows still run. Use V2)
 
 ![LC Lighting Control example](assets/readme/LC%20Lighting%20Control%20example.png)
 

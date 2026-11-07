@@ -2,7 +2,7 @@
 
 **153 Python nodes** + **5 JS-only** · version 1.51.3
 
-Registered class IDs: 153 (152 in search, 1 deprecated but still loads in old workflows).
+Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old workflows).
 
 ## LC123/Flux 3 (3)
 
@@ -127,7 +127,7 @@ Registered class IDs: 153 (152 in search, 1 deprecated but still loads in old wo
 - `LCPipeEdit`: LC Pipe (in/edit)
 - `LCPipeOut`: LC Pipe Out
 
-## LC123/prompt (9)
+## LC123/prompt (10)
 
 - `LCColorPalette`: 🎨LC Color Palette
 - `LCWildcard`: 🎲LC Wildcard
@@ -138,6 +138,7 @@ Registered class IDs: 153 (152 in search, 1 deprecated but still loads in old wo
 - `LCSubject`: 🗒️LC Subject
 - `LCSubjectArray`: 🗒️LC Subject Array
 - `LCPromptAssembler`: 🧩LC Prompt Assembler
+- `LCPromptList`: LC Prompt List 🗒️
 
 ## LC123/sampling (14)
 

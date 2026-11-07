@@ -81,6 +81,7 @@ const COLORS = {
     LCSaveImageMetadata: { color: "#28281E", bgcolor: "#28281E" },
     LC123SaveText: { color: "#28281E", bgcolor: "#28281E" },
     LCTextReplace: { color: "#28281E", bgcolor: "#28281E" },
+    LCPromptList: { color: "#28281E", bgcolor: "#28281E" },
     LCDuplicateTags: { color: "#28281E", bgcolor: "#28281E" },
     LCTextRemove: { color: "#28281E", bgcolor: "#28281E" },
     LCShowText: { color: "#28281E", bgcolor: "#28281E" },

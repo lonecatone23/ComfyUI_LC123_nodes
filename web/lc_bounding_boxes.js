@@ -9,6 +9,9 @@ const TYPE = "LCBoundingBoxes";
 const CANVAS_H = 330;
 const EDITOR_H = 150;
 const HANDLE = 8;
+const DEL_R = 8; // the × on the selected box
+/** Where the selected box's × sits: inside its top-right corner, clear of the corner resize handle. */
+const delSpot = (r) => [r.x + r.w - DEL_R - 6, r.y + DEL_R + 6];
 const KINDS = ["new", "change", "move", "remove"];
 const COLORS = { new: "#5ac878", change: "#5aa0f0", move: "#f0b43c", remove: "#e65050" };
 
@@ -282,6 +285,22 @@ function draw(node) {
     if (selected) for (const [hx, hy] of [[r.x, r.y], [r.x + r.w, r.y], [r.x, r.y + r.h], [r.x + r.w, r.y + r.h]]) {
       ctx.fillStyle = c;
       ctx.fillRect(hx - 4, hy - 4, 8, 8);
+    }
+    if (selected) {
+      // × on the selected box: click it to delete the box (the "✕ delete" button below is easy to miss)
+      const [xc, yc] = delSpot(r);
+      ctx.beginPath();
+      ctx.arc(xc, yc, DEL_R, 0, Math.PI * 2);
+      ctx.fillStyle = "#c62828";
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(xc - 3.5, yc - 3.5);
+      ctx.lineTo(xc + 3.5, yc + 3.5);
+      ctx.moveTo(xc + 3.5, yc - 3.5);
+      ctx.lineTo(xc - 3.5, yc + 3.5);
+      ctx.stroke();
     }
   });
   if (st.draft) {
@@ -601,6 +620,14 @@ function attach(node) {
     cv.setPointerCapture?.(e.pointerId);
     const [x, y] = pos(e);
     const [fx, fy] = frac(x, y);
+    const selBox = st.sel != null ? st.boxes[st.sel] : null;
+    if (selBox) {
+      const [xc, yc] = delSpot(toPx(layout(node), selBox));
+      if (Math.hypot(x - xc, y - yc) <= DEL_R + 2) {  // the × on the selected box
+        removeSel(node);
+        return;
+      }
+    }
     const h = hit(node, x, y);
     if (h) {
       st.sel = h.i;

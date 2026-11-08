@@ -138,6 +138,20 @@ function ensureStrengthStyle() {
 }
 
 function makeStrengthControl(node, index) {
+  return makeStrength(
+    () => Number(getRows(node)[index]?.strength ?? 1),
+    (v) => {
+      const rs = getRows(node);
+      if (!rs[index]) return;
+      rs[index].strength = v;
+      setRows(node, rs, { rerender: false });
+    }
+  );
+}
+
+/** The <◀ value ▶> strength control on its own: get() reads the value, set(v) stores it (shared with other LC
+ * packs through window.LC123LoraUI, e.g. LC AV Showrunner's shot LoRAs). */
+function makeStrength(get, set) {
   ensureStrengthStyle();
   const wrap = document.createElement("div");
   wrap.className = "lc-lora-strength";
@@ -159,13 +173,8 @@ function makeStrengthControl(node, index) {
 
   wrap.append(dec, valueEl, inc);
 
-  const getValue = () => Number(getRows(node)[index]?.strength ?? 1);
-  const commit = (v) => {
-    const rs = getRows(node);
-    if (!rs[index]) return;
-    rs[index].strength = Math.round(v * 100) / 100;
-    setRows(node, rs, { rerender: false });
-  };
+  const getValue = () => Number(get() ?? 1);
+  const commit = (v) => set(Math.round(v * 100) / 100);
   const render = () => {
     valueEl.textContent = getValue().toFixed(2);
   };
@@ -450,6 +459,16 @@ function closeLoraPicker() {
 }
 
 function showLoraPickerPopover(anchorEl, node, index) {
+  pickLora(anchorEl, () => getRows(node)[index]?.lora, (fullName) => {
+    const rs = getRows(node);
+    rs[index].lora = fullName;
+    setRows(node, rs);
+  });
+}
+
+/** The folder drill-down LoRA picker on its own: current() names the selected file, onSelect(fullName) takes the
+ * pick (shared with other LC packs through window.LC123LoraUI). */
+function pickLora(anchorEl, current, onSelect) {
   closeLoraPicker();
   closePopover();
 
@@ -503,13 +522,11 @@ function showLoraPickerPopover(anchorEl, node, index) {
 
   let path = [...lastLoraPath]; // start where the last picker (any row, any node) left off
 
-  const currentLora = () => getRows(node)[index]?.lora;
+  const currentLora = () => current();
 
   const select = (fullName) => {
-    const rs = getRows(node);
-    rs[index].lora = fullName;
-    setRows(node, rs);
     closeLoraPicker();
+    onSelect(fullName);
   };
 
   const makeRowEl = () => {
@@ -673,6 +690,10 @@ function showLoraPickerPopover(anchorEl, node, index) {
     search.focus();
   });
 }
+
+// Shared with the other LC packs (LC AV Showrunner's 🎛 shot LoRAs): the same folder picker, strength control and
+// Info popover as this node, so a LoRA is picked the same way everywhere.
+window.LC123LoraUI = { pickLora, makeStrength, showInfoPopover, infoEnabled, getLoraList };
 
 // ---- rows ----
 function ensureFace(node) {

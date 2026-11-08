@@ -101,7 +101,7 @@ def format_support(fmt, sysp):
         return "no", "int8 math failed on this card"
     if fmt.startswith("gguf"):
         if packs.get("GGUF") is False:
-            return "no", "needs the ComfyUI-GGUF pack"
+            return "no", "needs the gguf pack by calcuis"
         return "cast", "GGUF: unpacked per layer while it runs (a little slower than the same size in fp8 / int8)"
     return "native", ""
 
@@ -271,8 +271,8 @@ BITS_TO_LPIPS = {32: 0.0, 16: 0.0, 8: 0.02, 6: 0.03, 5: 0.04, 4: 0.07, 3: 0.18, 
 GOALS = {"Quality": None, "Optimal": 0.05, "Fast": 0.10}  # the most distance from bf16 each goal accepts (frame sheets: under ~0.05 looks the same)
 STEPS = {"minimax_h3": 8, "minimax_h3_fl2va": 8, "krea2": 8, "ltx25": 11, "anima": 30, "z_image_turbo": 8, "qwen_image_21": 25, "flux2_klein_9b": 20, "flux2_klein_9b_distilled": 4, "flux3_klein": 16, "fibo2_edit_turbo": 8, "flux3_klein_base": 50, "ideogram4": 20, "ltx23": 11,
          "krea2_raw": 52, "sdxl": 30, "illustrious": 28, "pony": 25}
-LOADER_NEEDS = {"UnetLoaderGGUF": "needs a current ComfyUI-GGUF pack (update it if a newer model such as Flux 3 Klein will not load)",
-                "CLIPLoaderGGUF": "needs a current ComfyUI-GGUF pack"}
+LOADER_NEEDS = {"UnetLoaderGGUF": "needs the gguf pack by calcuis (update it if a newer model will not load)",
+                "CLIPLoaderGGUF": "needs the gguf pack by calcuis"}
 
 
 def _class(fmt):
@@ -459,7 +459,7 @@ def shopping_guide(sysp):
         avoid.append({"what": "Expecting fp8 to be faster", "why": "fp8 math needs an RTX 40 or newer."})
     if ram and ram < 48:
         avoid.append({"what": "Big GGUFs with little RAM", "why": f"A GGUF sits fully in RAM; with {ram:g} GB it spills into the page file first (32 GB test: loading twice as slow)."})
-    avoid.append({"what": "Files your loader cannot open", "why": "Community GGUFs without an architecture tag (Ideogram 4, most Qwen-Image 2.1) are rejected by ComfyUI-GGUF; some community fp8 / bf16 files are not recognised at all. Check the model page for 'ComfyUI' and the loader."})
+    avoid.append({"what": "Files your loader cannot open", "why": "Community GGUFs without an architecture tag (Ideogram 4, most Qwen-Image 2.1) are rejected by ComfyUI-GGUF (the gguf pack by calcuis reads more of them); some community fp8 / bf16 files are not recognised at all. Check the model page for 'ComfyUI' and the loader."})
     avoid.append({"what": "Community int8 / fp8 conversions of finetunes without a comparison", "why": "Conversions vary, and a file name can be wrong (one finetune's \"int8\" file was really fp8). Official files are measured; a community one is only as good as its converter."})
     avoid.append({"what": "LoRA-heavy workflows on 8-bit quants (video)", "why": "LTX 2.3 with its LoRA drifted 0.07 to 0.09 on fp8 / int8 vs 0.015 for Q8; test before trusting."})
     # the short answer per goal: what to pick on THIS machine, best first

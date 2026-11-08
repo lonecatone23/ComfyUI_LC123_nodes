@@ -3884,5 +3884,28 @@
         "tooltip": "메인 프롬프트의 conditioning: 박스 주변의 장면. 연결하지 않으면 샘플러 자체의 프롬프트를 씁니다."
       }
     }
+  },
+  "LCPromptList": {
+    "description": "한 줄에 프롬프트 하나, 목록으로 내보냅니다. 각 줄이 따로 한 번씩 생성됩니다. 빈 줄과 //로 시작하는 줄은 빠집니다. CR Prompt List를 대신합니다(입력과 출력이 같음).",
+    "inputs": {
+      "prepend_text": {
+        "tooltip": "각 줄 앞에 그대로 붙습니다. 끝에 공백이나 쉼표를 넣으세요."
+      },
+      "multiline_text": {
+        "tooltip": "한 줄에 프롬프트 하나. 줄 앞에 //를 붙이면 그 줄은 꺼집니다."
+      },
+      "append_text": {
+        "tooltip": "각 줄 뒤에 그대로 붙습니다. 앞에 공백이나 쉼표를 넣으세요."
+      },
+      "start_index": {
+        "tooltip": "처음 쓸 줄(0 = 첫 줄). 빈 줄과 // 줄은 세지 않습니다."
+      },
+      "max_rows": {
+        "tooltip": "거기서부터 몇 줄을 쓸지."
+      },
+      "skip_blank_lines": {
+        "tooltip": "켜짐: 빈 줄과 // 줄을 뺍니다. 꺼짐: 모든 줄이 프롬프트가 됩니다(CR Prompt List와 같음)."
+      }
+    }
   }
 }

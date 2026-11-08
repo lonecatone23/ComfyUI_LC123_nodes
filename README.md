@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.56.3 · **160 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.56.4 · **160 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 
@@ -286,7 +286,7 @@ The **System & Model Optimization Report** tells you what suits your machine. Th
     - Pick your own files. ★ Recommended, downloads, estimates and file checks show as **unsupported** (we have no data for it).
     - The speed-ups still apply.
     - `clip_type` (Custom only): how the text encoder loads. **auto** works when the encoder matches one of the models above; otherwise set it (e.g. `chroma` for Chroma).
-- **GGUF:** loads through **ComfyUI-GGUF**. A GGUF it refuses (e.g. a `krea2` tag) falls back to the **calcuis gguf** pack if you have it.
+- **GGUF:** loads through the **gguf** pack by calcuis (it reads MiniMax H3 and Krea 2 GGUFs). **ComfyUI-GGUF** is the fallback.
 
 **Speed-ups (Auto)**
 - **Attention:** Sage (or Flash) only if it passed the report's test on this machine.

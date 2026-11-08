@@ -3884,5 +3884,28 @@
         "tooltip": "主提示词的 conditioning:框周围的场景。不接时使用采样器自己的提示词。"
       }
     }
+  },
+  "LCPromptList": {
+    "description": "每行一个提示词，作为列表输出：每一行各自生成一次。空行和以 // 开头的行会被跳过。可替代 CR Prompt List（输入输出相同）。",
+    "inputs": {
+      "prepend_text": {
+        "tooltip": "原样加在每一行前面。结尾加一个空格或逗号。"
+      },
+      "multiline_text": {
+        "tooltip": "每行一个提示词。行首加 // 即可关闭该行。"
+      },
+      "append_text": {
+        "tooltip": "原样加在每一行后面。开头加一个空格或逗号。"
+      },
+      "start_index": {
+        "tooltip": "从第几行开始（0 = 第一行）。空行和 // 行不计入。"
+      },
+      "max_rows": {
+        "tooltip": "从那里开始使用多少行。"
+      },
+      "skip_blank_lines": {
+        "tooltip": "开：跳过空行和 // 行。关：每一行都是提示词，和 CR Prompt List 一样。"
+      }
+    }
   }
 }

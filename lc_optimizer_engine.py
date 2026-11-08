@@ -3,7 +3,7 @@ LC Optimizer engine, shared by the four LC Optimizer nodes (image, image pipe, v
 
 Picks the model files for a base model and goal (from the System & Model Optimization Report when it has been
 run, Comfy's defaults otherwise), downloads missing ones on first use, loads them through ComfyUI's own loaders
-(split files, AIO checkpoints, GGUF via ComfyUI-GGUF or the calcuis gguf pack), applies the speed-ups that tested
+(split files, AIO checkpoints, GGUF via the calcuis gguf pack, or ComfyUI-GGUF as the fallback), applies the speed-ups that tested
 fine on this machine, and checks the picked files against the base model from their headers alone (hints, never
 a block).
 """
@@ -1143,19 +1143,19 @@ def load_model(folder, name):
     if name.lower().endswith(".gguf"):
         import nodes
 
-        if "UnetLoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
+        # calcuis's gguf pack first: it reads the newer architectures (MiniMax H3, Krea 2); ComfyUI-GGUF is the fallback
+        if "LoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
             try:
-                return _call("UnetLoaderGGUF", unet_name=name)[0], None, None, "GGUF"
+                return _call("LoaderGGUF", gguf_name=name)[0], None, None, "GGUF (calcuis)"
             except Exception as e:
-                if "LoaderGGUF" not in nodes.NODE_CLASS_MAPPINGS:
-                    raise RuntimeError(f"[LC Optimizer] ComfyUI-GGUF could not load {name} ({e}). The pack is most likely too old for this "
-                                       "model's architecture (Flux 3 Klein needs a current one): update ComfyUI-GGUF in ComfyUI-Manager and "
+                if "UnetLoaderGGUF" not in nodes.NODE_CLASS_MAPPINGS:
+                    raise RuntimeError(f"[LC Optimizer] The gguf pack could not load {name} ({e}). Update it in ComfyUI-Manager and "
                                        "restart ComfyUI. If it still fails, pick the int8 or bf16 file: ComfyUI's own loader reads those, and "
                                        "they were faster than GGUF on every card tested.") from e
-                print(f"[LC Optimizer] ComfyUI-GGUF could not load {name} ({e}); trying the calcuis gguf pack.")
-        if "LoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
-            return _call("LoaderGGUF", gguf_name=name)[0], None, None, "GGUF (calcuis)"
-        raise RuntimeError("[LC Optimizer] GGUF files need the ComfyUI-GGUF pack (install it from ComfyUI-Manager).")
+                print(f"[LC Optimizer] The gguf pack could not load {name} ({e}); trying ComfyUI-GGUF.")
+        if "UnetLoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
+            return _call("UnetLoaderGGUF", unet_name=name)[0], None, None, "GGUF"
+        raise RuntimeError("[LC Optimizer] GGUF files need the gguf pack by calcuis (install \"gguf\" from ComfyUI-Manager).")
     if _is_moss(full_path(folder, name)) and not _native_moss():
         # the MOSS-Image plugin reads OpenMOSS's own checkpoints: with these (fused qkv) files it renders noise
         raise RuntimeError("[LC Optimizer] MOSS-Image needs a ComfyUI with native MOSS-Image support (update ComfyUI: "
@@ -1202,11 +1202,16 @@ def load_clip(folder, name, clip_type, ckpt_name=None):
     if name.lower().endswith(".gguf"):
         import nodes
 
+        if "ClipLoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:  # calcuis first
+            try:
+                return _call("ClipLoaderGGUF", clip_name=name, type=clip_type)[0]
+            except Exception as e:
+                if "CLIPLoaderGGUF" not in nodes.NODE_CLASS_MAPPINGS:
+                    raise
+                print(f"[LC Optimizer] The gguf pack could not load {name} ({e}); trying ComfyUI-GGUF.")
         if "CLIPLoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
             return _call("CLIPLoaderGGUF", clip_name=name, type=clip_type)[0]
-        if "ClipLoaderGGUF" in nodes.NODE_CLASS_MAPPINGS:
-            return _call("ClipLoaderGGUF", clip_name=name, type=clip_type)[0]
-        raise RuntimeError("[LC Optimizer] GGUF text encoders need the ComfyUI-GGUF pack.")
+        raise RuntimeError("[LC Optimizer] GGUF text encoders need the gguf pack by calcuis (install \"gguf\" from ComfyUI-Manager).")
     return _call("CLIPLoader", clip_name=name, type=clip_type)[0]
 
 

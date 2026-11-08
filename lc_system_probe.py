@@ -860,7 +860,9 @@ def installed_packs():
             names |= {n.lower() for n in os.listdir(d) if os.path.isdir(os.path.join(d, n))}
         except Exception:
             pass
-    return {label: folder in names for label, folder in wanted.items()}
+    found = {label: folder in names for label, folder in wanted.items()}
+    found["GGUF"] = "gguf" in names or "comfyui-gguf" in names  # calcuis's gguf is the default; ComfyUI-GGUF also counts
+    return found
 
 
 def pack_alternatives():
@@ -1105,7 +1107,7 @@ def findings(p):
                 add("packs", -1, f"H3 {k}", v["detail"])
     for label, have in (p.get("packs") or {}).items():
         if not have and label in ("KJNodes", "GGUF") and not (p.get("pack_alternatives") or {}).get(label):
-            add("packs", 1, f"{label} not installed", "KJNodes holds most of the memory and speed nodes." if label == "KJNodes" else "GGUF lets smaller cards run big models as quantized files.")
+            add("packs", 1, f"{label} not installed", "KJNodes holds most of the memory and speed nodes." if label == "KJNodes" else "Install gguf (by calcuis) from ComfyUI-Manager: it lets smaller cards run big models as quantized files.")
     return F
 
 

@@ -1,0 +1,108 @@
+{
+ "id": "minimax_h3_image",
+ "name": "MiniMax H3 Image",
+ "kind": "image",
+ "params_b": 20,
+ "notes": [
+  "MiniMax's text-to-image and edit model: its own image model and image VAE, with the same Qwen3-VL-32B text encoder as H3 video.",
+  "Settings: 6 steps, cfg 1, euler / simple, no shift node. The model samples on its own fixed 6-step sigma grid.",
+  "Made for big pictures: 4 to 20 MP, best around 16 MP. Below 4 MP it gets weak. Sizes in multiples of 32.",
+  "Edits: MiniMax H3 Image Conditioning takes the prompt and reference pictures (<Picture 1>, <Picture 2>, ...). image_1 is the picture it edits.",
+  "Keep int(steps / denoise) at 6. Anything else lands off the sigma grid and faces turn to mush (low-denoise detailers and img2img included).",
+  "LC Speed Boost (grow at step 4) works: 6 s instead of 8 s at 7.5 MP on a 5090."
+ ],
+ "components": {
+  "diffusion": {
+   "label": "Image model",
+   "role": "diffusion",
+   "variants": [
+    {
+     "file": "minimax_h3_image_pruned_bf16.safetensors",
+     "format": "bf16",
+     "gb": 37.47,
+     "bits": 16,
+     "repo": "Comfy-Org/MiniMax-H3-Image",
+     "loader": "UNETLoader",
+     "pruned": true
+    },
+    {
+     "file": "minimax_h3_image_pruned_int8_convrot.safetensors",
+     "format": "int8_convrot",
+     "gb": 19.54,
+     "bits": 8,
+     "repo": "Comfy-Org/MiniMax-H3-Image",
+     "loader": "UNETLoader",
+     "pruned": true,
+     "default": true
+    },
+    {
+     "file": "minimax_h3_image_pruned_w4a8.safetensors",
+     "format": "w4a8",
+     "gb": 11.69,
+     "bits": 4,
+     "repo": "Comfy-Org/MiniMax-H3-Image",
+     "loader": "UNETLoader",
+     "pruned": true
+    }
+   ]
+  },
+  "text_encoder": {
+   "label": "Text encoder (Qwen3-VL-32B)",
+   "role": "text_encoder",
+   "clip_type": "minimax",
+   "variants": [
+    {
+     "file": "qwen3vl_32b_minimax_h3_bf16.safetensors",
+     "format": "bf16",
+     "gb": 47.97,
+     "bits": 16,
+     "repo": "Comfy-Org/MiniMax-H3",
+     "loader": "CLIPLoader"
+    },
+    {
+     "file": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+     "format": "int8_convrot",
+     "gb": 25.28,
+     "bits": 8,
+     "repo": "Comfy-Org/MiniMax-H3",
+     "loader": "CLIPLoader"
+    },
+    {
+     "file": "qwen3vl_32b_minimax_h3_w4a8_mixed.safetensors",
+     "format": "w4a8",
+     "gb": 15.35,
+     "bits": 4,
+     "repo": "AX1Y2JP/MiniMax-H3-W4A8-ConvRot",
+     "loader": "CLIPLoader",
+     "community": true
+    },
+    {
+     "file": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+     "format": "nvfp4",
+     "gb": 14.61,
+     "bits": 4,
+     "repo": "Comfy-Org/MiniMax-H3",
+     "loader": "CLIPLoader",
+     "default": true,
+     "note": "Comfy: does not need a Blackwell GPU"
+    }
+   ]
+  },
+  "vae": {
+   "label": "Image VAE",
+   "role": "fixed",
+   "variants": [
+    {
+     "file": "minimax_h3_image_vae_fp16.safetensors",
+     "format": "fp16",
+     "gb": 1.09,
+     "bits": 16,
+     "repo": "Comfy-Org/MiniMax-H3-Image",
+     "loader": "VAELoader",
+     "default": true
+    }
+   ]
+  }
+ },
+ "source": "Hugging Face tree API sizes (Comfy-Org/MiniMax-H3-Image, Comfy-Org/MiniMax-H3), ComfyUI 0.45 source (MiniMaxH3Image, nodes_minimax_h3.py) and the image_minimax_h3_image templates, 2026-11-10. Tested 2026-11-10 on the 5090 (int8 + Qwen3-VL bf16): 6 steps at 2688x3360 8 s warm, Speed Boost grow 4 6 s; reference edit at 1600x1984 20 s with the text encoder."
+}

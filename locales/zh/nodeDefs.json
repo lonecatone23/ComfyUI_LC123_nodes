@@ -2709,7 +2709,7 @@
     "description": "负面提示词文本框。"
   },
   "LCOptimizer": {
-    "description": "此节点会分析你的机器，加载最适合你显卡的模型、text encoder 和 VAE，并启用在你的显卡上真正有效的加速（Sage、Comfy Kitchen 等）。\n用下方按钮运行报告，或在 LC123 设置中运行。\n缺少文件？选择带 ⬇ 的条目，首次运行时会自动下载。\nFinetune 同样适用。选择你自己的文件，仍会获得加速；如果 text encoder 或 VAE 不匹配，会显示 ⚠️。\n其他任何模型：把 base model 设为 Custom，再选择你自己的文件（以及 text encoder 类型）。加速仍然生效；推荐、估算和检查会显示为不支持。\n⚠️ 不要在 .bat 中加入 --use-sage-attention。它会对所有模型强制启用 Sage，有些模型开启后会出黑图。不加这个参数，让此节点按模型自动开启 Sage。\n当前可用模型：Krea 2、Krea 2 (Raw)、Qwen-Image 2.1、Z-Image Turbo、Flux.2 Klein 9B (Distilled and Base)、Flux 3 Klein (Distilled and Base)、MOSS Image (SFT and Base)、FIBO 2.0 Edit Turbo、Ideogram 4、Anima、SDXL、Illustrious、Pony、Custom。",
+    "description": "此节点会分析你的机器，加载最适合你显卡的模型、text encoder 和 VAE，并启用在你的显卡上真正有效的加速（Sage、Comfy Kitchen 等）。\n用下方按钮运行报告，或在 LC123 设置中运行。\n缺少文件？选择带 ⬇ 的条目，首次运行时会自动下载。\nFinetune 同样适用。选择你自己的文件，仍会获得加速；如果 text encoder 或 VAE 不匹配，会显示 ⚠️。\n其他任何模型：把 base model 设为 Custom，再选择你自己的文件（以及 text encoder 类型）。加速仍然生效；推荐、估算和检查会显示为不支持。\n⚠️ 不要在 .bat 中加入 --use-sage-attention。它会对所有模型强制启用 Sage，有些模型开启后会出黑图。不加这个参数，让此节点按模型自动开启 Sage。\n当前可用模型：Krea 2、Krea 2 (Raw)、Qwen-Image 2.1、Z-Image Turbo、Flux.2 Klein 9B (Distilled and Base)、Flux 3 Klein (Distilled and Base)、MOSS Image (SFT and Base)、FIBO 2.0 Edit Turbo、MiniMax H3 Image、Ideogram 4、Anima、SDXL、Illustrious、Pony、Custom。",
     "inputs": {
       "base_model": {
         "tooltip": "模型家族。决定推荐的文件和检查项。"
@@ -2744,7 +2744,7 @@
     }
   },
   "LCOptimizerPipe": {
-    "description": "此节点会分析你的机器，加载最适合你显卡的模型、text encoder 和 VAE，并启用在你的显卡上真正有效的加速（Sage、Comfy Kitchen 等）。\n用下方按钮运行报告，或在 LC123 设置中运行。\n缺少文件？选择带 ⬇ 的条目，首次运行时会自动下载。\nFinetune 同样适用。选择你自己的文件，仍会获得加速；如果 text encoder 或 VAE 不匹配，会显示 ⚠️。\n其他任何模型：把 base model 设为 Custom，再选择你自己的文件（以及 text encoder 类型）。加速仍然生效；推荐、估算和检查会显示为不支持。\n⚠️ 不要在 .bat 中加入 --use-sage-attention。它会对所有模型强制启用 Sage，有些模型开启后会出黑图。不加这个参数，让此节点按模型自动开启 Sage。\n当前可用模型：Krea 2、Krea 2 (Raw)、Qwen-Image 2.1、Z-Image Turbo、Flux.2 Klein 9B (Distilled and Base)、Flux 3 Klein (Distilled and Base)、MOSS Image (SFT and Base)、FIBO 2.0 Edit Turbo、Ideogram 4、Anima、SDXL、Illustrious、Pony、Custom。",
+    "description": "此节点会分析你的机器，加载最适合你显卡的模型、text encoder 和 VAE，并启用在你的显卡上真正有效的加速（Sage、Comfy Kitchen 等）。\n用下方按钮运行报告，或在 LC123 设置中运行。\n缺少文件？选择带 ⬇ 的条目，首次运行时会自动下载。\nFinetune 同样适用。选择你自己的文件，仍会获得加速；如果 text encoder 或 VAE 不匹配，会显示 ⚠️。\n其他任何模型：把 base model 设为 Custom，再选择你自己的文件（以及 text encoder 类型）。加速仍然生效；推荐、估算和检查会显示为不支持。\n⚠️ 不要在 .bat 中加入 --use-sage-attention。它会对所有模型强制启用 Sage，有些模型开启后会出黑图。不加这个参数，让此节点按模型自动开启 Sage。\n当前可用模型：Krea 2、Krea 2 (Raw)、Qwen-Image 2.1、Z-Image Turbo、Flux.2 Klein 9B (Distilled and Base)、Flux 3 Klein (Distilled and Base)、MOSS Image (SFT and Base)、FIBO 2.0 Edit Turbo、MiniMax H3 Image、Ideogram 4、Anima、SDXL、Illustrious、Pony、Custom。",
     "inputs": {
       "base_model": {
         "tooltip": "模型家族。决定推荐的文件和检查项。"

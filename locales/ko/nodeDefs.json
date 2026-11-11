@@ -2709,7 +2709,7 @@
     "description": "Negative 프롬프트 텍스트 상자."
   },
   "LCOptimizer": {
-    "description": "이 노드는 당신의 컴퓨터를 분석해, 당신의 카드에 맞는 모델, text encoder, VAE를 로드하고 실제로 작동하는 속도 향상 기능(Sage, Comfy Kitchen 등)을 적용합니다.\n아래 버튼이나 LC123 설정에서 리포트를 실행하세요.\n파일이 없나요? ⬇ 항목을 고르면 첫 실행 때 다운로드됩니다.\nFinetune도 작동합니다. 직접 만든 파일을 골라도 속도 향상이 적용되며, text encoder나 VAE가 맞지 않으면 ⚠️가 표시됩니다.\n다른 모델: base model을 Custom으로 설정하고 직접 파일(과 text encoder 타입)을 고르세요. 속도 향상은 그대로 적용되며, 추천, 추정, 검사는 지원 안 됨으로 표시됩니다.\n⚠️ .bat에 --use-sage-attention을 넣지 마세요. 모든 모델에 Sage를 강제하는데, 일부 모델은 이 때문에 검은 이미지가 나옵니다. 빼두면 이 노드가 모델별로 Sage를 켭니다.\n현재 사용 가능한 모델: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom.",
+    "description": "이 노드는 당신의 컴퓨터를 분석해, 당신의 카드에 맞는 모델, text encoder, VAE를 로드하고 실제로 작동하는 속도 향상 기능(Sage, Comfy Kitchen 등)을 적용합니다.\n아래 버튼이나 LC123 설정에서 리포트를 실행하세요.\n파일이 없나요? ⬇ 항목을 고르면 첫 실행 때 다운로드됩니다.\nFinetune도 작동합니다. 직접 만든 파일을 골라도 속도 향상이 적용되며, text encoder나 VAE가 맞지 않으면 ⚠️가 표시됩니다.\n다른 모델: base model을 Custom으로 설정하고 직접 파일(과 text encoder 타입)을 고르세요. 속도 향상은 그대로 적용되며, 추천, 추정, 검사는 지원 안 됨으로 표시됩니다.\n⚠️ .bat에 --use-sage-attention을 넣지 마세요. 모든 모델에 Sage를 강제하는데, 일부 모델은 이 때문에 검은 이미지가 나옵니다. 빼두면 이 노드가 모델별로 Sage를 켭니다.\n현재 사용 가능한 모델: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, MiniMax H3 Image, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom.",
     "inputs": {
       "base_model": {
         "tooltip": "모델 계열. 추천 파일과 검사를 선택합니다."
@@ -2744,7 +2744,7 @@
     }
   },
   "LCOptimizerPipe": {
-    "description": "이 노드는 당신의 컴퓨터를 분석해, 당신의 카드에 맞는 모델, text encoder, VAE를 로드하고 실제로 작동하는 속도 향상 기능(Sage, Comfy Kitchen 등)을 적용합니다.\n아래 버튼이나 LC123 설정에서 리포트를 실행하세요.\n파일이 없나요? ⬇ 항목을 고르면 첫 실행 때 다운로드됩니다.\nFinetune도 작동합니다. 직접 만든 파일을 골라도 속도 향상이 적용되며, text encoder나 VAE가 맞지 않으면 ⚠️가 표시됩니다.\n다른 모델: base model을 Custom으로 설정하고 직접 파일(과 text encoder 타입)을 고르세요. 속도 향상은 그대로 적용되며, 추천, 추정, 검사는 지원 안 됨으로 표시됩니다.\n⚠️ .bat에 --use-sage-attention을 넣지 마세요. 모든 모델에 Sage를 강제하는데, 일부 모델은 이 때문에 검은 이미지가 나옵니다. 빼두면 이 노드가 모델별로 Sage를 켭니다.\n현재 사용 가능한 모델: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom.",
+    "description": "이 노드는 당신의 컴퓨터를 분석해, 당신의 카드에 맞는 모델, text encoder, VAE를 로드하고 실제로 작동하는 속도 향상 기능(Sage, Comfy Kitchen 등)을 적용합니다.\n아래 버튼이나 LC123 설정에서 리포트를 실행하세요.\n파일이 없나요? ⬇ 항목을 고르면 첫 실행 때 다운로드됩니다.\nFinetune도 작동합니다. 직접 만든 파일을 골라도 속도 향상이 적용되며, text encoder나 VAE가 맞지 않으면 ⚠️가 표시됩니다.\n다른 모델: base model을 Custom으로 설정하고 직접 파일(과 text encoder 타입)을 고르세요. 속도 향상은 그대로 적용되며, 추천, 추정, 검사는 지원 안 됨으로 표시됩니다.\n⚠️ .bat에 --use-sage-attention을 넣지 마세요. 모든 모델에 Sage를 강제하는데, 일부 모델은 이 때문에 검은 이미지가 나옵니다. 빼두면 이 노드가 모델별로 Sage를 켭니다.\n현재 사용 가능한 모델: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, MiniMax H3 Image, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom.",
     "inputs": {
       "base_model": {
         "tooltip": "모델 계열. 추천 파일과 검사를 선택합니다."

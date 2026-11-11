@@ -62,7 +62,7 @@ DESC_IMAGE = (
     "still apply; recommendations, estimates and checks show as unsupported.\n"
     "⚠️ Don't put --use-sage-attention in your .bat. It forces Sage on every model, and some models give black images "
     "with it. Leave it out and let this node turn Sage on per model.\n"
-    "Current available models: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, Ideogram 4, Anima, "
+    "Current available models: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, MiniMax H3 Image, Ideogram 4, Anima, "
     "SDXL, Illustrious, Pony, Custom."
 )
 DESC_VIDEO = (

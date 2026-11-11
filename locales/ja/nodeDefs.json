@@ -2709,7 +2709,7 @@
     "description": "ネガティブプロンプトのテキストボックス。"
   },
   "LCOptimizer": {
-    "description": "このノードはお使いのマシンを分析し、あなたのカードに合ったモデル、テキストエンコーダー、VAE を読み込みます。実際に効くスピードアップ (Sage、Comfy Kitchen など) も適用されます。\n下のボタン、または LC123 の設定からレポートを実行してください。\nファイルが足りない場合は ⬇ の付いた項目を選ぶと、初回実行時にダウンロードされます。\nファインチューンにも対応しています。自分のファイルを選んでもスピードアップは適用され、テキストエンコーダーや VAE が合わない場合は ⚠️ が表示されます。\nその他のモデル: base model を Custom にして、自分のファイル (とテキストエンコーダーの type) を選んでください。スピードアップは引き続き適用されますが、推奨、見積もり、チェックは非対応と表示されます。\n⚠️ .bat に --use-sage-attention を入れないでください。すべてのモデルで Sage が強制され、モデルによっては黒い画像になります。入れずに、このノードにモデルごとの Sage のオンオフを任せてください。\n現在対応しているモデル: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom。",
+    "description": "このノードはお使いのマシンを分析し、あなたのカードに合ったモデル、テキストエンコーダー、VAE を読み込みます。実際に効くスピードアップ (Sage、Comfy Kitchen など) も適用されます。\n下のボタン、または LC123 の設定からレポートを実行してください。\nファイルが足りない場合は ⬇ の付いた項目を選ぶと、初回実行時にダウンロードされます。\nファインチューンにも対応しています。自分のファイルを選んでもスピードアップは適用され、テキストエンコーダーや VAE が合わない場合は ⚠️ が表示されます。\nその他のモデル: base model を Custom にして、自分のファイル (とテキストエンコーダーの type) を選んでください。スピードアップは引き続き適用されますが、推奨、見積もり、チェックは非対応と表示されます。\n⚠️ .bat に --use-sage-attention を入れないでください。すべてのモデルで Sage が強制され、モデルによっては黒い画像になります。入れずに、このノードにモデルごとの Sage のオンオフを任せてください。\n現在対応しているモデル: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, MiniMax H3 Image, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom。",
     "inputs": {
       "base_model": {
         "tooltip": "モデルファミリー。推奨ファイルとチェックを選びます。"
@@ -2744,7 +2744,7 @@
     }
   },
   "LCOptimizerPipe": {
-    "description": "このノードはお使いのマシンを分析し、あなたのカードに合ったモデル、テキストエンコーダー、VAE を読み込みます。実際に効くスピードアップ (Sage、Comfy Kitchen など) も適用されます。\n下のボタン、または LC123 の設定からレポートを実行してください。\nファイルが足りない場合は ⬇ の付いた項目を選ぶと、初回実行時にダウンロードされます。\nファインチューンにも対応しています。自分のファイルを選んでもスピードアップは適用され、テキストエンコーダーや VAE が合わない場合は ⚠️ が表示されます。\nその他のモデル: base model を Custom にして、自分のファイル (とテキストエンコーダーの type) を選んでください。スピードアップは引き続き適用されますが、推奨、見積もり、チェックは非対応と表示されます。\n⚠️ .bat に --use-sage-attention を入れないでください。すべてのモデルで Sage が強制され、モデルによっては黒い画像になります。入れずに、このノードにモデルごとの Sage のオンオフを任せてください。\n現在対応しているモデル: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom。",
+    "description": "このノードはお使いのマシンを分析し、あなたのカードに合ったモデル、テキストエンコーダー、VAE を読み込みます。実際に効くスピードアップ (Sage、Comfy Kitchen など) も適用されます。\n下のボタン、または LC123 の設定からレポートを実行してください。\nファイルが足りない場合は ⬇ の付いた項目を選ぶと、初回実行時にダウンロードされます。\nファインチューンにも対応しています。自分のファイルを選んでもスピードアップは適用され、テキストエンコーダーや VAE が合わない場合は ⚠️ が表示されます。\nその他のモデル: base model を Custom にして、自分のファイル (とテキストエンコーダーの type) を選んでください。スピードアップは引き続き適用されますが、推奨、見積もり、チェックは非対応と表示されます。\n⚠️ .bat に --use-sage-attention を入れないでください。すべてのモデルで Sage が強制され、モデルによっては黒い画像になります。入れずに、このノードにモデルごとの Sage のオンオフを任せてください。\n現在対応しているモデル: Krea 2, Krea 2 (Raw), Qwen-Image 2.1, Z-Image Turbo, Flux.2 Klein 9B (Distilled and Base), Flux 3 Klein (Distilled and Base), MOSS Image (SFT and Base), FIBO 2.0 Edit Turbo, MiniMax H3 Image, Ideogram 4, Anima, SDXL, Illustrious, Pony, Custom。",
     "inputs": {
       "base_model": {
         "tooltip": "モデルファミリー。推奨ファイルとチェックを選びます。"

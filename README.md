@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.56.5 · **160 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.56.6 · **160 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 

@@ -35,12 +35,16 @@ if (!window.__lcPreviewTip) {
       tip.textContent = TEXT;
       document.body.appendChild(tip);
     }
+    // below and right of the pointer so it doesn't cover what you point at (LC Settings > Tooltips), above near the bottom
+    const below = setting("LC123.Tooltips.Below", true) !== false;
+    tip.style.transform = below ? "translate(16px,26px)" : "translate(5px,calc(-100% - 5px))";
     tip.style.left = `${x}px`;
     tip.style.top = `${y}px`;
     tip.style.display = "block";
     const r = tip.getBoundingClientRect();
     if (r.right > window.innerWidth) tip.style.left = `${x - r.width - 10}px`;
-    if (r.top < 0) tip.style.top = `${y + r.height + 10}px`;
+    if (below && r.bottom > window.innerHeight - 4) tip.style.transform = "translate(16px,calc(-100% - 12px))";
+    if (!below && r.top < 0) tip.style.top = `${y + r.height + 10}px`;
   };
   const vue = () => setting("Comfy.VueNodes.Enabled", false) === true;
 

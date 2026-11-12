@@ -108,6 +108,7 @@ const COLORS = {
     // Utility (#28281E)
     LCBooleanFlip: { color: "#28281E", bgcolor: "#28281E" },
     LCBooleanSwitch: { color: "#28281E", bgcolor: "#28281E" },
+    LCGate: { color: "#28281E", bgcolor: "#28281E" },
     LCBooleanValue: { color: "#28281E", bgcolor: "#28281E" },
     LCCustomCombo: { color: "#28281E", bgcolor: "#28281E" },
     LCCustomComboPanel: { color: "#28281E", bgcolor: "#28281E" },

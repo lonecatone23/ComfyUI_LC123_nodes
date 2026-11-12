@@ -332,11 +332,49 @@ def _retouch(x0, skin, delicate, features, s, seed, scale, sun=None, tick=lambda
         out = _pigment(x, out, m, ordinary, features, sun, s["pigmentation"], ref, k, seed)
     if s["eye_detail"] > 0:  # brows and lashes: crisper and a touch deeper (1 = what 0.5 was before 1.53.13)
         out = out + s["eye_detail"] * 0.6 * features * _luma(x - _blur(x, max(0.8, 0.004 * ref)))
-        # the broader pass only on the eye opening: on the whole lid it darkens the crease
-        out = out + s["eye_detail"] * 0.175 * (features if eyes is None else eyes) * (x - _blur(x, max(2.0, 0.02 * ref)))
+        if eyes:  # LC: the iris ring lifted (eye bench 2026-11-12: the broad pass on the opening muddied iris vs pupil)
+            out = _iris_lift(out, x0, eyes, min(1.0, s["eye_detail"]))  # 1 = the full lift
     tick()  # pores and character done
     out = _tone(out.clamp(0, 1), (ordinary + 0.3 * d).clamp(0, 1), s)  # 4. colour and light last, on the finished skin
     return torch.lerp(x0, out.clamp(0, 1), s["strength"])
+
+
+def _iris_lift(out, x0, eyes, k):
+    """The coloured ring around each pupil, lifted toward 0.30x the face's skin brightness (gain at most 1.8).
+    The pupil stays dark, and no pixel goes past 0.75x the skin, so catchlights and light irises are left alone."""
+    if k <= 0:
+        return out
+    H, W = out.shape[-2:]
+    for cx, cy, R, op, ref in eyes["irises"]:
+        ref = ref or eyes.get("ref")
+        if not ref:
+            continue
+        pad = int(R * 2.5) + 4
+        l, t, r_, b = max(0, int(cx) - pad), max(0, int(cy) - pad), min(W, int(cx) + pad + 1), min(H, int(cy) + pad + 1)
+        if r_ - l < 4 or b - t < 4:
+            continue
+        yy, xx = torch.meshgrid(torch.arange(t, b, device=out.device, dtype=out.dtype),
+                                torch.arange(l, r_, device=out.device, dtype=out.dtype), indexing="ij")
+        m = torch.as_tensor(op[t:b, l:r_], dtype=out.dtype, device=out.device)[None, None]
+        inner = -F.max_pool2d(-(m > 0.5).to(out.dtype), 3, stride=1, padding=1)  # the darkest spot, at full size
+        if float(inner.sum()) > 0:
+            bl = _blur(_luma(x0[..., t:b, l:r_]), max(R * 0.5, 0.6))
+            i = int(torch.argmin(torch.where(inner > 0.5, bl, bl.new_tensor(9.0))))
+            cy, cx = float(yy.flatten()[i]), float(xx.flatten()[i])
+        rr = torch.sqrt((yy - cy) ** 2 + (xx - cx) ** 2)[None, None]
+        mf = _blur(m, max(0.04 * R / 0.21, 0.7))
+        pupil = _blur((rr <= 0.42 * R).to(out.dtype), 0.6)
+        ring = (_blur((rr <= R).to(out.dtype), 0.8) - pupil).clamp(0, 1) * mf
+        if int((ring > 0.5).sum()) <= 5:
+            continue
+        o = out[..., t:b, l:r_]
+        L = _luma(o).clamp(min=1e-3)
+        cur = float(L[ring > 0.5].median())
+        g = min(1.8, max(1.0, 0.30 * ref / max(cur, 1e-3)))
+        g = 1 + (g - 1) * k
+        per_px = torch.minimum(L.new_tensor(g), (0.75 * ref / L).clamp(min=1.0))
+        out[..., t:b, l:r_] = o * (1 + (per_px - 1) * ring)
+    return out
 
 
 # ---------------------------------------------------------------- finding the skin (facexlib)
@@ -454,7 +492,8 @@ def _skin_maps(rgb_full, device, tolerance=1.0, delicate=True, tick=lambda: None
     excluded = np.zeros((h, w), np.float32)
     lips = np.zeros((h, w), np.float32)
     feats = np.zeros((h, w), np.float32)
-    eyes = np.zeros((h, w), np.float32)  # the eye opening only, for eye_detail's broader pass
+    irises, irises_w, face_ref = [], [], np.zeros((h, w), bool)  # each iris (centre, radius, opening), for eye_detail
+    luma_w = rgb @ np.array(LUMA, np.float32)
     faces = []
     try:
         tick()  # person matte done (or skipped)
@@ -479,7 +518,27 @@ def _skin_maps(rgb_full, device, tolerance=1.0, delicate=True, tick=lambda: None
         cloth |= np.isin(lab_map, (CLOTH, HAIR, HAT))
         lips = np.maximum(lips, np.isin(lab_map, LIPS).astype(np.float32))
         feats = np.maximum(feats, _dilate(np.isin(lab_map, BROWS_EYES).astype(np.float32), max(1, int(0.04 * (x2 - x1)))))
-        eyes = np.maximum(eyes, _dilate(np.isin(lab_map, BROWS_EYES).astype(np.float32), max(1, int(0.015 * (x2 - x1)))))
+        this_skin = lab_map == SKIN
+        face_ref |= this_skin
+        ref_f = float(np.median(luma_w[this_skin])) if this_skin.sum() > 100 else None  # each iris vs its own face
+        from scipy import ndimage  # each eye opening on its own: the parser sometimes labels both eyes alike
+        parts, n_parts = ndimage.label(np.isin(lab_map, (L_EYE, R_EYE)), np.ones((3, 3), bool))
+        for j in range(1, n_parts + 1):
+            op = parts == j
+            if op.sum() < max(4, 30 * s * s):
+                continue
+            cols = np.nonzero(op.any(0))[0]
+            ew = float(cols[-1] - cols[0] + 1) if len(cols) else 0.0
+            if ew < 8 * s:
+                continue
+            R = 0.21 * ew
+            inner = op & ~_dilate((~op).astype(np.float32), 1).astype(bool) if op.sum() > 9 else op
+            bl = _box(luma_w, max(1, int(round(R * 0.5))))
+            cy, cx = np.unravel_index(np.argmin(np.where(inner if inner.any() else op, bl, 9.0)), bl.shape)
+            if any(op[int(round(c[1])), int(round(c[0]))] for c in irises_w):
+                continue  # the same eye again, from a neighbouring face's crop
+            irises_w.append((cx, cy))
+            irises.append(((cx + 0.5) / s - 0.5, (cy + 0.5) / s - 0.5, R / s, op, ref_f))
     tick()  # faces found and parsed
     lab = _to_lab(rgb)
     L = np.maximum(lab[..., 0], 12.0)
@@ -532,7 +591,10 @@ def _skin_maps(rgb_full, device, tolerance=1.0, delicate=True, tick=lambda: None
     widths = sorted((b[2] - b[0]) / s for b in faces)
     scale = float(widths[len(widths) // 2]) if widths else None
     sun = _resize(_sun_map(faces, h, w), H, W) if faces else None
-    return _resize(skin, H, W), _resize(dmap, H, W), _resize(feats, H, W), sun, scale, len(faces), _resize(eyes, H, W)
+    eyes = {"ref": float(np.median(luma_w[face_ref])) if face_ref.sum() > 100 else None,
+            "irises": [(cx, cy, R, _resize(op.astype(np.float32), H, W) if s < 1 else op.astype(np.float32), rf)
+                       for cx, cy, R, op, rf in irises]}
+    return _resize(skin, H, W), _resize(dmap, H, W), _resize(feats, H, W), sun, scale, len(faces), eyes
 
 
 def _outlined(image, masks):
@@ -578,7 +640,8 @@ SLIDERS = [  # name, min, max, step, tooltip (in the order the node works)
     ("even_colour", 0.0, 1.0, 0.05, "Redness and colour patches pulled towards the skin's own colour."),
     ("pigmentation", 0.0, 1.0, 0.05, "Freckles where the sun lands (nose, cheekbones, forehead), grown from the ones "
                                      "already there and in their colour."),
-    ("eye_detail", 0.0, 2.0, 0.05, "Brows and lashes: crisper and deeper. Needs a face."),
+    ("eye_detail", 0.0, 1.0, 0.05, "Crisper lashes and brows, and the iris lifted around a dark pupil so the eyes look alive. "
+                                   "0.5 for everyday use, 1 = the most. Needs a face."),
     ("warmth", -1.0, 1.0, 0.05, "Below 0 cooler (calms orange AI skin), above 0 warmer."),
     ("brightness", -0.5, 1.0, 0.05, "Lighter or darker skin. Highlights are eased off."),
     ("rosy", -0.5, 0.5, 0.05, "Pinker or less pink."),
@@ -654,7 +717,7 @@ class LCSkinMaster(PreviewImage):
                 skin = _frame_mask(mask, i, h, w).clamp(0, 1)
             x = frame.permute(0, 3, 1, 2).to(device)
             to = lambda a: torch.as_tensor(a, dtype=x.dtype)[None, None].to(device)
-            res = _retouch(x, to(skin), to(deli), to(feats), s, int(seed), scale, None if sun is None else to(sun), tick, to(eyes))
+            res = _retouch(x, to(skin), to(deli), to(feats), s, int(seed), scale, None if sun is None else to(sun), tick, eyes)
             tick()  # tone done
             out.append(res.permute(0, 2, 3, 1).cpu())
             masks.append(skin[None].float())

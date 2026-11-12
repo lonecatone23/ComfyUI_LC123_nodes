@@ -122,7 +122,7 @@ class LCNaturalLook(PreviewImage):
                 "skin": ("FLOAT", {"default": 0.7, "min": 0.0, "max": 2.0, "step": 0.01,
                                    "tooltip": "How much orange / plastic skin is calmed, and how much flat skin is left out of the "
                                               "fine-texture lift, on top of strength. 0 = skin untouched and sharpened like the "
-                                              "rest (use 0 after LC Skin Master)."}),
+                                              "rest. 0.75 tested best, even after LC Skin Master."}),
                 "seed": ("INT", {"default": 8675309, "min": 0, "max": 0xFFFFFFFF, "control_after_generate": "fixed",
                                  "tooltip": "Seed for the faint grain."}),
             },

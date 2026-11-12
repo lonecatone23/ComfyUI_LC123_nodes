@@ -240,7 +240,7 @@ class LCApplyLUT(PreviewImage):
                         "min": 0.0,
                         "max": 2.0,
                         "step": 0.01,
-                        "tooltip": "0 = original, 1 = full LUT, >1 overdrives the LUT change (up to 2×). Try 0.7–1.2 for most grades.",
+                        "tooltip": "0 = original, 1 = full LUT, >1 overdrives the LUT change (up to 2×). 0.2–0.4 is usually plenty. Full strength is a sledgehammer.",
                     },
                 ),
                 "log": (

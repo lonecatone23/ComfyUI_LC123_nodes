@@ -1241,10 +1241,40 @@ QWEN_CACHE = {"lossless": ("auto", "default"), "int8": ("auto", "int8"), "int4":
 QWEN_CACHE_LABEL = {"lossless": "lossless", "int8": "int8", "int4": "int4", "RAM": "in RAM", "RAM + int8": "int8 in RAM", "off": "off"}
 
 
+_SAGE_LATE_ERR = None  # why Sage could not be registered late (shown in the attention row), or None
+
+
+def _late_sage():
+    """ComfyUI registers Sage only if `from sageattention import sageattn` works the moment comfy's attention module
+    loads, and it swallows the error when it doesn't (seen on ComfyUI Desktop: the report's Sage test passes, yet
+    'sage' is missing from the registry). Register it now with ComfyUI's own attention_sage."""
+    global _SAGE_LATE_ERR
+    try:
+        import inspect
+        import logging
+
+        import comfy.ldm.modules.attention as att
+
+        if "sage" in att.REGISTERED_ATTENTION_FUNCTIONS:
+            return
+        from sageattention import sageattn
+
+        att.sageattn = sageattn
+        att.SAGE_ATTENTION_SUPPORTS_MASK = "attn_mask" in inspect.signature(sageattn).parameters
+        att.SAGE_ATTENTION_IS_AVAILABLE = True
+        att.register_attention_function("sage", att.attention_sage)
+        _SAGE_LATE_ERR = None
+        logging.info("[LC Optimizer] ComfyUI did not register Sage at startup; registered it now.")
+    except Exception as e:
+        _SAGE_LATE_ERR = f"{type(e).__name__}: {e}"[:200]
+
+
 def _registered():
     try:
         from comfy.ldm.modules.attention import REGISTERED_ATTENTION_FUNCTIONS
 
+        if "sage" not in REGISTERED_ATTENTION_FUNCTIONS:
+            _late_sage()
         return set(REGISTERED_ATTENTION_FUNCTIONS)
     except Exception:
         return {"pytorch"}
@@ -1390,11 +1420,16 @@ def plan_speedups(profile_id, goal, manual=None):
             rows.append({"key": "attention", "label": f"Attention: {ATTN_LABEL[pick]}", "state": "on", "value": pick, "why": why})
         else:
             why = "Sage not installed or failed its test: see Recommended to install in the report" if sysp else "run the report to pick one"
+            if (t.get("sageattention") or {}).get("ok") and _SAGE_LATE_ERR:
+                why = f"Sage passed the report's test but ComfyUI can't load it here ({_SAGE_LATE_ERR})"
             rows.append({"key": "attention", "label": "Attention: standard", "state": "off", "value": None, "why": why})
     elif want == "pytorch" or want in reg:
         rows.append({"key": "attention", "label": f"Attention: {ATTN_LABEL.get(want, want)}", "state": "on", "value": want, "why": "set by hand"})
     else:
-        rows.append({"key": "attention", "label": f"Attention: {ATTN_LABEL.get(want, want)}", "state": "na", "value": None, "why": "not installed: see Recommended to install in the report"})
+        why = "not installed: see Recommended to install in the report"
+        if want == "sage" and _SAGE_LATE_ERR:
+            why = f"ComfyUI can't load Sage here ({_SAGE_LATE_ERR})"
+        rows.append({"key": "attention", "label": f"Attention: {ATTN_LABEL.get(want, want)}", "state": "na", "value": None, "why": why})
 
     kit = sysp.get("kitchen") or {}
     if kit.get("installed"):

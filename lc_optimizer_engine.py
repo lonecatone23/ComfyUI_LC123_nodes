@@ -1052,6 +1052,9 @@ def resolve(profile_id, role, value, goal):
             hit = find_on_disk(v["file"], ROLE_FOLDERS[role])
             if hit:
                 return hit[0], hit[1], v
+        hit = find_on_disk(base, ROLE_FOLDERS[role])
+        if hit:  # the same file moved into a subfolder since the workflow was saved (vae/Minimax/...)
+            return hit[0], hit[1], v
         entry = shipped(value) if role == "model" else None
         if entry:  # one of Lonecat's models saved in the workflow: a renamed copy counts, a download is the user's pick
             hit = locate(entry["file"], ROLE_FOLDERS[role], entry["repo"], entry["path"], entry.get("sha256"))
@@ -1685,6 +1688,11 @@ def plan(profile_id, goal, picks, manual=None):
                                        "confidence": pk.get("confidence")}
             else:
                 folder = next((f for f in ROLE_FOLDERS[role] if value in _list(f)), None)
+                name = value
+                if not folder:  # moved into a subfolder since the workflow was saved: the run finds it by file name too
+                    moved = find_on_disk(os.path.basename(value.replace("\\", "/")), ROLE_FOLDERS[role])
+                    if moved:
+                        folder, name = moved
                 row.update(label=os.path.basename(value.replace("\\", "/")), state="disk" if folder else "missing")
                 entry = shipped(value) if (role == "model" and not folder) else None
                 if entry:
@@ -1694,7 +1702,7 @@ def plan(profile_id, goal, picks, manual=None):
                     if prof and entry.get("profile") and entry["profile"] != profile_id:
                         out["hints"].append(("⚠️", f"{entry['family']} is a {profiles().get(entry['profile'], {}).get('name', entry['profile'])} model: set the base model to match."))
                 if folder:
-                    paths[role] = full_path(folder, value)
+                    paths[role] = full_path(folder, name)
                     ckpt = ckpt or (role == "model" and folder == "checkpoints")
         except Exception as e:
             row.update(label=str(value), state="missing", error=str(e))

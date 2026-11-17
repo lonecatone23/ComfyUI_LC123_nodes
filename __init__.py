@@ -167,6 +167,11 @@ _load("lc_relight")  # LC Relight
 _load("lc_light")  # LC Light
 _load("lc_natural_look")  # LC Natural Look
 
+try:  # LC Settings ⚙️ > Housekeeping > Delete nuisance folders (a route, no nodes)
+    from . import lc_housekeeping  # noqa: F401
+except Exception as _hk_e:
+    print(f"[LC123] Housekeeping not loaded: {_hk_e}")
+
 try:  # the Lonecat banner (first LC pack to load) or this pack's one line under it
     from .lc_banner import pack_version as _pv, show as _banner
 

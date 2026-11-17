@@ -397,9 +397,26 @@ def _model_dir():
     return d
 
 
+def _need_facexlib():
+    """Clear error with the exact install command when facexlib is missing (updating a pack does not reinstall its
+    requirements, and portable builds need it in python_embeded)."""
+    try:
+        import facexlib  # noqa: F401
+    except ImportError:
+        import sys
+        exe = sys.executable
+        if "python_embeded" in exe.replace("\\", "/").lower():
+            cmd = "python_embeded\\python.exe -m pip install facexlib  (run it in your ComfyUI_windows_portable folder)"
+        else:
+            cmd = f'"{exe}" -m pip install facexlib'
+        raise RuntimeError("LC Skin Master needs facexlib, which is not installed. Close ComfyUI, run:\n  " + cmd +
+                           "\nthen start ComfyUI again.") from None
+
+
 def _load(name, device):
     key = (name, str(device))
     if key not in _models:
+        _need_facexlib()
         if name == "detect":
             from facexlib.detection import init_detection_model
             _models[key] = init_detection_model("retinaface_mobile0.25", device=device, model_rootpath=_model_dir())

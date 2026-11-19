@@ -26,7 +26,7 @@ import folder_paths
 import comfy.sd
 import comfy.utils
 
-from .lc_lora_loader import _moved_lora
+from .lc_lora_loader import _lora_fit, _moved_lora
 
 STACK_NODE_NAME = "LCLoraLoaderStack"
 APPLY_NODE_NAME = "LCApplyLoraStack"
@@ -151,6 +151,12 @@ class LCApplyLoraStack:
                 continue
 
             lora, lora_metadata = _cached_lora(prev, used, path)
+            try:  # wrong base model: a console warning here (the Stack node never sees the model)
+                fit = _lora_fit(model, clip, lora, lora_metadata)
+                if fit and fit["warn"]:
+                    print(f"[LC Apply LoRA Stack] ⚠️ {name}: {fit['tip']}")
+            except Exception as e:
+                print(f"[LC Apply LoRA Stack] fit check skipped for {name}: {e}")
 
             out_model, out_clip = comfy.sd.load_lora_for_models(
                 out_model, out_clip, lora, strength_model, strength_clip, lora_metadata=lora_metadata

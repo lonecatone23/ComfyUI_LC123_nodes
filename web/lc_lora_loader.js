@@ -321,6 +321,110 @@ function setRows(node, rows, { rerender = true } = {}) {
   } catch (_) {}
 }
 
+// ---- pick-time wrong-base check: no run needed ----
+// The model file is found by walking the model input upstream (through other LoRA loaders, patch nodes, reroutes
+// and Set / Get pairs) to the loader that names it: native UNET / Checkpoint loaders, GGUF, KJ's loaders all keep it
+// in one of these widgets. The server builds that model empty from its header and checks every row's LoRA.
+const MODEL_FILE_WIDGETS = ["unet_name", "model_name", "ckpt_name"];
+const MODEL_FILE_RE = /\.(safetensors|sft|gguf|ckpt)$/i;
+
+function setterFor(graph, name) {
+  return (graph?._nodes || []).find((n) => /set/i.test(n.type || "") && !/get/i.test(n.type || "") && n.widgets?.[0]?.value === name);
+}
+
+function upstreamModelFile(node) {
+  const graph = node.graph;
+  let cur = node;
+  let slot = (node.inputs || []).findIndex((i) => i.name === "model" || i.type === "MODEL");
+  if (slot < 0) slot = (node.inputs || []).findIndex((i) => /PIPE/i.test(String(i.type || ""))); // e.g. LC H3 Make
+  const seen = new Set();
+  for (let hop = 0; hop < 50 && cur && slot >= 0; hop++) {
+    let src = null;
+    try {
+      src = cur.getInputNode(slot);
+    } catch (_) {}
+    if (!src || seen.has(src.id)) return null;
+    seen.add(src.id);
+    const cls = src.comfyClass || src.type || "";
+    if (/^LCOptimizer/.test(cls)) {
+      // LC Optimizer: "★ Krealism V3.1", "★ Recommended"... are resolved to the real file on the server
+      const v = (n) => widget(src, n)?.value;
+      return { optimizer: { class: cls, base_model: v("base_model"), goal: v("goal"), model_file: v("model_file") } };
+    }
+    for (const name of MODEL_FILE_WIDGETS) {
+      const v = widget(src, name)?.value;
+      if (typeof v === "string" && MODEL_FILE_RE.test(v)) return v;
+    }
+    const type = src.type || "";
+    if (/get/i.test(type) && typeof src.widgets?.[0]?.value === "string") {
+      const setter = setterFor(graph, src.widgets[0].value);
+      if (!setter) return null;
+      cur = setter;
+      slot = 0;
+      continue;
+    }
+    cur = src;
+    slot = (src.inputs || []).findIndex((i) => i.type === "MODEL" || i.type === "*" || i.name === "model");
+    if (slot < 0) slot = (src.inputs || []).findIndex((i) => /PIPE/i.test(String(i.type || ""))); // LC pipes carry the model
+  }
+  return null;
+}
+
+/** The same check for other LC packs (LC AV Showrunner's shot LoRAs): modelFor(node) = the model that node gets,
+ * fits(model, loras) = {lora: {warn, tip}}. */
+window.LC123LoraFit = {
+  modelFor: (node) => upstreamModelFile(node),
+  fits: (model, loras) =>
+    api
+      .fetchApi("/lc123/lora_loader/fit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(typeof model === "string" ? { model, loras } : { ...model, loras }),
+      })
+      .then((r) => r.json())
+      .then((j) => j?.fits || {}),
+};
+
+const fitSig = new WeakMap(); // node -> the model + LoRAs last asked about
+function pollPickFits() {
+  let root;
+  try {
+    root = app.rootGraph || app.graph;
+  } catch (_) {
+    return;
+  }
+  for (const g of [root, ...(root?.subgraphs?.values?.() || [])]) {
+    for (const node of g?._nodes || []) {
+      if (!NODES.has(node.comfyClass || node.type)) continue;
+      if (node.mode === 4 || node.mode === 2) {
+        // bypassed or muted: its LoRAs don't go on, so no ⚠️; asked again when it is switched back on
+        if (fitSig.get(node) !== "off") {
+          fitSig.set(node, "off");
+          node.__lcFit = {};
+          renderRows(node);
+        }
+        continue;
+      }
+      const model = upstreamModelFile(node);
+      const loras = [...new Set(getRows(node).map((r) => r.lora).filter(Boolean))];
+      const sig = model && loras.length ? JSON.stringify(model) + "|" + loras.join("|") : "";
+      if (sig === (fitSig.get(node) || "")) continue;
+      fitSig.set(node, sig);
+      if (!sig) continue;
+      const body = typeof model === "string" ? { model, loras } : { ...model, loras };
+      api
+        .fetchApi("/lc123/lora_loader/fit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        .then((r) => r.json())
+        .then((j) => {
+          if (fitSig.get(node) !== sig || !j?.fits) return; // something changed while it was asked
+          node.__lcFit = j.fits;
+          renderRows(node);
+        })
+        .catch(() => {});
+    }
+  }
+}
+
 function hideRowsWidget(node) {
   const w = widget(node, "lora_rows");
   if (!w || w._lcHidden) return;
@@ -795,7 +899,16 @@ function makeRow(node, row, index, rows, dragState) {
 
   const strength = makeStrengthControl(node, index);
 
-  el.append(...(isSingle(node) ? [] : [handle]), on, picker, strength.wrap);
+  // ⚠️ wrong base model: set by the last run (the server checks each LoRA against the loaded model), hover for why
+  const fit = node.__lcFit?.[getRows(node)[index]?.lora || row.lora];
+  const warn = document.createElement("span");
+  if (fit?.warn) {
+    warn.textContent = "⚠️";
+    warn.title = fit.tip;
+    warn.style.cssText = "flex:0 0 auto;cursor:help;font-size:13px;line-height:1;user-select:none;";
+  }
+
+  el.append(...(isSingle(node) ? [] : [handle]), on, ...(fit?.warn ? [warn] : []), picker, strength.wrap);
 
   if (infoEnabled()) {
     const info = document.createElement("button");
@@ -920,6 +1033,22 @@ app.registerExtension({
       return r;
     };
 
+    // the server's per-LoRA fit verdicts from the last run -> the ⚠️ on each row (LC LoRA Loader and Single)
+    const onExecuted = nodeType.prototype.onExecuted;
+    nodeType.prototype.onExecuted = function (message) {
+      const r = onExecuted?.apply(this, arguments);
+      const raw = message?.lc_lora_fit?.[0];
+      if (raw !== undefined) {
+        try {
+          this.__lcFit = JSON.parse(raw) || {};
+        } catch (_) {
+          this.__lcFit = {};
+        }
+        renderRows(this);
+      }
+      return r;
+    };
+
     const getExtra = nodeType.prototype.getExtraMenuOptions;
     nodeType.prototype.getExtraMenuOptions = function (canvas, options) {
       getExtra?.apply(this, arguments);
@@ -944,6 +1073,9 @@ app.registerExtension({
   },
 
   async setup() {
+    // pick-time wrong-base check: a cheap walk of the graph every 1.5 s; the server is only asked when the model
+    // file or the LoRA list of a loader actually changed
+    setInterval(pollPickFits, 1500);
     // the Performance-settings toggle for the Info button applies live, to every open LC LoRA Loader /
     // LC LoRA Loader Stack node
     window.addEventListener("lc123-perf-changed", () => {

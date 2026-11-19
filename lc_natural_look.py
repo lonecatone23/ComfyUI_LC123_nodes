@@ -59,7 +59,9 @@ def _q(l, q):
     return torch.quantile(flat, q, dim=1).view(-1, 1, 1, 1)
 
 
-def natural_look(img, strength, skin_amount, seed):
+def natural_look(img, strength, skin_amount, seed, rolloff=True, grain=True):
+    """rolloff / grain False: LC Photo Style's 'natural' runs only the de-AI part here; its own highlight and grain
+    stages do those (the LC Natural Look node itself keeps both)."""
     k = float(strength)
     x0 = img[..., :3].float()
     x = x0.clone()
@@ -82,7 +84,8 @@ def natural_look(img, strength, skin_amount, seed):
     knee = 0.82
     over = (x - knee).clamp(min=0)
     rolled = knee + (1 - knee) * torch.tanh(over / (1 - knee) * 1.4) / torch.tanh(torch.tensor(1.4))
-    x = torch.where(x > knee, x + (rolled - x) * min(1.0, 0.85 * k), x)
+    if rolloff:
+        x = torch.where(x > knee, x + (rolled - x) * min(1.0, 0.85 * k), x)
 
     # 4) calm the glossy large-scale glow, lift the fine texture. Flat skin is left out (sharpened, a plain neck turns to
     # leather); brows, lashes and hair inside the skin mask have strong fine detail and keep the lift
@@ -104,8 +107,9 @@ def natural_look(img, strength, skin_amount, seed):
     x = x + (l - m1) * (gain - 1) + smooth(m0 - m1, seg) * 0.75
 
     # 6) a whisper of grain so flat areas do not look airbrushed
-    gen = torch.Generator().manual_seed(int(seed))
-    x = x + torch.randn(B, H, W, 1, generator=gen) * 0.004 * k
+    if grain:
+        gen = torch.Generator().manual_seed(int(seed))
+        x = x + torch.randn(B, H, W, 1, generator=gen) * 0.004 * k
     x = x.clamp(0, 1)
     return torch.cat([x, img[..., 3:]], -1) if img.shape[-1] > 3 else x
 

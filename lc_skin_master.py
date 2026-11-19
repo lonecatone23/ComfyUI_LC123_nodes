@@ -323,6 +323,10 @@ def _retouch(x0, skin, delicate, features, s, seed, scale, sun=None, tick=lambda
     out = base + tone + blemish + texture
 
     out = out.clamp(0, 1)
+    if s.get("skin_slider", 0.0):
+        # lips stay out; the edge pull-back is round here (inner's square shrink turns eye holes into boxes)
+        round_in = ((_blur(m, max(2.0, 0.5 * s2)) - 0.55) / 0.35).clamp(0, 1)
+        out = _skin_slider(out, ordinary * round_in, float(s["skin_slider"]), ref, features)
     tick()  # bands done
     if s["add_pores"] > 0:  # real relief where the skin has none
         out = _add_pores(out, ordinary * inner * (1 - features.clamp(0, 1)), s["add_pores"], ref, k, seed)
@@ -337,6 +341,90 @@ def _retouch(x0, skin, delicate, features, s, seed, scale, sun=None, tick=lambda
     tick()  # pores and character done
     out = _tone(out.clamp(0, 1), (ordinary + 0.3 * d).clamp(0, 1), s)  # 4. colour and light last, on the finished skin
     return torch.lerp(x0, out.clamp(0, 1), s["strength"])
+
+
+def _skin_slider(x, m, amount, ref, features=None):
+    """-1 = a light retouch (pores and fine relief calmed), +1 = real pores brought out; freckles, moles, stubble, brows and
+    tattoos kept, tone and colour unchanged. Method from SchmuserKadser's SchmusRealism 2-in-1 Skin Slider model card
+    (the pixel filter its training pairs were made with), sized to the face here."""
+    k = (ref or 380.0) / 380.0  # his numbers are for a ~380 px face (832 x 1248 portraits)
+    s_f, s_r = max(0.8, 1.6 * k), max(2.5, 5.0 * k)
+    lab = _rgb_to_lab(x[0].permute(1, 2, 0))  # (H, W, 3)
+    L = lab[..., 0][None, None]
+    mm = m.clamp(0, 1)
+
+    def level(v, sig):  # the local skin level: a blur that only sees skin, so hair and background cannot bleed in
+        return _blur(v * mm, sig) / (_blur(mm, sig) + 1e-4)
+
+    g_f, g_r = level(L, s_f), level(L, s_r)
+    fine, relief = L - g_f, g_f - g_r
+    local = level(L, max(8.0, 20.0 * k))
+    # protection: clearly darker than the skin (moles, stubble, brow and hair edges) and off-colour (tattoos, makeup)
+    dark = ((local - L - 6.0) / 8.0).clamp(0, 1)  # a soft ramp (6 to 14 L units): a hard cut left dark islands at -2
+    ab = lab[..., 1:].permute(2, 0, 1)[None]
+    ab_loc = level(ab, max(8.0, 20.0 * k))
+    off = (((ab - ab_loc).pow(2).sum(1, keepdim=True).sqrt() - 9.0) / 6.0).clamp(0, 1)
+    hard = _blur(torch.maximum(dark, off), max(1.0, 1.5 * k)).clamp(0, 1)
+    # freckles and beauty marks: compact dark spots, bigger than a pore, not long like a wrinkle or a hair
+    bp = (level(L, max(0.7, 1.0 * k)) - level(L, max(2.0, 3.0 * k)))[0, 0]
+    on = mm[0, 0] > 0.5
+    # LC: a fixed -2 missed soft freckles (freckle test: 0.8 % of the skin found); the cut follows the skin's own spread
+    thr = float((1.3 * bp[on][::7].float().std()).clamp(0.8, 2.0)) if on.sum() > 64 else 2.0
+    # LC: freckles are browner than the skin too (b up), so faint ones in dense clusters are found by color as well
+    bb = lab[..., 2][None, None]
+    bp_b = (level(bb, max(0.7, 1.0 * k)) - level(bb, max(2.0, 3.0 * k)))[0, 0]
+    thr_b = float((1.3 * bp_b[on][::7].float().std()).clamp(0.5, 2.0)) if on.sum() > 64 else 2.0
+    score = (-bp / thr) + (bp_b / thr_b)  # darker and browner together; either one strongly also counts
+    cand = (((bp < -thr) | (bp_b > thr_b) | (score > 1.3)) & (bp < 0) & (mm[0, 0] > 0.3)).cpu().numpy()
+    spots = np.zeros(cand.shape, dtype=np.float32)
+    if cand.any():
+        from scipy import ndimage
+        lab_id, n = ndimage.label(cand)
+        if n:
+            area = np.bincount(lab_id.ravel(), minlength=n + 1)
+            keep = np.zeros(n + 1, dtype=bool)
+            for j, sl in enumerate(ndimage.find_objects(lab_id)):
+                if sl is None:
+                    continue
+                hh, ww = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+                a = area[j + 1]
+                keep[j + 1] = (6.0 * k * k <= a <= 600.0 * k * k and max(hh, ww) / max(1, min(hh, ww)) < 3.0
+                               and a / (hh * ww) > 0.35)
+            spots = keep[lab_id].astype(np.float32)
+    spot = _blur(torch.from_numpy(spots).to(x)[None, None], max(0.7, k)).clamp(0, 1)
+    if features is not None:  # brows and lashes, from the face parser
+        # LC: the parser's brow / eye areas are square-grown boxes: rounded and feathered here, so no straight seam
+        soft = ((_blur(features.clamp(0, 1), max(3.0, 6.0 * k)) - 0.25) / 0.5).clamp(0, 1)
+        hard = torch.maximum(hard, soft)
+    if amount < 0:  # -1: fine x0.5, relief x0.65 (his x0.2 / x0.5 went plastic as a filter; his LoRA lands at about half
+        # the pore energy, which is what this gives); -2: fine x0.15, relief x0.35, never flat
+        a = min(2.0, -amount)
+        f_gain = 1 - 0.5 * a if a <= 1 else 0.5 - 0.35 * (a - 1)
+        r_gain = 1 - 0.35 * a if a <= 1 else 0.65 - 0.3 * (a - 1)
+    else:  # +1: fine x2.0, relief x1.4 (only what is already there is boosted: no added noise)
+        f_gain, r_gain = 1 + 1.0 * amount, 1 + 0.4 * amount
+    free = mm * (1 - hard)
+    if amount > 0:
+        # LC (freckle test 2026-11-18): boosting the fine band on freckles gave them dark rims and clumped dense ones.
+        # On the + side the spots (grown a pixel) are left out of both bands, and freckle-dense skin gets less boost.
+        r = max(1, int(round(k)))
+        spot = F.max_pool2d(spot, 2 * r + 1, stride=1, padding=r)
+        dense = _blur(torch.from_numpy(cand.astype(np.float32)).to(x)[None, None], max(4.0, 8.0 * k))
+        free = free * (1 - (2.5 * dense).clamp(0, 0.7))
+        f_w = free * (1 - spot)
+    else:
+        f_w = free * (1 - 0.5 * spot)  # spots: fine band half way, so they do not sit as islands of texture
+    r_w = free * (1 - spot)  # the relief band carries most of a freckle's body: left alone
+    L2 = L + fine * (f_gain - 1) * f_w + relief * (r_gain - 1) * r_w
+    lab2 = torch.cat([L2[0, 0][..., None], lab[..., 1:]], -1)
+    out = _lab_to_rgb(lab2)
+    # tone kept: the skin's mean L, a and b put back (the slider changes texture only)
+    w = mm[0, 0]
+    tot = w.sum() + 1e-6
+    lab_o = _rgb_to_lab(out)
+    shift = ((lab - lab_o) * w[..., None]).sum((0, 1)) / tot
+    out = _lab_to_rgb(lab_o + shift * w[..., None]).permute(2, 0, 1)[None]
+    return torch.lerp(x, out, mm)
 
 
 def _iris_lift(out, x0, eyes, k):
@@ -689,7 +777,11 @@ class LCSkinMaster(PreviewImage):
                 "delicate_skin": ("BOOLEAN", {"default": True, "tooltip": "Lips and other delicate skin are found and treated "
                                                                           "lightly, their colour kept."}),
                 "skin_match": ("FLOAT", {"default": 1.0, "min": 0.5, "max": 2.0, "step": 0.05,
-                                         "tooltip": "Higher finds more skin (and more skin-coloured cloth)."}),
+                                         "tooltip": "Higher finds more skin (and more skin-colored cloth)."}),
+                "skin_slider": ("FLOAT", {"default": 0.0, "min": -2.0, "max": 2.0, "step": 0.05,
+                                          "tooltip": "-1 = a light retouch: pores calmed, the skin keeps its texture. +1 = real "
+                                                     "pores brought out. Freckles, moles, stubble and tattoos stay, the skin tone "
+                                                     "does not move. Works on top of any preset. 0 = off. Freckled faces: 0.5 at most."}),
             },
         }
 
@@ -702,8 +794,10 @@ class LCSkinMaster(PreviewImage):
                    "each done once on one face-aware skin map. Presets from a light clean-up to plastic-skin restore, weathered and "
                    "sun-kissed. Outputs the skin_mask for other nodes. On-node before/after wipe.")
 
-    def run(self, image, preset="Real Skin Restore", seed=0, mask=None, delicate_skin=True, skin_match=1.0, **sliders):
+    def run(self, image, preset="Real Skin Restore", seed=0, mask=None, delicate_skin=True, skin_match=1.0, skin_slider=0.0,
+            **sliders):
         s = dict(PRESETS[preset]) if preset in PRESETS else {k: float(sliders.get(k, v)) for k, v in DEFAULTS.items()}
+        s["skin_slider"] = float(skin_slider)  # like strength, always the node's own, on top of any preset
         if preset in PRESETS:
             s["strength"] = float(sliders.get("strength", 1.0))  # strength is always the node's own
         import comfy.model_management

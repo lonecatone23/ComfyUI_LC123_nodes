@@ -467,6 +467,15 @@ def vae_signature(path):
     return None
 
 
+def h3_still_vae(path):
+    """True for the MiniMax H3 image VAEs (single-frame ViT decoder, proj_out 768 wide: ComfyUI's own test)."""
+    got = _header_shapes(path)
+    if not got:
+        return False
+    s = got[0].get("decoder.proj_out.weight")
+    return bool(s) and s[0] == 768
+
+
 def model_class(path):
     """ComfyUI's own model detection, run on empty placeholder tensors built from the header."""
     got = _header_shapes(path)
@@ -515,6 +524,9 @@ def check_files(profile_id, picks):
             got = TE_NAMES.get(sig, f"{sig[0]} layers, width {sig[1]}{', with vision' if sig[2] else ''}")
             hints.append(("⚠️", f"{name} expects {want[0]}. This text encoder looks like {got}: expect errors or bad results."))
     p = picks.get("vae")
+    if p and profile_id in ("minimax_h3", "minimax_h3_fl2va") and h3_still_vae(p):
+        hints.append(("⚠️", "This is a MiniMax H3 IMAGE VAE: it only decodes still pictures and the video decode will fail. "
+                             "Pick minimax_h3_video_vae_fp16."))
     if p and profile_id in VAE_EXPECTS:
         sig = vae_signature(p)
         want = VAE_EXPECTS[profile_id]

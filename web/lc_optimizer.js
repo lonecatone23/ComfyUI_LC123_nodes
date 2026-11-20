@@ -680,7 +680,7 @@ function openWindow() {
 
     const KINDS = [
       ["pack", "That pack's own settings (current value checked)", "#60a5fa"],
-      ["lc123", "LC123 optimization settings", "#86efac"],
+      ["lc123", "LC optimization settings", "#86efac"],
       ["comfy", "ComfyUI settings", "#c4b5fd"],
       ["sidebar", "Sidebar tabs", "#fbbf24"],
       ["required", "Required to function (no setting, part of how the pack works)", "#9aa3ad"],

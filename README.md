@@ -789,6 +789,7 @@ Details: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
 | [`workflows/LC Dual sigma workflow example.json`](workflows/LC%20Dual%20sigma%20workflow%20example.json) | Split sigma |
 | [`workflows/LC Dual Sigma Advanced workflow example.json`](workflows/LC%20Dual%20Sigma%20Advanced%20workflow%20example.json) | Advanced split sigmas |
 | [`workflows/LC Better Sigmas V2.0.json`](workflows/LC%20Better%20Sigmas%20V2.0.json) | LC Sigmas + LC Detail Daemon against a plain euler / simple baseline, with I2I and LC Vision prompt assist |
+| [`workflows/LC Vision Smart Prompt Batch.json`](workflows/LC%20Vision%20Smart%20Prompt%20Batch.json) | One prompt, a batch of variations: LC Vision Filter, Caption and **LC Vision Smart Prompt Batch**, into Krea 2. Needs **LC Vision** |
 | [`workflows/MOSS Regional BBOX Prompt Module v1.1.json`](workflows/MOSS%20Regional%20BBOX%20Prompt%20Module%20v1.1.json) | MOSS Image with regional boxes: **LC Bounding Boxes** (two chained) into **LC MOSS Layout Prompt**, plain KSampler (Speed Boost does not work on MOSS). Saves the picture and a boxes-next-to-result sheet |
 
 Workflow > Open, or just drag it onto the canvas.

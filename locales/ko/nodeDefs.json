@@ -3956,5 +3956,42 @@
         "tooltip": "(구절:가중치)가 들어간 프롬프트. 메타데이터나 CLIP 인코더용."
       }
     }
+  },
+  "LCBatchGate": {
+    "description": "배치의 가벼운 첫 패스 앞에 두세요. 미리보기 실행은 처음 `preview`개만 통과시켜서 LC Preview Gate가 빨리 보여 줄 수 있습니다. 그다음 LC Preview Gate의 ▶로, 뺀 것을 제외한 전부를 실행합니다.",
+    "inputs": {
+      "items": {
+        "tooltip": "목록(Smart Prompt Batch 프롬프트, 데이터셋 행) 또는 그림 배치. 가벼운 첫 패스 앞에 둡니다."
+      },
+      "preview": {
+        "tooltip": "미리보기 실행에서 통과시킬 개수. LC Preview Gate의 ▶ 이후에는 뺀 것을 제외하고 전부 통과합니다."
+      },
+      "phase": {
+        "tooltip": "LC Preview Gate의 ▶가 설정합니다. 건드리지 마세요."
+      },
+      "drop": {
+        "tooltip": "LC Preview Gate의 ▶가 설정합니다. 건드리지 마세요."
+      }
+    }
+  },
+  "LCPreviewGate": {
+    "description": "가벼운 첫 패스 결과를 보여 주고, LC Stop처럼 거기서 멈춥니다. 그림을 클릭하면 뺄 수 있고, ▶ Continue(또는 Run)로 같은 seed 그대로 나머지를 실행합니다. 위에 LC Batch Gate가 있으면 미리보기는 처음 몇 개만 렌더링하고, 뺀 것은 오래 걸리는 단계로 가지 않습니다.",
+    "inputs": {
+      "images": {
+        "tooltip": "가벼운 첫 패스의 그림."
+      },
+      "enable": {
+        "tooltip": "켜짐: 그림을 보여 주고 멈춤. 꺼짐: 멈추지 않고 그대로 통과."
+      },
+      "phase": {
+        "tooltip": "▶가 설정합니다. 건드리지 마세요."
+      },
+      "drop": {
+        "tooltip": "▶가 설정합니다. 건드리지 마세요."
+      },
+      "also": {
+        "tooltip": "▶를 기다려야 하는 다른 것. 그대로 통과시킵니다: 데이터셋의 캡션 텍스트 같은 것. 그러면 미리보기 실행에서 캡션 파일이 써지지 않습니다."
+      }
+    }
   }
 }

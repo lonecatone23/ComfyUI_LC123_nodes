@@ -3956,5 +3956,42 @@
         "tooltip": "(フレーズ:ウェイト) を書き込んだプロンプト。メタデータや CLIP エンコーダー用。"
       }
     }
+  },
+  "LCBatchGate": {
+    "description": "バッチの軽い1回目の前に置きます。プレビュー実行では最初の `preview` 個だけを通すので、LC Preview Gate がすばやく表示できます。そのあと LC Preview Gate の ▶ で、外したもの以外をすべて実行します。",
+    "inputs": {
+      "items": {
+        "tooltip": "リスト（Smart Prompt Batch のプロンプト、データセットの行）または画像バッチ。軽い1回目の前に置きます。"
+      },
+      "preview": {
+        "tooltip": "プレビュー実行で通す数。LC Preview Gate の ▶ のあとは、外したもの以外すべてが通ります。"
+      },
+      "phase": {
+        "tooltip": "LC Preview Gate の ▶ が設定します。触らないでください。"
+      },
+      "drop": {
+        "tooltip": "LC Preview Gate の ▶ が設定します。触らないでください。"
+      }
+    }
+  },
+  "LCPreviewGate": {
+    "description": "軽い1回目の結果を表示して、LC Stop と同じようにそこで止めます。画像をクリックすると外せます。▶ Continue（または Run）で、同じ seed のまま残りを実行します。上に LC Batch Gate があれば、プレビューは最初の数個だけをレンダリングし、外したものは時間のかかる工程に進みません。",
+    "inputs": {
+      "images": {
+        "tooltip": "軽い1回目の画像。"
+      },
+      "enable": {
+        "tooltip": "オン：画像を表示して止める。オフ：止めずにそのまま通す。"
+      },
+      "phase": {
+        "tooltip": "▶ が設定します。触らないでください。"
+      },
+      "drop": {
+        "tooltip": "▶ が設定します。触らないでください。"
+      },
+      "also": {
+        "tooltip": "▶ を待つ必要があるほかのもの。そのまま通します：データセットのキャプション文など。これでプレビュー実行ではキャプションファイルが書かれません。"
+      }
+    }
   }
 }

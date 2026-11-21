@@ -597,7 +597,7 @@ app.registerExtension({
         this.properties = this.properties || {};
         this.addInput("hub", "*");
         this.addOutput("OPT_CONNECTION", "*");
-        lcApplyLaunchColor(this, "#28281E");
+        lcApplyLaunchColor(this, "#AF6419");
         this.size = [270, 48];
         this._lcTimer = null;
         this._lcKind = null; // "node" | "group"

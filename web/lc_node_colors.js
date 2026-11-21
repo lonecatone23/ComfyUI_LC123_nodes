@@ -98,7 +98,7 @@ const COLORS = {
     "LC Bypasser": { color: "#28281E", bgcolor: "#28281E" },
     "LC Mute": { color: "#28281E", bgcolor: "#28281E" },
     "LC Groups Bypasser": { color: "#28281E", bgcolor: "#28281E" },
-    "LC Bypasser Panel": { color: "#28281E", bgcolor: "#28281E" },
+    "LC Bypasser Panel": { color: "#AF6419", bgcolor: "#AF6419" },
     LCBypassRelay: { color: "#28281E", bgcolor: "#28281E" },
     "LC Bypass Relay": { color: "#28281E", bgcolor: "#28281E" },
     LCImagePass: { color: "#28281E", bgcolor: "#28281E" },
@@ -135,6 +135,8 @@ const COLORS = {
 
     // Exceptions — dedicated colors, not part of the base palette
     LCStop: { color: "#963232", bgcolor: "#963232" },
+    LCPreviewGate: { color: "#963232", bgcolor: "#963232" },
+    LCBatchGate: { color: "#963232", bgcolor: "#963232" },
     LCPositive: { color: "#326432", bgcolor: "#326432" },
     LCNegative: { color: "#643232", bgcolor: "#643232" },
 };

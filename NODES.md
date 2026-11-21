@@ -1,8 +1,8 @@
 # LC123 node inventory
 
-**159 Python nodes** + **5 JS-only** · version 1.56.17
+**161 Python nodes** + **5 JS-only** · version 1.56.18
 
-Registered class IDs: 162 (159 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
+Registered class IDs: 164 (161 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
 
 ## LC123/Flux 3 (3)
 
@@ -206,6 +206,8 @@ Registered class IDs: 162 (159 nodes, LCChangeStepCount as a second name for LC 
 - `LCControlPanel`: LC Control Panel 🎛️
 - `LCTimer`: LC Timer ⏱️
 - `LCStop`: LC Stop 🛑
+- `LCBatchGate`: LC Batch Gate 🚦
+- `LCPreviewGate`: LC Preview Gate 🛑
 - `LCTextRemove`: LC Text Remove 🔪
 - `LCTextReplace`: LC Text Replace ✂️
 - `LCDuplicateTags`: LC ✂️ Duplicate Tags 🏷️

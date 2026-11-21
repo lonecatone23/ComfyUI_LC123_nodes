@@ -3956,5 +3956,42 @@
         "tooltip": "写入了 (词组:权重) 的提示词，用于元数据或 CLIP 编码器。"
       }
     }
+  },
+  "LCBatchGate": {
+    "description": "放在一批的低成本第一遍之前。预览运行只放行前 `preview` 个项目，让 LC Preview Gate 能快速显示它们。之后在 LC Preview Gate 上按 ▶，就会全部运行，去掉你丢弃的那些。",
+    "inputs": {
+      "items": {
+        "tooltip": "列表（Smart Prompt Batch 的提示词、数据集行）或图片批次，放在低成本第一遍之前。"
+      },
+      "preview": {
+        "tooltip": "预览运行放行多少个项目。在 LC Preview Gate 上按 ▶ 后，全部都会运行（去掉你丢弃的）。"
+      },
+      "phase": {
+        "tooltip": "由 LC Preview Gate 的 ▶ 设置。不用动。"
+      },
+      "drop": {
+        "tooltip": "由 LC Preview Gate 的 ▶ 设置。不用动。"
+      }
+    }
+  },
+  "LCPreviewGate": {
+    "description": "显示低成本第一遍的结果并在这里停下，和 LC Stop 一样。点击图片可以丢弃它，然后 ▶ Continue（或 Run）用相同的 seed 跑完其余部分。上面有 LC Batch Gate 时，预览只渲染它的前几个项目，丢弃的项目永远不会进入耗时的阶段。",
+    "inputs": {
+      "images": {
+        "tooltip": "低成本第一遍的图片。"
+      },
+      "enable": {
+        "tooltip": "开：显示图片并停下。关：直接通过，不停下。"
+      },
+      "phase": {
+        "tooltip": "由 ▶ 设置。不用动。"
+      },
+      "drop": {
+        "tooltip": "由 ▶ 设置。不用动。"
+      },
+      "also": {
+        "tooltip": "其他也要等 ▶ 的东西，原样传过去：比如数据集的标注文本，这样预览运行时不会写出任何标注文件。"
+      }
+    }
   }
 }

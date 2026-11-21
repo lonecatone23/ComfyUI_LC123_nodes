@@ -56,6 +56,10 @@ def _phrases(weights: str) -> list:
     return out
 
 
+def _norm(t: str) -> str:
+    return " ".join(str(t).lower().split())
+
+
 def _spans(text: str, phrase: str) -> list:
     """(start, end) of every whole-word, any-case match of `phrase` in `text`, spaces matched loosely."""
     words = [re.escape(w) for w in phrase.split()]
@@ -309,24 +313,38 @@ class LCWeightedPrompt:
                 "last_in": ("STRING", {"default": "", "tooltip": "The incoming prompt of the last run (set on the node)."}),
                 "prompt": ("STRING", {"forceInput": True, "tooltip": "Optional: a prompt from another node. It lands in the "
                                                                     "box, where you can edit and weight it (see block)."}),
+                "extra": ("STRING", {"multiline": True, "default": "",
+                                     "tooltip": "Your own words (✍🏼 on the node): they go in front of the prompt on every "
+                                                "run, and an incoming prompt never overwrites them."}),
+                "weights_in": ("STRING", {"forceInput": True,
+                                          "tooltip": "Weights from another LC Weighted Prompt (its weights output), applied "
+                                                     "here too. Weight the base prompt before LC Vision Smart Prompt Batch and "
+                                                     "they land on every prompt it writes. This node's own weights win on the "
+                                                     "same phrase."}),
             },
         }
 
-    RETURN_TYPES = ("MODEL", "CONDITIONING", "STRING", "STRING")
-    RETURN_NAMES = ("model", "conditioning", "prompt", "weighted_prompt")
+    RETURN_TYPES = ("MODEL", "CONDITIONING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("model", "conditioning", "prompt", "weighted_prompt", "weights")
     OUTPUT_TOOLTIPS = ("The model, with the word weights built in on Krea 2 and MOSS Image (wire it to the sampler).",
                        "The encoded prompt.", "The prompt used (your edit, or the linked one), without weights: wire it into an "
                        "edit encoder or metadata.",
-                       "The prompt with (word:weight) written in, for metadata or another encoder.")
+                       "The prompt with (word:weight) written in, for metadata or another encoder.",
+                       "The weights, to carry around a node that rewrites the prompt (LC Vision Smart Prompt Batch): wire it "
+                       "into weights_in of the LC Weighted Prompt after it.")
     FUNCTION = "encode"
     CATEGORY = "LC123/conditioning"
     DESCRIPTION = ("A text encoder with a weight per word: click a word, move its slider. Green = more, red = less, "
                    "below 0 = taken out. Works on Krea 2 and MOSS Image (inside the model) and on Anima and CLIP models (SDXL, Illustrious, Pony).")
 
     def encode(self, clip, text, strength, weights, model=None, edit_conditioning=None, block="on change", last_in="",
-               prompt=None):
+               prompt=None, extra="", weights_in=None):
         box = text or ""
         hold = False
+        written = []
+        if prompt is not None and "(" in str(prompt):  # (phrase:weight) written in upstream (LC Add Weights): weights
+            from .lc_add_weights import unwrite
+            prompt, written = unwrite(str(prompt))
         if prompt is None:  # nothing wired: the box
             src, take = box, False
         else:
@@ -338,9 +356,27 @@ class LCWeightedPrompt:
             # always: a new incoming prompt (not the first one this node sees) stops the run here
             hold = block == "always" and not take and changed and bool(last_in)
         use_edit = prompt is not None and not take
-        phrases = _phrases(weights)
+        box_src = src  # what the box shows (the face keeps your own words apart)
+        own = (extra or "").strip()
+        if own:  # your own words go in front of whatever came in, every run
+            src = own if not src.strip() else own.rstrip(" ,") + ", " + src.lstrip(" ,")
+        mine = _phrases(weights)
+        incoming_w = _phrases(weights_in) if weights_in else []
+        if written:  # weights written into the incoming prompt count as carried in
+            have = {_norm(t) for t, _ in incoming_w}
+            incoming_w += [(t, w) for t, w in written if _norm(t) not in have]
+        mine_keys = {_norm(t) for t, _ in mine}
+        phrases = [(t, w) for t, w in incoming_w if _norm(t) not in mine_keys] + mine
+        weights_out = json.dumps([{"text": t, "w": round(w, 4)} for t, w in phrases], ensure_ascii=False)
         wtext = weighted_text(src, phrases)
-        ui = {"lc_prompt": [src]}
+        ui = {"lc_prompt": [box_src]}
+        if incoming_w:
+            ui["lc_carried"] = [json.dumps([{"text": t, "w": w} for t, w in incoming_w], ensure_ascii=False)]
+        if incoming_w:  # weights carried in for a phrase this prompt no longer has (it was varied away)
+            missing = [t for t, _ in incoming_w if not _spans(src, t)]
+            ui["lc_missing"] = [json.dumps(missing, ensure_ascii=False)]
+            if missing:
+                print(f"[LC Weighted Prompt] {len(missing)} carried weight(s) not in this prompt: {', '.join(missing)}")
         if prompt is not None:  # the face puts the incoming prompt in the box and remembers it for on change
             ui.update({"lc_in": [str(prompt)], "lc_take": [take]})
         if hold:
@@ -348,7 +384,7 @@ class LCWeightedPrompt:
             nodes.interrupt_processing()
             ui["lc_hold"] = [time.time()]
             print("[LC Weighted Prompt] Block always: a new prompt came in, stopped here. Edit if you like, then Run.")
-            return {"ui": ui, "result": (model, None, src, wtext)}
+            return {"ui": ui, "result": (model, None, src, wtext, weights_out)}
         if model is not None and _is_krea2(model):
             tok = clip.tokenize(src)
             cond = clip.encode_from_tokens_scheduled(tok)
@@ -377,7 +413,7 @@ class LCWeightedPrompt:
                       f"(placed from the end of the prompt, any encoder{', your edit' if use_edit else ''})")
             if edit_conditioning is not None:
                 cond = edit_conditioning
-            return {"ui": ui, "result": (model, cond, src, wtext)}
+            return {"ui": ui, "result": (model, cond, src, wtext, weights_out)}
         if model is not None and _is_moss(model):
             tok = clip.tokenize(src)
             cond = clip.encode_from_tokens_scheduled(tok)
@@ -387,10 +423,10 @@ class LCWeightedPrompt:
             if positions:
                 model = _moss_patch(model, positions, strength, cond_len)
                 print(f"[LC Weighted Prompt] MOSS: {len(positions)} token(s) weighted: {_shown(clip, tok, cond_len, positions)}")
-            return {"ui": ui, "result": (model, cond, src, wtext)}
+            return {"ui": ui, "result": (model, cond, src, wtext, weights_out)}
         enc = weighted_text(src, [(p, 1.0 + strength * (w - 1.0)) for p, w in phrases]) if phrases else src
         cond = clip.encode_from_tokens_scheduled(clip.tokenize(enc))
-        return {"ui": ui, "result": (model, cond, src, wtext)}
+        return {"ui": ui, "result": (model, cond, src, wtext, weights_out)}
 
 
 NODE_CLASS_MAPPINGS = {NODE_NAME: LCWeightedPrompt}

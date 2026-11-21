@@ -1,8 +1,8 @@
 # LC123 node inventory
 
-**153 Python nodes** + **5 JS-only** · version 1.51.3
+**159 Python nodes** + **5 JS-only** · version 1.56.17
 
-Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old workflows).
+Registered class IDs: 162 (159 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
 
 ## LC123/Flux 3 (3)
 
@@ -18,7 +18,7 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 
 - `Krea2RegionalCanvasInline`: LC Krea2 Regional Inline Canvas
 
-## LC123/conditioning (6)
+## LC123/conditioning (8)
 
 - `LCNegative`: LC Negative
 - `LCPositive`: Prompt
@@ -26,9 +26,10 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 - `LCReferenceLatent`: LC Reference Latent
 - `LCPromptToConditioning`: Prompt to Conditioning
 - `LCWeightedPrompt`: LC Weighted Prompt ⚖️
+- `LCAddWeights`: LC Add Weights ⚖️
 - `LCAnimaBoxPrompt`: LC Anima Box Prompt 🔲
 
-## LC123/image (49)
+## LC123/image (56)
 
 - `LCApplyLUT`: LC Apply LUT
 - `LCAspectRatioPipeIn`: LC Aspect Ratio Pipe (In/Edit)
@@ -85,6 +86,7 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 - `LCWatermark`: LC Watermark 💧
 - `AspectRatioSimplifier`: 📐 LC Aspect Ratio Simplifier
 - `LCAspectRatioPipeOut`: 📐 LC Aspect Ratio Simplifier (pipe)
+- `LCSkinMaster`: LC Skin Master ✨ (BETA)
 
 ## LC123/io (4)
 
@@ -97,15 +99,20 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 
 - `LCDenoise`: LC Denoise 💉
 
-## LC123/loaders (3)
+## LC123/loaders (4)
 
 - `LCApplyLoraStack`: LC Apply LoRA Stack 🎚️
 - `LCLoraLoaderStack`: LC LoRA Loader Stack 🎚️
 - `LCLoraLoader`: LC LoRA Loader 🎚️
+- `LCLoraLoaderSingle`: LC LoRA Loader (single) 🎚️
 
 ## LC123/mask (1)
 
 - `LCMaskPass`: LC Mask Pass
+
+## LC123/MOSS Image (1)
+
+- `LCMOSSLayoutPrompt`: LC MOSS Layout Prompt 🗺️
 
 ## LC123/optimizer (4)
 
@@ -140,7 +147,7 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 - `LCPromptAssembler`: 🧩LC Prompt Assembler
 - `LCPromptList`: LC Prompt List 🗒️
 
-## LC123/sampling (14)
+## LC123/sampling (16)
 
 - `LCBasicScheduler`: LC Basic Scheduler
 - `LCDetailDaemon`: LC Detail Daemon (BETA)
@@ -164,7 +171,7 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 - `LCCivitaiStrip`: CivitAI 🚩🔪
 - `LCWidgetToString`: LC Widget To String
 
-## LC123/utils (33)
+## LC123/utils (40)
 
 - `LCAnyEmptyBool`: LC Any Empty Bool
 - `LCAnyEmptyFloat`: LC Any Empty Float
@@ -205,6 +212,7 @@ Registered class IDs: 154 (153 in search, 1 deprecated but still loads in old wo
 - `LCVRAMCacheClear`: LC VRAM Cache Clear
 - `LCSeed`: 🌱LC Seed
 - `LC123SaveText`: 📝 LC Save Text
+- `LCGate`: LC Gate 🚧
 
 ## JS-only (no Python class, 5)
 

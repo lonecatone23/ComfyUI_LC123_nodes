@@ -3924,5 +3924,37 @@
         "tooltip": "オン：空行と // の行を除きます。オフ：すべての行がプロンプトになります（CR Prompt List と同じ）。"
       }
     }
+  },
+  "LCAddWeights": {
+    "display_name": "LC Add Weights ⚖️",
+    "description": "別のノード(LC Vision Smart Prompt Batch)が書き換えたプロンプトにウェイトを戻します。clip + model をつなぐと、LC Weighted Prompt と同じように各バリエーションにウェイトを適用します。",
+    "inputs": {
+      "prompt": {
+        "tooltip": "ウェイトを付けるプロンプト。例: LC Vision Smart Prompt Batch の prompt 出力(すべてのバリエーションにウェイトが付きます)。"
+      },
+      "weights": {
+        "tooltip": "LC Weighted Prompt の weights 出力、または (parka:1.3), (fur hood:1.2) のようなテキスト。"
+      },
+      "clip": {
+        "tooltip": "clip + model をつなぐと、各バリエーションの最終テキストにここでウェイトを適用します(Krea 2 と MOSS はモデル内部で)。"
+      },
+      "model": {
+        "tooltip": "ウェイトを持たせるモデル(Krea 2、MOSS)。サンプリングには model 出力を使います。"
+      },
+      "strength": {
+        "tooltip": "すべてのウェイトを拡大縮小します。LC Weighted Prompt の strength と同じです。"
+      }
+    },
+    "outputs": {
+      "0": {
+        "tooltip": "ウェイトの入ったモデル(Krea 2、MOSS)。これでサンプリングします。"
+      },
+      "1": {
+        "tooltip": "エンコーダー用のきれいなプロンプト。clip + model をつながない場合は (フレーズ:ウェイト) が書き込まれます。"
+      },
+      "2": {
+        "tooltip": "(フレーズ:ウェイト) を書き込んだプロンプト。メタデータや CLIP エンコーダー用。"
+      }
+    }
   }
 }

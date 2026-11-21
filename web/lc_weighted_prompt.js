@@ -136,6 +136,7 @@ function restoreValues(node, values) {
   const ok = block?.options?.values?.includes(values[3]);
   set("block", ok ? values[3] : "on change");
   set("last_in", ok && typeof values[4] === "string" ? values[4] : "");
+  set("extra", ok && typeof values[5] === "string" ? values[5] : "");
 }
 
 function hideWidget(w) {
@@ -151,10 +152,21 @@ function hideWidget(w) {
   if (el?.style) el.style.display = "none";
 }
 
-/** The prompt shown as words: the text box. */
-function promptText(node) {
+/** The box alone (what ✎ edits). */
+function boxText(node) {
   const v = widget(node, "text")?.value;
   return typeof v === "string" && v ? v : node.__lcRunPrompt ?? v ?? "";
+}
+
+/** Your own words (✍🏼): kept apart from the box, so an incoming prompt never overwrites them. */
+const extraText = (node) => String(widget(node, "extra")?.value || "").trim();
+
+/** The prompt shown as words: your own words in front of the box, joined the way the node joins them. */
+function promptText(node) {
+  const own = extraText(node);
+  const box = boxText(node);
+  if (!own) return box;
+  return box.trim() ? own.replace(/[ ,]+$/, "") + ", " + box.replace(/^[ ,]+/, "") : own;
 }
 
 /** Words and the gaps between them: [{t: "word", word: true}, {t: ", ", word: false}, ...] */
@@ -230,7 +242,11 @@ function ensureFace(node) {
   useBtn.textContent = "Use new";
   useBtn.title = "Put the new incoming prompt in the box (your weights stay on the words still in it)";
   useBtn.style.cssText = "display:none;flex:0 0 auto;height:20px;line-height:18px;padding:0 6px;background:#2a2a2a;color:#fc6;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:11px;";
-  hintRow.append(hint, useBtn, copyBtn, editBtn);
+  const writeBtn = document.createElement("button");
+  writeBtn.textContent = "✍🏼";
+  writeBtn.title = "Your own words: they go in front of the prompt on every run, and an incoming prompt never overwrites them";
+  writeBtn.style.cssText = "flex:0 0 26px;width:26px;height:20px;line-height:18px;padding:0;background:#2a2a2a;border:1px solid #444;border-radius:4px;cursor:pointer;font-size:11px;";
+  hintRow.append(hint, useBtn, copyBtn, writeBtn, editBtn);
   const rowsHost = document.createElement("div");
   rowsHost.style.cssText = "display:flex;flex-direction:column;";
   wrap.append(rowsHost, hintRow, words, editor);
@@ -240,7 +256,13 @@ function ensureFace(node) {
   });
   dom.serializeValue = () => undefined;
   Object.defineProperty(dom, "width", { get: () => undefined, set: () => {}, configurable: true });
-  node.__lcPW = { wrap, words, editor, hintRow, hint, editBtn, copyBtn, useBtn, rowsHost, height: 60, anchor: null, sel: "", editing: false };
+  node.__lcPW = { wrap, words, editor, hintRow, hint, editBtn, copyBtn, useBtn, writeBtn, rowsHost, height: 60, anchor: null, sel: "", editing: false };
+  writeBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+  writeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (node.__lcPW.editing) finishEdit(node, true);
+    else startEdit(node, "extra");
+  });
   useBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
   copyBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
   copyBtn.addEventListener("click", async (e) => {
@@ -298,9 +320,27 @@ function ensureFace(node) {
   return node.__lcPW;
 }
 
-function startEdit(node) {
+function startEdit(node, target = "text") {
   const face = node.__lcPW;
-  if (!face || face.editing || locked(node)) return; // fed straight into the box: edited where it comes from
+  if (!face || face.editing) return;
+  face.target = target;
+  if (target === "extra") {
+    face.editing = true;
+    face.editor.value = extraText(node);
+    face.words.style.display = "none";
+    face.editor.style.display = "block";
+    face.writeBtn.textContent = "✓";
+    face.writeBtn.title = "Done (Ctrl+Enter). Escape cancels.";
+    face.hint.textContent = "Your own words, in front of the prompt on every run (green eyes, blonde hair ...). Ctrl+Enter when done.";
+    face.editor.__grow();
+    face.outside = (ev) => {
+      if (ev.target !== face.editor && ev.target !== face.writeBtn) finishEdit(node, true);
+    };
+    setTimeout(() => window.addEventListener("pointerdown", face.outside, true), 0);
+    face.editor.focus();
+    return;
+  }
+  if (locked(node)) return; // fed straight into the box: edited where it comes from
   if (passThrough(node)) {
     // Block: never puts every incoming prompt over the box, so an edit would be gone on the next run. Editing
     // means keeping it: on change holds the edit until a different prompt comes in
@@ -309,7 +349,7 @@ function startEdit(node) {
     b.callback?.(b.value);
   }
   face.editing = true;
-  face.editor.value = promptText(node);
+  face.editor.value = boxText(node);
   face.words.style.display = "none";
   face.editor.style.display = "block";
   face.editBtn.textContent = "✓";
@@ -333,7 +373,7 @@ function finishEdit(node, keep) {
   face.anchor = null; // the words moved: a half-made phrase start no longer points at the same word
   face.sel = "";
   if (keep) {
-    const t = widget(node, "text");
+    const t = widget(node, face.target === "extra" ? "extra" : "text");
     if (t && t.value !== face.editor.value) {
       t.value = face.editor.value;
       t.callback?.(t.value);
@@ -346,6 +386,9 @@ function finishEdit(node, keep) {
   face.words.style.display = "";
   face.editBtn.textContent = "✎";
   face.editBtn.title = "Edit the prompt (or double-click it)";
+  face.writeBtn.textContent = "✍🏼";
+  face.writeBtn.title = "Your own words: they go in front of the prompt on every run, and an incoming prompt never overwrites them";
+  face.target = "text";
   render(node);
 }
 
@@ -484,7 +527,9 @@ function paint(node) {
   for (const span of face.words.querySelectorAll("span[data-row]")) {
     const k = Number(span.dataset.row);
     const v = k >= 0 ? rows[k]?.w ?? 1 : 1;
-    span.style.color = k >= 0 ? colorFor(v) : "#ddd";
+    const cw = span.dataset.carried != null ? Number(span.dataset.carried) : null;
+    span.style.color = k >= 0 ? colorFor(v) : cw != null ? colorFor(cw) : "#ddd";
+    span.style.textDecoration = k < 0 && cw != null ? "underline dotted" : "";
     span.style.fontWeight = k >= 0 && v > 1.0001 ? "bold" : "normal";
     const tag = span.querySelector("span.lc-w");
     if (tag) tag.textContent = k >= 0 && span.dataset.last === "1" && Math.abs(v - 1) > 0.0001 ? ":" + short(v) : "";
@@ -511,7 +556,15 @@ function renderWords(node) {
   const rows = getWeights(node);
   const toks = tokens(text);
   const hit = wordRows(toks, rows);
+  const carried = node.__lcCarried || [];
+  const chit = carried.length ? wordRows(toks, carried) : [];
   face.words.innerHTML = "";
+  if (extraText(node) && text.trim()) {
+    const mark = document.createElement("span");
+    mark.textContent = "✍🏼 ";
+    mark.title = "Your own words start here (✍🏼 to change them)";
+    face.words.appendChild(mark);
+  }
   const wordIdx = [];
   toks.forEach((t, i) => {
     if (!t.word) {
@@ -526,6 +579,10 @@ function renderWords(node) {
     const nextIdx = next ? toks.indexOf(next) : -1;
     span.dataset.last = hit[i] >= 0 && (nextIdx < 0 || hit[nextIdx] !== hit[i]) ? "1" : "0";
     span.style.cssText = "cursor:pointer;border-radius:3px;padding:0 1px;";
+    if (hit[i] < 0 && chit[i] >= 0) {
+      span.dataset.carried = String(carried[chit[i]].w);
+      span.title = `Weight ${short(carried[chit[i]].w)} carried in from the LC Weighted Prompt before (change it there)`;
+    }
     const tag = document.createElement("span");
     tag.className = "lc-w";
     span.appendChild(tag);
@@ -560,6 +617,11 @@ function renderWords(node) {
     face.hint.textContent = text.trim()
       ? "Click a word, then move the slider. Shift-click a second word for a phrase." + (locked(node) ? "" : " Double-click to edit.")
       : "";
+  const miss = node.__lcMissing || [];
+  if (!held && !face.editing && miss.length) {
+    face.hint.style.color = "#fc6";
+    face.hint.textContent = `⚠️ ${miss.length} carried weight${miss.length > 1 ? "s" : ""} not in this prompt: ${miss.join(", ")}`;
+  }
 }
 
 function clickWord(node, toks, i, shift) {
@@ -655,6 +717,7 @@ app.registerExtension({
       lcApplyLaunchColor(this, "#232", "#353"); // LiteGraph's stock green
       hideWidget(widget(this, "weights"));
       hideWidget(widget(this, "last_in"));
+      hideWidget(widget(this, "extra"));
       hookBlock(this);
       ensureFace(this);
       tuckText(this);
@@ -671,6 +734,7 @@ app.registerExtension({
       restoreValues(this, info?.widgets_values);
       hideWidget(widget(this, "weights"));
       hideWidget(widget(this, "last_in"));
+      hideWidget(widget(this, "extra"));
       hookBlock(this);
       ensureFace(this);
       tuckText(this);
@@ -682,6 +746,13 @@ app.registerExtension({
     const onExecuted = nodeType.prototype.onExecuted;
     nodeType.prototype.onExecuted = function (message) {
       const r = onExecuted?.apply(this, arguments);
+      try {
+        this.__lcMissing = Array.isArray(message?.lc_missing) ? JSON.parse(message.lc_missing[0] || "[]") : [];
+        this.__lcCarried = Array.isArray(message?.lc_carried) ? JSON.parse(message.lc_carried[0] || "[]") : [];
+      } catch (_) {
+        this.__lcMissing = [];
+        this.__lcCarried = [];
+      }
       if (Array.isArray(message?.lc_in)) {
         const last = widget(this, "last_in");
         if (last) last.value = String(message.lc_in[0] ?? "");

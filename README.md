@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.56.10 · **160 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.56.17 · **159 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 
@@ -339,6 +339,9 @@ A multi-row LoRA loader modeled on rgthree's Power Lora Loader, rebuilt to fix t
 
 ![LC LoRA Loader strength control and Info popover](assets/readme/lc_lora_loader_strength_and_info.png)
 
+**LC LoRA Loader (single) 🎚️**
+- One LC LoRA Loader row (on / off, folder picker, strength, ℹ Info, wrong-model ⚠️) for a turbo or style LoRA on its own spot. Model only, no add or remove.
+
 **LC LoRA Loader Stack 🎚️ / LC Apply LoRA Stack 🎚️**
 - The loader split in two (like Comfyroll's CR LoRA Stack): build the rows once, apply them to more than one model/clip pair.
 - **Stack:** the same face as LC LoRA Loader, no sockets in, a `LORA_STACK` out.
@@ -567,6 +570,7 @@ What a real camera does to a scene, in the order light travels. Wire a depth map
 | **LC Aspect Ratio Pipe Out** | Unpacks the aspect pipe. 💡 This used to be called Pipe (In/Edit), old workflows still load it |
 | **LC Get Image 📐** | Megapixels, width, height, batch, aspect, longer side |
 | **LC Dimension Resize 📐** | One value in, add / sub / mul / div both sides, rounded outputs |
+| **LC Image Crop 🖼️🔪** | Crop by dragging a box and its handles on the node. **aspect** locks the shape (free, original or a common ratio). Put it first in post, so everything after it lands on your final framing |
 | **LC Image-Mask Resize 📐** | Image + mask only. **match_aspect_ratio**, **upscale_by** none / multiplier / megapixels. The real **WxH** is drawn on the node after a run |
 | **LC RTX Super Resolution ⚡** | NVIDIA RTX Video Super Resolution on pictures or video frames. **mode**: upscale (up to 4x), upscale (clean source) for lossless or high-bitrate sources, denoise, deblur (same size). **quality** LOW to ULTRA, **scale** or **megapixels**, **strength** blends back toward a plain resize. Optional mask is resized along. About half a second per 2x. Video frames run one at a time with a progress bar, and Cancel stops it between frames. Needs an RTX card and `nvidia-vfx` |
 | **LC Image to Total Megapixels 📐** | Scales to a total megapixel count, plus **resolution** and **megapixels** outputs. 1 MP = 1,000,000 pixels, the same count LC Get Image uses (the native node counts 1024 x 1024) |
@@ -668,7 +672,8 @@ Full directions: [`LC_Prompt_Builder_Note.md`](LC_Prompt_Builder_Note.md)
 | **LC MiniMax H3 Pipe V2** | Everything above plus `prompt`, `total_steps`, `cfg`, `sampler_name`, `scheduler`. Feed a V1 pipe in to upgrade it |
 | **LC Image Ref Pipe In** / **Out** | Up to 16 reference images on one wire. Sockets grow as you fill them, same as Text Encode Qwen Image 2.1 |
 | **Prompt to Conditioning** / **+ Zero** | A string into conditioning |
-| **LC Weighted Prompt ⚖️** | A prompt box with a weight per word. Click a word (shift-click a second one for a phrase) and move the slider: above 1 the word gets more say (bold green, **cat:1.5**), below 1 less (red), below 0 it is taken out. Type in the box, or wire a prompt into **prompt** and edit it right there. **block** decides which one is used: **on change** (the box takes the incoming prompt when it changes, your edit holds until then), **always** (your box holds, and a new incoming prompt stops the run there: edit, then **Run** carries on with the same seeds), **never** (the incoming prompt always comes through; ✎ switches it to **on change** so your edit holds). 📋 copies the prompt. Weights on words that leave the prompt are dropped, so they don't come back on a later prompt. **Krea 2:** run the model through it (the weights work inside the model) and wire its **prompt** output into your encoder. Works with the plain, Image Reference Edit and Identity Edit encoders and with ControlNet. **MOSS Image:** the same, model through it, its conditioning into the sampler (a real negative stays untouched). **Anima / SDXL / Pony / Illustrious:** clip only, the weights go in as (word:1.5). **strength** scales every weight. Drag the node taller and the box grows |
+| **LC Weighted Prompt ⚖️** | A prompt box with a weight per word. Click a word (shift-click a second one for a phrase) and move the slider: above 1 the word gets more say (bold green, **cat:1.5**), below 1 less (red), below 0 it is taken out. Type in the box, or wire a prompt into **prompt** and edit it right there. **block** decides which one is used: **on change** (the box takes the incoming prompt when it changes, your edit holds until then), **always** (your box holds, and a new incoming prompt stops the run there: edit, then **Run** carries on with the same seeds), **never** (the incoming prompt always comes through; ✎ switches it to **on change** so your edit holds). 📋 copies the prompt. **✍🏼** adds your own words in front of the prompt on every run, and an incoming prompt never overwrites them. The **weights** output carries the weights around **LC Vision Smart Prompt Batch** to **LC Add Weights ⚖️**; **weights_in** takes another Weighted Prompt's weights (this node's own win on the same phrase). Weights on words that leave the prompt are dropped, so they don't come back on a later prompt. **Krea 2:** run the model through it (the weights work inside the model) and wire its **prompt** output into your encoder. Works with the plain, Image Reference Edit and Identity Edit encoders and with ControlNet. **MOSS Image:** the same, model through it, its conditioning into the sampler (a real negative stays untouched). **Anima / SDXL / Pony / Illustrious:** clip only, the weights go in as (word:1.5). **strength** scales every weight. Drag the node taller and the box grows |
+| **LC Add Weights ⚖️** | Puts weights back on a prompt that **LC Vision Smart Prompt Batch** rewrote. Weight the base prompt once in an **LC Weighted Prompt**, wire its **weights** output here, and every variant gets the weights back on the phrases it still has (a phrase the variant no longer has is skipped). Wire **clip** + **model** and it applies them here, on each variant's final text: Krea 2 and MOSS inside the model (sample with its **model** out, send the clean **prompt** to the encoder), other models as (phrase:weight). Nothing may be added to the prompt after it. **weights** can also be typed as (parka:1.3), (fur hood:1.2) |
 | **LC Anima Box Prompt 🔲** | Regional prompting for Anima. Draw boxes in **LC Bounding Boxes** and describe what goes in each one like a normal prompt (a full sentence works best); your main prompt describes the scene. No left / right words needed, and leave out quality tags (masterpiece, best quality): on Anima they pull toward NSFW. Wire it between the model and the sampler (after any pipe that also feeds detailers). **placement** holds the boxes in place (lower it if subjects turn into close-ups), **isolation** keeps each box to itself (higher gives flat panels). No boxes drawn = it passes the model through. Needs [Anima Regional Conditioning](https://github.com/Sen-sou/Comfyui-Anima-Regional-Conditioning); the Regional LLLite patch (51 MB) downloads on first use |
 | **Prompt / LC Negative** | Pre-colored prompt boxes. **Prompt** (was LC Positive) is a plain prompt box for any text |
 
@@ -790,6 +795,7 @@ Details: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
 | [`workflows/LC Dual Sigma Advanced workflow example.json`](workflows/LC%20Dual%20Sigma%20Advanced%20workflow%20example.json) | Advanced split sigmas |
 | [`workflows/LC Better Sigmas V2.0.json`](workflows/LC%20Better%20Sigmas%20V2.0.json) | LC Sigmas + LC Detail Daemon against a plain euler / simple baseline, with I2I and LC Vision prompt assist |
 | [`workflows/LC Vision Smart Prompt Batch.json`](workflows/LC%20Vision%20Smart%20Prompt%20Batch.json) | One prompt, a batch of variations: LC Vision Filter, Caption and **LC Vision Smart Prompt Batch**, into Krea 2. Needs **LC Vision** |
+| [`workflows/LC Skin Master Module.json`](workflows/LC%20Skin%20Master%20Module.json) | **LC Skin Master** on a loaded picture, with an optional **LC Person Mask**, a before/after split and the saves |
 | [`workflows/MOSS Regional BBOX Prompt Module v1.1.json`](workflows/MOSS%20Regional%20BBOX%20Prompt%20Module%20v1.1.json) | MOSS Image with regional boxes: **LC Bounding Boxes** (two chained) into **LC MOSS Layout Prompt**, plain KSampler (Speed Boost does not work on MOSS). Saves the picture and a boxes-next-to-result sheet |
 
 Workflow > Open, or just drag it onto the canvas.

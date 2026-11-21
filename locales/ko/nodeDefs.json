@@ -3924,5 +3924,37 @@
         "tooltip": "켜짐: 빈 줄과 // 줄을 뺍니다. 꺼짐: 모든 줄이 프롬프트가 됩니다(CR Prompt List와 같음)."
       }
     }
+  },
+  "LCAddWeights": {
+    "display_name": "LC Add Weights ⚖️",
+    "description": "다른 노드(LC Vision Smart Prompt Batch)가 다시 쓴 프롬프트에 가중치를 되돌려 줍니다. clip + model을 연결하면 LC Weighted Prompt처럼 각 변형에 가중치를 적용합니다.",
+    "inputs": {
+      "prompt": {
+        "tooltip": "가중치를 줄 프롬프트. 예: LC Vision Smart Prompt Batch의 prompt 출력(모든 변형에 가중치가 붙습니다)."
+      },
+      "weights": {
+        "tooltip": "LC Weighted Prompt의 weights 출력, 또는 (parka:1.3), (fur hood:1.2) 같은 텍스트."
+      },
+      "clip": {
+        "tooltip": "clip + model을 연결하면 각 변형의 최종 텍스트에 여기서 가중치를 적용합니다(Krea 2와 MOSS는 모델 내부에서)."
+      },
+      "model": {
+        "tooltip": "가중치를 담을 모델(Krea 2, MOSS). 샘플링에는 model 출력을 쓰세요."
+      },
+      "strength": {
+        "tooltip": "모든 가중치의 크기를 조절합니다. LC Weighted Prompt의 strength와 같습니다."
+      }
+    },
+    "outputs": {
+      "0": {
+        "tooltip": "가중치가 들어간 모델(Krea 2, MOSS). 이걸로 샘플링하세요."
+      },
+      "1": {
+        "tooltip": "인코더용 깨끗한 프롬프트. clip + model을 연결하지 않으면 (구절:가중치)가 들어갑니다."
+      },
+      "2": {
+        "tooltip": "(구절:가중치)가 들어간 프롬프트. 메타데이터나 CLIP 인코더용."
+      }
+    }
   }
 }

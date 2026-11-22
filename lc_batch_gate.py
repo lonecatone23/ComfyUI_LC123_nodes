@@ -24,7 +24,7 @@ class AnyType(str):
 
 
 any_type = AnyType("*")
-MAX_SHOWN = 32  # pictures shown on the Preview Gate
+MAX_SHOWN = 64  # pictures shown on the Preview Gate (a whole dataset at the end of a run)
 # what each Preview Gate showed in its last preview (pictures + the `also` values, per list item), so the full run can
 # put the kept ones back in front instead of rendering them again. Keyed by the Preview Gate's node id.
 STORE: dict = {}
@@ -129,6 +129,10 @@ class LCPreviewGate:
                                                "dataset, so no caption file is written in the preview run."}),
                 "also_2": (any_type, {"tooltip": "One more, like also: the save metadata of each picture."}),
                 "also_3": (any_type, {"tooltip": "One more, like also."}),
+                "note": (any_type, {"tooltip": "A short note per picture, written on its thumbnail: the score from LC "
+                                               "Face Match or the note from LC Vision Reviewer. A note with ❌ puts a "
+                                               "red ✕ in the corner: a likely drop. Nothing is dropped until you click."}),
+                "note_2": (any_type, {"tooltip": "A second note per picture, like note."}),
             },
             "hidden": {"unique_id": "UNIQUE_ID"},
         }
@@ -156,7 +160,8 @@ class LCPreviewGate:
                    "▶ Continue (or Run) runs the rest with the same seeds. With LC Batch Gate above, the preview only "
                    "renders its first items and the dropped ones never reach the long stages.")
 
-    def main(self, images, enable, phase, drop, also=None, also_2=None, also_3=None, unique_id=None):
+    def main(self, images, enable, phase, drop, also=None, also_2=None, also_3=None, note=None, note_2=None,
+             unique_id=None):
         images = list(images or [])
         extra = [list(a) if a is not None else [None] for a in (also, also_2, also_3)]
         gid = str(_first(unique_id, "") or "")
@@ -210,13 +215,51 @@ class LCPreviewGate:
             per_item.append(mine)
         STORE[gid] = {"mode": "batch" if len(images) == 1 and images[0].shape[0] > 1 else "list", "n": len(images),
                       "images": images, "frames": per_item, "also": [None if a == [None] else a for a in extra]}
-        shown = nodes.PreviewImage().save_images(torch.cat(frames, 0), filename_prefix="LC_gate")["ui"]["images"] if frames else []
+        shown = _save_frames(frames)
         nodes.interrupt_processing()
         print(f"[LC Preview Gate] stopped with {len(owner)} picture(s): look, drop the bad ones, then ▶ to run the rest")
+        # one note per shown picture: the notes of its list item (a single batch: one note per picture)
+        notes = []
+        for k in range(len(shown)):
+            idx = owner[k] if len(images) > 1 else k
+            notes.append("\n".join(t for t in (_note_at(note, idx), _note_at(note_2, idx)) if t))
         # a fresh stamp per stop (LC Continue): the next queue is a continue with the same seeds
         return {"ui": {"lc_hold": [time.time()],
-                       "lc_gate": [{"state": "stopped", "images": shown, "owner": owner[:len(shown)], "total": len(owner)}]},
+                       "lc_gate": [{"state": "stopped", "images": shown, "owner": owner[:len(shown)], "total": len(owner),
+                                    "notes": notes}]},
                 "result": (images, *extra)}
+
+
+def _save_frames(frames):
+    """The shown thumbnails as temp files. Pictures of different sizes (a list) go one by one."""
+    if not frames:
+        return []
+    if all(f.shape[1:] == frames[0].shape[1:] for f in frames):
+        return nodes.PreviewImage().save_images(torch.cat(frames, 0), filename_prefix="LC_gate")["ui"]["images"]
+    out = []
+    for f in frames:
+        out += nodes.PreviewImage().save_images(f, filename_prefix="LC_gate")["ui"]["images"]
+    return out
+
+
+def _note_at(v, i):
+    """The note of list item i as one short line ('' when there is none)."""
+    if v is None:
+        return ""
+    v = list(v) if isinstance(v, (list, tuple)) else [v]
+    if not v:
+        return ""
+    x = v[i] if i < len(v) else (v[0] if len(v) == 1 else None)
+    if isinstance(x, (list, tuple)):
+        x = x[0] if x else None
+    if isinstance(x, bool):
+        return "✅" if x else "❌"
+    if isinstance(x, float):
+        return f"{x:.2f}"
+    if isinstance(x, (str, int)):
+        return str(x).strip()[:160]
+    # anything else (a picture passed through when the scorer is bypassed): no note
+    return ""
 
 
 NODE_CLASS_MAPPINGS = {"LCBatchGate": LCBatchGate, "LCPreviewGate": LCPreviewGate}

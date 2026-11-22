@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.56.18 · **161 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.56.19 · **161 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 
@@ -753,7 +753,7 @@ Details: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
 | **LC Bypasser** / **LC Mute** / **Groups Bypasser** / **Bypasser Panel** | Remote **bypass** (pass-through) or **mute** (never runs). Panel's `hub` accepts any of the three |
 | **LC Bypass Relay** | Autogrow `*` targets on the left. Its `OPT_CONNECTION` goes into a Bypasser or Mute, and every target follows the hub. The state survives a refresh |
 | **LC Stop 🛑** | Pauses the graph. The play button (or **Run**) carries on with the same seeds, so everything above the stop comes from the cache instead of starting over on a new random seed |
-| **LC Batch Gate 🚦** + **LC Preview Gate 🛑** | A look before the long run. The Batch Gate goes before the first pass of a batch (a prompt list, dataset rows, a picture batch) and lets only the first `preview` items through. The Preview Gate goes after it, shows those pictures and stops like LC Stop. Click a picture to drop it, then **▶ Continue** (or **Run**) renders the rest with the same seeds: the kept previews are not rendered again, and anything wired through `also` / `also_2` / `also_3` (captions, save metadata) waits for ▶ too, in the same order. Change a setting above the gate and **Run** makes a fresh preview; **✕ Clear** throws the preview away. `enable` off = no stop. 💡 A single picture batch renders whole again in the full run: its noise is drawn by position. |
+| **LC Batch Gate 🚦** + **LC Preview Gate 🛑** | A look before the long run. The Batch Gate goes before the first pass of a batch (a prompt list, dataset rows, a picture batch) and lets only the first `preview` items through. The Preview Gate goes after it, shows those pictures and stops like LC Stop. Click a picture to drop it, then **▶ Continue** (or **Run**) renders the rest with the same seeds: the kept previews are not rendered again, and anything wired through `also` / `also_2` / `also_3` (captions, save metadata) waits for ▶ too, in the same order. Change a setting above the gate and **Run** makes a fresh preview; **✕ Clear** throws the preview away. `enable` off = no stop. **note** / **note_2** write a short note on each thumbnail (LC Face Match, LC Vision Reviewer): a note with ❌ puts a red ✕ in the corner as a likely drop, nothing drops until you click. A second Preview Gate at the end of a run works too: everything above it comes from the cache, and ▶ saves only what you kept. The panel grows with the node. 💡 A single picture batch renders whole again in the full run: its noise is drawn by position. |
 | **LC VRAM Cache Clear** | Clears VRAM / cache, then passes through |
 
 ![LC Seed's buttons and seed history dropdown](assets/readme/lc_seed_history.png)

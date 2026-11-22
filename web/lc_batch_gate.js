@@ -16,6 +16,9 @@ const COLOR = "#963232";
 const pending = new Map(); // preview gate id -> { owner, total, dropped: Set of shown picture indexes }
 const CONTROLS = new Set(["control_after_generate", "control_before_generate"]);
 let lastSent = null; // the last queued prompt (API format): the preview run, once a gate stops it
+// the graph as it stands right after a gate stopped: nodes that write their own fields when they run (LC Weighted
+// Prompt, combo panels, show nodes) are already updated in it, so a plain Run is not taken as "settings changed"
+let baseline = null;
 let forceContinue = false; // ▶ pressed: continue even when settings changed
 
 /** The widget's own randomize / increment control (or a Primitive node's feeding it), not on fixed (as LC Continue). */
@@ -90,7 +93,8 @@ const viewUrl = (im) =>
   api.apiURL(`/view?filename=${encodeURIComponent(im.filename)}&subfolder=${encodeURIComponent(im.subfolder || "")}` +
     `&type=${encodeURIComponent(im.type || "temp")}&t=${Date.now()}`);
 
-/** Every LC Batch Gate above this node (any distance up the wires). */
+/** Every LC Batch Gate above this node (any distance up the wires), up to the next Preview Gate: a Batch Gate above
+ * that one belongs to it. */
 function batchGatesAbove(node) {
   const graph = node.graph ?? app.graph;
   const seen = new Set();
@@ -101,6 +105,7 @@ function batchGatesAbove(node) {
       const src = link ? graph.getNodeById(link.origin_id) : null;
       if (!src || seen.has(src.id)) continue;
       seen.add(src.id);
+      if (src.type === GATE) continue;
       if (src.type === BATCH) found.push(src);
       walk(src);
     }
@@ -123,6 +128,24 @@ function droppedItems(p) {
 
 /** Turn a queued prompt into the continue run of every stopped Preview Gate. */
 function patchPrompt(output) {
+  // gates above a stopped gate that already went on (a first gate, then a gate at the end): keep what they ran with,
+  // so everything above comes from the cache instead of stopping or rendering again
+  const above = new Set();
+  for (const id of pending.keys()) {
+    const g = app.graph?.getNodeById(Number(id)) ?? app.graph?.getNodeById(id);
+    if (g) for (const x of idsAbove(g)) above.add(x);
+  }
+  for (const id of above) {
+    const n = output?.[id];
+    const prev = lastSent?.[id]?.inputs;
+    if (!n || !prev || pending.has(id)) continue;
+    // a node you did not touch since the stop goes out exactly as last time: nodes that write their own fields when
+    // they run (LC Weighted Prompt) would otherwise miss the cache and render everything below them again
+    const same = baseline?.[id] && JSON.stringify(baseline[id].inputs) === JSON.stringify(n.inputs);
+    if (same && n.class_type === lastSent[id].class_type) n.inputs = JSON.parse(JSON.stringify(prev));
+    if ((n.class_type === GATE || n.class_type === BATCH) && String(prev.phase || "").startsWith("all"))
+      Object.assign(n.inputs, { phase: prev.phase, drop: prev.drop ?? "" });
+  }
   for (const [id, p] of pending) {
     const gate = app.graph?.getNodeById(Number(id)) ?? app.graph?.getNodeById(id);
     const gin = output?.[String(id)]?.inputs;
@@ -157,7 +180,10 @@ function buildPanel(node) {
   info.style.cssText = "flex:1;color:#bbb";
   bar.append(btn, clear, info);
   const grid = document.createElement("div");
-  grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px;overflow:auto;flex:1;align-content:start";
+  // rows keep the whole picture (max-content): without it the cells (overflow hidden) shrink to fit the panel and the
+  // thumbnails turn into thin strips once there are many of them; the panel scrolls instead
+  grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));grid-auto-rows:max-content;" +
+    "gap:4px;overflow:auto;flex:1;min-height:0;align-content:start";
   root.append(bar, grid);
 
   const render = () => {
@@ -186,6 +212,21 @@ function buildPanel(node) {
       const num = document.createElement("div");
       num.textContent = String(i + 1);
       num.style.cssText = "position:absolute;left:3px;top:2px;font-size:11px;background:rgba(0,0,0,.6);padding:0 4px;border-radius:3px";
+      const noteText = p.notes?.[i] || "";
+      const note = document.createElement("div");
+      note.textContent = noteText;
+      note.style.cssText = "position:absolute;left:0;right:0;bottom:0;font-size:10px;line-height:1.25;white-space:pre-line;" +
+        "background:rgba(0,0,0,.7);padding:2px 4px;max-height:45%;overflow:hidden;pointer-events:none;" +
+        (noteText ? "" : "display:none;") +
+        `color:${noteText.includes("❌") ? "#ff8080" : noteText.includes("⚠️") ? "#ffd27a" : "#cfe8cf"}`;
+      cell.title = noteText;
+      // a likely drop (a ❌ in its note): a red ✕ in the corner, still kept until you click it
+      const flag = document.createElement("div");
+      flag.textContent = "✕";
+      flag.title = "Likely drop: " + noteText.replace(/\n/g, " · ");
+      flag.style.cssText = "position:absolute;right:3px;top:2px;font-size:14px;line-height:16px;width:18px;text-align:center;" +
+        "font-weight:700;color:#fff;background:#c62828;border-radius:3px;pointer-events:none;" +
+        (noteText.includes("❌") ? "" : "display:none");
       const paint = () => {
         const off = p.dropped.has(i);
         mark.style.display = off ? "flex" : "none";
@@ -199,7 +240,7 @@ function buildPanel(node) {
           (p.total > p.images.length ? ` (${p.total} in the batch, ${p.images.length} shown)` : "") + " · click to drop";
       };
       paint();
-      cell.append(img, num, mark);
+      cell.append(img, num, note, flag, mark);
       grid.appendChild(cell);
     });
   };
@@ -238,7 +279,8 @@ app.registerExtension({
             const g = app.graph?.getNodeById(Number(id)) ?? app.graph?.getNodeById(id);
             if (g) for (const x of idsAbove(g)) above.add(x);
           }
-          if (!forceContinue && changedSince(lastSent, data.output, above)) {
+          if (!forceContinue && changedSince(lastSent, data.output, above) &&
+              (!baseline || changedSince(baseline, data.output, above))) {
             console.log("[LC Preview Gate] settings changed since the preview: a fresh preview, not a continue");
             for (const id of pending.keys()) {
               const n = app.graph?.getNodeById(Number(id));
@@ -271,7 +313,8 @@ app.registerExtension({
         this.color = COLOR;
         this.bgcolor = COLOR;
         const w = this.addDOMWidget("lc_gate_panel", "lc_gate_panel", buildPanel(this), { serialize: false, hideOnZoom: false });
-        w.computeSize = (width) => [width, 260];
+        // fills whatever height the node has (a big Final Gate shows big thumbnails), never less than 260
+        w.computeLayoutSize = () => ({ minHeight: 260, minWidth: 200 });
         this.setSize([Math.max(this.size[0], 360), Math.max(this.size[1], 340)]);
       }
       return r;
@@ -282,8 +325,19 @@ app.registerExtension({
       const r = onExecuted?.apply(this, arguments);
       const g = message?.lc_gate?.[0];
       if (g?.state === "stopped") {
-        pending.set(String(this.id), { images: g.images || [], owner: g.owner || [], total: g.total || 0, dropped: new Set() });
+        // nothing is dropped for you: a note with ❌ only marks the picture as a likely drop (red ✕ in the corner)
+        const notes = g.notes || [];
+        pending.set(String(this.id), { images: g.images || [], owner: g.owner || [], total: g.total || 0, notes,
+          dropped: new Set() });
         this.__lcGateState = "stopped";
+        baseline = null;
+        setTimeout(async () => {
+          try {
+            baseline = JSON.parse(JSON.stringify((await app.graphToPrompt())?.output || null));
+          } catch (_) {
+            baseline = null;
+          }
+        }, 400);
       } else if (g) {
         pending.delete(String(this.id));
         this.__lcGateState = "passed";

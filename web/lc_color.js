@@ -3,35 +3,59 @@
  * Comfy stock / empty color. Never overwrite a user-chosen or workflow-saved color.
  *
  * Comfy's own palette colors (green #232, blue #223, black #222/#000) look like "stock" to the
- * check below, and several nodes repaint after the saved workflow has been applied. So the ids of
- * every node that carries a saved color are remembered when a graph loads, and those nodes are
- * never repainted.
+ * check below, and several nodes repaint after the saved workflow has been applied. So every node
+ * that arrives with a saved color (load, paste, undo) is marked, and marked nodes are never repainted.
+ *
+ * "No color" clears the color, which a workflow would not save, so the pack default came back on
+ * reload. An LC node with no color now keeps a lc_no_color property, which loads back as no color.
+ *
+ * The same file ships in every LC pack; the hooks install once however many packs are loaded.
  */
-import { app } from "../../scripts/app.js";
+const NO_COLOR = "lc_no_color";
+const isLC = (node) => /ComfyUI_LC/i.test(String(node?.constructor?.nodeData?.python_module || ""));
 
-const savedColorIds = new Set();
+(function installHooks() {
+  const LGN = globalThis.LiteGraph?.LGraphNode || globalThis.LGraphNode;
+  if (!LGN || LGN.prototype.__lcColorHooks) return;
+  LGN.prototype.__lcColorHooks = true;
 
-function collectSavedColors(graphData) {
-  const add = (nodes) => {
-    for (const n of nodes || []) {
-      if (n && (n.color || n.bgcolor)) savedColorIds.add(String(n.id));
-    }
+  const configure = LGN.prototype.configure;
+  LGN.prototype.configure = function (info) {
+    let none = false;
+    try {
+      none = !!info?.properties?.[NO_COLOR] && !info.color && !info.bgcolor;
+      if (info && (info.color || info.bgcolor || none)) this._lcSavedColor = true;
+    } catch (_) {}
+    const r = configure.apply(this, arguments);
+    try {
+      if (none) {
+        this.color = undefined;
+        this.bgcolor = undefined;
+      } else if (this.properties && NO_COLOR in this.properties) {
+        delete this.properties[NO_COLOR];
+      }
+    } catch (_) {}
+    return r;
   };
-  add(graphData?.nodes);
-  for (const sg of graphData?.definitions?.subgraphs || []) add(sg?.nodes);
-}
+
+  // a workflow never saves a missing color, so "No color" on an LC node is kept as a property
+  const setColorOption = LGN.prototype.setColorOption;
+  if (setColorOption) {
+    LGN.prototype.setColorOption = function (option) {
+      const r = setColorOption.apply(this, arguments);
+      try {
+        if (!this.properties) this.properties = {};
+        if (!option && isLC(this)) this.properties[NO_COLOR] = true;
+        else delete this.properties[NO_COLOR];
+      } catch (_) {}
+      return r;
+    };
+  }
+})();
 
 export function lcHasSavedColor(node) {
-  return !!node && savedColorIds.has(String(node.id));
+  return !!node && !!node._lcSavedColor;
 }
-
-app.registerExtension({
-  name: "LC123.SavedColorLock",
-  beforeConfigureGraph(graphData) {
-    savedColorIds.clear();
-    try { collectSavedColors(graphData); } catch (_) {}
-  },
-});
 
 const STOCK = new Set([
   "",
@@ -75,11 +99,13 @@ export function lcApplyLaunchColor(node, color, bgcolor) {
 }
 
 export function lcRestoreSerializedColor(node, data) {
-  if (!node || !data || !data.color) return false;
-  if (lcColorIsStock(data.color)) return false;
-  try {
-    node.color = data.color;
-    node.bgcolor = data.bgcolor || data.color;
-  } catch (_) {}
-  return true;
+  if (!node || !data) return false;
+  if ("color" in data || "bgcolor" in data) {
+    try {
+      node.color = data.color;
+      node.bgcolor = data.bgcolor ?? data.color;
+    } catch (_) {}
+    return true;
+  }
+  return false;
 }

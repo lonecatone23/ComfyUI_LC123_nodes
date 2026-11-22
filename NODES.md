@@ -1,6 +1,6 @@
 # LC123 node inventory
 
-**161 Python nodes** + **5 JS-only** · version 1.56.19
+**161 Python nodes** + **5 JS-only** · version 1.56.20
 
 Registered class IDs: 164 (161 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
 

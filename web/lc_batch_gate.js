@@ -186,6 +186,34 @@ function buildPanel(node) {
     "gap:4px;overflow:auto;flex:1;min-height:0;align-content:start";
   root.append(bar, grid);
 
+  // thumbnails grow with the node: the column count that gives the biggest pictures that still all fit; past the point
+  // where they would get smaller than 110 px, it keeps 110 px columns and scrolls
+  let aspect = 1.25; // height / width of the pictures, from the first one that loads
+  const GAP = 4;
+  const layout = () => {
+    const n = grid.childElementCount;
+    const W = grid.clientWidth, H = grid.clientHeight;
+    if (!n || W < 50 || H < 50) return;
+    let best = 0, bestW = 0;
+    for (let c = 1; c <= n; c++) {
+      const w = (W - GAP * (c - 1)) / c;
+      const rows = Math.ceil(n / c);
+      if (rows * (w * aspect + 4) + GAP * (rows - 1) <= H && w > bestW) { best = c; bestW = w; }
+    }
+    if (best && bestW >= 110) {
+      grid.style.gridTemplateColumns = `repeat(${best}, ${Math.floor(bestW)}px)`;
+    } else {
+      grid.style.gridTemplateColumns = "repeat(auto-fill,minmax(110px,1fr))";
+      bestW = 110;
+    }
+    const fs = Math.max(10, Math.min(18, Math.round(bestW / 12)));
+    for (const el of grid.querySelectorAll("[data-lc-note]")) el.style.fontSize = fs + "px";
+    for (const el of grid.querySelectorAll("[data-lc-num], [data-lc-flag]")) el.style.fontSize = Math.max(11, fs) + "px";
+  };
+  try {
+    new ResizeObserver(() => layout()).observe(grid);
+  } catch (_) {}
+
   const render = () => {
     const p = pending.get(String(node.id));
     grid.innerHTML = "";
@@ -205,16 +233,24 @@ function buildPanel(node) {
       const img = document.createElement("img");
       img.src = viewUrl(im);
       img.style.cssText = "width:100%;display:block";
+      if (i === 0) {
+        img.onload = () => {
+          if (img.naturalWidth) aspect = img.naturalHeight / img.naturalWidth;
+          layout();
+        };
+      }
       const mark = document.createElement("div");
       mark.textContent = "✕";
       mark.style.cssText = "position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:42px;" +
         "color:#ff6060;background:rgba(0,0,0,.55);font-weight:700";
       const num = document.createElement("div");
       num.textContent = String(i + 1);
+      num.dataset.lcNum = "1";
       num.style.cssText = "position:absolute;left:3px;top:2px;font-size:11px;background:rgba(0,0,0,.6);padding:0 4px;border-radius:3px";
       const noteText = p.notes?.[i] || "";
       const note = document.createElement("div");
       note.textContent = noteText;
+      note.dataset.lcNote = "1";
       note.style.cssText = "position:absolute;left:0;right:0;bottom:0;font-size:10px;line-height:1.25;white-space:pre-line;" +
         "background:rgba(0,0,0,.7);padding:2px 4px;max-height:45%;overflow:hidden;pointer-events:none;" +
         (noteText ? "" : "display:none;") +
@@ -223,6 +259,7 @@ function buildPanel(node) {
       // a likely drop (a ❌ in its note): a red ✕ in the corner, still kept until you click it
       const flag = document.createElement("div");
       flag.textContent = "✕";
+      flag.dataset.lcFlag = "1";
       flag.title = "Likely drop: " + noteText.replace(/\n/g, " · ");
       flag.style.cssText = "position:absolute;right:3px;top:2px;font-size:14px;line-height:16px;width:18px;text-align:center;" +
         "font-weight:700;color:#fff;background:#c62828;border-radius:3px;pointer-events:none;" +
@@ -243,6 +280,7 @@ function buildPanel(node) {
       cell.append(img, num, note, flag, mark);
       grid.appendChild(cell);
     });
+    layout();
   };
   btn.onclick = () => {
     const p = pending.get(String(node.id));

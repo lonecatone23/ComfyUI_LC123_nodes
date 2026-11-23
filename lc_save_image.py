@@ -23,6 +23,7 @@ import folder_paths
 from .lc_pipe_io import PIPE_TYPE
 from .lc_civitai_hashes import collect_hashes, format_hash_fields, civitai_resources_payload
 from .lc_lora_metadata import collect_lora_metadata, image_ancestors, inactive_lora_files
+from . import lc_civitai_lookup  # noqa: F401  (loaded here so LC Save Video can find it)
 
 
 META_TYPE = "LC_SAVE_META"
@@ -172,6 +173,10 @@ def _build_parameters(meta: dict, width: int, height: int, hash_bits=None) -> st
     if air:
         resources = civitai_resources_payload(air)
         if resources:
+            # CivitAI calls an image "made on-site" when it has civitaiResources and no Version key;
+            # Version marks it as an external (ComfyUI) image and keeps the resource links
+            if not re.search(r"(^|,\s*)Version:", extra or ""):
+                bits.append("Version: ComfyUI")
             bits.append("Civitai resources: " + json.dumps(resources, separators=(",", ":")))
     if extra:
         bits.append(extra.lstrip(", "))
@@ -291,7 +296,7 @@ class LCSaveImageMetadata:
                     "STRING",
                     {
                         "default": "",
-                        "tooltip": "CivitAI AIR or model URL. Several are fine, comma-separated (e.g. the model and your workflow page). No hash lookup. Fill it to link your workflow/model on CivitAI. Trade-off: CivitAI then labels the image \"made on-site\". Leave it empty and the image reads as an external generator (models and LoRAs still match by hash).",
+                        "tooltip": "CivitAI AIR or model URL. Several are fine, comma-separated (e.g. the model and your workflow page). Fill it to link your workflow/model on CivitAI. Pictures and videos still read as an external generator. Models and LoRAs on pictures match by hash without it.",
                     },
                 ),
                 "width": (

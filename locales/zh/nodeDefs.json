@@ -2990,7 +2990,7 @@
         "tooltip": "Checkpoint 名称。Model 1 和 Model 2 在同一字段，用逗号分隔。"
       },
       "civitai_air": {
-        "tooltip": "CivitAI AIR 或模型 URL。可填多个，用逗号分隔（例如模型页和你的工作流页）。不做哈希查找。填写后可链接到你在 CivitAI 上的工作流/模型。代价：CivitAI 会把图像标记为“站内生成”。留空则图像显示为外部生成器（模型和 LoRA 仍通过哈希匹配）。"
+        "tooltip": "CivitAI AIR 或模型 URL。可填多个，用逗号分隔（例如模型页和你的工作流页）。填写后可链接到你在 CivitAI 上的工作流/模型。图片和视频仍显示为外部生成器。图片里的模型和 LoRA 不填也会通过哈希匹配。"
       },
       "width": {
         "tooltip": "0 = LC Save Image 实际保存的图像宽度（无论是否放大）。填其他数字则写入该数字。"

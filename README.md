@@ -8,7 +8,7 @@ Custom nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) by [loneca
 - **CivitAI:** [lonecatone23](https://civitai.com/user/lonecatone23)
 - **Instagram:** [synth.studio.models](https://www.instagram.com/synth.studio.models/)
 - **Support:** [Buy me a ☕](https://ko-fi.com/lonecatone)
-- **Version:** 1.56.22 · **161 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
+- **Version:** 1.56.23 · **161 Python nodes** · **5 JS-only** (LC Bypasser, LC Mute, Groups Bypasser, Panel, LC Note)
 
 > Small tools that remove friction: less wire mess, fewer clicks, clearer workflows.
 
@@ -696,7 +696,7 @@ Full directions: [`LC_Prompt_Builder_Note.md`](LC_Prompt_Builder_Note.md)
 |------|----------------|
 | **LC Easy Folder 📂** | A combined prefix for Save Image, or wire it into LC Save Image's `filename_prefix` |
 | **LC Advanced Folder 📂** | Filename and path split apart |
-| **LC Save Metadata 🏷️** | Optional **LC_PIPE in**. Fills prompts, seed, steps, CFG, sampler, scheduler, size and denoise. Widgets win when set (seed `-1`, steps/cfg `0` = use the pipe). **civitai_air** takes one or more AIR tags or CivitAI URLs, comma-separated (e.g. the model and your workflow page) |
+| **LC Save Metadata 🏷️** | Optional **LC_PIPE in**. Fills prompts, seed, steps, CFG, sampler, scheduler, size and denoise. Widgets win when set (seed `-1`, steps/cfg `0` = use the pipe). **civitai_air** takes one or more AIR tags or CivitAI URLs, comma-separated (e.g. the model and your workflow page). The upload links them and still reads as an external generator |
 | **LC Save Image 💾** | `filename` + `path` under the output folder. PNG gets the workflow, `parameters`, `civitaiResources` and AutoV2 hashes. JPEG/WebP only get a short comment (a format limit, not a bug). Only resources that feed the saved image are listed: LoRAs that are muted, bypassed, switched off, at strength 0 or on another branch are skipped. A `lora_metadata` chunk records each LoRA's model and CLIP strength |
 | **📝 LC Save Text** | Writes text to a file, cleaning illegal path characters |
 | **LC Join Strings 🔗** | Joins N strings. Empty slots skip the delimiter. `\n` allowed |

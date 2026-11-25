@@ -3529,7 +3529,7 @@
         "tooltip": "선택 사항. eta 같은 자체 설정을 가진 ClownSampler(또는 아무 SAMPLER)입니다. sampler_name을 대체합니다."
       },
       "positive_half": {
-        "tooltip": "절반 크기 스텝용 선택적 positive. Speed Boost는 MOSS Image에서 작동하지 않습니다."
+        "tooltip": "절반 크기 스텝용 선택적 positive."
       }
     }
   },

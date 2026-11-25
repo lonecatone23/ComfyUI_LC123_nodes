@@ -3529,7 +3529,7 @@
         "tooltip": "任意。eta など独自の設定を持つ ClownSampler（または任意の SAMPLER）。sampler_name の代わりになります。"
       },
       "positive_half": {
-        "tooltip": "半分のサイズのステップ用の任意の positive。Speed Boost は MOSS Image では動作しません。"
+        "tooltip": "半分のサイズのステップ用の任意の positive。"
       }
     }
   },

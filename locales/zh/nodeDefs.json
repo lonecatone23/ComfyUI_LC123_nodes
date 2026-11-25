@@ -3529,7 +3529,7 @@
         "tooltip": "可选。带有自身设置（如 eta）的 ClownSampler（或任何 SAMPLER）。会取代 sampler_name。"
       },
       "positive_half": {
-        "tooltip": "可选，用于半尺寸步骤的 positive。Speed Boost 对 MOSS Image 无效。"
+        "tooltip": "可选，用于半尺寸步骤的 positive。"
       }
     }
   },

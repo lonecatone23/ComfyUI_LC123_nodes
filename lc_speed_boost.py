@@ -288,7 +288,7 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
         why = ("SenseNova / HiDream-O1 draw in pixels and scale their noise to the picture size, so a half size start "
                "turns the picture into colored noise")
         model_says_no = True
-    elif x.ndim != 4:
+    elif not (x.ndim == 4 or (x.ndim == 5 and x.shape[2] == 1)):  # Krea 2 / Flux 2 style: 5D with one frame is a picture
         why = "video and other multi-frame latents can't start at half size"
         model_says_no = True
     kind = None if why else _kind(model, sigmas)
@@ -451,8 +451,7 @@ class LCSpeedBoostKSampler:
         }, "optional": {
             "sampler": ("SAMPLER", {"tooltip": "Optional. A ClownSampler (or any SAMPLER) with its own settings, like eta. "
                                                "Replaces sampler_name."}),
-            "positive_half": ("CONDITIONING", {"tooltip": "Optional positive for the half-size steps. Speed Boost does not work "
-                                                          "on MOSS Image."}),
+            "positive_half": ("CONDITIONING", {"tooltip": "Optional positive for the half-size steps."}),
         }, "hidden": {"prompt": "PROMPT", "unique_id": "UNIQUE_ID"}}
 
     RETURN_TYPES = ("LATENT",)

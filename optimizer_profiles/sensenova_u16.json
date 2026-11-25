@@ -1,0 +1,40 @@
+{
+ "id": "sensenova_u16",
+ "name": "SenseNova U1.6",
+ "kind": "image",
+ "params_b": 18,
+ "notes": [
+  "SenseTime's unified 8B MoT model: one checkpoint holds the image model and its own language model, which reads the prompt. It draws in pixels, so there is no VAE file.",
+  "With the 8-step LoRA at strength 1: 10 steps at cfg 1 (8 looks flat), 12 for sharper lines (anime). 50 steps at cfg 4 without the LoRA comes out very bright. euler / simple, no shift node (the model sets its own shift 3).",
+  "Trained at 2048 x 2048 (4 MP). Works from 1 to 16 MP, sides in multiples of 32, 1:3 to 3:1.",
+  "Edits: pictures go into HiDream-O1 Reference Images, then SenseNova Conditioning (task image) before the sampler.",
+  "bf16 only: fp16 overflows in the language model. Apache 2.0."
+ ],
+ "components": {
+  "diffusion": {
+   "label": "Checkpoint (model + its language model)",
+   "role": "diffusion",
+   "variants": [
+    {
+     "file": "sensenova_u1.6_8b_mot_int8_convrot.safetensors",
+     "format": "int8_convrot",
+     "gb": 17.63,
+     "bits": 8,
+     "repo": "Comfy-Org/SenseNova-U1",
+     "loader": "CheckpointLoaderSimple",
+     "default": true,
+     "note": "ComfyUI's default file"
+    },
+    {
+     "file": "sensenova_u1.6_8b_mot_bf16.safetensors",
+     "format": "bf16",
+     "gb": 35.07,
+     "bits": 16,
+     "repo": "Comfy-Org/SenseNova-U1",
+     "loader": "CheckpointLoaderSimple"
+    }
+   ]
+  }
+ },
+ "source": "Hugging Face tree API sizes (Comfy-Org/SenseNova-U1), 2026-11-24; settings from the Comfy-Org templates image_sensenova_u16_t2i / image_edit"
+}

@@ -23,7 +23,8 @@
      "bits": 16,
      "repo": "Comfy-Org/MiniMax-H3-Image",
      "loader": "UNETLoader",
-     "pruned": true
+     "pruned": true,
+     "note": "Same picture as int8 at 100% (16 MP test), 1.8x slower"
     },
     {
      "file": "minimax_h3_image_pruned_int8_convrot.safetensors",

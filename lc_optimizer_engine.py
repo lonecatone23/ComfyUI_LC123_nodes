@@ -64,7 +64,7 @@ VAE_NAMES = {(16, 4): "16-channel 2D (Flux 1 / Z-Image)", (16, 5): "16-channel 3
              (64, 5): "64-channel (Qwen-Image 2.1)", (4, 4): "4-channel (SD / SDXL)", (128, 2): "128-channel (LTX)"}
 MODEL_CLASSES = {"anima": "Anima", "flux2_klein_9b": "Flux2", "flux2_klein_9b_distilled": "Flux2", "ideogram4": "Ideogram4", "krea2": "Krea2", "ltx23": "LTXAV",
                  "ltx25": "LTXAV", "minimax_h3": "MiniMaxH3", "minimax_h3_fl2va": "MiniMaxH3", "minimax_h3_image": "MiniMaxH3Image", "qwen_image_21": "QwenImage21", "z_image_turbo": "ZImage",
-                 "krea2_raw": "Krea2", "sdxl": "SDXL", "illustrious": "SDXL", "pony": "SDXL"}
+                 "krea2_raw": "Krea2", "sdxl": "SDXL", "illustrious": "SDXL", "pony": "SDXL", "sensenova_u16": "SenseNovaU15"}
 
 
 # the extra parts each base model uses (the nodes are static; this only decides which pickers matter)

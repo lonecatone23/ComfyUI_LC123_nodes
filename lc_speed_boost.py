@@ -113,6 +113,41 @@ def _auto_off(model):
     return None
 
 
+def _pixel_model(model):
+    """SenseNova U1.5 / U1.6 and HiDream-O1: pixel-space models whose noise is scaled by the picture size (tested
+    2026-11-24: a grow at step 4 gave pure colored noise). Speed Boost always sits them out."""
+    p = _patcher(model)
+    return type(getattr(p, "model", None)).__name__ in ("SenseNovaU15", "HiDreamO1")
+
+
+# readable names for the warning on the node
+_MODEL_NAMES = {"SenseNovaU15": "SenseNova", "HiDreamO1": "HiDream-O1", "MiniMaxH3": "MiniMax H3 video",
+                "MiniMaxH3Image": "MiniMax H3 Image", "QwenImage21": "Qwen-Image 2.1", "MOSSImage": "MOSS Image",
+                "WAN21": "Wan", "WAN22": "Wan", "LTXAV": "LTX", "LTXV": "LTX", "HunyuanVideo": "Hunyuan Video"}
+
+
+def _model_class(model):
+    p = _patcher(model)
+    return type(getattr(p, "model", None)).__name__ if p is not None else ""
+
+
+def _model_name(model):
+    cls = _model_class(model)
+    return _MODEL_NAMES.get(cls, cls or "this model")
+
+
+def _tell(node, text, level):
+    """Status line under the node (and a toast for warnings). Never stops the run."""
+    if node is None:
+        return
+    try:
+        from server import PromptServer
+
+        PromptServer.instance.send_sync("lc_speed_boost_status", {"node": str(node), "text": text, "level": level})
+    except Exception:
+        pass
+
+
 def _flow_t(s, kind):
     """A noise level on the 0..1 flow scale (SDXL's sigma s is the same mix as flow t = s / (1 + s))."""
     return s if kind == "flow" else s / (1.0 + s)
@@ -229,7 +264,7 @@ def _half_conds(model, raw, xs):
 
 
 def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, lc_inner, lc_auto, lc_step, lc_layout=False,
-             lc_half_positive=None, **kw):
+             lc_half_positive=None, lc_node=None, **kw):
     extra_args = dict(extra_args or {})
     inner_fn, inner_opts = lc_inner.sampler_function, dict(lc_inner.extra_options)
 
@@ -240,17 +275,31 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
         return inner_fn(model, xx, ss, extra_args=extra_args, callback=cb, disable=disable, **inner_opts)
 
     why = None
+    model_says_no = False  # the model can't take Speed Boost at all (warn), not this run's settings (just note)
     if extra_args.get("denoise_mask") is not None:
         why = "inpaint mask (it only works on the whole picture)"
     elif lc_layout and lc_half_positive is None:
-        why = "MOSS layout boxes (placed in full-size pixels; Speed Boost does not work on MOSS Image anyway)"
+        why = "MOSS layout boxes (they are placed in full-size pixels)"
+    elif _model_class(model) == "MiniMaxH3":
+        why = ("MiniMax H3 video packs its video and audio into one flat latent while sampling, so there is no "
+               "half size picture to start from")
+        model_says_no = True
+    elif _pixel_model(model):
+        why = ("SenseNova / HiDream-O1 draw in pixels and scale their noise to the picture size, so a half size start "
+               "turns the picture into colored noise")
+        model_says_no = True
+    elif x.ndim != 4:
+        why = "video and other multi-frame latents can't start at half size"
+        model_says_no = True
     kind = None if why else _kind(model, sigmas)
     if why:
         pass
     elif kind is None:
         why = "this model type isn't supported (flow models and SDXL-family models are)"
+        model_says_no = True
     elif lc_auto and _auto_off(model):
         why = _auto_off(model)
+        model_says_no = True
     elif _flow_t(float(sigmas[0]), kind) < MIN_START:
         why = f"the run starts at noise {_flow_t(float(sigmas[0]), kind):.2f}, too little to start small (upscale / image to image pass)"
     j = None if why else plan(sigmas, lc_auto, lc_step, kind, _auto_target(model, kind, len(sigmas) - 1))
@@ -258,6 +307,11 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
         if not why:
             why = "grow_at_step is 0" if not lc_auto and lc_step <= 0 else "too few steps"
         print(f"[LC Speed Boost] Off for this run: {why}. Sampling at full size.")
+        if model_says_no:
+            _tell(lc_node, f"⚠️ Speed Boost does not work with {_model_name(model)}: no speed-up, it samples at full size "
+                           f"({why}).", "warn")
+        else:
+            _tell(lc_node, f"ℹ️ Speed Boost off for this run: {why}.", "info")
         return run(x, sigmas, 0)
 
     H, W = x.shape[-2:]
@@ -266,6 +320,8 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
     xs = _shrink_start(model, x, float(sigmas[0]), h, w, kind)
     if xs is None:
         print("[LC Speed Boost] Off for this run: can't separate the starting picture from the noise. Sampling at full size.")
+        _tell(lc_node, f"⚠️ Speed Boost does not work with {_model_name(model)} here: it can't separate the starting "
+                       "picture from the noise, so it samples at full size.", "warn")
         return run(x, sigmas, 0)
     guider = getattr(model, "inner_model", None)
     swap = None
@@ -288,6 +344,7 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
     n = len(sigmas) - 1
     print(f"[LC Speed Boost] {j} of {n} steps at half size (latent {w}x{h} of {W}x{H}), grew at noise {t:.3f} "
           f"(carries on at {t2:.3f}), {n - j} at full size.")
+    _tell(lc_node, f"🚀 Speed Boost on: {j} of {n} steps at half size ({_model_name(model)}).", "ok")
     _reset_size_cache(model)
     return run(X, rest, j)
 
@@ -304,16 +361,16 @@ def _reset_size_cache(model):
         dm.reset_prefix_cache(True)
 
 
-def _wrap(sampler, auto, step, layout=False, half_positive=None):
+def _wrap(sampler, auto, step, layout=False, half_positive=None, node=None):
     # The LC Detail Daemon times its window by step. Wrapped inside the size switch, each size part would restart that
     # window, so it goes outside: the Daemon sees the whole schedule, Speed Boost runs inside it.
     opts = getattr(sampler, "extra_options", {}) or {}
     if "lc_wrapped" in opts and "lc_amount" in opts:
-        inner = _wrap(opts["lc_wrapped"], auto, step, layout, half_positive)
+        inner = _wrap(opts["lc_wrapped"], auto, step, layout, half_positive, node)
         return KSAMPLER(sampler.sampler_function, extra_options={**opts, "lc_wrapped": inner},
                         inpaint_options=getattr(sampler, "inpaint_options", {}))
     return KSAMPLER(_sampler, extra_options={"lc_inner": sampler, "lc_auto": bool(auto), "lc_step": int(step), "lc_layout": bool(layout),
-                                             "lc_half_positive": half_positive},
+                                             "lc_half_positive": half_positive, "lc_node": node},
                     inpaint_options=getattr(sampler, "inpaint_options", {}))
 
 
@@ -339,12 +396,12 @@ class LCSpeedBoost:
                    "Speeds up passes that start from noise (denoise 0.9 and up). Upscale and image to image passes run as "
                    "normal: their layout comes from your image.\n"
                    "Works on Krea 2, Z-Image, Flux.2 Klein, Qwen-Image, Wan, and SDXL / Pony / Illustrious (about 1.4x "
-                   "there). On Flux 3 Klein auto grows early (about 1.2x) so text and small faces stay clean. On MOSS Image it grows at noise 0.85 (about 1.6x, 2.4x with the 8-step LoRA). It switches itself off on inpaint masks and MOSS layout boxes (the console says why). On Qwen-Image 2.1 auto stays "
+                   "there). On Flux 3 Klein auto grows early (about 1.2x) so text and small faces stay clean. On MOSS Image it grows at noise 0.85 (about 1.6x, 2.4x with the 8-step LoRA). It does not work with SenseNova, HiDream-O1 or MiniMax H3 video: the node shows a ⚠️ under it and samples at full size. It switches itself off on inpaint masks and MOSS layout boxes (the console says why). On Qwen-Image 2.1 auto stays "
                    "off: line art, text and flat color break at its half size. Set grow_at_step by hand for photos.\n"
                    "Based on SPEED (Xiao, Chao, Yariv and Wetzstein, 2026).")
 
     def go(self, sampler, auto, grow_at_step, prompt=None, unique_id=None):
-        return (_wrap(sampler, auto, grow_at_step, layout_for_sampler_node(prompt, unique_id)),)
+        return (_wrap(sampler, auto, grow_at_step, layout_for_sampler_node(prompt, unique_id), node=unique_id),)
 
 
 class LCSpeedBoostKSampler:
@@ -415,7 +472,7 @@ class LCSpeedBoostKSampler:
                    "ClownShark (RES4LYF) samplers are in the sampler list when RES4LYF is installed. Wire a ClownSampler "
                    "into sampler to use its own settings.\n"
                    "Works on Krea 2, Z-Image, Flux.2 Klein, Qwen-Image, Wan, and SDXL / Pony / Illustrious (about 1.4x "
-                   "there). On Flux 3 Klein auto grows early (about 1.2x) so text and small faces stay clean. On MOSS Image it grows at noise 0.85 (about 1.6x, 2.4x with the 8-step LoRA). On image to image (denoise under 0.9), inpaint masks and MOSS layout boxes it samples like a plain KSampler. On "
+                   "there). On Flux 3 Klein auto grows early (about 1.2x) so text and small faces stay clean. On MOSS Image it grows at noise 0.85 (about 1.6x, 2.4x with the 8-step LoRA). It does not work with SenseNova, HiDream-O1 or MiniMax H3 video: the node shows a ⚠️ under it and samples at full size. On image to image (denoise under 0.9), inpaint masks and MOSS layout boxes it samples like a plain KSampler. On "
                    "Qwen-Image 2.1 auto stays off: line art, text and flat color break at its half size. Set grow_at_step "
                    "by hand for photos.\n"
                    "Based on SPEED (Xiao, Chao, Yariv and Wetzstein, 2026).")
@@ -456,7 +513,7 @@ class LCSpeedBoostKSampler:
             return (out,)
         noise = comfy.sample.prepare_noise(latent, seed, latent_image.get("batch_index", None))
         boosted = _wrap(sampler if sampler is not None else make_sampler(sampler_name), speed_boost, grow_at_step,
-                        layout_upstream(prompt, unique_id), positive_half)
+                        layout_upstream(prompt, unique_id), positive_half, node=unique_id)
         callback = latent_preview.prepare_callback(model, sigmas.shape[-1] - 1)
         out["samples"] = comfy.sample.sample_custom(model, noise, cfg, boosted, sigmas, positive, negative, latent,
                                                     noise_mask=latent_image.get("noise_mask", None), callback=callback,

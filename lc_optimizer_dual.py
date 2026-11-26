@@ -279,6 +279,129 @@ def _values(role):
     return vals
 
 
+FREE_TIP = ("For low RAM (Wan 2.2 + sound on 32 GB). Model 2 waits on disk until its pass, the text encoder leaves RAM when "
+            "model 1 starts, model 1 when model 2 starts, each model after its pass, and LC Foley lets go of MMAudio after "
+            "its sound. Wan + Foley on an 8 GB laptop: about 47 GB of RAM down to about 25 GB, same speed. Leave it off on "
+            "machines with plenty of RAM (it reloads both models every run, about 6% slower on a 5090). Each model must be "
+            "sampled once per run.")
+
+
+def _drop(obj, what):
+    """Take a model or text encoder out of RAM and VRAM for good: unload it, unpin it, drop its weights."""
+    import gc
+
+    import comfy.model_management as mm
+
+    mp = getattr(obj, "patcher", obj)
+    if mp is None or getattr(mp, "_lc_dropped", False):
+        return
+    try:
+        mm.unload_model_and_clones(mp)
+    except Exception as e:
+        print(f"[LC Dual Optimizer] free after pass: unload of the {what} failed ({e})")
+    try:
+        mp.unpin_all_weights()
+    except Exception:
+        pass
+    size = 0
+    for mod in mp.model.modules():
+        for store in (mod._parameters, mod._buffers):
+            for k, t in list(store.items()):
+                if t is not None:
+                    try:
+                        size += t.numel() * t.element_size()
+                    except Exception:
+                        pass
+                    store[k] = None
+    for attr in ("backup", "backup_buffers"):
+        if isinstance(getattr(mp, attr, None), dict):
+            getattr(mp, attr).clear()
+    mp._lc_dropped = True
+    gc.collect()
+    mm.soft_empty_cache()
+    print(f"[LC Dual Optimizer] free after pass: {what} out of memory ({size / 1024 ** 3:.1f} GB)")
+
+
+def _hollow(mp):
+    """Model 2's weights out of RAM until its pass: every weight becomes an empty placeholder of the same name and
+    shape (on the meta device), so LoRA loaders, shift and guidance nodes still see the full model."""
+    import gc
+
+    import torch
+
+    size = 0
+    # only the diffusion model's weights wait: the sampling schedule (model_sampling) is read before the pass starts
+    for mod in getattr(mp.model, "diffusion_model", mp.model).modules():
+        for store in (mod._parameters, mod._buffers):
+            for k, t in list(store.items()):
+                if t is None or t.device.type == "meta":
+                    continue
+                try:
+                    size += t.numel() * t.element_size()
+                except Exception:
+                    pass
+                shape = tuple(getattr(t, "tensor_shape", None) or t.shape)
+                e = torch.empty(shape, dtype=t.dtype if t.dtype.is_floating_point else torch.float16, device="meta")
+                store[k] = torch.nn.Parameter(e, requires_grad=False) if isinstance(t, torch.nn.Parameter) else e
+    gc.collect()
+    print(f"[LC Dual Optimizer] free after pass: model 2 waits on disk until its pass ({size / 1024 ** 3:.1f} GB not loaded yet)")
+
+
+def _refill(mp, folder, name):
+    """Read model 2 from disk again and put its real weights back into the hollow model (same module names)."""
+    import gc
+
+    import time
+
+    t = time.time()
+    fresh = E.load_model(folder, name)[0]
+    src = dict(getattr(fresh.model, "diffusion_model", fresh.model).named_modules())
+    n = 0
+    for mname, mod in getattr(mp.model, "diffusion_model", mp.model).named_modules():
+        new = src.get(mname)
+        if new is None:
+            continue
+        for store, nstore in ((mod._parameters, new._parameters), (mod._buffers, new._buffers)):
+            for k in list(store):
+                if k in nstore:
+                    store[k] = nstore[k]
+                    n += 1
+    del fresh, src
+    gc.collect()
+    print(f"[LC Dual Optimizer] free after pass: model 2 loaded for its pass ({n} tensors, {time.time() - t:.1f} s)")
+
+
+def _free_after_pass(models, clips, late=None):
+    """OUTER_SAMPLE wrappers that drop what is done: the text encoders when the first model samples, model 1 when
+    model 2 samples, and every model after its own pass."""
+    import comfy.patcher_extension as pe
+
+    live = [m for m in models if m is not None]
+    te = [c for c in dict.fromkeys(c for c in clips if c is not None)]
+    out = list(models)
+    for i, m in enumerate(models):
+        if m is None:
+            continue
+        before = te if m is live[0] else [x for x in live[:live.index(m)]]
+        names = ["text encoder"] * len(te) if m is live[0] else [f"model {models.index(x) + 1}" for x in before]
+
+        def outer(executor, *args, _before=before, _names=names, _self=m, _i=i, **kwargs):
+            for x, n in zip(_before, _names):
+                _drop(x, n)
+            if late and late.get(_i) and not getattr(_self, "_lc_refilled", False):
+                _refill(_self, *late[_i])
+                _self._lc_refilled = True
+            try:
+                return executor(*args, **kwargs)
+            finally:
+                _drop(_self, f"model {_i + 1}")
+
+        m = m.clone()
+        m.add_wrapper_with_key(pe.WrappersMP.OUTER_SAMPLE, "lc_dual_free_after_pass", outer)
+        out[i] = m
+    return out
+
+
 class LCOptimizerDual:
     CATEGORY = "LC123/optimizer"
     FUNCTION = "run"
@@ -307,7 +430,8 @@ class LCOptimizerDual:
         req["spectrum"] = (["auto", "on", "off"], {"default": "auto", "tooltip": SPECTRUM_DUAL_TIP})
         req["veda"] = (["auto", "on", "off"], {"default": "auto", "tooltip": VEDA_TIP})
         req["clip_type"] = (E.clip_types("video"), {"default": E.CLIP_AUTO, "tooltip": CLIP_TIP})
-        return {"required": req, "hidden": {"unique_id": "UNIQUE_ID"}}
+        opt = {"free_after_pass": ("BOOLEAN", {"default": False, "tooltip": FREE_TIP})}
+        return {"required": req, "optional": opt, "hidden": {"unique_id": "UNIQUE_ID"}}
 
     @classmethod
     def VALIDATE_INPUTS(cls, **kw):
@@ -316,6 +440,8 @@ class LCOptimizerDual:
     @classmethod
     def IS_CHANGED(cls, **kw):
         kw.pop("unique_id", None)
+        if kw.get("free_after_pass"):
+            return float("nan")  # the models are dropped after their pass, so every run loads them again
         sysp = E.report() or {}
         return hashlib.sha1((json.dumps(kw, sort_keys=True, default=str) + str(sysp.get("when"))).encode()).hexdigest()
 
@@ -340,7 +466,14 @@ class LCOptimizerDual:
                 swap[widget] = r[1]
             return r
 
-        for slot, (_, mw, tw) in enumerate(SLOT_WIDGETS):
+        free = bool(kw.get("free_after_pass"))
+        import comfy.model_management as _mm
+
+        _mm.lc_free_after_pass = free  # LC Foley reads this: it drops MMAudio after its sound when RAM is tight
+        late = {}
+        order = [1, 0] if (free and all(on)) else [0, 1]  # model 2 first, so it can wait on disk before the rest loads
+        for slot in order:
+            _, mw, tw = SLOT_WIDGETS[slot]
             label = f"model {slot + 1} ({fam['labels'][slot]})" if fam["labels"][slot] != f"Model {slot + 1}" else f"model {slot + 1}"
             pid = fam["pids"][slot]
             if not on[slot]:
@@ -352,6 +485,9 @@ class LCOptimizerDual:
                                  if E.is_custom(pid) else f"[LC Dual Optimizer] Pick a file for model {slot + 1}.")
             folder, name, _ = got
             model, clip, vae, how = E.load_model(folder, name)
+            if free and slot == 1 and on[0] and clip is None:
+                _hollow(model)
+                late[1] = (folder, name)
             loaded.append((label, f"{name} ({how})"))
             ckpt = name if folder == "checkpoints" else None
             slot_ckpt[slot] = ckpt
@@ -422,6 +558,9 @@ class LCOptimizerDual:
                 if up.startswith(E.DOWNLOAD):
                     swap["latent_upscaler"] = gu[1]
 
+        if free:
+            models = _free_after_pass(models, clips, late)
+            loaded.append(("memory", "free after pass: text encoder, then each model, leave RAM once used"))
         picks = {w: kw.get(w) for trio in SLOT_WIDGETS for w in trio[1:]}
         picks.update({w: kw.get(w) for _, w in SHARED})
         for slot, w in enumerate(("model_file_1", "model_file_2")):  # after a download the plan reads the real file

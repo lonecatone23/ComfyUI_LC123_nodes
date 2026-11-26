@@ -275,6 +275,12 @@ The **System & Model Optimization Report** tells you what suits your machine. Th
 - **Wan 2.2:** model 1 = high noise, model 2 = low noise (I2V and T2V, official files, GGUFs or finetunes). The node checks the pair: the official files by hash, your fingerprint library, CivitAI info files and the file names, then CivitAI by hash as a last resort. Two highs, two lows, swapped slots or two different releases get a ⚠️ under the node and in `info`. It still runs.
 - **Any other family:** two models of it, for merging or A/B tests.
 - Click the family to fill both slots with the recommended files, then change either one. The VAE is the first checkpoint's own when the model is an all-in-one checkpoint, otherwise the family's recommended VAE. Speed-ups apply to both models.
+- **free_after_pass** (off by default): for low RAM (Wan 2.2 + sound on a 32 GB machine).
+    - Model 2 waits on disk until its pass. LoRAs, shift and guidance nodes still see a normal model.
+    - The text encoder leaves RAM when model 1 starts sampling, model 1 when model 2 starts, each model after its own pass, and LC Foley (LC_AV) lets go of MMAudio after its sound.
+    - Wan 2.2 + LC Foley on an 8 GB laptop: about 47 GB of RAM at the peak down to about 25 GB, same speed, the same video.
+    - Leave it off on machines with plenty of RAM: both models load again every run (about 6% slower on an RTX 5090).
+    - Each model must be sampled once per run.
 
 **How it works**
 - Pick the **base model** and a **goal** (Quality / Optimal / Fast, same as the report).
@@ -295,6 +301,7 @@ The **System & Model Optimization Report** tells you what suits your machine. Th
     - The speed-ups still apply.
     - `clip_type` (Custom only): how the text encoder loads. **auto** works when the encoder matches one of the models above; otherwise set it (e.g. `chroma` for Chroma).
 - **GGUF:** loads through the **gguf** pack by calcuis (it reads MiniMax H3 and Krea 2 GGUFs). **ComfyUI-GGUF** is the fallback.
+    - GGUF layers use their own forward, so ComfyUI's fused fp16 path (fp16 accumulation, `--fast`) no longer fails with "cutlass_fp16_linear: K mismatch" (Wan 2.2 GGUF).
 
 **Speed-ups (Auto)**
 - **Attention:** Sage (or Flash) only if it passed the report's test on this machine.
@@ -546,7 +553,7 @@ What a real camera does to a scene, in the order light travels. Wire a depth map
 | **LC Depth FX 🌫️** | Haze, light wrap and depth of field from a depth map |
 | **LC Chromatic Aberration** | RGB fringe |
 | **LC Image Denoise** | **smart** (default) measures the noise in each image, cleans brightness grain and colour speckle separately, and brings back pores and hair where they stand above the noise. **noise_report** says how noisy each image was. **legacy** is the old edge-gated blur. 💡 On heavy noise, add LC Film Grain after it so skin does not look plastic |
-| **LC Color Match 🎨** | Matches a reference with **skin_protect**. **oklab** (default) matches how all the colours relate, not each channel on its own; **oklab + distribution** also matches the shape of the colours (best for copying a grade, can over-match a different scene); **adain** / **mean_std** are the old methods. oklab methods use every reference frame and run on the GPU. Optional **mask**: white = match, black = keep |
+| **LC Color Match 🎨** | Matches a reference with **skin_protect**. **oklab** (default) matches how all the colors relate, not each channel on its own; **oklab + distribution** also matches the shape of the colors (best for copying a grade, can over-match a different scene); **adain** / **mean_std** are the old methods. oklab methods use every reference frame and run on the GPU one frame at a time with a progress bar, so a long or upscaled video never fills VRAM. Optional **mask**: white = match, black = keep |
 | **LC Tone Match** | **image** supplies the detail, **reference** supplies lighting / color. Optional **mask** (white = lock). **split**: **guided** (default) follows the image's own edges, so no bright or dark rim on hard edges; **blur** is the old split. Wipes against the reference |
 | **LC Image Desaturate** | Desaturate, plain and simple |
 | **LC Skin Beauty ✨** / **LC Skin Upscale** / **LC Photo Style 📷** | See above |

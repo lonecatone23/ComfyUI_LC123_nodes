@@ -4050,6 +4050,10 @@
       },
       "clip_type": {
         "tooltip": "Custom 전용: text encoder를 로드하는 방식입니다(CLIPLoader의 type). auto = encoder의 형태가 알려진 base 모델 하나와 일치할 때 그로부터 판단. 다른 base 모델과 체크포인트 자체 encoder에서는 무시됩니다."
+      },
+      "free_after_pass": {
+        "name": "free_after_pass",
+        "tooltip": "RAM이 적은 컴퓨터용(32 GB에서 Wan 2.2 + 소리). 모델 2는 자기 패스까지 디스크에서 기다리고, 모델 1이 시작하면 텍스트 인코더가 RAM에서 빠지고, 모델 2가 시작하면 모델 1이 빠지며, 각 모델은 자기 패스 후에 빠집니다. LC Foley도 소리를 만든 뒤 MMAudio를 놓습니다. 8 GB 노트북에서 Wan + Foley: RAM 약 47 GB가 약 25 GB로, 속도는 같습니다. RAM이 넉넉한 컴퓨터에서는 꺼 두세요(매번 두 모델을 다시 불러와 5090에서 약 6% 느려집니다). 각 모델은 한 번 실행에 한 번만 샘플링해야 합니다."
       }
     }
   }

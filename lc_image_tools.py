@@ -1495,9 +1495,8 @@ class LCColorMatch(PreviewImage):
 
         if method.startswith("oklab"):
             from .lc_oklab import match as _oklab_match
-            matched = _oklab_match(image[..., :3], reference[..., :3], distribution=(method != "oklab"),
-                                   skin_protect=float(skin_protect))
-            result = torch.lerp(image[..., :3].float(), matched.float(), float(strength)).clamp(0, 1)
+            result = _oklab_match(image, reference, distribution=(method != "oklab"),
+                                  skin_protect=float(skin_protect), strength=float(strength))
             return self._finish(image, reference, result, mask)
 
         ref = reference[0:1, ..., :3]  # an RGBA reference: match its color, not its alpha

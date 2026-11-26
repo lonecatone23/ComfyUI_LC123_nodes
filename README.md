@@ -268,6 +268,14 @@ The **System & Model Optimization Report** tells you what suits your machine. Th
 - MiniMax H3 FL2VA (first and last frame, the default) and MiniMax H3 Ref2VA (reference to video), LTX 2.5, LTX 2.3 (its distilled LoRA is applied at 0.5, like Comfy's template).
 - *note:* the outputs never change with the base model. These nodes sit at the start of the graph, so your wires stay put. A part the model doesn't use just shows **not used by** (e.g. no upscaler on MiniMax H3).
 
+**LC Dual Model Optimizer ⚡⚡** (two models of one family)
+- Outputs: `model_1`, `model_2`, `clip_1`, `clip_2`, `vae`, `audio_vae`, `latent_upscaler`, `info`.
+- Each model has its own model file and text encoder picker, and an on / off switch. A model that is off isn't loaded: its model and clip are None. The same text encoder for both loads once.
+- **MiniMax H3 (FL2VA + Ref2VA):** model 1 = FL2VA, model 2 = Ref2VA.
+- **Wan 2.2:** model 1 = high noise, model 2 = low noise (I2V and T2V, official files, GGUFs or finetunes). The node checks the pair: the official files by hash, your fingerprint library, CivitAI info files and the file names, then CivitAI by hash as a last resort. Two highs, two lows, swapped slots or two different releases get a ⚠️ under the node and in `info`. It still runs.
+- **Any other family:** two models of it, for merging or A/B tests.
+- Click the family to fill both slots with the recommended files, then change either one. The VAE is the first checkpoint's own when the model is an all-in-one checkpoint, otherwise the family's recommended VAE. Speed-ups apply to both models.
+
 **How it works**
 - Pick the **base model** and a **goal** (Quality / Optimal / Fast, same as the report).
 - **Every file defaults to ★ Recommended:** the file the report picked for this machine. No report yet? Comfy's own default files, and a 💡⚠️ banner on the node telling you to run the report first.
@@ -742,7 +750,7 @@ Details: [`LC123_Save_Image_Note.md`](LC123_Save_Image_Note.md)
 | **LC Seed Jump 🌱** | One seed + a jump = six stepped seeds |
 | **🌱LC Seed** | Type a number for a fixed seed, or **Randomize Each Time** / **New Fixed Random**. A **seed history** remembers the last 10 seeds this node actually ran with. On Randomize, saved images carry the seed actually used, not the randomize setting. Capped at 2^53-1, the browser's safe integer limit |
 | **LC Slider** | A plain slider that looks the same in classic and Nodes 2.0. Double-click the value to type. min / max / step / decimals behind the faint gear |
-| **LC Size Pad 📐** | A 2D slider for width × height: the frame is pinned to the bottom-left; drag its top-right corner (or click anywhere on the pad). **model** (MiniMax H3, Krea 2, SDXL, LTX, Klein 9B, Wan 2.2, Custom) snaps to that model's step (H3 and LTX 32, SDXL 64, the rest 16) and stops the drag at its megapixel limit (*Max megapixels reached*). **aspect** locks the shape, **megapixels** resizes it, **⇄** flips portrait / landscape. Outputs width, height and an info line. 💡 Wan: 0.92 MP is 720p, 0.4 MP is 480p |
+| **LC Size Pad 📐** | A 2D slider for width × height: the frame is pinned to the bottom-left; drag its top-right corner (or click anywhere on the pad). **model** (MiniMax H3, Krea 2, SDXL, LTX, Klein 9B, Wan 2.2, Custom) snaps to that model's step (H3 and LTX 32, SDXL 64, the rest 16) and stops the drag at its megapixel limit (*Max megapixels reached*). **aspect** locks the shape (**image**: the shape of the picture in the optional **image** socket; with nothing plugged in, the frame you drew), **megapixels** resizes it, **⇄** flips portrait / landscape. Outputs width, height and an info line. 💡 Wan: 0.92 MP is 720p, 0.4 MP is 480p |
 | **LC 🚦** | A light for a boolean. One input, no widgets: lit in one color for true, another for false. The faint ⚙ sets each color, or none. Follows a boolean widget upstream live, otherwise shows the last run. Dark when it or its source is muted or bypassed |
 | **LC Timer ⏱️** | Times every run, shows the time left while it runs, and scores the newest one against the 5 before it: faster in green, slower in red, plus how it compares to their average. The last 10 runs are listed, newest first. Stopped and fully cached runs are left out of the score. The history saves with the workflow; right-click to clear it |
 | **LC Control Panel 🎛️** | Up to 16 LC Sliders on one node, each on its own output. The ⚙ at the end of a row sets its name, min, max, step and decimals (0 = INT, otherwise FLOAT), or deletes it. **+ Add slider** adds a row. Plug a new row into a number input and it copies that input's name, range and value. Double-click a value to type one |

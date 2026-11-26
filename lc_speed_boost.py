@@ -263,6 +263,20 @@ def _half_conds(model, raw, xs):
     return comfy.samplers.process_conds(guider.inner_model, xs, conds, xs.device)["positive"]
 
 
+# video models whose latent is plain [B, C, frames, H, W]: half size works frame by frame, like a picture
+_VIDEO_OK = {"WAN21", "WAN22"}
+
+
+def _all_conds_at(model, xs):
+    """Every prompt (positive, negative...) prepared again for the half-size latent. Wan image-to-video attaches the
+    start picture to its prompts at the latent's size: prepared at full size it can't meet a half-size latent."""
+    import comfy.samplers
+
+    guider = model.inner_model
+    conds = {k: [c.copy() for c in v] for k, v in guider.original_conds.items()}
+    return comfy.samplers.process_conds(guider.inner_model, xs, conds, xs.device)
+
+
 def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, lc_inner, lc_auto, lc_step, lc_layout=False,
              lc_half_positive=None, lc_node=None, **kw):
     extra_args = dict(extra_args or {})
@@ -288,7 +302,8 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
         why = ("SenseNova / HiDream-O1 draw in pixels and scale their noise to the picture size, so a half size start "
                "turns the picture into colored noise")
         model_says_no = True
-    elif not (x.ndim == 4 or (x.ndim == 5 and x.shape[2] == 1)):  # Krea 2 / Flux 2 style: 5D with one frame is a picture
+    elif not (x.ndim == 4 or (x.ndim == 5 and (x.shape[2] == 1 or _model_class(model) in _VIDEO_OK))):
+        # Krea 2 / Flux 2 style: 5D with one frame is a picture; Wan video shrinks frame by frame
         why = "video and other multi-frame latents can't start at half size"
         model_says_no = True
     kind = None if why else _kind(model, sigmas)
@@ -325,6 +340,18 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
         return run(x, sigmas, 0)
     guider = getattr(model, "inner_model", None)
     swap = None
+    all_swap = None  # Wan video: every prompt prepared again at half size (its start picture rides on the prompts)
+    if x.ndim == 5 and x.shape[2] > 1 and guider is not None and isinstance(getattr(guider, "conds", None), dict):
+        try:
+            all_swap = guider.conds
+            guider.conds = _all_conds_at(model, xs)
+        except Exception as e:
+            print(f"[LC Speed Boost] Off for this run: the prompts could not be prepared at half size ({e}). "
+                  "Sampling at full size.")
+            guider.conds = all_swap
+            _tell(lc_node, f"⚠️ Speed Boost does not work with {_model_name(model)} here: its prompts could not be "
+                           "prepared at half size, so it samples at full size.", "warn")
+            return run(x, sigmas, 0)
     if lc_half_positive is not None and guider is not None and isinstance(getattr(guider, "conds", None), dict):
         try:
             swap = guider.conds.get("positive")
@@ -339,6 +366,8 @@ def _sampler(model, x, sigmas, extra_args=None, callback=None, disable=None, *, 
     finally:
         if swap is not None:
             guider.conds["positive"] = swap
+        if all_swap is not None:
+            guider.conds = all_swap
     X, t2 = grow(y, H, W, t, extra_args.get("seed", 0) + 7, kind)
     rest = torch.cat([torch.tensor([t2], dtype=sigmas.dtype, device=sigmas.device), sigmas[j + 1:]])
     n = len(sigmas) - 1

@@ -128,10 +128,13 @@
         "tooltip": "サイズをこのモデルが求める値(ステップとサイズ)に合わせ、メガピクセルの上限でドラッグを止めます。Custom:8刻みで、実質的な上限なし。"
       },
       "aspect": {
-        "tooltip": "ドラッグ中、フレームをこの形に固定します。free: 任意の形。"
+        "tooltip": "ドラッグ中、フレームをこの形に固定します。free: 任意の形。image: image ソケットの画像の形を、このメガピクセルのサイズで使います。何もつながっていないときは、描いたフレームを使います。"
       },
       "megapixels": {
         "tooltip": "現在の形でのサイズです。変更するとフレームがリサイズされ、ドラッグすると更新されます。モデルの上限を超えることはありません。"
+      },
+      "image": {
+        "tooltip": "aspect が image のとき、サイズはこの画像の形になります。"
       }
     },
     "outputs": {
@@ -4003,6 +4006,50 @@
       },
       "note_2": {
         "tooltip": "画像ごとの2つ目のメモ、note と同じ。"
+      }
+    }
+  },
+  "LCOptimizerDual": {
+    "description": "同じファミリーのモデルを1つまたは2つ読み込みます。それぞれに専用のテキストエンコーダーがあり、VAE、オーディオ VAE、latent upscaler は共通です。ファイルピッカー、ダウンロード、高速化は LC Model Optimizer と同じです。\nMiniMax H3 (FL2VA + Ref2VA)：モデル1 = FL2VA、モデル2 = Ref2VA。\nWan 2.2：モデル1 = high noise、モデル2 = low noise。正しい組み合わせか、スロットが正しいかを確認し、違う場合は ⚠️ を表示します（実行は続きます）。\nその他のファミリー：そのファミリーのモデルを2つ。マージや A/B テストに。\nファミリーをクリックすると両方のスロットに推奨ファイルが入ります。その後はどちらのスロットも自由に変更できます。\n各モデルの横のスイッチでオフにできます：読み込まれず、その model と clip の出力は None になります。\nファイルがない場合は ⬇ の項目を選ぶと、最初の実行時にダウンロードされます。それ以外が勝手にダウンロードされることはありません。",
+    "inputs": {
+      "base_model": {
+        "tooltip": "モデルファミリー。両方のモデルの推奨ファイルとチェック内容を決めます。"
+      },
+      "goal": {
+        "tooltip": "Quality = bf16 に最も近い。Optimal = 高速でほぼ同一。Fast = 見た目が問題ない範囲で最速。"
+      },
+      "model_1_on": {
+        "tooltip": "オン：このモデルを読み込みます。オフ：スキップし、その model と clip の出力は None になります。"
+      },
+      "model_2_on": {
+        "tooltip": "オン：このモデルを読み込みます。オフ：スキップし、その model と clip の出力は None になります。"
+      },
+      "speed_ups": {
+        "tooltip": "Auto = System & Model Optimization Report に従います。Manual = 下の各項目を個別に選択します。"
+      },
+      "attention": {
+        "tooltip": "アテンションのバックエンド。auto = レポートのテストに合格した中で最速のもの。"
+      },
+      "fp16_accumulation": {
+        "tooltip": "品質をわずかに犠牲にした、より高速な fp16 演算。auto = Fast ゴールのときのみ。"
+      },
+      "step_cache": {
+        "tooltip": "EasyCache: ほとんど変化しないステップをスキップします。auto = Fast ゴール、20ステップ以上。"
+      },
+      "torch_compile": {
+        "tooltip": "モデルをコンパイルします。初回は遅く、以降は速くなります。Triton が必要です。"
+      },
+      "qwen21_cache": {
+        "tooltip": "Qwen-Image 2.1 専用 (Qwen Image 2.1 Cache): KV キャッシュの置き場所と保存方法です。auto = 無劣化。Fast goal または 16 GB 未満のカードでは int8。int8 はキャッシュを半分にし、精度は bf16 並み。int4 は4分の1になりますが、ステップごとの誤差がほぼ倍になります。RAM に置いても速度への影響は小さいです。off = 最も遅くなります。"
+      },
+      "spectrum": {
+        "tooltip": "MiniMax H3、MOSS Image、Krea 2：Spectrum は一部のステップを実行せずに予測します。auto = このファミリーに対する LC Model Optimizer と同じ選択。on = 試す。off = 使わない（speed_ups が Auto でも有効）。オンのときはステップキャッシュの代わりになります。"
+      },
+      "veda": {
+        "tooltip": "MiniMax H3 専用: 低解像度向けの Veda スパースアテンション (Veda-on-ComfyUI と models/veda 内の predictor。別途インストール)。auto = 0.9 MP 未満で動作 (8 GB カードで約1.4倍、見た目は同じ)、それ以上ではフルアテンション (テストで顔がずれたため)。on = すべての解像度で動作。off = 使用しない (speed_ups が Auto でも有効)。"
+      },
+      "clip_type": {
+        "tooltip": "Custom のみ: テキストエンコーダーの読み込み方です (CLIPLoader の type)。auto = エンコーダーの形状が既知のベースモデルの1つと一致する場合に、そこから判定します。他のベースモデルやチェックポイント内蔵のエンコーダーでは無視されます。"
       }
     }
   }

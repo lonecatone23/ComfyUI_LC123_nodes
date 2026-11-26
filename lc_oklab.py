@@ -46,48 +46,58 @@ def to_srgb(lab: torch.Tensor) -> torch.Tensor:
 
 
 def match(image_bhwc: torch.Tensor, reference_bhwc: torch.Tensor, distribution: bool = False,
-          skin_protect: float = 0.5, neutral_guard: bool = True) -> torch.Tensor:
+          skin_protect: float = 0.5, neutral_guard: bool = True, strength: float = 1.0) -> torch.Tensor:
     """Colour-match every image to the reference(s). Reference batch the same size as the image batch: frame i is
-    matched to reference i. Otherwise every reference frame is pooled into one target look."""
-    src_dev = image_bhwc.device
+    matched to reference i. Otherwise every reference frame is pooled into one target look.
+    One frame at a time on the GPU (a long video never sits there whole); the result is built where the input lives.
+    strength blends original (0) to matched (1). Shows a progress bar (fit pass, then apply pass)."""
+    import comfy.utils
+
     dev = _device()
-    img = image_bhwc[..., :3].to(dev, torch.float32).clamp(0, 1)
-    ref = reference_bhwc[..., :3].to(dev, torch.float32).clamp(0, 1)
-    pair = ref.shape[0] == img.shape[0] and img.shape[0] > 1
-    ref_lab = srgb_to_oklab(ref)
+    n, n_ref = image_bhwc.shape[0], reference_bhwc.shape[0]
+    pair = n_ref == n and n > 1
+
+    def lab_of(t, i):
+        return srgb_to_oklab(t[i, ..., :3].to(dev, torch.float32).clamp(0, 1))
+
     if not pair:
-        per = max(1, MAX_POINTS // ref_lab.shape[0])
-        pooled = torch.cat([_sample(ref_lab[i], per) for i in range(ref_lab.shape[0])], 0)
-    labs = [srgb_to_oklab(img[i]) for i in range(img.shape[0])]
+        per = max(1, MAX_POINTS // n_ref)
+        pooled = torch.cat([_sample(lab_of(reference_bhwc, i), per) for i in range(n_ref)], 0)
+    pbar = comfy.utils.ProgressBar(2 * n)
     fits = []
-    for i in range(img.shape[0]):
-        src = _sample(labs[i])
-        dst = _sample(ref_lab[i]) if pair else pooled
+    for i in range(n):
+        src = _sample(lab_of(image_bhwc, i))
+        dst = _sample(lab_of(reference_bhwc, i)) if pair else pooled
         mu_s, cov_s, _ = weighted_mean_cov(src)
         mu_d, cov_d, _ = weighted_mean_cov(dst)
         a, b = mkl_transform(mu_s, cov_s, mu_d, cov_d)
         fits.append(torch.cat([a.to(torch.float32), b.to(torch.float32).view(3, 1)], 1))
+        pbar.update(1)
     # a video clip shares its colour transform over nearby frames, so the match does not pump; separate images keep
     # their own
-    fits = smooth(torch.stack(fits), segments(img))
-    out = []
-    for i in range(img.shape[0]):
-        lab = labs[i]
-        src = _sample(lab)
-        dst = _sample(ref_lab[i]) if pair else pooled
+    fits = smooth(torch.stack(fits), segments(image_bhwc))
+    out = torch.empty((n, *image_bhwc.shape[1:3], 3), dtype=torch.float32, device=image_bhwc.device)
+    for i in range(n):
+        lab = lab_of(image_bhwc, i)
         a, b = fits[i][:, :3], fits[i][:, 3]
         flat = lab.reshape(-1, 3)
         mapped = flat @ a.T + b
         if distribution:
-            chain = IDTChain.fit(src @ a.T + b, dst, iterations=10)
+            dst = _sample(lab_of(reference_bhwc, i)) if pair else pooled
+            chain = IDTChain.fit(_sample(lab) @ a.T + b, dst, iterations=10)
             mapped = chain(mapped)
         mapped = mapped.reshape(lab.shape)
         if neutral_guard:
             mapped = apply_neutral_guard(lab, mapped)
         if skin_protect > 0:
             mapped = apply_skin_protection(lab, mapped, float(skin_protect))
-        out.append(to_srgb(mapped))
-    return torch.stack(out, 0).to(src_dev)
+        res = to_srgb(mapped)
+        if strength < 1.0:
+            orig = image_bhwc[i, ..., :3].to(dev, torch.float32).clamp(0, 1)
+            res = torch.lerp(orig, res, float(strength))
+        out[i] = res.clamp(0, 1).to(out.device)
+        pbar.update(1)
+    return out
 
 
 # ---------------------------------------------------------------- numpy helpers for the numpy-based LC nodes

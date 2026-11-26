@@ -1,8 +1,8 @@
 # LC123 node inventory
 
-**161 Python nodes** + **5 JS-only** · version 1.56.20
+**162 Python nodes** + **5 JS-only** · version 1.56.20
 
-Registered class IDs: 164 (161 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
+Registered class IDs: 165 (162 nodes, LCChangeStepCount as a second name for LC Sigma Resample, and 2 deprecated nodes that still load in old workflows).
 
 ## LC123/Flux 3 (3)
 
@@ -114,12 +114,13 @@ Registered class IDs: 164 (161 nodes, LCChangeStepCount as a second name for LC 
 
 - `LCMOSSLayoutPrompt`: LC MOSS Layout Prompt 🗺️
 
-## LC123/optimizer (4)
+## LC123/optimizer (5)
 
 - `LCOptimizer`: LC Model Optimizer ⚡
 - `LCOptimizerPipe`: LC Model Optimizer (pipe) ⚡
 - `LCOptimizerVideo`: LC Model Optimizer Video ⚡
 - `LCOptimizerVideoPipe`: LC Model Optimizer Video (pipe) ⚡
+- `LCOptimizerDual`: LC Dual Model Optimizer ⚡⚡
 
 ## LC123/pipe (10)
 

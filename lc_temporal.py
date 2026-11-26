@@ -27,12 +27,15 @@ def _frames(images):
 
 def segments(images):
     """One segment id per frame. Consecutive frames that look alike share an id."""
-    x = _frames(images)
-    b = x.shape[0]
+    b = len(images)
     if b < 2:
         return [0] * b
-    thumbs = F.adaptive_avg_pool2d(x, (32, 32))
-    small = F.adaptive_avg_pool2d(x, (128, 128))
+    thumbs, small = [], []
+    for s in range(0, b, 16):  # a few frames at a time: a long, big video never gets a full float copy
+        x = _frames(images[s:s + 16])
+        thumbs.append(F.adaptive_avg_pool2d(x, (32, 32)))
+        small.append(F.adaptive_avg_pool2d(x, (128, 128)))
+    thumbs, small = torch.cat(thumbs), torch.cat(small)
     idx = (small * 15.999).long().flatten(2)
     hist = torch.zeros(b, 3, 16)
     hist.scatter_add_(2, idx, torch.ones_like(idx, dtype=torch.float32))

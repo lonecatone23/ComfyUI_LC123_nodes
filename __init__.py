@@ -128,6 +128,7 @@ _load("lc_optimizer")
 _load("lc_system_check")
 _load("lc_pack_usage")
 _load("lc_optimizer_node")
+_load("lc_optimizer_dual")  # LC Dual Model Optimizer
 _load("lc_link_card")
 _load("lc_vram_cache_clear")
 _load("lc_stop")

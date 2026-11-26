@@ -17,7 +17,7 @@ PRESETS = {
     "Wan 2.2": {"step": 16, "mp": 0.92, "max_mp": 0.93},      # 720p (1280 x 720); 0.4 MP is 480p (832 x 480)
     "Custom": {"step": 8, "mp": 1.0, "max_mp": 16.0},
 }
-ASPECTS = ["free", "1:1", "4:5", "5:4", "2:3", "3:2", "3:4", "4:3", "9:16", "16:9", "9:21", "21:9"]
+ASPECTS = ["free", "1:1", "4:5", "5:4", "2:3", "3:2", "3:4", "4:3", "9:16", "16:9", "9:21", "21:9", "image"]
 
 
 def snap(v, step):
@@ -36,6 +36,20 @@ def fit(w, h, preset):
     return w, h
 
 
+def size_for(mp, r, preset):
+    """Snapped size of mp megapixels at shape r (width / height), kept under the limit (same as sizeFor in the JS)."""
+    p = PRESETS.get(preset, PRESETS["Custom"])
+    area = min(float(mp), p["max_mp"]) * 1e6
+    w = math.sqrt(area * r)
+    w, h = snap(w, p["step"]), snap(w / r, p["step"])
+    while w * h > p["max_mp"] * 1e6 + 1 and w > p["step"] and h > p["step"]:
+        if w / h > r:
+            w -= p["step"]
+        else:
+            h -= p["step"]
+    return w, h
+
+
 class LCSizePad:
     @classmethod
     def INPUT_TYPES(cls):
@@ -45,12 +59,17 @@ class LCSizePad:
                                           "tooltip": "Snaps the size to what this model wants (its step and size) and "
                                                      "stops the drag at its megapixel limit. Custom: steps of 8, no real limit."}),
                 "aspect": (ASPECTS, {"default": "free",
-                                     "tooltip": "Locks the frame to this shape while you drag. free: any shape."}),
+                                     "tooltip": "Locks the frame to this shape while you drag. free: any shape. image: "
+                                                "the shape of the picture in the image socket at this megapixel size; "
+                                                "with nothing plugged in, the frame you drew."}),
                 "megapixels": ("FLOAT", {"default": 1.0, "min": 0.1, "max": 16.0, "step": 0.05,
                                          "tooltip": "The size at the current shape. Changing it resizes the frame; "
                                                     "dragging updates it. It never goes past the model's limit."}),
                 "width": ("INT", {"default": 1024, "min": 64, "max": 16384, "step": 8}),
                 "height": ("INT", {"default": 1024, "min": 64, "max": 16384, "step": 8}),
+            },
+            "optional": {
+                "image": ("IMAGE", {"tooltip": "With aspect on image: the size takes this picture's shape."}),
             },
         }
 
@@ -64,10 +83,18 @@ class LCSizePad:
                    "Klein 9B, Wan 2.2) and an aspect ratio. The size is snapped to the model's step and kept under its "
                    "megapixel limit.")
 
-    def run(self, model, aspect, megapixels, width, height):
-        w, h = fit(width, height, model)
+    def run(self, model, aspect, megapixels, width, height, image=None):
+        src = ""
+        iw = ih = 0
+        if aspect == "image" and image is not None and image.ndim == 4 and image.shape[1] > 0 and image.shape[2] > 0:
+            ih, iw = int(image.shape[1]), int(image.shape[2])
+            w, h = size_for(megapixels, iw / ih, model)
+            src = f" · image {iw} x {ih}"
+        else:  # no picture: the frame as drawn
+            w, h = fit(width, height, model)
         mp = round(w * h / 1e6, 2)
-        return (w, h, f"{w} x {h} · {mp:.2f} MP · {model}", mp)
+        out = (w, h, f"{w} x {h} · {mp:.2f} MP · {model}{src}", mp)
+        return {"ui": {"lc_size_pad": [{"w": w, "h": h, "iw": iw, "ih": ih}]}, "result": out}
 
 
 NODE_CLASS_MAPPINGS = {"LCSizePad": LCSizePad}

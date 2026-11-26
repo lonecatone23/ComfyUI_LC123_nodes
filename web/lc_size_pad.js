@@ -24,6 +24,12 @@ const ratioOf = (a) => {
   const m = /^(\d+):(\d+)$/.exec(String(a || ""));
   return m ? Number(m[1]) / Number(m[2]) : null;
 };
+// the shape the frame is locked to: a ratio, the plugged-in picture's shape (known after a run), or null (free)
+const ratioNode = (node) => {
+  const a = W(node, "aspect")?.value;
+  if (a === "image") return node._lcSpImg ? node._lcSpImg.iw / node._lcSpImg.ih : null;
+  return ratioOf(a);
+};
 const snap = (v, step) => Math.max(step, Math.round(v / step) * step);
 const minSide = (p) => Math.max(p.step * 2, 128);
 
@@ -107,7 +113,7 @@ function draw(node) {
   ctx.stroke();
 
   // the aspect lock: the line the corner slides along
-  const r = ratioOf(W(node, "aspect")?.value);
+  const r = ratioNode(node);
   if (r) {
     ctx.setLineDash([2, 4]);
     ctx.strokeStyle = "rgba(255,255,255,0.25)";
@@ -158,7 +164,10 @@ function draw(node) {
   ctx.textBaseline = "middle";
   ctx.fillStyle = at ? "#f3c969" : "rgba(255,255,255,0.8)";
   const asp = W(node, "aspect")?.value;
-  ctx.fillText(`${sw} × ${sh} · ${mp.toFixed(2)} / ${p.max} MP${asp && asp !== "free" ? ` · ${asp}` : ""}`, cw / 2, lay.ch + 12);
+  const img = node._lcSpImg;
+  const tag = asp === "image" ? (img ? ` · image ${img.iw} × ${img.ih}` : " · image (none: drawn shape)")
+    : asp && asp !== "free" ? ` · ${asp}` : "";
+  ctx.fillText(`${sw} × ${sh} · ${mp.toFixed(2)} / ${p.max} MP${tag}`, cw / 2, lay.ch + 12);
 
   // "Max megapixels reached" while a drag is held at the limit, fading out after release
   const tip = node._lcSpTip;
@@ -254,7 +263,7 @@ function attach(node) {
     e.preventDefault();
     e.stopPropagation();
     cv.setPointerCapture?.(e.pointerId);
-    node._lcSpDrag = { r: ratioOf(W(node, "aspect")?.value), p: preset(node), lay };
+    node._lcSpDrag = { r: ratioNode(node), p: preset(node), lay };
     onMove(node, x, y); // a click puts the corner right there
   });
   cv.addEventListener("pointermove", (e) => {
@@ -296,11 +305,11 @@ function attach(node) {
   hook("model", () => {
     const p = preset(node);
     const { w, h } = size(node);
-    const s = sizeFor(p.mp, ratioOf(W(node, "aspect")?.value) || w / h, p);
+    const s = sizeFor(p.mp, ratioNode(node) || w / h, p);
     setSize(node, s.w, s.h);
   });
-  hook("aspect", (v) => {
-    const r = ratioOf(v);
+  hook("aspect", () => {
+    const r = ratioNode(node);
     if (!r) return draw(node);
     const p = preset(node);
     const { w, h } = size(node);
@@ -319,6 +328,7 @@ function attach(node) {
   hook("height", () => draw(node));
   node.addWidget("button", "⇄ portrait / landscape", null, () => {
     const a = W(node, "aspect");
+    if (a?.value === "image" && node._lcSpImg) return; // the picture decides the shape
     if (a && FLIP[a.value]) a.value = FLIP[a.value];
     const { w, h } = size(node);
     setSize(node, h, w);
@@ -353,6 +363,27 @@ app.registerExtension({
       this._lcSpConfigured = true;
       const r = configure?.apply(this, arguments);
       requestAnimationFrame(() => draw(this));
+      return r;
+    };
+    // after a run: the picture's shape (aspect = image), so the pad shows and locks to the size that went out
+    const executed = nodeType.prototype.onExecuted;
+    nodeType.prototype.onExecuted = function (msg) {
+      const r = executed?.apply(this, arguments);
+      const s = msg?.lc_size_pad?.[0];
+      if (s) {
+        this._lcSpImg = s.iw > 0 && s.ih > 0 ? { iw: s.iw, ih: s.ih } : null;
+        if (this._lcSpImg && W(this, "aspect")?.value === "image") setSize(this, s.w, s.h);
+        else draw(this);
+      }
+      return r;
+    };
+    const conn = nodeType.prototype.onConnectionsChange;
+    nodeType.prototype.onConnectionsChange = function (type, slot, connected) {
+      const r = conn?.apply(this, arguments);
+      if (!connected && this.inputs?.[slot]?.name === "image") {
+        this._lcSpImg = null; // unplugged: back to the drawn frame
+        draw(this);
+      }
       return r;
     };
     const removed = nodeType.prototype.onRemoved;

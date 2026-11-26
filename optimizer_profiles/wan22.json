@@ -1,0 +1,558 @@
+{
+  "id": "wan22",
+  "name": "Wan 2.2",
+  "kind": "video_pair",
+  "params_b": 14,
+  "notes": [
+    "Two models per run: the high noise model makes the first half of the steps (motion and layout), the low noise model finishes them (detail). Load both with LC Dual Model Optimizer: high in model 1, low in model 2.",
+    "I2V (image to video) and T2V (text to video) are separate pairs: keep both models from the same one.",
+    "Same text encoder (umt5-xxl) and VAE (Wan 2.1 VAE) for both models."
+  ],
+  "components": {
+    "diffusion_high": {
+      "label": "High noise model",
+      "role": "diffusion",
+      "variants": [
+        {
+          "file": "wan2.2_i2v_high_noise_14B_fp16.safetensors",
+          "format": "fp16",
+          "gb": 28.58,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "c21c21efa368d529a982a7d89dd11d86608b5937cae9a125d0ffe5491918a100"
+        },
+        {
+          "file": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+          "format": "fp8_scaled",
+          "gb": 14.29,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "6122e79d55e0f235698d11d657f3b196c5273c830da00b2b013c5a048d5e6a42",
+          "default": true
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-HighNoise-Q8_0.gguf",
+          "format": "gguf_q8_0",
+          "gb": 15.41,
+          "bits": 8,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "619a66032c28e1b27882dfccc0bf93e51edb1491e8d4e4c6f291726abe4de8aa"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-HighNoise-Q6_K.gguf",
+          "format": "gguf_q6_k",
+          "gb": 12.0,
+          "bits": 6,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "33ab8d99b5be745d2c939055f541d09108befe3467802fdbbf22ba8e4e62383c"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-HighNoise-Q5_K_M.gguf",
+          "format": "gguf_q5_k_m",
+          "gb": 10.79,
+          "bits": 5,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "163e9e5ae7ff83a4598d55242c767384be8909749dc07240d388a24838e8bac6"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-HighNoise-Q4_K_M.gguf",
+          "format": "gguf_q4_k_m",
+          "gb": 9.65,
+          "bits": 4,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "836250abfaa3411694e2c9cf3a0cc18265329d5156d81aa116d5366b0f8f02e7"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-HighNoise-Q3_K_M.gguf",
+          "format": "gguf_q3_k_m",
+          "gb": 7.18,
+          "bits": 3,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "high",
+          "sha256": "ac3a72d74330e030fe2ded047b0ef9afc21dd90afc4f300c7aa79e1b0f9dd940"
+        },
+        {
+          "file": "wan2.2_t2v_high_noise_14B_fp16.safetensors",
+          "format": "fp16",
+          "gb": 28.58,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "c793e1515320fc8883ac8f97e2a45270c35edd8c4e334a6d42d3e95455bd8da2",
+          "note": "text to video"
+        },
+        {
+          "file": "wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors",
+          "format": "fp8_scaled",
+          "gb": 14.29,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "cad711ae211c8b23455ec68cd6a190a33a3d874234a77eb57266d73f8f0e6c9f",
+          "note": "text to video"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-HighNoise-Q8_0.gguf",
+          "format": "gguf_q8_0",
+          "gb": 15.4,
+          "bits": 8,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "e15fecd4ce8f7effe1c4d9ab2c51d37b071bf3dd8b7f1b73e9fc27ac28f6820a"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-HighNoise-Q6_K.gguf",
+          "format": "gguf_q6_k",
+          "gb": 12.0,
+          "bits": 6,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "504340d1d4eb9c754a824861234cedb5519155c125aa8dbb4c170716d899cd3b"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-HighNoise-Q5_K_M.gguf",
+          "format": "gguf_q5_k_m",
+          "gb": 10.79,
+          "bits": 5,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "fe704eb3541b09edb9cb675d58443bebccbabba0c9f5353305a6e01d9d9a2478"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-HighNoise-Q4_K_M.gguf",
+          "format": "gguf_q4_k_m",
+          "gb": 9.65,
+          "bits": 4,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "e0c490c6e316fd91ff52034e4ca66b825717e33ff11624585c0ccfcb5d410c59"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-HighNoise-Q3_K_M.gguf",
+          "format": "gguf_q3_k_m",
+          "gb": 7.17,
+          "bits": 3,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "high",
+          "sha256": "0a1166c9429630be04d5a9351abae7972acd18cee34ea52c130986ff1ab827b6"
+        }
+      ]
+    },
+    "diffusion_low": {
+      "label": "Low noise model",
+      "role": "diffusion",
+      "variants": [
+        {
+          "file": "wan2.2_i2v_low_noise_14B_fp16.safetensors",
+          "format": "fp16",
+          "gb": 28.58,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "edb89340c8a6fbf1a70e76a839ae01eaf7d289f05ea1ebd6b1a3fc6f533826e9"
+        },
+        {
+          "file": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+          "format": "fp8_scaled",
+          "gb": 14.29,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "5471a457b6ac404202a5fbe6c11595a3d5641fc766b00f38763f72303fffc21e",
+          "default": true
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-LowNoise-Q8_0.gguf",
+          "format": "gguf_q8_0",
+          "gb": 15.41,
+          "bits": 8,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "029c7adc74de4f7804905c5e4fb9335d0862cd2fc37191df526aeac13b64425e"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-LowNoise-Q6_K.gguf",
+          "format": "gguf_q6_k",
+          "gb": 12.0,
+          "bits": 6,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "962d9c937a6e882562cd234ba87c5cfc19d6e99efbf0fc31b4dd9e43eb493ae6"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-LowNoise-Q5_K_M.gguf",
+          "format": "gguf_q5_k_m",
+          "gb": 10.79,
+          "bits": 5,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "c5affcba15576959fa6d63c18261275b6407c3edd5ad3d8ab1c420e96f9d05d0"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-LowNoise-Q4_K_M.gguf",
+          "format": "gguf_q4_k_m",
+          "gb": 9.65,
+          "bits": 4,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "e2f98d834af009d035c6b0918268f2eba0aa8a63025ce942277e2384d40b0866"
+        },
+        {
+          "file": "Wan2.2-I2V-A14B-LowNoise-Q3_K_M.gguf",
+          "format": "gguf_q3_k_m",
+          "gb": 7.18,
+          "bits": 3,
+          "repo": "QuantStack/Wan2.2-I2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "i2v",
+          "noise": "low",
+          "sha256": "4472e4e30a9729da0e0de36c708c45344a70799d431b17371b0c513d20a1351b"
+        },
+        {
+          "file": "wan2.2_t2v_low_noise_14B_fp16.safetensors",
+          "format": "fp16",
+          "gb": 28.58,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "431d1613ffa809ae1f735b661a01788c6d74991f51efd01f45d5aee955ccd224",
+          "note": "text to video"
+        },
+        {
+          "file": "wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors",
+          "format": "fp8_scaled",
+          "gb": 14.29,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "UNETLoader",
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "e71b96d7c82e638694c5e7fb98fac4bfb0e4ddc5fbbb4b1df40da8f0f1278a97",
+          "note": "text to video"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-LowNoise-Q8_0.gguf",
+          "format": "gguf_q8_0",
+          "gb": 15.4,
+          "bits": 8,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "71574f62260f3ba305c31085c922a2b1b6672dbfdbe07717c066688ea56966fc"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-LowNoise-Q6_K.gguf",
+          "format": "gguf_q6_k",
+          "gb": 12.0,
+          "bits": 6,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "db35061810049f77f571198d6a7bab422dec94fe0bf016b145b5cfc03eaaf661"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-LowNoise-Q5_K_M.gguf",
+          "format": "gguf_q5_k_m",
+          "gb": 10.79,
+          "bits": 5,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "67242c61f055eb40c70fb421eb7dc1bdfde9c535f47c165fdfbf0b81b8b535dd"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-LowNoise-Q4_K_M.gguf",
+          "format": "gguf_q4_k_m",
+          "gb": 9.65,
+          "bits": 4,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "091a5bae02e14aa016bc9b10a7892efda4c629346b81c5dcebbe30ea2ac8923a"
+        },
+        {
+          "file": "Wan2.2-T2V-A14B-LowNoise-Q3_K_M.gguf",
+          "format": "gguf_q3_k_m",
+          "gb": 7.17,
+          "bits": 3,
+          "repo": "QuantStack/Wan2.2-T2V-A14B-GGUF",
+          "loader": "UnetLoaderGGUF",
+          "community": true,
+          "task": "t2v",
+          "noise": "low",
+          "sha256": "13bf25ca46c94d210bd20796093f2f6cec35d3331004c0e50ff0f961c7b68947"
+        }
+      ]
+    },
+    "text_encoder": {
+      "label": "Text encoder (umt5-xxl)",
+      "role": "text_encoder",
+      "clip_type": "wan",
+      "variants": [
+        {
+          "file": "umt5_xxl_fp16.safetensors",
+          "format": "fp16",
+          "gb": 11.37,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "CLIPLoader",
+          "sha256": "7b8850f1961e1cf8a77cca4c964a358d303f490833c6c087d0cff4b2f99db2af"
+        },
+        {
+          "file": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+          "format": "fp8_scaled",
+          "gb": 6.74,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "CLIPLoader",
+          "default": true,
+          "sha256": "c3355d30191f1f066b26d93fba017ae9809dce6c627dda5f6a66eaa651204f68"
+        },
+        {
+          "file": "umt5_xxl_int8_convrot.safetensors",
+          "format": "int8_convrot",
+          "gb": 5.69,
+          "bits": 8,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "CLIPLoader",
+          "sha256": "79e9ab4946df522669350682a59efd9d9cf4f5db84b2e6f7e4e56d3647247c57"
+        }
+      ]
+    },
+    "vae": {
+      "label": "VAE",
+      "role": "fixed",
+      "variants": [
+        {
+          "file": "wan_2.1_vae.safetensors",
+          "format": "bf16",
+          "gb": 0.25,
+          "bits": 16,
+          "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+          "loader": "VAELoader",
+          "always": true,
+          "also": [
+            "wan21-vae.safetensors"
+          ],
+          "sha256": "2fc39d31359a4b0a64f55876d8ff7fa8d780956ae2cb13463b0223e15148976b"
+        }
+      ]
+    }
+  },
+  "extras": [
+    {
+      "file": "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+      "gb": 1.23,
+      "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "loader": "LoraLoaderModelOnly",
+      "task": "i2v",
+      "noise": "high",
+      "steps": 4,
+      "sha256": "d176c808d6fc461999b68e321efcb7501b20b8c3797523ed0df14f7d1deff11e",
+      "label": "Lightning 4-step LoRA (lightx2v)"
+    },
+    {
+      "file": "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors",
+      "gb": 1.23,
+      "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "loader": "LoraLoaderModelOnly",
+      "task": "i2v",
+      "noise": "low",
+      "steps": 4,
+      "sha256": "024f21de095bc8fad9809ded3e9e49a2e170dcf27075da8145ba7d60d8aab7f9",
+      "label": "Lightning 4-step LoRA (lightx2v)"
+    },
+    {
+      "file": "wan2.2_t2v_lightx2v_4steps_lora_v1.1_high_noise.safetensors",
+      "gb": 1.23,
+      "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "loader": "LoraLoaderModelOnly",
+      "task": "t2v",
+      "noise": "high",
+      "steps": 4,
+      "sha256": "698321cb86bd30c4af06c9b84e656a1048c8cb54e06d50694536fb5de37fde41",
+      "label": "Lightning 4-step LoRA (lightx2v)"
+    },
+    {
+      "file": "wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors",
+      "gb": 1.23,
+      "repo": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "loader": "LoraLoaderModelOnly",
+      "task": "t2v",
+      "noise": "low",
+      "steps": 4,
+      "sha256": "ec95216e614b3c132c11bfb387b11feedf62163150ccc9068bca8a189771e75a",
+      "label": "Lightning 4-step LoRA (lightx2v)"
+    }
+  ],
+  "pair_known": [
+    {
+      "file": "wan2.2_fun_camera_high_noise_14B_bf16.safetensors",
+      "sha256": "b242a310d161460d3ecf8430d4f8ee01398bebc3925a479c267b71318e8e30ad",
+      "noise": "high",
+      "release": "Wan 2.2 fun camera"
+    },
+    {
+      "file": "wan2.2_fun_camera_high_noise_14B_fp8_scaled.safetensors",
+      "sha256": "89a99cb5ab29e388f2e24fddac48eab4d88ca339d236c7a8d96aabacd0f525ae",
+      "noise": "high",
+      "release": "Wan 2.2 fun camera"
+    },
+    {
+      "file": "wan2.2_fun_camera_low_noise_14B_bf16.safetensors",
+      "sha256": "277a7b0374f9d0d5ba0e769fa9648687301cfff8b32d32c9b57d122dbea24c02",
+      "noise": "low",
+      "release": "Wan 2.2 fun camera"
+    },
+    {
+      "file": "wan2.2_fun_camera_low_noise_14B_fp8_scaled.safetensors",
+      "sha256": "a2b7b361e3fad907958aa6ad662a3673bad5ffdce14706cffde4baabb98f9020",
+      "noise": "low",
+      "release": "Wan 2.2 fun camera"
+    },
+    {
+      "file": "wan2.2_fun_control_high_noise_14B_bf16.safetensors",
+      "sha256": "e4be07ca25d67aaf3461ef87fbb5ad8762f602a5efa620aea9dc250ac2747a9d",
+      "noise": "high",
+      "release": "Wan 2.2 fun control"
+    },
+    {
+      "file": "wan2.2_fun_control_high_noise_14B_fp8_scaled.safetensors",
+      "sha256": "aa2f6b6f4cfc8a75a273a075db31730530f93320a996b153b8825205c3a3c498",
+      "noise": "high",
+      "release": "Wan 2.2 fun control"
+    },
+    {
+      "file": "wan2.2_fun_control_low_noise_14B_bf16.safetensors",
+      "sha256": "d82bc21cd703e089eee4f6fabc25e90ebbd00965623fdc5e83d46d01dbeac2c3",
+      "noise": "low",
+      "release": "Wan 2.2 fun control"
+    },
+    {
+      "file": "wan2.2_fun_control_low_noise_14B_fp8_scaled.safetensors",
+      "sha256": "0f83c7b1cd6d509ff3504a8f604ca9d9876a8b1ed04f6e05095c4a7ccb9009cd",
+      "noise": "low",
+      "release": "Wan 2.2 fun control"
+    },
+    {
+      "file": "wan2.2_fun_inpaint_high_noise_14B_bf16.safetensors",
+      "sha256": "c5629ded970ac8070f7b0cadf4249060710e384e2a7724fe5f5d1e2714fe9c60",
+      "noise": "high",
+      "release": "Wan 2.2 fun inpaint"
+    },
+    {
+      "file": "wan2.2_fun_inpaint_high_noise_14B_fp8_scaled.safetensors",
+      "sha256": "6106c137d8a921bc17d579c3e9deaa4fc4fadbc77fbe733f43ff19bb33ec3995",
+      "noise": "high",
+      "release": "Wan 2.2 fun inpaint"
+    },
+    {
+      "file": "wan2.2_fun_inpaint_low_noise_14B_bf16.safetensors",
+      "sha256": "67408d1a1a577b4d0257b57c31093fdc4b3ebcdef27fbfd354cfc7dbcec3b1a7",
+      "noise": "low",
+      "release": "Wan 2.2 fun inpaint"
+    },
+    {
+      "file": "wan2.2_fun_inpaint_low_noise_14B_fp8_scaled.safetensors",
+      "sha256": "a3981f3e0f79c59fb3cffe1240ee34656bbc57e599101fac2b7140461037ab9c",
+      "noise": "low",
+      "release": "Wan 2.2 fun inpaint"
+    },
+    {
+      "file": "wan2.2_fun_vace_high_noise_14B_bf16.safetensors",
+      "sha256": "66c61b736c5674deeeef17861e494d3652cc9b1463a9656bf18c2c72d2c5f007",
+      "noise": "high",
+      "release": "Wan 2.2 fun vace"
+    },
+    {
+      "file": "wan2.2_fun_vace_high_noise_14B_fp8_scaled.safetensors",
+      "sha256": "23130f30207f6c8697a5bead113ddc9904cfbb5e8fa51a550df3cee4d21fb54c",
+      "noise": "high",
+      "release": "Wan 2.2 fun vace"
+    },
+    {
+      "file": "wan2.2_fun_vace_low_noise_14B_bf16.safetensors",
+      "sha256": "0bf791adfb8330d451d2f5c03577b2a8fb780453f8ef05e23a8fa91f27a2134d",
+      "noise": "low",
+      "release": "Wan 2.2 fun vace"
+    },
+    {
+      "file": "wan2.2_fun_vace_low_noise_14B_fp8_scaled.safetensors",
+      "sha256": "ca55a5cc543e28576edbd2079f8c1de05f71cd9e85bf96fab635f55663dbcb69",
+      "noise": "low",
+      "release": "Wan 2.2 fun vace"
+    }
+  ],
+  "source": "Hugging Face tree API (sizes and sha256) of Comfy-Org/Wan_2.2_ComfyUI_Repackaged and QuantStack/Wan2.2-I2V-A14B-GGUF / Wan2.2-T2V-A14B-GGUF, read 2026-11-25; Comfy-Org Wan 2.2 workflow templates"
+}

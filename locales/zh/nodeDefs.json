@@ -128,10 +128,13 @@
         "tooltip": "将尺寸对齐到该模型所需的值（其步长和尺寸），并在拖动到其百万像素上限时停止。Custom：步长 8，几乎无上限。"
       },
       "aspect": {
-        "tooltip": "拖动时将画框锁定为此形状。free：任意形状。"
+        "tooltip": "拖动时将画框锁定为此形状。free：任意形状。image：使用 image 接口中图片的形状，按此百万像素大小；没有接图片时，用你画的画框。"
       },
       "megapixels": {
         "tooltip": "当前形状下的尺寸。修改它会调整框的大小；拖动会更新它。永远不会超过模型的上限。"
+      },
+      "image": {
+        "tooltip": "aspect 设为 image 时，尺寸采用这张图片的形状。"
       }
     },
     "outputs": {
@@ -4003,6 +4006,50 @@
       },
       "note_2": {
         "tooltip": "每张图的第二条备注，和 note 一样。"
+      }
+    }
+  },
+  "LCOptimizerDual": {
+    "description": "加载同一家族的一个或两个模型，每个模型有自己的文本编码器，另外加载共用的 VAE、音频 VAE 和 latent upscaler。文件选择器、下载和加速与 LC Model Optimizer 相同。\nMiniMax H3 (FL2VA + Ref2VA)：模型 1 = FL2VA，模型 2 = Ref2VA。\nWan 2.2：模型 1 = high noise，模型 2 = low noise。节点会检查两者是否为匹配的一对且位置正确，不匹配时显示 ⚠️（仍会运行）。\n其他任意家族：加载该家族的两个模型，用于合并或 A/B 测试。\n点击家族即可为两个槽位填入推荐文件。之后可以随意更改任一槽位。\n每个模型旁的开关可将其关闭：不会加载，它的 model 和 clip 输出为 None。\n缺少文件？选择带 ⬇ 的条目，首次运行时会自动下载。其他任何内容都不会自行下载。",
+    "inputs": {
+      "base_model": {
+        "tooltip": "模型家族。决定两个模型的推荐文件和检查项。"
+      },
+      "goal": {
+        "tooltip": "Quality = 最接近 bf16。Optimal = 快且几乎一致。Fast = 在效果仍然正确的前提下最快。"
+      },
+      "model_1_on": {
+        "tooltip": "开：加载此模型。关：跳过它，其 model 和 clip 输出为 None。"
+      },
+      "model_2_on": {
+        "tooltip": "开：加载此模型。关：跳过它，其 model 和 clip 输出为 None。"
+      },
+      "speed_ups": {
+        "tooltip": "Auto = 来自 System & Model Optimization Report。Manual = 在下方逐项选择。"
+      },
+      "attention": {
+        "tooltip": "Attention 后端。auto = 通过报告测试的最快一个。"
+      },
+      "fp16_accumulation": {
+        "tooltip": "更快的 fp16 运算，质量略有损失。auto = 仅 Fast goal 时启用。"
+      },
+      "step_cache": {
+        "tooltip": "EasyCache：跳过变化很小的步骤。auto = Fast 目标，20 步以上。"
+      },
+      "torch_compile": {
+        "tooltip": "编译模型:第一次运行较慢,之后更快。需要 Triton。"
+      },
+      "qwen21_cache": {
+        "tooltip": "仅限 Qwen-Image 2.1(Qwen Image 2.1 Cache):KV cache 放在哪里以及如何存储。auto = 无损,在 Fast 目标或 16 GB 以下的显卡上使用 int8。int8 将 cache 减半,精度接近 bf16;int4 压到四分之一,但每步误差约翻倍。RAM 对速度影响很小。off = 最慢。"
+      },
+      "spectrum": {
+        "tooltip": "MiniMax H3、MOSS Image 和 Krea 2：Spectrum 会预测部分步骤而不实际运行。auto = 与 LC Model Optimizer 对该家族的选择相同。on = 试用。off = 不使用（speed_ups 设为 Auto 时同样有效）。开启时会取代步骤缓存。"
+      },
+      "veda": {
+        "tooltip": "仅限 MiniMax H3：用于低分辨率的 Veda sparse attention（Veda-on-ComfyUI 及其位于 models/veda 的 predictor，需另行安装）。auto = 低于 0.9 MP 时运行（8 GB 显卡上约 1.4 倍，画面相同），高于此值用完整 attention，因为我们的测试中脸会漂移。on = 所有分辨率。off = 不使用（speed_ups 设为 Auto 时同样有效）。"
+      },
+      "clip_type": {
+        "tooltip": "仅限 Custom:文本编码器的加载方式(CLIPLoader 的 type)。auto = 当编码器的结构与某个已知基础模型匹配时据此判断。对其他基础模型以及 checkpoint 自带的编码器无效。"
       }
     }
   }

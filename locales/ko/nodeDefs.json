@@ -128,10 +128,13 @@
         "tooltip": "크기를 이 모델이 원하는 값(step과 크기)에 맞추고, 드래그를 메가픽셀 한계에서 멈춥니다. Custom: 8 단위, 실질적 한계 없음."
       },
       "aspect": {
-        "tooltip": "드래그하는 동안 프레임을 이 모양으로 고정합니다. free: 아무 모양."
+        "tooltip": "드래그하는 동안 프레임을 이 모양으로 고정합니다. free: 아무 모양. image: image 소켓에 연결된 그림의 모양을 이 메가픽셀 크기로 씁니다. 아무것도 연결되지 않으면 그린 프레임을 씁니다."
       },
       "megapixels": {
         "tooltip": "현재 모양에서의 크기. 바꾸면 프레임 크기가 조절되고, 드래그하면 갱신됩니다. 모델의 한계를 넘지 않습니다."
+      },
+      "image": {
+        "tooltip": "aspect가 image일 때 크기가 이 그림의 모양을 따릅니다."
       }
     },
     "outputs": {
@@ -4003,6 +4006,50 @@
       },
       "note_2": {
         "tooltip": "그림마다 두 번째 메모, note와 같아요."
+      }
+    }
+  },
+  "LCOptimizerDual": {
+    "description": "같은 계열의 모델을 하나 또는 두 개 불러옵니다. 각 모델에 자체 텍스트 인코더가 있고, VAE, 오디오 VAE, latent upscaler는 공유합니다. 파일 선택기, 다운로드, 가속은 LC Model Optimizer와 같습니다.\nMiniMax H3 (FL2VA + Ref2VA): 모델 1 = FL2VA, 모델 2 = Ref2VA.\nWan 2.2: 모델 1 = high noise, 모델 2 = low noise. 올바른 한 쌍인지, 슬롯이 맞는지 확인하고 아니면 ⚠️를 표시합니다(실행은 계속됩니다).\n그 밖의 계열: 해당 계열의 모델 두 개. 병합이나 A/B 테스트용입니다.\n계열을 클릭하면 두 슬롯에 추천 파일이 채워집니다. 그 후에는 어느 슬롯이든 자유롭게 바꿀 수 있습니다.\n각 모델 옆의 스위치로 끌 수 있습니다: 불러오지 않으며 model과 clip 출력은 None이 됩니다.\n파일이 없나요? ⬇ 항목을 고르면 첫 실행 때 다운로드됩니다. 그 외에는 절대 저절로 다운로드되지 않습니다.",
+    "inputs": {
+      "base_model": {
+        "tooltip": "모델 계열. 두 모델의 추천 파일과 검사 항목을 정합니다."
+      },
+      "goal": {
+        "tooltip": "Quality = bf16에 가장 가까움. Optimal = 빠르고 거의 동일. Fast = 보기에 괜찮은 선에서 가장 빠름."
+      },
+      "model_1_on": {
+        "tooltip": "켜기: 이 모델을 불러옵니다. 끄기: 건너뛰며 model과 clip 출력은 None이 됩니다."
+      },
+      "model_2_on": {
+        "tooltip": "켜기: 이 모델을 불러옵니다. 끄기: 건너뛰며 model과 clip 출력은 None이 됩니다."
+      },
+      "speed_ups": {
+        "tooltip": "Auto = System & Model Optimization Report에서 가져옴. Manual = 아래에서 각각 직접 선택."
+      },
+      "attention": {
+        "tooltip": "Attention backend. auto = 리포트 테스트를 통과한 것 중 가장 빠른 것."
+      },
+      "fp16_accumulation": {
+        "tooltip": "품질 손실이 작은 더 빠른 fp16 연산. auto = Fast goal에서만."
+      },
+      "step_cache": {
+        "tooltip": "EasyCache: 거의 변하지 않는 스텝을 건너뜁니다. auto = Fast goal, 20+ 스텝."
+      },
+      "torch_compile": {
+        "tooltip": "모델을 컴파일합니다. 첫 실행은 느리고 이후 실행은 더 빠릅니다. Triton이 필요합니다."
+      },
+      "qwen21_cache": {
+        "tooltip": "Qwen-Image 2.1 전용 (Qwen Image 2.1 Cache): KV cache가 위치하는 곳과 저장 방식입니다. auto = 무손실, Fast goal이거나 16 GB 미만 카드에서는 int8. int8은 cache를 절반으로 줄이며 정확도는 bf16 수준, int4는 4분의 1로 줄지만 스텝당 오차가 대략 두 배가 됩니다. RAM은 속도 손실이 적습니다. off = 가장 느림."
+      },
+      "spectrum": {
+        "tooltip": "MiniMax H3, MOSS Image, Krea 2: Spectrum은 일부 단계를 실행하지 않고 예측합니다. auto = 이 계열에 대한 LC Model Optimizer와 같은 선택. on = 사용해 보기. off = 사용 안 함(speed_ups가 Auto일 때도 적용). 켜면 단계 캐시를 대신합니다."
+      },
+      "veda": {
+        "tooltip": "MiniMax H3 전용: 저해상도용 Veda sparse attention입니다(Veda-on-ComfyUI + models/veda의 predictor, 별도 설치). auto = 0.9 MP 미만에서 실행(8 GB 카드에서 약 1.4배, 같은 look), 그 이상에서는 full attention(테스트에서 얼굴이 흐트러졌음). on = 모든 해상도. off = 사용 안 함(speed_ups가 Auto여도 작동)."
+      },
+      "clip_type": {
+        "tooltip": "Custom 전용: text encoder를 로드하는 방식입니다(CLIPLoader의 type). auto = encoder의 형태가 알려진 base 모델 하나와 일치할 때 그로부터 판단. 다른 base 모델과 체크포인트 자체 encoder에서는 무시됩니다."
       }
     }
   }

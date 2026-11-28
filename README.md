@@ -282,6 +282,12 @@ The **System & Model Optimization Report** tells you what suits your machine. Th
     - Leave it off on machines with plenty of RAM: both models load again every run (about 6% slower on an RTX 5090).
     - Each model must be sampled once per run.
 
+**LC Model Optimizer (passthrough) ⚡** (speed-ups only)
+- Input: `model` from your own loader. Outputs: `model`, `summary`.
+- For workflows that load models another way, e.g. a wildcard model switcher picking a different finetune each run. Set **base_model** to the family the models belong to: every finetune of it gets the same speed-ups the Optimizer would give it.
+- No files are loaded here, so there are no ★ picks, downloads or file checks. Run the report so the speed-ups suit your machine.
+- *note:* `torch_compile` on recompiles every time the model changes.
+
 **How it works**
 - Pick the **base model** and a **goal** (Quality / Optimal / Fast, same as the report).
 - **Every file defaults to ★ Recommended:** the file the report picked for this machine. No report yet? Comfy's own default files, and a 💡⚠️ banner on the node telling you to run the report first.
@@ -894,7 +900,7 @@ Workflow > Open, or just drag it onto the canvas.
 
 MIT. See `LICENSE`.
 
-Borrowed code, with thanks (all MIT): colour science in `vendor/chromagrade` from ComfyUI-ChromaGrade (MONKEYFOREVER2), guided filter and tetrahedral LUT adapted from the same; band-pass detail transfer and skin texture synthesis adapted from ComfyUI-SkinDetailer; Photo Style local tone mapping re-written after ComfyUI-CameraForensicRealism.
+Methods, with thanks to the people who came up with them: the Oklab colour space and its gamut clipping by Björn Ottosson (public domain); colour distribution transfer and the linear Monge-Kantorovich colour mapping by François Pitié, Anil Kokaram and Rozenn Dahyot (2007); the guided filter by Kaiming He, Jian Sun and Xiaoou Tang (ECCV 2010). Also Fritsch & Carlson's monotone cubic curves (1980) and Google's Monk Skin Tone Scale (Ellis Monk, CC BY 4.0) for the skin hue range. The code is LC123's own (`lc_color_science.py`, `lc_guided.py`, `lc_apply_lut.py`). Borrowed code (MIT): band-pass detail transfer and skin texture synthesis adapted from ComfyUI-SkinDetailer; Photo Style local tone mapping re-written after ComfyUI-CameraForensicRealism.
 
 This represents hundreds of hours of work. If you enjoy it, please 👍 like, 💬 comment, and feel free to ⚡ tip 😉
 

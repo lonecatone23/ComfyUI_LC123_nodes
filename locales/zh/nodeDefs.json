@@ -4056,5 +4056,40 @@
         "tooltip": "用于内存（RAM）较小的电脑（32 GB 跑 Wan 2.2 + 声音）。模型 2 在它的阶段开始前留在硬盘上，模型 1 开始时文本编码器离开内存，模型 2 开始时模型 1 离开，每个模型在自己的阶段后离开，LC Foley 生成声音后也会释放 MMAudio。8 GB 笔记本上跑 Wan + Foley：内存从约 47 GB 降到约 25 GB，速度相同。内存充足的电脑请保持关闭（每次运行都会重新载入两个模型，在 5090 上慢约 6%）。每个模型每次运行只能采样一次。"
       }
     }
+  },
+  "LCModelOptimizerPassthrough": {
+    "description": "为你自己加载的模型（任何加载器、wildcard 模型切换器等）提供 Optimizer 的加速。把 base model 设为该模型所属的家族：它的每个 finetune 都会得到同样的加速。\n这里不加载任何文件，所以没有 ★ 推荐、下载或文件检查。运行 System & Model Optimization Report，让加速适合这台机器。\ntorch_compile 开启时，每次换模型都会重新编译。",
+    "inputs": {
+      "model": {
+        "tooltip": "来自你自己加载器的模型。"
+      },
+      "base_model": {
+        "tooltip": "该模型所属的家族。决定对它有效的加速。"
+      },
+      "goal": {
+        "tooltip": "Quality = 最接近 bf16。Optimal = 快且几乎一致。Fast = 在效果仍然正确的前提下最快。"
+      },
+      "speed_ups": {
+        "tooltip": "Auto = 来自 System & Model Optimization Report。Manual = 在下方逐项选择。"
+      },
+      "attention": {
+        "tooltip": "Attention 后端。auto = 通过报告测试的最快一个。"
+      },
+      "fp16_accumulation": {
+        "tooltip": "更快的 fp16 运算，质量略有损失。auto = 仅 Fast goal 时启用。"
+      },
+      "step_cache": {
+        "tooltip": "EasyCache：跳过变化很小的步骤。auto = Fast 目标，20 步以上。"
+      },
+      "torch_compile": {
+        "tooltip": "编译模型:第一次运行较慢,之后更快。需要 Triton。"
+      },
+      "qwen21_cache": {
+        "tooltip": "仅限 Qwen-Image 2.1(Qwen Image 2.1 Cache):KV cache 放在哪里以及如何存储。auto = 无损,在 Fast 目标或 16 GB 以下的显卡上使用 int8。int8 将 cache 减半,精度接近 bf16;int4 压到四分之一,但每步误差约翻倍。RAM 对速度影响很小。off = 最慢。"
+      },
+      "spectrum": {
+        "tooltip": "MOSS Image 和 Krea 2：Spectrum 会预测部分步骤而不实际运行，在我们的测试中没有可见变化（MOSS 约 1.7 倍，Krea 2 Turbo 约 1.35 倍，Raw 约 1.6 倍）。内置，无需安装。auto = Optimal 和 Fast 目标；前 20% 的步骤始终会运行（构图在此阶段形成），低于 8 步时不启用。off = 不使用（speed_ups 设为 Auto 时同样有效）。开启时会取代步骤缓存。"
+      }
+    }
   }
 }

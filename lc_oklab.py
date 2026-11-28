@@ -1,5 +1,5 @@
 """
-Oklab colour tools for LC image nodes, built on the vendored ComfyUI-ChromaGrade modules (vendor/chromagrade, MIT).
+Oklab colour tools for LC image nodes (Oklab by Björn Ottosson), built on lc_color_science.py.
 
 - match(): colour transfer in Oklab. "oklab" fits the full 3x3 colour covariance (linear Monge-Kantorovich, Pitie
   & Kokaram 2007), so it matches the whole colour cloud, not each channel on its own. "oklab + distribution" adds
@@ -14,12 +14,9 @@ from __future__ import annotations
 
 import torch
 
-from .vendor.chromagrade.colorspace import linear_to_srgb, srgb_to_oklab
-from .vendor.chromagrade.gamut import gamut_map_to_linear
-from .vendor.chromagrade.protect import apply_neutral_guard, apply_skin_protection
-from .vendor.chromagrade.stats import mkl_transform, weighted_mean_cov
+from .lc_color_science import (DistributionTransfer, gamut_map_to_linear, guard_neutrals, linear_to_oklab, linear_to_srgb,
+                               mean_cov, mkl, protect_skin, skin_membership, srgb_to_oklab)
 from .lc_temporal import segments, smooth
-from .vendor.chromagrade.transport import IDTChain
 
 MAX_POINTS = 65536
 
@@ -68,9 +65,9 @@ def match(image_bhwc: torch.Tensor, reference_bhwc: torch.Tensor, distribution: 
     for i in range(n):
         src = _sample(lab_of(image_bhwc, i))
         dst = _sample(lab_of(reference_bhwc, i)) if pair else pooled
-        mu_s, cov_s, _ = weighted_mean_cov(src)
-        mu_d, cov_d, _ = weighted_mean_cov(dst)
-        a, b = mkl_transform(mu_s, cov_s, mu_d, cov_d)
+        mu_s, cov_s = mean_cov(src)
+        mu_d, cov_d = mean_cov(dst)
+        a, b = mkl(mu_s, cov_s, mu_d, cov_d)
         fits.append(torch.cat([a.to(torch.float32), b.to(torch.float32).view(3, 1)], 1))
         pbar.update(1)
     # a video clip shares its colour transform over nearby frames, so the match does not pump; separate images keep
@@ -84,13 +81,13 @@ def match(image_bhwc: torch.Tensor, reference_bhwc: torch.Tensor, distribution: 
         mapped = flat @ a.T + b
         if distribution:
             dst = _sample(lab_of(reference_bhwc, i)) if pair else pooled
-            chain = IDTChain.fit(_sample(lab) @ a.T + b, dst, iterations=10)
+            chain = DistributionTransfer.fit(_sample(lab) @ a.T + b, dst, iterations=10)
             mapped = chain(mapped)
         mapped = mapped.reshape(lab.shape)
         if neutral_guard:
-            mapped = apply_neutral_guard(lab, mapped)
+            mapped = guard_neutrals(lab, mapped)
         if skin_protect > 0:
-            mapped = apply_skin_protection(lab, mapped, float(skin_protect))
+            mapped = protect_skin(lab, mapped, float(skin_protect))
         res = to_srgb(mapped)
         if strength < 1.0:
             orig = image_bhwc[i, ..., :3].to(dev, torch.float32).clamp(0, 1)
@@ -106,7 +103,6 @@ def linear_to_srgb_safe(lin):
     instead of clipping each channel (which shifts hue and flattens bright colours into solid patches)."""
     import numpy as np
 
-    from .vendor.chromagrade.colorspace import linear_to_oklab
 
     t = torch.from_numpy(np.ascontiguousarray(lin, dtype=np.float32))
     return to_srgb(linear_to_oklab(t)).numpy().astype(np.float32)
@@ -117,7 +113,6 @@ def vibrance(img, vibrance_pct, saturation_pct, protect_skin):
     most and leaves strong ones nearly alone; saturation scales everything; skin gets 70 % less vibrance."""
     import numpy as np
 
-    from .vendor.chromagrade.protect import skin_membership
 
     lab = srgb_to_oklab(torch.from_numpy(np.ascontiguousarray(img[..., :3], dtype=np.float32)))
     c = (lab[..., 1:2] ** 2 + lab[..., 2:3] ** 2).sqrt()
@@ -138,7 +133,6 @@ def vibrance_signed(rgb, vib, skin_protect):
     """LC Photo Style's vibrance in Oklab: vib -1..1 (negative mutes), skin_protect 0..1. Hue never shifts."""
     import numpy as np
 
-    from .vendor.chromagrade.protect import skin_membership
 
     lab = srgb_to_oklab(torch.from_numpy(np.ascontiguousarray(rgb[..., :3], dtype=np.float32)))
     c = (lab[..., 1:2] ** 2 + lab[..., 2:3] ** 2).sqrt()

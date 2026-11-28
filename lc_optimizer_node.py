@@ -278,17 +278,80 @@ class LCOptimizerVideoPipe(_LCOptimizerBase):
         return (pipe, model, clip, vae, extra.get("audio_vae"), extra.get("upscaler"), text)
 
 
+DESC_PASS = (
+    "The Optimizer's speed-ups for a model you load yourself (any loader, a wildcard model switcher, etc.). "
+    "Set the base model to the family the model belongs to: every finetune of it gets the same speed-ups.\n"
+    "No files are loaded here, so there are no ★ picks, downloads or file checks. Run the System & Model "
+    "Optimization Report so the speed-ups suit this machine.\n"
+    "torch_compile on recompiles every time the model changes."
+)
+
+
+class LCModelOptimizerPassthrough:
+    """Speed-ups only: MODEL in, MODEL out. The class name stays off the LCOptimizer prefix on purpose: the
+    LoRA check, CivitAI hashes and Vision checkup read a model file from LCOptimizer* nodes, and this one has none
+    (they walk past it to the real loader)."""
+    KIND = "image"
+    CATEGORY = "LC123/optimizer"
+    FUNCTION = "run"
+    RETURN_TYPES = ("MODEL", "STRING")
+    RETURN_NAMES = ("model", "summary")
+    DESCRIPTION = DESC_PASS
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        names = [n for _, n in E.base_names(cls.KIND)] or ["(no profiles)"]  # Custom: attention / step speed-ups only
+        req = {
+            "model": ("MODEL", {"tooltip": "The model from your own loader."}),
+            "base_model": (names, {"default": "Krea 2 (Turbo)" if "Krea 2 (Turbo)" in names else names[0],
+                                   "tooltip": "The family the model belongs to. Picks the speed-ups that work for it."}),
+            "goal": (E.GOALS, {"default": "Optimal", "tooltip": "Quality = closest to bf16. Optimal = fast and near identical. Fast = fastest that still looks right."}),
+            "speed_ups": (["Auto", "Manual"], {"default": "Auto", "tooltip": "Auto = from the System & Model Optimization Report. Manual = choose each one below."}),
+        }
+        for k, (opts, d, tip) in MANUAL.items():
+            req[k] = (opts, {"default": d, "tooltip": tip})
+        req["qwen21_cache"] = (["auto"] + list(E.QWEN_CACHE), {"default": "auto", "tooltip": QWEN_TIP})
+        req["spectrum"] = (["auto", "on", "off"], {"default": "auto", "tooltip": MOSS_SPECTRUM_TIP})
+        return {"required": req}
+
+    @classmethod
+    def IS_CHANGED(cls, **kw):
+        # a new report changes the speed-ups; a new model reruns the node by itself
+        sysp = E.report() or {}
+        kw = {k: v for k, v in kw.items() if k != "model"}
+        return hashlib.sha1((json.dumps(kw, sort_keys=True, default=str) + str(sysp.get("when"))).encode()).hexdigest()
+
+    def run(self, model, base_model, goal, speed_ups, **kw):
+        base_model = E.LEGACY_BASE.get(base_model, base_model)
+        pid = next((p for p, n in E.base_names(self.KIND) if n == base_model), None)
+        if not pid:
+            raise ValueError(f"[LC Optimizer] Unknown base model {base_model}.")
+        manual = ({k: kw[k] for k in list(MANUAL) + ["qwen21_cache", "spectrum"] if kw.get(k) is not None}
+                  if speed_ups == "Manual" else None)
+        if kw.get("spectrum") in ("on", "off"):  # its opt-out works on Auto too
+            manual = {**(manual or {}), "spectrum": kw["spectrum"]}
+        rows = E.plan_speedups(pid, goal, manual)
+        model, applied = E.apply_speedups(model, rows)
+        pl = {"base": base_model, "speedups": rows, "applied": applied, "hints": []}
+        if not E.report():
+            pl["hints"].append(("💡⚠️", "No report yet: run the System & Model Optimization Report so the speed-ups suit this machine."))
+        text = E.summary_text(pl, applied, [("model", "from the input")])
+        return (model, text)
+
+
 NODE_CLASS_MAPPINGS = {
     "LCOptimizer": LCOptimizer,
     "LCOptimizerPipe": LCOptimizerPipe,
     "LCOptimizerVideo": LCOptimizerVideo,
     "LCOptimizerVideoPipe": LCOptimizerVideoPipe,
+    "LCModelOptimizerPassthrough": LCModelOptimizerPassthrough,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LCOptimizer": "LC Model Optimizer ⚡",
     "LCOptimizerPipe": "LC Model Optimizer (pipe) ⚡",
     "LCOptimizerVideo": "LC Model Optimizer Video ⚡",
     "LCOptimizerVideoPipe": "LC Model Optimizer Video (pipe) ⚡",
+    "LCModelOptimizerPassthrough": "LC Model Optimizer (passthrough) ⚡",
 }
 
 

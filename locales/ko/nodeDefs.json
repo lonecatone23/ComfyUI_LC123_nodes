@@ -4056,5 +4056,40 @@
         "tooltip": "RAM이 적은 컴퓨터용(32 GB에서 Wan 2.2 + 소리). 모델 2는 자기 패스까지 디스크에서 기다리고, 모델 1이 시작하면 텍스트 인코더가 RAM에서 빠지고, 모델 2가 시작하면 모델 1이 빠지며, 각 모델은 자기 패스 후에 빠집니다. LC Foley도 소리를 만든 뒤 MMAudio를 놓습니다. 8 GB 노트북에서 Wan + Foley: RAM 약 47 GB가 약 25 GB로, 속도는 같습니다. RAM이 넉넉한 컴퓨터에서는 꺼 두세요(매번 두 모델을 다시 불러와 5090에서 약 6% 느려집니다). 각 모델은 한 번 실행에 한 번만 샘플링해야 합니다."
       }
     }
+  },
+  "LCModelOptimizerPassthrough": {
+    "description": "직접 불러온 모델(어떤 로더든, wildcard 모델 전환기 등)에 Optimizer의 가속을 적용합니다. base model을 그 모델이 속한 계열로 설정하세요. 그 계열의 모든 finetune이 같은 가속을 받습니다.\n여기서는 파일을 불러오지 않으므로 ★ 추천, 다운로드, 파일 검사가 없습니다. System & Model Optimization Report를 실행하면 이 컴퓨터에 맞는 가속이 적용됩니다.\ntorch_compile을 켜면 모델이 바뀔 때마다 다시 컴파일합니다.",
+    "inputs": {
+      "model": {
+        "tooltip": "직접 사용하는 로더에서 온 모델."
+      },
+      "base_model": {
+        "tooltip": "모델이 속한 계열. 그 모델에 효과가 있는 가속을 고릅니다."
+      },
+      "goal": {
+        "tooltip": "Quality = bf16에 가장 가까움. Optimal = 빠르고 거의 동일. Fast = 보기에 괜찮은 선에서 가장 빠름."
+      },
+      "speed_ups": {
+        "tooltip": "Auto = System & Model Optimization Report에서 가져옴. Manual = 아래에서 각각 직접 선택."
+      },
+      "attention": {
+        "tooltip": "Attention backend. auto = 리포트 테스트를 통과한 것 중 가장 빠른 것."
+      },
+      "fp16_accumulation": {
+        "tooltip": "품질 손실이 작은 더 빠른 fp16 연산. auto = Fast goal에서만."
+      },
+      "step_cache": {
+        "tooltip": "EasyCache: 거의 변하지 않는 스텝을 건너뜁니다. auto = Fast goal, 20+ 스텝."
+      },
+      "torch_compile": {
+        "tooltip": "모델을 컴파일합니다. 첫 실행은 느리고 이후 실행은 더 빠릅니다. Triton이 필요합니다."
+      },
+      "qwen21_cache": {
+        "tooltip": "Qwen-Image 2.1 전용 (Qwen Image 2.1 Cache): KV cache가 위치하는 곳과 저장 방식입니다. auto = 무손실, Fast goal이거나 16 GB 미만 카드에서는 int8. int8은 cache를 절반으로 줄이며 정확도는 bf16 수준, int4는 4분의 1로 줄지만 스텝당 오차가 대략 두 배가 됩니다. RAM은 속도 손실이 적습니다. off = 가장 느림."
+      },
+      "spectrum": {
+        "tooltip": "MOSS Image와 Krea 2: Spectrum이 일부 스텝을 실행하는 대신 예측하며, 테스트에서 눈에 띄는 변화가 없었습니다(MOSS 약 1.7배, Krea 2 Turbo 약 1.35배, Raw 약 1.6배). 내장되어 있어 설치할 것이 없습니다. auto = Optimal 및 Fast goal. 처음 20% 스텝은 항상 실행되며(레이아웃이 여기서 형성됨) 8스텝 미만의 실행에서는 빠집니다. off = 사용 안 함(speed_ups가 Auto여도 작동). 켜면 step cache를 대체합니다."
+      }
+    }
   }
 }

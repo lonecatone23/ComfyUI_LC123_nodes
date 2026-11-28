@@ -1063,7 +1063,7 @@ def findings(p):
     lc = p.get("llama_cpp") or {}
     if lc:
         if not lc.get("installed"):
-            add("packs", -1, "llama-cpp (LC Vision)", lc.get("detail", "Not installed") + ". LC Vision's install.py sets up the right build.")
+            add("packs", -1, "llama-cpp (LC Vision)", lc.get("detail", "Not installed") + (". LC Vision's install.py sets up the right build." if os.path.isdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ComfyUI_LC_Vision_nodes")) else ". Only needed for LC Vision: nothing to do if you don't use it."))
         elif not (lc.get("qwen3_vl") or lc.get("qwen25_vl")):
             add("packs", 3, f"llama-cpp {lc.get('version')} (LC Vision)", "Installed, but not the vision build: LC Vision needs the JamePeng fork. Run LC Vision's install.py.")
         elif lc.get("gpu_offload") is False:

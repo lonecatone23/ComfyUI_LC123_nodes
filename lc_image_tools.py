@@ -209,7 +209,7 @@ class LCAutoWhiteBalance(PreviewImage):
         linears, ests = [], []
         for img in arrays:
             linear = srgb_to_linear(img)
-            # Tested 2026-09-30: skipping clipped / near-black pixels (as ChromaGrade does) made the estimate worse on
+            # Tested 2026-09-30: skipping clipped / near-black pixels made the estimate worse on
             # warm and cool casts, with and without a blown highlight, so every pixel is still measured.
             e = np.empty(3, dtype=np.float64)
             for c in range(3):

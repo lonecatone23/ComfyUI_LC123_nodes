@@ -4056,5 +4056,40 @@
         "tooltip": "RAM が少ないマシン向け（32 GB で Wan 2.2 + 音）。モデル 2 は自分のパスまでディスクで待ち、モデル 1 の開始時にテキストエンコーダーが RAM から外れ、モデル 2 の開始時にモデル 1 が外れ、各モデルは自分のパスの後に外れます。LC Foley も音を作った後に MMAudio を手放します。8 GB ノートで Wan + Foley：RAM 約 47 GB が約 25 GB に、速度は同じ。RAM に余裕があるマシンではオフのままに（毎回両モデルを読み直すので、5090 では約 6% 遅くなります）。各モデルは1回の実行で1度だけサンプリングしてください。"
       }
     }
+  },
+  "LCModelOptimizerPassthrough": {
+    "description": "自分で読み込んだモデル（どのローダーでも、wildcard のモデル切り替えなど）に Optimizer の高速化を適用します。base model をそのモデルのファミリーに設定してください。どの finetune にも同じ高速化がかかります。\nここではファイルを読み込まないため、★ おすすめ、ダウンロード、ファイルチェックはありません。System & Model Optimization Report を実行すると、このマシンに合った高速化になります。\ntorch_compile をオンにすると、モデルが変わるたびに再コンパイルされます。",
+    "inputs": {
+      "model": {
+        "tooltip": "自分のローダーから来たモデル。"
+      },
+      "base_model": {
+        "tooltip": "モデルが属するファミリー。そのモデルで効く高速化を選びます。"
+      },
+      "goal": {
+        "tooltip": "Quality = bf16 に最も近い。Optimal = 高速でほぼ同一。Fast = 見た目が問題ない範囲で最速。"
+      },
+      "speed_ups": {
+        "tooltip": "Auto = System & Model Optimization Report に従います。Manual = 下の各項目を個別に選択します。"
+      },
+      "attention": {
+        "tooltip": "アテンションのバックエンド。auto = レポートのテストに合格した中で最速のもの。"
+      },
+      "fp16_accumulation": {
+        "tooltip": "品質をわずかに犠牲にした、より高速な fp16 演算。auto = Fast ゴールのときのみ。"
+      },
+      "step_cache": {
+        "tooltip": "EasyCache: ほとんど変化しないステップをスキップします。auto = Fast ゴール、20ステップ以上。"
+      },
+      "torch_compile": {
+        "tooltip": "モデルをコンパイルします。初回は遅く、以降は速くなります。Triton が必要です。"
+      },
+      "qwen21_cache": {
+        "tooltip": "Qwen-Image 2.1 専用 (Qwen Image 2.1 Cache): KV キャッシュの置き場所と保存方法です。auto = 無劣化。Fast goal または 16 GB 未満のカードでは int8。int8 はキャッシュを半分にし、精度は bf16 並み。int4 は4分の1になりますが、ステップごとの誤差がほぼ倍になります。RAM に置いても速度への影響は小さいです。off = 最も遅くなります。"
+      },
+      "spectrum": {
+        "tooltip": "MOSS Image と Krea 2: Spectrum が一部のステップを実行する代わりに予測します。テストでは見た目の変化はありませんでした（MOSS 約1.7倍、Krea 2 Turbo 約1.35倍、Raw 約1.6倍）。組み込み済みで、インストール不要です。auto = Optimal と Fast のゴール。最初の20%のステップ（レイアウトが形成される部分）は常に実行され、8ステップ未満の実行では動作しません。off = オプトアウト（speed_ups が Auto でも有効）。オンの場合、ステップキャッシュの代わりになります。"
+      }
+    }
   }
 }

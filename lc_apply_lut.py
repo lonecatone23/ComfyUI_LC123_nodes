@@ -154,10 +154,11 @@ def _trilinear_lut(img, table):
 
 def _tetrahedral_lut(img, table, chunk=1 << 22):
     """
-    img HxWx3 in 0..1, table (S,S,S,3) indexed [b, g, r]. Tetrahedral interpolation on the GPU when there is one:
-    each lattice cube is split into six tetrahedra, so a grey input only ever mixes grey-axis entries (cleaner
-    neutrals than trilinear, which mixes all eight corners).
-    Adapted from ComfyUI-ChromaGrade (chromagrade/lut.py _tetrahedral), MIT License, Copyright (c) 2026 MONKEYFOREVER2.
+    img HxWx3 in 0..1, table (S,S,S,3) indexed [b, g, r]. Tetrahedral interpolation on the GPU when there is one.
+    Inside its lattice cube, a colour walks from the low corner to the high corner one axis at a time, largest
+    fraction first; the four corners on that path are the tetrahedron it sits in, weighted by the differences of the
+    sorted fractions. A grey (equal fractions) only ever mixes grey-axis entries, so neutrals stay cleaner than with
+    trilinear, which mixes all eight corners.
     """
     import torch
     try:
@@ -166,37 +167,24 @@ def _tetrahedral_lut(img, table, chunk=1 << 22):
     except Exception:
         dev = torch.device("cpu")
     size = table.shape[0]
-    # [b, g, r] -> [r, g, b] so the flat index is (r * S + g) * S + b
-    flat = torch.from_numpy(np.ascontiguousarray(table.transpose(2, 1, 0, 3))).to(dev, torch.float32).reshape(-1, 3)
-    x_all = torch.from_numpy(np.ascontiguousarray(img, dtype=np.float32)).to(dev).reshape(-1, 3)
-    out = torch.empty_like(x_all)
-    s2 = size * size
-    for a in range(0, x_all.shape[0], chunk):
-        x = x_all[a:a + chunk]
-        f = x.clamp(0.0, 1.0) * (size - 1)
-        i0 = f.floor().clamp(0, size - 2).long()
-        d = (f - i0).clamp(0.0, 1.0)
-        base = (i0[:, 0] * size + i0[:, 1]) * size + i0[:, 2]
-        v = lambda dr, dg, db: flat[base + dr * s2 + dg * size + db]
-        v000, v001, v010, v011 = v(0, 0, 0), v(0, 0, 1), v(0, 1, 0), v(0, 1, 1)
-        v100, v101, v110, v111 = v(1, 0, 0), v(1, 0, 1), v(1, 1, 0), v(1, 1, 1)
-        dr, dg, db = d[:, 0:1], d[:, 1:2], d[:, 2:3]
-        c1 = (dr > dg) & (dg > db)
-        c2 = (dr > dg) & ~(dg > db) & (dr > db)
-        c3 = (dr > dg) & ~(dg > db) & ~(dr > db)
-        c4 = ~(dr > dg) & (db > dg)
-        c5 = ~(dr > dg) & ~(db > dg) & (db > dr)
-
-        def pick(o1, o2, o3, o4, o5, o6):
-            o = o6
-            for c, val in ((c5, o5), (c4, o4), (c3, o3), (c2, o2), (c1, o1)):
-                o = torch.where(c, val, o)
-            return o
-
-        cr = pick(v100 - v000, v100 - v000, v101 - v001, v111 - v011, v111 - v011, v110 - v010)
-        cg = pick(v110 - v100, v111 - v101, v111 - v101, v011 - v001, v010 - v000, v010 - v000)
-        cb = pick(v111 - v110, v101 - v100, v001 - v000, v001 - v000, v011 - v010, v111 - v110)
-        out[a:a + chunk] = v000 + cr * dr + cg * dg + cb * db
+    lut = torch.from_numpy(np.ascontiguousarray(table, dtype=np.float32)).to(dev).reshape(-1, 3)  # [b, g, r] order
+    stride = torch.tensor([1, size, size * size], device=dev)  # r, g, b steps in the flat [b, g, r] table
+    pix = torch.from_numpy(np.ascontiguousarray(img, dtype=np.float32)).to(dev).reshape(-1, 3)
+    out = torch.empty_like(pix)
+    for start in range(0, pix.shape[0], chunk):
+        pos = pix[start:start + chunk].clamp(0.0, 1.0) * (size - 1)
+        cell = pos.floor().clamp(0, size - 2)
+        frac = (pos - cell).clamp(0.0, 1.0)
+        order = torch.argsort(frac, dim=1, descending=True, stable=True)
+        f = torch.gather(frac, 1, order)  # f0 >= f1 >= f2
+        idx = (cell.long() * stride).sum(1)
+        steps = stride[order]  # the axis to step along, largest fraction first
+        c0 = idx
+        c1 = c0 + steps[:, 0]
+        c2 = c1 + steps[:, 1]
+        c3 = c2 + steps[:, 2]
+        out[start:start + chunk] = (lut[c0] * (1.0 - f[:, 0:1]) + lut[c1] * (f[:, 0:1] - f[:, 1:2])
+                                    + lut[c2] * (f[:, 1:2] - f[:, 2:3]) + lut[c3] * f[:, 2:3])
     return out.reshape(img.shape).cpu().numpy().astype(np.float32)
 
 

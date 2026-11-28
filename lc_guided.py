@@ -1,10 +1,10 @@
 """
-Guided filter (He, Sun, Tang, "Guided Image Filtering", ECCV 2010): an edge-aware blur in constant time per pixel.
-Splitting two images with the SAME guide gives both low-frequency layers the same edges, so swapping or mixing
-them cannot leave a halo along a hard edge.
+Guided filter (Kaiming He, Jian Sun, Xiaoou Tang, "Guided Image Filtering", ECCV 2010): an edge-aware blur in constant
+time per pixel. Splitting two images with the SAME guide gives both low-frequency layers the same edges, so swapping or
+mixing them cannot leave a halo along a hard edge.
 
-Box filter and guided filter adapted from ComfyUI-ChromaGrade (chromagrade/guided.py), MIT License,
-Copyright (c) 2026 MONKEYFOREVER2. Changed to work on NCHW tensors.
+The box means come from running sums, one direction at a time, averaged over the part of the window that lies inside
+the image.
 """
 
 from __future__ import annotations
@@ -12,34 +12,32 @@ from __future__ import annotations
 import torch
 
 
-def _box_1d(x: torch.Tensor, radius: int, dim: int) -> torch.Tensor:
-    """Moving average along dim, with correct counts at the borders (cumulative-sum form)."""
+def _running_mean(x: torch.Tensor, radius: int, dim: int) -> torch.Tensor:
+    """Mean of the 2r+1 values around each position along dim, from a running sum (one row or column at a time, so
+    the sums stay small and float32 stays exact enough on a 4K frame)."""
     n = x.shape[dim]
-    if radius <= 0 or n < 2:
-        return x
-    cum = torch.cat([torch.zeros_like(x.narrow(dim, 0, 1)), torch.cumsum(x, dim=dim)], dim=dim)
-    ar = torch.arange(n, device=x.device)
-    hi = (ar + radius + 1).clamp(0, n)
-    lo = (ar - radius).clamp(0, n)
-    count = (hi - lo).to(x.dtype)
-    shape = [1] * x.ndim
-    shape[dim] = n
-    return (cum.index_select(dim, hi) - cum.index_select(dim, lo)) / count.reshape(shape).clamp_min(1.0)
+    run = torch.nn.functional.pad(x.cumsum(dim).movedim(dim, -1), (1, 0)).movedim(-1, dim)  # run[i] = sum x[:i]
+    pos = torch.arange(n, device=x.device)
+    start, stop = (pos - radius).clamp(0, n), (pos + radius + 1).clamp(0, n)
+    count = (stop - start).to(x.dtype).view([-1 if d == (dim % x.ndim) else 1 for d in range(x.ndim)])
+    return (run.index_select(dim, stop) - run.index_select(dim, start)) / count
 
 
 def box(x: torch.Tensor, radius: int) -> torch.Tensor:
-    """Separable box filter over the last two dims (H, W)."""
-    return _box_1d(_box_1d(x, radius, -2), radius, -1)
+    """Mean over a (2r+1) x (2r+1) window on the last two dims (H, W); at the borders, over the pixels that exist."""
+    if radius <= 0:
+        return x
+    return _running_mean(_running_mean(x, radius, x.ndim - 2), radius, x.ndim - 1)
 
 
 def guided(guide: torch.Tensor, src: torch.Tensor, radius: int, eps: float = 1e-3) -> torch.Tensor:
-    """guide: [N,1,H,W]; src: [N,C,H,W]. Edge-aware low-pass of src that follows the guide's edges."""
-    mean_i = box(guide, radius)
-    mean_p = box(src, radius)
-    var_i = (box(guide * guide, radius) - mean_i * mean_i).clamp_min(0.0)
-    cov_ip = box(guide * src, radius) - mean_i * mean_p
-    a = cov_ip / (var_i + eps)
-    b = mean_p - a * mean_i
+    """guide: [N,1,H,W]; src: [N,C,H,W]. Edge-aware low-pass of src that follows the guide's edges (He et al.,
+    Algorithm 1)."""
+    mean_g, mean_s = box(guide, radius), box(src, radius)
+    var_g = (box(guide * guide, radius) - mean_g * mean_g).clamp_min(0.0)
+    cov_gs = box(guide * src, radius) - mean_g * mean_s
+    a = cov_gs / (var_g + eps)
+    b = mean_s - a * mean_g
     return box(a, radius) * guide + box(b, radius)
 
 
